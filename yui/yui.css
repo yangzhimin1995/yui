@@ -974,6 +974,7 @@ div[yui-radio] > a {
     position: relative;
     line-height: 24px;
     cursor: pointer;
+    background-color: white;
 }
 
 div[yui-radio] > a[disabled] {
