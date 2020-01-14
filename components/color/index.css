@@ -1,0 +1,232 @@
+/*颜色大箱子，包含上下两部分*/
+.yui-color-box {
+    margin: 20px 0;
+    text-align: center;
+    color: white;
+}
+
+.yui-color-box .yui-top {
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+.yui-color-box .yui-top > div {
+    margin: 5px 0;
+    font-size: 12px;
+}
+
+.yui-color-box .yui-bottom {
+    display: flex;
+}
+
+.yui-color-box .yui-bottom div {
+    width: 10%;
+    padding: 20px 0;
+    font-size: 12px;
+    color: #515a6e;
+}
+
+/*主要颜色*/
+.yui-primary-color .yui-colorful-blue {
+    background-color: rgb(64, 158, 255);
+}
+
+.yui-primary-color .yui-deep-blue {
+    background-color: rgb(45, 140, 240);
+}
+
+.yui-primary-color .yui-plain-blue {
+    background-color: rgb(236, 245, 255);
+    color: #409eff;
+}
+
+.yui-primary-color .yui-plain-border-blue {
+    background-color: rgb(179, 216, 255);
+    color: #2b85e4;
+}
+
+.yui-primary-color .yui-light-blue {
+    background-color: rgb(92, 173, 255);
+}
+
+.yui-primary-color .yui-dark-blue {
+    background-color: rgb(43, 133, 228);
+}
+
+/*信息颜色*/
+.yui-info-color .yui-plain-sky-blue {
+    background-color: rgb(234, 247, 254);
+    color: #2db7f5;
+}
+
+.yui-info-color .yui-plain-border-sky-blue {
+    background-color: rgb(192, 233, 252);
+    color: #2db7f5;
+}
+
+.yui-info-color .yui-sky-blue {
+    background-color: rgb(45, 183, 245);
+}
+
+.yui-info-color .yui-plain-gray {
+    background-color: rgb(244, 244, 245);
+    color: #909399;
+}
+
+.yui-info-color .yui-plain-border-gray {
+    background-color: rgb(211, 212, 214);
+    color: #909399;
+}
+
+.yui-info-color .yui-light-gray {
+    background-color: rgb(144, 147, 153);
+}
+
+/*成功颜色*/
+.yui-success-color .yui-plain-green {
+    background-color: rgb(240, 249, 235);
+    color: #67C23A;
+}
+
+.yui-success-color .yui-plain-border-green {
+    background-color: rgb(194, 231, 176);
+    color: #19be6b;
+}
+
+.yui-success-color .yui-colorful-green {
+    background-color: rgb(103, 194, 58);
+}
+
+.yui-success-color .yui-deep-green {
+    background-color: rgb(25, 190, 107);
+}
+
+/*危险颜色*/
+.yui-danger-color .yui-plain-red {
+    background-color: rgb(254, 240, 240);
+    color: #ed4014;
+}
+
+.yui-danger-color .yui-plain-border-red {
+    background-color: rgb(251, 196, 196);
+    color: #F56C6C;
+}
+
+.yui-danger-color .yui-colorful-red {
+    background-color: rgb(237, 64, 20);
+}
+
+.yui-danger-color .yui-deep-red {
+    background-color: rgb(245, 108, 108);
+}
+
+/*警告颜色*/
+.yui-warning-color .yui-plain-yellow {
+    background-color: rgb(253, 246, 236);
+    color: #ff9900;
+}
+
+.yui-warning-color .yui-plain-border-yellow {
+    background-color: rgb(245, 218, 177);
+    color: #E6A23C;
+}
+
+.yui-warning-color .yui-colorful-yellow {
+    background-color: rgb(255, 153, 0);
+}
+
+.yui-warning-color .yui-deep-yellow {
+    background-color: rgb(230, 162, 60);
+}
+
+/*颜色小箱子*/
+.yui-little-color-box {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.yui-little-color-box > div {
+    width: 22%;
+    margin: 10px 1.5%;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.yui-little-color-box div > div {
+    margin: 2px 0;
+    font-size: 12px;
+}
+
+/*文字颜色*/
+.yui-text-color {
+    color: white;
+}
+
+.yui-text-color .yui-primary-text {
+    background-color: rgb(48, 49, 51);
+}
+
+.yui-text-color .yui-normal-text {
+    background-color: rgb(96, 98, 102);
+}
+
+.yui-text-color .yui-minor-text {
+    background-color: rgb(144, 147, 153);
+}
+
+.yui-text-color .yui-placeholder-text {
+    background-color: rgb(192, 196, 204);
+}
+
+.yui-text-color .yui-title-text {
+    background-color: rgb(23, 35, 61);
+}
+
+.yui-text-color .yui-content-text {
+    background-color: rgb(81, 90, 110);
+}
+
+.yui-text-color .yui-desc-text {
+    background-color: rgb(128, 134, 149);
+}
+
+.yui-text-color .yui-invalid-text {
+    background-color: rgb(197, 200, 206);
+}
+
+/*边框颜色*/
+.yui-border-color .yui-border-1 {
+    background-color: rgb(220, 223, 230);
+}
+
+.yui-border-color .yui-border-2 {
+    background-color: rgb(228, 231, 237);
+}
+
+.yui-border-color .yui-border-3 {
+    background-color: rgb(235, 238, 245);
+}
+
+.yui-border-color .yui-border-4 {
+    background-color: rgb(242, 246, 252);
+}
+
+.yui-border-color .yui-deep-border {
+    background-color: rgb(220, 222, 226);
+}
+
+.yui-border-color .yui-line {
+    background-color: rgb(232, 234, 236);
+}
+
+/*背景色*/
+.yui-bg-color .yui-color-1 {
+    background-color: rgb(248, 248, 249);
+}
+
+.yui-bg-color .yui-color-2 {
+    background-color: rgb(245, 245, 245);
+}

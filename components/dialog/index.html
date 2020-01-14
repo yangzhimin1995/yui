@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - Dialog 对话框</title>
+    <link rel="icon" type="image/x-icon" href="../../public/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../public/index.css">
+    <link rel="stylesheet" type="text/css" href="../../public/highLight/monokai-sublime.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="../../yui/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="../../yui/yui.css">
+</head>
+<body>
+<!--网页头部-->
+<div class="page-header"></div>
+<!--网页内容-->
+<div class="page-content">
+    <div class="page-title">
+        Dialog 对话框
+    </div>
+    <div class="demo">
+        <a yui-button type="primary" onclick="yuiDialog('dialog')">打开对话框</a>
+        <div yui-dialog-mask name="dialog">
+            <div yui-dialog>
+                <div yui-header>
+                    <div yui-left>提示</div>
+                    <div yui-right>
+                        <i onclick="yuiDialogClosed('dialog')" class="iconfont yui-closed"></i>
+                    </div>
+                </div>
+                <div yui-body style="height: 150px">
+                    这是一个对话框<br/>
+                    这是一个对话框<br/>
+                    这是一个对话框<br/>
+                    这是一个对话框<br/>
+                    这是一个对话框<br/>
+                    这是一个对话框<br/>
+                    这是一个对话框<br/>
+                    这是一个对话框<br/>
+                    这是一个对话框<br/>
+                </div>
+                <div yui-footer>
+                    <a onclick="yuiDialogClosed('dialog')" yui-button type="primary">确定</a>
+                    <a onclick="yuiDialogClosed('dialog')" yui-button>关闭</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="code">
+        <pre><code class="html">
+        &lt;a yui-button type="primary" onclick="yuiDialog('dialog')"&gt;打开对话框&lt;/a&gt;
+
+        &lt;div yui-dialog-mask name="dialog"&gt;
+            &lt;div yui-dialog&gt;
+                &lt;div yui-header&gt;
+                    &lt;div yui-left&gt;提示&lt;/div&gt;
+                    &lt;div yui-right&gt;
+                        &lt;i onclick="yuiDialogClosed('dialog')" class="iconfont yui-closed"&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div yui-body style="height: 150px"&gt;
+                    这是一个对话框&lt;br/&gt;
+                    这是一个对话框&lt;br/&gt;
+                    这是一个对话框&lt;br/&gt;
+                    这是一个对话框&lt;br/&gt;
+                    这是一个对话框&lt;br/&gt;
+                    这是一个对话框&lt;br/&gt;
+                    这是一个对话框&lt;br/&gt;
+                    这是一个对话框&lt;br/&gt;
+                    这是一个对话框&lt;br/&gt;
+                &lt;/div&gt;
+                &lt;div yui-footer&gt;
+                    &lt;a onclick="yuiDialogClosed('dialog')" yui-button type="primary"&gt;确定&lt;/a&gt;
+                    &lt;a onclick="yuiDialogClosed('dialog')" yui-button&gt;关闭&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        </code></pre>
+    </div>
+    <div class="demo">
+        <div class="module-title">
+            基于Dialog的MessageBox
+        </div>
+        <a yui-button type="primary" onclick="yuiDialog('info')">打开消息</a>
+        <div yui-dialog-mask name="info">
+            <div yui-dialog messageBox>
+                <div yui-header>
+                    <div yui-left>
+                        提示
+                    </div>
+                    <div yui-right>
+                        <i onclick="yuiDialogClosed('info')" class="iconfont yui-closed"></i>
+                    </div>
+                </div>
+                <div yui-body>
+                    这是一条消息
+                </div>
+                <div yui-footer>
+                    <a onclick="yuiDialogClosed('info')" size="mini" yui-button>取消</a>
+                    <a onclick="yuiDialogClosed('info')" size="mini" yui-button type="primary">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="code">
+        <pre><code class="html">
+        &lt;a yui-button type="primary" onclick="yuiDialog('info')"&gt;打开消息&lt;/a&gt;
+
+        &lt;div yui-dialog-mask name="info"&gt;
+            &lt;div yui-dialog messageBox&gt;
+                &lt;div yui-header&gt;
+                    &lt;div yui-left&gt;
+                        提示
+                    &lt;/div&gt;
+                    &lt;div yui-right&gt;
+                        &lt;i onclick="yuiDialogClosed('info')" class="iconfont yui-closed"&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div yui-body&gt;
+                    这是一条消息
+                &lt;/div&gt;
+                &lt;div yui-footer&gt;
+                    &lt;a onclick="yuiDialogClosed('info')" size="mini" yui-button&gt;取消&lt;/a&gt;
+                    &lt;a onclick="yuiDialogClosed('info')" size="mini" yui-button type="primary"&gt;确定&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        </code></pre>
+    </div>
+    <div class="demo">
+        <div class="module-title">
+            基于Dialog的MessageBox -- JS调用
+        </div>
+        <a yui-button onclick="openMessage()">打开消息</a>
+        <a yui-button type="primary" onclick="openCustomMessage()">自定义</a>
+    </div>
+    <div class="code">
+        <pre><code class="html">
+        &lt;a yui-button onclick="openMessage()"&gt;打开消息&lt;/a&gt;
+
+        &lt;a yui-button type="primary" onclick="openCustomMessage()"&gt;自定义&lt;/a&gt;
+
+        &lt;script&gt;
+
+            function openMessage() {
+                let name = yuiMessageBox('提示', '这是一条消息', {
+                    beforeClose: function (name, callback) {
+                        yuiMessage(`关闭前的回调`, {delay: 1000, type: "success"});
+                        callback()
+                    },
+                });
+                console.log(`生成name='${name}'的MessageBox`);
+            }
+
+            function openCustomMessage() {
+                let name = yuiMessageBox('提示', '有一条新的消息', {
+                    clickMaskNotClosed: true,
+                    showLeftBtn: true,
+                    leftBtnText: '直接删除',
+                    leftBtnMethod: function (name, callback) {
+                        yuiMessage(`直接删除`, {type: "danger", delay: 1000});
+                        callback();
+                    },
+                    leftBtnAttr: {type: "danger", size: "mini"},
+                    rightBtnText: "查 看",
+                    rightBtnAttr: {type: "success", size: "mini"},
+                    rightBtnMethod: function (name, callback) {
+                        yuiMessage(`查看`, {type: "success", delay: 1000});
+                        callback();
+                    },
+                });
+                console.log(`生成name='${name}'的MessageBox`);
+            }
+
+        &lt;/script&gt;
+        </code></pre>
+    </div>
+    <div class="attr">
+        <div class="module-title">
+            yui-dialog-mask
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <td>属性</td>
+                <td>说明</td>
+                <td>类型</td>
+                <td>可选值 / 回调参数</td>
+                <td>默认值 / 参数形式</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>name</td>
+                <td>对话框唯一名称</td>
+                <td>string</td>
+                <td>--</td>
+                <td>--</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="module-title">
+            yui-dialog
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <td>属性</td>
+                <td>说明</td>
+                <td>类型</td>
+                <td>可选值 / 回调参数</td>
+                <td>默认值 / 参数形式</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>messageBox</td>
+                <td>对话框唯一名称</td>
+                <td>string</td>
+                <td>--</td>
+                <td>--</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="module-title">
+            事件
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <td>方法</td>
+                <td>说明</td>
+                <td>参数</td>
+                <td>返回</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>yuiDialogClosed(name)</td>
+                <td>关闭对话框的function</td>
+                <td>name：想要关闭的对话框名称</td>
+                <td>--</td>
+            </tr>
+            <tr>
+                <td>yuiMessageBox(title,content,options)</td>
+                <td>打开MessageBox</td>
+                <td>
+                    title：标题<br/>
+                    content：内容<br/>
+                    options：配置，具体见下表
+                </td>
+                <td>生成的MessageBox名称</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="module-title">
+            yuiMessageBox中的options
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <td>参数</td>
+                <td>说明</td>
+                <td>类型</td>
+                <td>可选值 / 回调参数</td>
+                <td>默认值 / 参数形式</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>showLeftBtn</td>
+                <td>是否显示左边按钮</td>
+                <td>boolean</td>
+                <td>true / false</td>
+                <td>false</td>
+            </tr>
+            <tr>
+                <td>leftBtnText</td>
+                <td>左边按钮文字</td>
+                <td>string</td>
+                <td>--</td>
+                <td>取 消</td>
+            </tr>
+            <tr>
+                <td>leftBtnAttr</td>
+                <td>左边按钮样式</td>
+                <td>object</td>
+                <td>参考yui-button属性</td>
+                <td>{size:"small"}</td>
+            </tr>
+            <tr>
+                <td>leftBtnMethod</td>
+                <td>
+                    左边按钮点击事件，可以使用 callback() 或者
+                    yuiDialogClosed(name) 进行关闭
+                </td>
+                <td>function</td>
+                <td>
+                    name:MessageBox名称<br/>
+                    callback:关闭MessageBox的方法<br/>
+                </td>
+                <td>(name,callback)</td>
+            </tr>
+            <tr>
+                <td>showRightBtn</td>
+                <td>是否显示右边按钮</td>
+                <td>boolean</td>
+                <td>true / false</td>
+                <td>true</td>
+            </tr>
+            <tr>
+                <td>rightBtnText</td>
+                <td>右边按钮文字</td>
+                <td>string</td>
+                <td>--</td>
+                <td>确 定</td>
+            </tr>
+            <tr>
+                <td>rightBtnAttr</td>
+                <td>右边按钮样式</td>
+                <td>object</td>
+                <td>参考yui-button属性</td>
+                <td>{size:"small",type:"primary"}</td>
+            </tr>
+            <tr>
+                <td>rightBtnMethod</td>
+                <td>
+                    右边按钮点击事件，可以使用 callback() 或者
+                    yuiDialogClosed(name) 进行关闭
+                </td>
+                <td>function</td>
+                <td>
+                    name:MessageBox名称<br/>
+                    callback:关闭MessageBox的方法<br/>
+                </td>
+                <td>(name,callback)</td>
+            </tr>
+            <tr>
+                <td>showCloseIcon</td>
+                <td>是否显示右上角关闭图标</td>
+                <td>boolean</td>
+                <td>true / false</td>
+                <td>true</td>
+            </tr>
+            <tr>
+                <td>clickMaskNotClosed</td>
+                <td>点击遮罩不关闭MessageBox</td>
+                <td>boolean</td>
+                <td>true / false</td>
+                <td>false</td>
+            </tr>
+            <tr>
+                <td>beforeClose</td>
+                <td>
+                    点击关闭图标或点击遮罩时的回调，可以使用 callback() 或者
+                    yuiDialogClosed(name) 或者 return true 进行关闭
+                </td>
+                <td>function</td>
+                <td>
+                    name:MessageBox名称<br/>
+                    callback:关闭MessageBox的方法<br/>
+                </td>
+                <td>(name,callback)</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+<script src="../../public/highLight/highlight.pack.js"></script>
+<script src="../../public/index.js"></script>
+<script src="../../yui/yui.js"></script>
+<script>
+    function openMessage() {
+        let name = yuiMessageBox('提示', '这是一条消息', {
+            beforeClose: function (name, callback) {
+                yuiMessage(`关闭前的回调`, {delay: 1000, type: "success"});
+                callback()//beforeClose中callback()或者return true都可关闭MessageBox
+            },
+        });
+        console.log(`生成name='${name}'的MessageBox`);
+    }
+</script>
+<script>
+    function openCustomMessage() {
+        let name = yuiMessageBox('提示', '有一条新的消息', {
+            clickMaskNotClosed: true,
+            showLeftBtn: true,
+            leftBtnText: '直接删除',
+            leftBtnMethod: function (name, callback) {
+                yuiMessage(`直接删除`, {type: "danger", delay: 1000});
+                callback();
+            },
+            leftBtnAttr: {type: "danger", size: "mini"},
+            rightBtnText: "查 看",
+            rightBtnAttr: {type: "success", size: "mini"},
+            rightBtnMethod: function (name, callback) {
+                yuiMessage(`查看`, {type: "success", delay: 1000});
+                callback();
+            },
+        });
+        console.log(`生成name='${name}'的MessageBox`);
+    }
+</script>
+</html>

@@ -1,0 +1,7 @@
+.demo {
+    text-align: center;
+}
+
+.demo a[yui-link]{
+    margin: 0 10px;
+}

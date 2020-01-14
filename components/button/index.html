@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yHtml - Button 按钮</title>
+    <link rel="icon" type="image/x-icon" href="../../public/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../public/index.css">
+    <link rel="stylesheet" type="text/css" href="../../public/highLight/monokai-sublime.css">
+    <link rel="stylesheet" type="text/css" href="../../yui/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="../../yui/yui.css">
+</head>
+<body>
+<!--网页头部-->
+<div class="page-header"></div>
+<!--网页内容-->
+<div class="page-content">
+    <div class="page-title">
+        Button 按钮
+    </div>
+    <div class="demo">
+        <div class="module-title">
+            基础按钮
+        </div>
+        <a yui-button>默认按钮</a>
+        <a yui-button type="primary">主要按钮</a>
+        <a yui-button type="success">成功按钮</a>
+        <a yui-button type="warning">警告按钮</a>
+        <a yui-button type="danger">危险按钮</a>
+        <a yui-button type="info">信息按钮</a>
+    </div>
+    <div class="code">
+        <pre><code class="html">
+        &lt;a yui-button&gt;默认按钮&lt;/a&gt;
+
+        &lt;a yui-button type="primary"&gt;主要按钮&lt;/a&gt;
+
+        &lt;a yui-button type="success"&gt;成功按钮&lt;/a&gt;
+
+        &lt;a yui-button type="warning"&gt;警告按钮&lt;/a&gt;
+
+        &lt;a yui-button type="danger"&gt;危险按钮&lt;/a&gt;
+
+        &lt;a yui-button type="info"&gt;信息按钮&lt;/a&gt;
+        </code></pre>
+    </div>
+    <div class="demo">
+        <div class="module-title">
+            朴素按钮
+        </div>
+        <a yui-button plain>默认按钮</a>
+        <a yui-button type="primary" plain>主要按钮</a>
+        <a yui-button type="success" plain>成功按钮</a>
+        <a yui-button type="warning" plain>警告按钮</a>
+        <a yui-button type="danger" plain>危险按钮</a>
+        <a yui-button type="info" plain>信息按钮</a>
+    </div>
+    <div class="code">
+        <pre><code class="html">
+        &lt;a yui-button&gt;默认按钮&lt;/a&gt;
+
+        &lt;a yui-button type="primary" plain&gt;主要按钮&lt;/a&gt;
+
+        &lt;a yui-button type="success" plain&gt;成功按钮&lt;/a&gt;
+
+        &lt;a yui-button type="warning" plain&gt;警告按钮&lt;/a&gt;
+
+        &lt;a yui-button type="danger" plain&gt;危险按钮&lt;/a&gt;
+
+        &lt;a yui-button type="info" plain&gt;信息按钮&lt;/a&gt;
+        </code></pre>
+    </div>
+    <div class="demo">
+        <div class="module-title">
+            圆角按钮
+        </div>
+        <a yui-button radius>默认按钮</a>
+        <a yui-button type="primary" radius>主要按钮</a>
+        <a yui-button type="success" radius>成功按钮</a>
+        <a yui-button type="warning" radius>警告按钮</a>
+        <a yui-button type="danger" radius>危险按钮</a>
+        <a yui-button type="info" radius>信息按钮</a>
+    </div>
+    <div class="code">
+        <pre><code class="html">
+        &lt;a yui-button&gt;默认按钮&lt;/a&gt;
+
+        &lt;a yui-button type="primary" radius&gt;主要按钮&lt;/a&gt;
+
+        &lt;a yui-button type="success" radius&gt;成功按钮&lt;/a&gt;
+
+        &lt;a yui-button type="warning" radius&gt;警告按钮&lt;/a&gt;
+
+        &lt;a yui-button type="danger" radius&gt;危险按钮&lt;/a&gt;
+
+        &lt;a yui-button type="info" radius&gt;信息按钮&lt;/a&gt;
+        </code></pre>
+    </div>
+    <div class="demo">
+        <div class="module-title">
+            文字按钮
+        </div>
+        <a yui-button text>文字按钮</a>
+    </div>
+    <div class="code">
+        <pre><code class="html">
+        &lt;a yui-button text&gt;文字按钮&lt;/a&gt;
+        </code></pre>
+    </div>
+    <div class="demo">
+        <div class="module-title">
+            带icon按钮
+        </div>
+        <a yui-button type="success" plain>
+            <i class="iconfont yui-success" style="margin-right: 3px"></i>
+            默认按钮
+        </a>
+        <a yui-button type="success">
+            默认按钮
+            <i class="iconfont yui-success" style="margin-left: 3px"></i>
+        </a>
+    </div>
+    <div class="code">
+        <pre><code class="html">
+        &lt;a yui-button type="success" plain&gt;
+            &lt;i class="iconfont yui-success" style="margin-right: 3px"&gt;&lt;/i&gt;
+            默认按钮
+        &lt;/a&gt;
+
+        &lt;a yui-button type="success"&gt;
+            默认按钮
+            &lt;i class="iconfont yui-success" style="margin-left: 3px"&gt;&lt;/i&gt;
+        &lt;/a&gt;
+        </code></pre>
+    </div>
+    <div class="demo">
+        <div class="module-title">
+            禁用按钮
+        </div>
+        <a yui-button type="primary" disabled>主要按钮</a>
+        <a yui-button type="success" plain disabled>朴素按钮</a>
+        <a yui-button text disabled>文字按钮</a>
+    </div>
+    <div class="code">
+        <pre><code class="html">
+        &lt;a yui-button type="primary" disabled&gt;主要按钮&lt;/a&gt;
+
+        &lt;a yui-button type="success" plain disabled&gt;朴素按钮&lt;/a&gt;
+
+        &lt;a yui-button text disabled&gt;文字按钮&lt;/a&gt;
+        </code></pre>
+    </div>
+    <div class="demo">
+        <div class="module-title">
+            按钮尺寸
+        </div>
+        <a yui-button type="primary" style="padding: 25px 20px">定义padding</a>
+        <a yui-button type="primary" style="width: 100px;height: 55px">定义宽高</a>
+        <a yui-button size="large" type="primary">偏大按钮</a>
+        <a yui-button type="primary">默认按钮</a>
+        <a yui-button size="small" type="primary">偏小按钮</a>
+        <a yui-button size="mini" type="primary">迷你按钮</a>
+    </div>
+    <div class="code">
+        <pre><code class="html">
+        &lt;a yui-button type="primary" style="padding: 25px 20px"&gt;定义padding&lt;/a&gt;
+
+        &lt;a yui-button type="primary" style="width: 100px;height: 55px"&gt;定义宽高&lt;/a&gt;
+
+        &lt;a yui-button size="large" type="primary"&gt;偏大按钮&lt;/a&gt;
+
+        &lt;a yui-button type="primary"&gt;默认按钮&lt;/a&gt;
+
+        &lt;a yui-button size="small" type="primary"&gt;偏小按钮&lt;/a&gt;
+
+        &lt;a yui-button size="mini" type="primary"&gt;迷你按钮&lt;/a&gt;
+        </code></pre>
+    </div>
+    <div class="demo">
+        <div class="module-title">
+            按钮组合
+        </div>
+        <div yui-button-group>
+            <a yui-button type="primary" plain>上一页</a>
+            <a yui-button plain>1</a>
+            <a yui-button plain>2</a>
+            <a yui-button plain>3</a>
+            <a yui-button plain>4</a>
+            <a yui-button plain>5</a>
+            <a yui-button type="primary" plain>下一页</a>
+        </div>
+        <div yui-button-group>
+            <a yui-button type="primary">昨天</a>
+            <a yui-button type="primary">今天</a>
+            <a yui-button type="primary">明天</a>
+        </div>
+    </div>
+    <div class="code">
+        <pre><code class="html">
+        &lt;div yui-button-group&gt;
+            &lt;a yui-button type="primary" plain&gt;上一页&lt;/a&gt;
+            &lt;a yui-button plain&gt;1&lt;/a&gt;
+            &lt;a yui-button plain&gt;2&lt;/a&gt;
+            &lt;a yui-button plain&gt;3&lt;/a&gt;
+            &lt;a yui-button plain&gt;4&lt;/a&gt;
+            &lt;a yui-button plain&gt;5&lt;/a&gt;
+            &lt;a yui-button type="primary" plain&gt;下一页&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;div yui-button-group&gt;
+            &lt;a yui-button type="primary"&gt;昨天&lt;/a&gt;
+            &lt;a yui-button type="primary"&gt;今天&lt;/a&gt;
+            &lt;a yui-button type="primary"&gt;明天&lt;/a&gt;
+        &lt;/div&gt;
+        </code></pre>
+    </div>
+    <div class="attr">
+        <div class="module-title">
+            yui-button
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <td>属性</td>
+                <td>说明</td>
+                <td>类型</td>
+                <td>可选值 / 回调参数</td>
+                <td>默认值 / 参数形式</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>type</td>
+                <td>类型</td>
+                <td>string</td>
+                <td>primary / success / warning / danger / info</td>
+                <td>--</td>
+            </tr>
+            <tr>
+                <td>plain</td>
+                <td>朴素按钮样式</td>
+                <td>是否具有该属性</td>
+                <td>--</td>
+                <td>--</td>
+            </tr>
+            <tr>
+                <td>radius</td>
+                <td>圆角按钮样式</td>
+                <td>是否具有该属性</td>
+                <td>--</td>
+                <td>--</td>
+            </tr>
+            <tr>
+                <td>text</td>
+                <td>文字按钮样式</td>
+                <td>是否具有该属性</td>
+                <td>--</td>
+                <td>--</td>
+            </tr>
+            <tr>
+                <td>disabled</td>
+                <td>按钮禁用</td>
+                <td>是否具有该属性</td>
+                <td>--</td>
+                <td>--</td>
+            </tr>
+            <tr>
+                <td>size</td>
+                <td>按钮尺寸</td>
+                <td>string</td>
+                <td>large / small / mini</td>
+                <td>--</td>
+            </tr>
+            <tr>
+                <td>padding</td>
+                <td>设置按钮内边距改变按钮尺寸</td>
+                <td>原生style属性</td>
+                <td>--</td>
+                <td>10px 18px</td>
+            </tr>
+            <tr>
+                <td>width</td>
+                <td>设置按钮宽度</td>
+                <td>原生style属性</td>
+                <td>--</td>
+                <td>--</td>
+            </tr>
+            <tr>
+                <td>height</td>
+                <td>设置按钮高度</td>
+                <td>原生style属性</td>
+                <td>--</td>
+                <td>--</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+<script src="../../public/highLight/highlight.pack.js"></script>
+<script src="../../public/index.js"></script>
+<script src="../../yui/yui.js"></script>
+</html>
