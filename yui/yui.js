@@ -260,12 +260,13 @@ function yui_anchorMenuListener() {
     let menuItemDom = document.querySelectorAll("div[yui-anchor-menu]>a");
     let modulesDom = document.querySelectorAll("div[yui-anchor-menu-module]");
     let blankDivDom = yui_appendBlankDiv(menuDom);
+    let checkedLineDom = yui_appendCheckedLine(menuDom);
     let scrollTop = document.documentElement.scrollTop;
     let menuDomOT = menuDom.offsetTop;
     let clientHeight = document.documentElement.clientHeight;
     let attr = handleAttr(menuDom, clientHeight);
     let fixedTop = attr['fixedTop'];
-    handleMenuClick(menuItemDom, attr['clickTop']);
+    handleMenuClick(menuItemDom, attr['clickTop'], checkedLineDom);
     window.onscroll = function (e) {
         scrollTop = document.documentElement.scrollTop;
         yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, fixedTop)
@@ -275,13 +276,19 @@ function yui_anchorMenuListener() {
 /**
  *点击菜单时模块跳转
  */
-function handleMenuClick(dom, clickTop) {
+function handleMenuClick(dom, clickTop, checkedLineDom) {
     dom.forEach(menu => {
         menu.addEventListener("click", function () {
             //清除所有选中，选中当前
             yui_menuCheck(dom, menu);
+            //选线移动
+            yui_bulkAddStyles(checkedLineDom, {
+                display: "block",
+                width: menu.offsetWidth + "px",
+                left: menu.offsetLeft + "px",
+            });
             let value = menu.getAttribute("value");
-            let moduleDom = document.querySelector(`div[yui-anchor-menu-module='${value}']`)
+            let moduleDom = document.querySelector(`div[yui-anchor-menu-module='${value}']`);
             window.scroll({
                 left: 0,
                 top: moduleDom.offsetTop - clickTop,
@@ -337,6 +344,7 @@ function yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, fixedTop
         yui_bulkAddStyles(blankDivDom, {display: "block"});
     } else {
         yui_bulkAddClasses(menuDom, ['yui-anchor-menu-fixed'], 'remove');
+        yui_bulkAddStyles(menuDom, {top: ""});
         yui_bulkAddStyles(blankDivDom, {display: "none"});
     }
 }
@@ -351,6 +359,16 @@ function yui_appendBlankDiv(dom) {
         display: "none"
     });
     dom.parentNode.insertBefore(divDom, dom);
+    return divDom
+}
+
+/**
+ 创建选中线div
+ */
+function yui_appendCheckedLine(dom) {
+    let divDom = document.createElement('div');
+    yui_bulkAddClasses(divDom, ["yui-anchor-menu-checked-line"]);
+    dom.appendChild(divDom);
     return divDom
 }
 

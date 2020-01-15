@@ -130,15 +130,15 @@ div[yui-anchor] > a[checked]:before {
 /*anchorMenu =========================================================================== start*/
 .yui-anchor-menu-checked-line {
     position: absolute;
-    width: 80px;
     height: 2px;
     background-color: #409eff;
     bottom: -1px;
+    display: none;
+    transition: left .3s;
 }
 
 .yui-anchor-menu-fixed {
     position: fixed !important;
-    top: 60px;
     left: 0;
     width: 100%;
 }
@@ -151,10 +151,11 @@ div[yui-anchor-Menu] {
     box-sizing: border-box;
     align-items: center;
     background-color: white;
+    position: relative;
 }
 
 div[yui-anchor-Menu] > a {
-    padding: 18px 12px;
+    padding: 18px 8px;
     cursor: pointer;
     color: #606266;
     box-sizing: border-box;
@@ -165,6 +166,12 @@ div[yui-anchor-Menu] > a:before {
     content: '#';
     visibility: hidden;
     margin-right: 3px;
+}
+
+div[yui-anchor-Menu] > a:after {
+    content: '#';
+    visibility: hidden;
+    margin-left: 3px;
 }
 
 div[yui-anchor-Menu] > a:hover {
