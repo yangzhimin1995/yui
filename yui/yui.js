@@ -659,50 +659,63 @@ function yui_notifyRemove(name, event) {
 // notify =================================================== end //
 
 // numberRun =================================================== start //
-function yuiNumberRun(id, endValue) {
+function yuiNumberRun(id, number, options) {
+    options = yui_json2Default(options, {
+        callback: null,
+        count: 20
+    });
     let dom = document.querySelector(`#${id}`);
     if (!dom) {
         yuiMessage(`numberRun错误：未找到id='${id}'的元素`, {type: 'danger'});
         return
     }
-    let endVal = yui_string2Number(endValue);
-    if (!endVal && endVal !== 0) {
-        yuiMessage(`numberRun错误：非法值'${endVal}'`, {type: 'danger'});
+    let num = yui_string2Number(number);
+    if (!num && num !== 0) {
+        yuiMessage(`numberRun错误：非法值'${num}'`, {type: 'danger'});
         return
     }
-    let endValStr = '' + endVal;
-    let length = endValStr.length;
+    let numStr = '' + num;
+    let length = numStr.length;
     dom.innerText = "";
-    for (let i in endValStr) {
-        let str = endValStr[i];
-        let num = parseInt(str);
+    for (let i in numStr) {
+        let str = numStr[i];
+        let singleNum = parseInt(str);
         let numDom = document.createElement("span");
         if (str === '.') {
             numDom.innerText = str;
         } else {
             numDom.innerText = "0";
             setTimeout(() => {
-                numDom.innerText = '' + num;
-                yui_startNumberRun(numDom, num);
+                numDom.innerText = '' + singleNum;
+                if (i === '0') {
+                    yui_startNumberRun(numDom, singleNum, options["count"], options["callback"], num);
+                } else {
+                    yui_startNumberRun(numDom, singleNum, options["count"]);
+                }
             }, (length - i) * 150)
         }
         dom.appendChild(numDom)
     }
 }
 
-function yui_startNumberRun(dom, value) {
+function yui_startNumberRun(dom, value, count, callback, num) {
     let start = 0;
+    let startCount = 0;
     let interval = setInterval(() => {
         start++;
         if (start === 10) {
             start = 0
         }
         dom.innerText = '' + start;
-        setTimeout(() => {
+        startCount++;
+        if (count === startCount) {
             clearInterval(interval);
             dom.innerText = value;
-        }, 1000)
-    }, 20)
+            if (callback) {
+                callback(num)
+            }
+        }
+    }, 10)
 }
 
 // numberRun =================================================== end //
