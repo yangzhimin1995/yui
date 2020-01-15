@@ -15,6 +15,7 @@ if (document.readyState !== 'loading') {
 function yuiComponentsInit() {
     yui_getScrollbarWidth();
     yui_anchorListener();
+    yui_anchorMenuListener();
     yui_dialogMaskClickListener();
     yui_menuHoverListener();
     yui_radioClickListener();
@@ -37,9 +38,9 @@ function yui_bulkAddStyles(dom, styles = {}) {
 /**
  批量增加class
  */
-function yui_bulkAddClasses(dom, classes = []) {
+function yui_bulkAddClasses(dom, classes = [], operator = 'add') {
     classes.forEach(item => {
-        dom.classList.add(item)
+        dom.classList[operator](item)
     })
 }
 
@@ -246,6 +247,114 @@ function yui_anchorAttributeHandle(anchorDom, clientHeight) {
 }
 
 // anchor =================================================== end //
+
+// anchorMenu =================================================== start //
+/**
+ 监听锚点菜单事件
+ */
+function yui_anchorMenuListener() {
+    let menuDom = document.querySelector("div[yui-anchor-menu]");
+    if (menuDom === null) {
+        return
+    }
+    let menuItemDom = document.querySelectorAll("div[yui-anchor-menu]>a");
+    let modulesDom = document.querySelectorAll("div[yui-anchor-menu-module]");
+    let blankDivDom = yui_appendBlankDiv(menuDom);
+    let scrollTop = document.documentElement.scrollTop;
+    let menuDomOT = menuDom.offsetTop;
+    let clientHeight = document.documentElement.clientHeight;
+    let attr = handleAttr(menuDom, clientHeight);
+    let fixedTop = attr['fixedTop'];
+    handleMenuClick(menuItemDom, attr['clickTop']);
+    window.onscroll = function (e) {
+        scrollTop = document.documentElement.scrollTop;
+        yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, fixedTop)
+    }
+}
+
+/**
+ *点击菜单时模块跳转
+ */
+function handleMenuClick(dom, clickTop) {
+    dom.forEach(menu => {
+        menu.addEventListener("click", function () {
+            //清除所有选中，选中当前
+            yui_menuCheck(dom, menu);
+            let value = menu.getAttribute("value");
+            let moduleDom = document.querySelector(`div[yui-anchor-menu-module='${value}']`)
+            window.scroll({
+                left: 0,
+                top: moduleDom.offsetTop - clickTop,
+                behavior: 'smooth'
+            })
+        })
+    })
+}
+
+/**
+ *菜单选中
+ */
+function yui_menuCheck(items, item) {
+    items.forEach(menu => {
+        menu.removeAttribute("checked");
+    });
+    yui_bulkAddAttributes(item, {checked: ""})
+}
+
+/**
+ *处理一些属性
+ */
+function handleAttr(dom, clientHeight) {
+    let attr = yui_bulkGetAttributes(dom, ['fixed-top']);
+    //菜单滚动到距离顶部多少时固定
+    let fixedTop = attr['fixed-top'];
+    fixedTop = yui_string2Number(fixedTop);
+    if (fixedTop && attr['fixed-top'].indexOf("%") !== -1) {
+        fixedTop = fixedTop * clientHeight;
+    }
+    if (!fixedTop) {
+        fixedTop = 0
+    }
+    //点击时对应模块滚动到视窗上部的距离
+    let clickTop = attr['click-top'];
+    clickTop = yui_string2Number(clickTop);
+    if (clickTop && attr['click-top'].indexOf("%") !== -1) {
+        clickTop = clickTop * clientHeight;
+    }
+    if (!clickTop) {
+        clickTop = clientHeight / 4
+    }
+    return {fixedTop, clickTop}
+}
+
+/**
+ *监听菜单滚动位置
+ */
+function yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, fixedTop) {
+    if (menuDomOT - scrollTop < fixedTop) {
+        yui_bulkAddClasses(menuDom, ['yui-anchor-menu-fixed']);
+        yui_bulkAddStyles(menuDom, {top: fixedTop + "px"});
+        yui_bulkAddStyles(blankDivDom, {display: "block"});
+    } else {
+        yui_bulkAddClasses(menuDom, ['yui-anchor-menu-fixed'], 'remove');
+        yui_bulkAddStyles(blankDivDom, {display: "none"});
+    }
+}
+
+/**
+ 创建等高的空div
+ */
+function yui_appendBlankDiv(dom) {
+    let divDom = document.createElement('div');
+    yui_bulkAddStyles(divDom, {
+        height: dom.offsetHeight + 'px',
+        display: "none"
+    });
+    dom.parentNode.insertBefore(divDom, dom);
+    return divDom
+}
+
+// anchorMenu =================================================== end //
 
 // dialog =================================================== start //
 
