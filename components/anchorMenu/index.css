@@ -1,0 +1,8 @@
+div[yui-anchor-menu-module], .module {
+    height: 500px;
+    box-sizing: border-box;
+    background-color: #F5F5F5;
+    border: 1px solid #b3d8ff;
+    margin: 50px auto;
+    width: 1200px !important;
+}

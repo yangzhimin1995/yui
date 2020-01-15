@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - AnchorMenu 锚点菜单</title>
+    <link rel="icon" type="image/x-icon" href="../../public/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../public/index.css">
+    <link rel="stylesheet" type="text/css" href="../../public/highLight/monokai-sublime.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="../../yui/yui.css">
+    <link rel="stylesheet" type="text/css" href="../../yui/iconfont.css">
+</head>
+<body>
+<!--网页头部-->
+<div class="page-header"></div>
+<!--网页内容-->
+<div class="page-content">
+    <div class="page-title">
+        快速定位模块位置
+    </div>
+    <div class="module">
+        头部
+    </div>
+    <div yui-anchor-Menu>
+        <a value="user">用户管理</a>
+        <a value="role">角色管理</a>
+        <a value="dict">字典管理</a>
+        <a value="order">订单管理</a>
+    </div>
+    <div yui-anchor-menu-module="user">
+        用户管理
+    </div>
+    <div yui-anchor-menu-module="role">
+        角色管理
+    </div>
+    <div yui-anchor-menu-module="dict">
+        字典管理
+    </div>
+    <div yui-anchor-menu-module="order">
+        订单管理
+    </div>
+</div>
+</body>
+<script src="../../public/highLight/highlight.pack.js"></script>
+<script src="../../public/index.js"></script>
+<script src="../../yui/yui.js"></script>
+</html>
