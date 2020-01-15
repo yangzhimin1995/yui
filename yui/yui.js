@@ -265,12 +265,45 @@ function yui_anchorMenuListener() {
     let menuDomOT = menuDom.offsetTop;
     let clientHeight = document.documentElement.clientHeight;
     let attr = handleAttr(menuDom, clientHeight);
-    let fixedTop = attr['fixedTop'];
     handleMenuClick(menuItemDom, attr['clickTop'], checkedLineDom);
     window.onscroll = function (e) {
         scrollTop = document.documentElement.scrollTop;
-        yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, fixedTop)
+        yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, attr['fixedTop']);
+        yui_handleModuleRoll(scrollTop, modulesDom, menuItemDom, checkedLineDom, attr['scrollTop']);
     }
+}
+
+/**
+ *监听模块滚动改变锚点选中
+ */
+function yui_handleModuleRoll(scrollTop, modulesDom, menuItemDom, checkedLineDom, top) {
+    modulesDom.forEach((module, index) => {
+        let value = module.getAttribute("yui-anchor-menu-module");
+        let menuDom = document.querySelector("div[yui-anchor-menu]>a[value=" + value + "]");
+        if (module.offsetTop - scrollTop < top) {
+            if (!menuDom.hasAttribute("checked")) {
+                yui_menuCheck(menuItemDom, menuDom)
+                //控制选中线
+                yui_menuCheckLine(checkedLineDom, menuItemDom);
+            }
+        }
+        if (index === 0) {
+            if (menuDom.offsetTop - scrollTop > top) {
+                //清除所有选中，选中当前
+                yui_menuCheck(menuItemDom);
+                //控制选中线
+                yui_menuCheckLine(checkedLineDom);
+            }
+        }
+        if (index === modulesDom.length - 1) {
+            if (menuDom.offsetTop + menuDom.clientHeight - scrollTop < top) {
+                //清除所有选中，选中当前
+                yui_menuCheck(menuItemDom);
+                //控制选中线
+                yui_menuCheckLine(checkedLineDom);
+            }
+        }
+    })
 }
 
 /**
@@ -280,13 +313,9 @@ function handleMenuClick(dom, clickTop, checkedLineDom) {
     dom.forEach(menu => {
         menu.addEventListener("click", function () {
             //清除所有选中，选中当前
-            yui_menuCheck(dom, menu);
-            //选线移动
-            yui_bulkAddStyles(checkedLineDom, {
-                display: "block",
-                width: menu.offsetWidth + "px",
-                left: menu.offsetLeft + "px",
-            });
+            yui_menuCheck(dom, menu, checkedLineDom);
+            //控制选中线
+            yui_menuCheckLine(checkedLineDom, menu);
             let value = menu.getAttribute("value");
             let moduleDom = document.querySelector(`div[yui-anchor-menu-module='${value}']`);
             window.scroll({
@@ -305,7 +334,27 @@ function yui_menuCheck(items, item) {
     items.forEach(menu => {
         menu.removeAttribute("checked");
     });
-    yui_bulkAddAttributes(item, {checked: ""})
+    if (item) {
+        yui_bulkAddAttributes(item, {checked: ""})
+    }
+}
+
+/**
+ *选中下划线
+ */
+function yui_menuCheckLine(checkedLineDom, menuItemDom) {
+    if (menuItemDom) {
+        //选线移动
+        yui_bulkAddStyles(checkedLineDom, {
+            display: "block",
+            width: menuItemDom.offsetWidth + "px",
+            left: menuItemDom.offsetLeft + "px",
+        });
+    } else {
+        yui_bulkAddStyles(checkedLineDom, {
+            display: "none"
+        });
+    }
 }
 
 /**
@@ -331,7 +380,16 @@ function handleAttr(dom, clientHeight) {
     if (!clickTop) {
         clickTop = clientHeight / 4
     }
-    return {fixedTop, clickTop}
+    //模块滚动触发选中时对视窗上部的距离
+    let scrollTop = attr['scroll-top'];
+    scrollTop = yui_string2Number(scrollTop);
+    if (scrollTop && attr['scroll-top'].indexOf("%") !== -1) {
+        scrollTop = scrollTop * clientHeight;
+    }
+    if (!scrollTop) {
+        scrollTop = clientHeight / 2
+    }
+    return {fixedTop, clickTop, scrollTop}
 }
 
 /**
