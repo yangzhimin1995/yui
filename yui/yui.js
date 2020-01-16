@@ -287,22 +287,22 @@ function yui_handleModuleRoll(scrollTop, modulesDom, menuItemDom, checkedLineDom
                 yui_menuCheckLine(checkedLineDom, menuDom);
             }
         }
-        // if (index === 0) {
-        //     if (menuDom.offsetTop - scrollTop > top) {
-        //         //清除所有选中，选中当前
-        //         yui_menuCheck(menuItemDom);
-        //         //控制选中线
-        //         yui_menuCheckLine(checkedLineDom);
-        //     }
-        // }
-        // if (index === modulesDom.length - 1) {
-        //     if (menuDom.offsetTop + menuDom.clientHeight - scrollTop < top) {
-        //         //清除所有选中，选中当前
-        //         yui_menuCheck(menuItemDom);
-        //         //控制选中线
-        //         yui_menuCheckLine(checkedLineDom);
-        //     }
-        // }
+        if (index === 0) {
+            if (module.offsetTop - scrollTop > top) {
+                //清除所有选中，选中当前
+                yui_menuCheck(menuItemDom);
+                //控制选中线
+                yui_menuCheckLine(checkedLineDom);
+            }
+        }
+        if (index === modulesDom.length - 1) {
+            if (module.offsetTop + module.clientHeight - scrollTop < top) {
+                //清除所有选中，选中当前
+                yui_menuCheck(menuItemDom);
+                //控制选中线
+                yui_menuCheckLine(checkedLineDom);
+            }
+        }
     })
 }
 
