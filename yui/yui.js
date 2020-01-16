@@ -40,7 +40,9 @@ function yui_bulkAddStyles(dom, styles = {}) {
  */
 function yui_bulkAddClasses(dom, classes = [], operator = 'add') {
     classes.forEach(item => {
-        dom.classList[operator](item)
+        if (item) {
+            dom.classList[operator](item)
+        }
     })
 }
 
@@ -266,10 +268,10 @@ function yui_anchorMenuListener() {
     let clientHeight = document.documentElement.clientHeight;
     let attr = handleAttr(menuDom, clientHeight);
     handleMenuClick(menuItemDom, attr, checkedLineDom);
-    yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, attr['fixedTop']);
+    yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, attr);
     window.onscroll = function (e) {
         scrollTop = document.documentElement.scrollTop;
-        yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, attr['fixedTop']);
+        yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, attr);
         yui_handleModuleRoll(scrollTop, modulesDom, menuItemDom, checkedLineDom, attr['scrollTop']);
     }
 }
@@ -315,8 +317,8 @@ function handleMenuClick(dom, attr, checkedLineDom) {
         menu.addEventListener("click", function () {
             let value = menu.getAttribute("value");
             let flag = true;
-            if (attr['yuiClick']) {
-                flag = eval(attr['yuiClick'] + `('${value}')`)
+            if (attr['yui-click']) {
+                flag = eval(attr['yui-click'] + `('${value}')`)
             }
             if (flag !== false) {
                 //清除所有选中，选中当前
@@ -368,7 +370,7 @@ function yui_menuCheckLine(checkedLineDom, menuItemDom) {
  *处理一些属性
  */
 function handleAttr(dom, clientHeight) {
-    let attr = yui_bulkGetAttributes(dom, ['fixed-top', 'click-top', 'scroll-top', 'yui-click']);
+    let attr = yui_bulkGetAttributes(dom, ['fixed-top', 'click-top', 'scroll-top', 'yui-click', 'fixed-class']);
     //菜单滚动到距离顶部多少时固定
     let fixedTop = attr['fixed-top'];
     fixedTop = yui_string2Number(fixedTop);
@@ -396,20 +398,19 @@ function handleAttr(dom, clientHeight) {
     if (!scrollTop) {
         scrollTop = clientHeight / 2
     }
-    return {fixedTop, clickTop, scrollTop, yuiClick: attr['yui-click']}
+    return {fixedTop, clickTop, scrollTop, ...attr}
 }
 
 /**
  *监听菜单滚动位置
  */
-function yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, fixedTop) {
-    console.log("111111")
-    if (menuDomOT - scrollTop < fixedTop) {
-        yui_bulkAddClasses(menuDom, ['yui-anchor-menu-fixed']);
-        yui_bulkAddStyles(menuDom, {top: fixedTop + "px"});
+function yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, attr) {
+    if (menuDomOT - scrollTop < attr['fixedTop']) {
+        yui_bulkAddClasses(menuDom, ['yui-anchor-menu-fixed', attr['fixed-class']]);
+        yui_bulkAddStyles(menuDom, {top: attr['fixedTop'] + "px"});
         yui_bulkAddStyles(blankDivDom, {display: "block"});
     } else {
-        yui_bulkAddClasses(menuDom, ['yui-anchor-menu-fixed'], 'remove');
+        yui_bulkAddClasses(menuDom, ['yui-anchor-menu-fixed', attr['fixed-class']], 'remove');
         yui_bulkAddStyles(menuDom, {top: ""});
         yui_bulkAddStyles(blankDivDom, {display: "none"});
     }

@@ -21,7 +21,12 @@
     <div class="module">
         头部
     </div>
-    <div yui-anchor-Menu fixed-top="60" scroll-top="32%" click-top="25%" yui-click="anchorMenuClick">
+    <div yui-anchor-Menu
+         fixed-class="custom-class"
+         fixed-top="60"
+         scroll-top="32%"
+         click-top="25%"
+         yui-click="anchorMenuClick">
         <a value="user">用户管理</a>
         <a value="role">角色管理</a>
         <a value="dict">字典管理</a>
@@ -91,6 +96,10 @@
                 width: 1200px;
             }
 
+            .custom-class {
+                background-color: #ecf5ff !important;
+            }
+
         &lt;/style&gt;
         </code></pre>
     </div>
@@ -129,6 +138,13 @@
                 <td>number：数字（px）<br/>percent：视窗高度的百分数</td>
                 <td>--</td>
                 <td>0</td>
+            </tr>
+            <tr>
+                <td>fixed-class</td>
+                <td>菜单的位置为fixed时自定义class类名</td>
+                <td>string</td>
+                <td>--</td>
+                <td>--</td>
             </tr>
             <tr>
                 <td>yui-click</td>

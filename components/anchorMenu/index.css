@@ -6,3 +6,7 @@ div[yui-anchor-menu-module], .module {
     margin: 150px auto;
     width: 1200px;
 }
+
+.custom-class {
+    background-color: #ecf5ff !important;
+}
