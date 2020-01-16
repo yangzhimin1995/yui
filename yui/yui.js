@@ -321,10 +321,6 @@ function handleMenuClick(dom, attr, checkedLineDom) {
                 flag = eval(attr['yui-click'] + `('${value}')`)
             }
             if (flag !== false) {
-                //清除所有选中，选中当前
-                yui_menuCheck(dom, menu, checkedLineDom);
-                //控制选中线
-                yui_menuCheckLine(checkedLineDom, menu);
                 let moduleDom = document.querySelector(`div[yui-anchor-menu-module='${value}']`);
                 window.scroll({
                     left: 0,
