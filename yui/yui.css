@@ -152,6 +152,7 @@ div[yui-anchor-Menu] {
     align-items: center;
     background-color: white;
     position: relative;
+    font-size: 15px;
 }
 
 div[yui-anchor-Menu] > a {
