@@ -13,11 +13,13 @@ body > .page-header {
     min-width: 1200px;
 }
 
-body > .page-header .more-row {
+body > .page-header .more-menu {
     display: flex;
+    flex-wrap: wrap;
+    width: 660px;
 }
 
-body > .page-header .more-row > a {
+body > .page-header .more-menu > a {
     width: 220px;
 }
 
