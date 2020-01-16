@@ -70,12 +70,12 @@
 
         &lt;script&gt;
 
-            function anchorClick(name) {
-                if (name === 'order') {
-                    yuiMessage(`阻止跳转到 ${name} 模块`, {type: "danger", delay: 1000});
+            function anchorClick(value) {
+                if (value === 'order') {
+                    yuiMessage(`阻止跳转到 ${value} 模块`, {type: "danger", delay: 1000});
                     return false
                 }
-                yuiMessage(`跳转到 ${name} 模块`, {type: "success", delay: 1000})
+                yuiMessage(`跳转到 ${value} 模块`, {type: "success", delay: 1000})
             }
 
         &lt;/script&gt;
@@ -214,12 +214,12 @@
 <script src="../../public/index.js"></script>
 <script src="../../yui/yui.js"></script>
 <script>
-    function anchorClick(name) {
-        if (name === 'order') {
-            yuiMessage(`阻止跳转到 ${name} 模块`, {type: "danger", delay: 1000});
+    function anchorClick(value) {
+        if (value === 'order') {
+            yuiMessage(`阻止跳转到 ${value} 模块`, {type: "danger", delay: 1000});
             return false
         }
-        yuiMessage(`跳转到 ${name} 模块`, {type: "success", delay: 1000})
+        yuiMessage(`跳转到 ${value} 模块`, {type: "success", delay: 1000})
     }
 </script>
 </html>

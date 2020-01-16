@@ -265,7 +265,7 @@ function yui_anchorMenuListener() {
     let menuDomOT = menuDom.offsetTop;
     let clientHeight = document.documentElement.clientHeight;
     let attr = handleAttr(menuDom, clientHeight);
-    handleMenuClick(menuItemDom, attr['clickTop'], checkedLineDom);
+    handleMenuClick(menuItemDom, attr, checkedLineDom);
     window.onscroll = function (e) {
         scrollTop = document.documentElement.scrollTop;
         yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, attr['fixedTop']);
@@ -309,20 +309,26 @@ function yui_handleModuleRoll(scrollTop, modulesDom, menuItemDom, checkedLineDom
 /**
  *点击菜单时模块跳转
  */
-function handleMenuClick(dom, clickTop, checkedLineDom) {
+function handleMenuClick(dom, attr, checkedLineDom) {
     dom.forEach(menu => {
         menu.addEventListener("click", function () {
-            //清除所有选中，选中当前
-            yui_menuCheck(dom, menu, checkedLineDom);
-            //控制选中线
-            yui_menuCheckLine(checkedLineDom, menu);
             let value = menu.getAttribute("value");
-            let moduleDom = document.querySelector(`div[yui-anchor-menu-module='${value}']`);
-            window.scroll({
-                left: 0,
-                top: moduleDom.offsetTop - clickTop,
-                behavior: 'smooth'
-            })
+            let flag = true;
+            if (attr['yuiClick']) {
+                flag = eval(attr['yuiClick'] + `('${value}')`)
+            }
+            if (flag !== false) {
+                //清除所有选中，选中当前
+                yui_menuCheck(dom, menu, checkedLineDom);
+                //控制选中线
+                yui_menuCheckLine(checkedLineDom, menu);
+                let moduleDom = document.querySelector(`div[yui-anchor-menu-module='${value}']`);
+                window.scroll({
+                    left: 0,
+                    top: moduleDom.offsetTop - attr['clickTop'],
+                    behavior: 'smooth'
+                })
+            }
         })
     })
 }
@@ -361,7 +367,7 @@ function yui_menuCheckLine(checkedLineDom, menuItemDom) {
  *处理一些属性
  */
 function handleAttr(dom, clientHeight) {
-    let attr = yui_bulkGetAttributes(dom, ['fixed-top']);
+    let attr = yui_bulkGetAttributes(dom, ['fixed-top', 'click-top', 'scroll-top', 'yui-click']);
     //菜单滚动到距离顶部多少时固定
     let fixedTop = attr['fixed-top'];
     fixedTop = yui_string2Number(fixedTop);
@@ -389,7 +395,7 @@ function handleAttr(dom, clientHeight) {
     if (!scrollTop) {
         scrollTop = clientHeight / 2
     }
-    return {fixedTop, clickTop, scrollTop}
+    return {fixedTop, clickTop, scrollTop, yuiClick: attr['yui-click']}
 }
 
 /**
