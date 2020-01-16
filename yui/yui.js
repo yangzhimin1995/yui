@@ -266,6 +266,7 @@ function yui_anchorMenuListener() {
     let clientHeight = document.documentElement.clientHeight;
     let attr = handleAttr(menuDom, clientHeight);
     handleMenuClick(menuItemDom, attr, checkedLineDom);
+    yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, attr['fixedTop']);
     window.onscroll = function (e) {
         scrollTop = document.documentElement.scrollTop;
         yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, attr['fixedTop']);
@@ -402,6 +403,7 @@ function handleAttr(dom, clientHeight) {
  *监听菜单滚动位置
  */
 function yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, fixedTop) {
+    console.log("111111")
     if (menuDomOT - scrollTop < fixedTop) {
         yui_bulkAddClasses(menuDom, ['yui-anchor-menu-fixed']);
         yui_bulkAddStyles(menuDom, {top: fixedTop + "px"});
