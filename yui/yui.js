@@ -322,11 +322,13 @@ function handleMenuClick(dom, attr, checkedLineDom) {
             }
             if (flag !== false) {
                 let moduleDom = document.querySelector(`div[yui-anchor-menu-module='${value}']`);
-                window.scroll({
-                    left: 0,
-                    top: moduleDom.offsetTop - attr['clickTop'],
-                    behavior: 'smooth'
-                })
+                if (moduleDom) {
+                    window.scroll({
+                        left: 0,
+                        top: moduleDom.offsetTop - attr['clickTop'],
+                        behavior: 'smooth'
+                    })
+                }
             }
         })
     })
