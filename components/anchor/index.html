@@ -228,8 +228,8 @@
 <script src="../../yui/yui.js"></script>
 <script>
     function anchorClick(value) {
-        if (value === 'order') {
-            yuiMessage(`阻止跳转到 ${dict} 模块`, {type: "danger", delay: 1000});
+        if (value === 'dict') {
+            yuiMessage(`阻止跳转到 ${value} 模块`, {type: "danger", delay: 1000});
             return false
         }
         yuiMessage(`跳转到 ${value} 模块`, {type: "success", delay: 1000})
