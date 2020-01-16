@@ -4,5 +4,5 @@ div[yui-anchor-module], .module {
     background-color: #F5F5F5;
     border: 1px solid #b3d8ff;
     margin: 150px auto;
-    width: 1200px !important;
+    width: 1200px;
 }

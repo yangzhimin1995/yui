@@ -71,7 +71,7 @@
         &lt;script&gt;
 
             function anchorClick(value) {
-                if (value === 'order') {
+                if (value === 'dict') {
                     yuiMessage(`阻止跳转到 ${value} 模块`, {type: "danger", delay: 1000});
                     return false
                 }
@@ -79,6 +79,19 @@
             }
 
         &lt;/script&gt;
+
+        &lt;style&gt;
+
+            div[yui-anchor-module], .module {
+                height: 500px;
+                box-sizing: border-box;
+                background-color: #F5F5F5;
+                border: 1px solid #b3d8ff;
+                margin: 150px auto;
+                width: 1200px;
+            }
+
+        &lt;/style&gt;
         </code></pre>
     </div>
     <div class="attr">
@@ -216,7 +229,7 @@
 <script>
     function anchorClick(value) {
         if (value === 'order') {
-            yuiMessage(`阻止跳转到 ${value} 模块`, {type: "danger", delay: 1000});
+            yuiMessage(`阻止跳转到 ${dict} 模块`, {type: "danger", delay: 1000});
             return false
         }
         yuiMessage(`跳转到 ${value} 模块`, {type: "success", delay: 1000})

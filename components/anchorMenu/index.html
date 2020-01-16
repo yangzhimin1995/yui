@@ -39,8 +39,159 @@
     <div yui-anchor-menu-module="order">
         订单管理
     </div>
-    <div class="module">
-        头部
+    <div class="code">
+        <pre><code class="html">
+        &lt;div class="module"&gt;
+            头部
+        &lt;/div&gt;
+
+        &lt;div yui-anchor-Menu fixed-top="60" scroll-top="32%" click-top="25%" yui-click="anchorMenuClick"&gt;
+            &lt;a value="user"&gt;用户管理&lt;/a&gt;
+            &lt;a value="role"&gt;角色管理&lt;/a&gt;
+            &lt;a value="dict"&gt;字典管理&lt;/a&gt;
+            &lt;a value="order"&gt;订单管理&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;div yui-anchor-menu-module="user"&gt;
+            用户管理
+        &lt;/div&gt;
+
+        &lt;div yui-anchor-menu-module="role"&gt;
+            角色管理
+        &lt;/div&gt;
+
+        &lt;div yui-anchor-menu-module="dict"&gt;
+            字典管理
+        &lt;/div&gt;
+
+        &lt;div yui-anchor-menu-module="order"&gt;
+            订单管理
+        &lt;/div&gt;
+
+        &lt;script&gt;
+
+            function anchorMenuClick(value) {
+                if (value === 'dict') {
+                    yuiMessage(`阻止跳转到 ${value} 模块`, {type: "danger", delay: 1000});
+                    return false
+                }
+                yuiMessage(`跳转到 ${value} 模块`, {type: "success", delay: 1000})
+            }
+
+        &lt;/script&gt;
+
+        &lt;style&gt;
+
+            div[yui-anchor-menu-module], .module {
+                height: 500px;
+                box-sizing: border-box;
+                background-color: #F5F5F5;
+                border: 1px solid #b3d8ff;
+                margin: 150px auto;
+                width: 1200px;
+            }
+
+        &lt;/style&gt;
+        </code></pre>
+    </div>
+    <div class="attr">
+        <div class="module-title">
+            yui-anchor-menu
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <td>属性</td>
+                <td>说明</td>
+                <td>类型</td>
+                <td>可选值 / 回调参数</td>
+                <td>默认值 / 参数形式</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>click-top</td>
+                <td>点击锚点时对应模块跳转到的位置距离顶部的大小</td>
+                <td>number：数字（px）<br/>percent：视窗高度的百分数</td>
+                <td>--</td>
+                <td>25%</td>
+            </tr>
+            <tr>
+                <td>scroll-top</td>
+                <td>模块滚动到距离顶部多少时相应的锚点变成选中状态</td>
+                <td>number：数字（px）<br/>percent：视窗高度的百分数</td>
+                <td>--</td>
+                <td>50%</td>
+            </tr>
+            <tr>
+                <td>fixed-top</td>
+                <td>菜单滚动到距离顶部多少时进行fixed固定</td>
+                <td>number：数字（px）<br/>percent：视窗高度的百分数</td>
+                <td>--</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>yui-click</td>
+                <td>点击锚点时的回调，如果返回false，则阻止模块的滚动</td>
+                <td>functionName：方法名</td>
+                <td>name：被点击的锚点名称</td>
+                <td>(name)</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="module-title">
+            yui-anchor-menu > div
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <td>属性</td>
+                <td>说明</td>
+                <td>类型</td>
+                <td>可选值 / 回调参数</td>
+                <td>默认值 / 参数形式</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>value</td>
+                <td>锚点的值</td>
+                <td>string</td>
+                <td>--</td>
+                <td>--</td>
+            </tr>
+            <tr>
+                <td>checked</td>
+                <td>锚点选中状态</td>
+                <td>是否具有该属性</td>
+                <td>--</td>
+                <td>--</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="module-title">
+            yui-anchor-menu-module
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <td>属性</td>
+                <td>说明</td>
+                <td>类型</td>
+                <td>可选值 / 回调参数</td>
+                <td>默认值 / 参数形式</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>yui-anchor-menu-module</td>
+                <td>标识为锚点模块，与锚点的值对应</td>
+                <td>string</td>
+                <td>--</td>
+                <td>--</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>
@@ -49,7 +200,7 @@
 <script src="../../yui/yui.js"></script>
 <script>
     function anchorMenuClick(value) {
-        if (value === 'order') {
+        if (value === 'dict') {
             yuiMessage(`阻止跳转到 ${value} 模块`, {type: "danger", delay: 1000});
             return false
         }
