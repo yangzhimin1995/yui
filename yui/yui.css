@@ -141,6 +141,7 @@ div[yui-anchor] > a[checked]:before {
     position: fixed !important;
     left: 0;
     width: 100%;
+    z-index: 2020;
 }
 
 div[yui-anchor-menu] {
