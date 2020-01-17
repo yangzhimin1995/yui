@@ -468,23 +468,6 @@ div[yui-button-group] > a[yui-button]:last-child {
 /*button =========================================================================== end*/
 
 /*card =========================================================================== start*/
-@keyframes cardShadowFadeIn {
-    0% {
-        box-shadow: 1px 0 0 0 #ebeef5, 0 1px 0 0 #ebeef5, 1px 1px 0 0 #ebeef5, 1px 0 0 0 #ebeef5 inset, 0 1px 0 0 #ebeef5 inset;
-    }
-    100% {
-        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
-    }
-}
-
-@keyframes cardShadowFadeOut {
-    0% {
-        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
-    }
-    100% {
-        box-shadow: 1px 0 0 0 #ebeef5, 0 1px 0 0 #ebeef5, 1px 1px 0 0 #ebeef5, 1px 0 0 0 #ebeef5 inset, 0 1px 0 0 #ebeef5 inset;
-    }
-}
 
 div[yui-card] {
     border-radius: 4px;
@@ -494,19 +477,11 @@ div[yui-card] {
     box-sizing: border-box;
     display: inline-block;
     width: 100%;
-}
-
-div[yui-card][shadow=hover] {
-    -webkit-animation: cardShadowFadeOut .5s ease-out both;
-    -moz-animation: cardShadowFadeOut .5s ease-out both;
-    animation: cardShadowFadeOut .5s ease-out both;
+    transition: box-shadow .5s;
 }
 
 div[yui-card][shadow=hover]:hover {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
-    -webkit-animation: cardShadowFadeIn .5s ease-out both;
-    -moz-animation: cardShadowFadeIn .5s ease-out both;
-    animation: cardShadowFadeIn .5s ease-out both;
 }
 
 div[yui-card][shadow=always] {
