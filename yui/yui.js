@@ -83,14 +83,14 @@ function yui_bulkAddAttributes(dom, attributes = {}) {
  字符串转小数，支持百分比，错误返回null
  */
 function yui_string2Number(string) {
-    if (typeof string === "number") {
+    if (typeof string === 'number') {
         return string
     }
     if (!string) {
         return null
     }
-    if (string.indexOf("%") !== -1) {
-        string = string.replace("%", "");
+    if (string.indexOf('%') !== -1) {
+        string = string.replace('%', '');
         if (isNaN(string)) {
             return null
         } else {
@@ -135,12 +135,12 @@ function yui_hasScrollbar() {
  锚点初始化
  */
 function yui_anchorListener() {
-    let anchorDom = document.querySelector("div[yui-anchor]");
+    let anchorDom = document.querySelector('div[yui-anchor]');
     if (anchorDom === null) {
         return
     }
-    let anchorItemDom = document.querySelectorAll("div[yui-anchor]>a");
-    let moduleDom = document.querySelectorAll("div[yui-anchor-module]");
+    let anchorItemDom = document.querySelectorAll('div[yui-anchor]>a');
+    let moduleDom = document.querySelectorAll('div[yui-anchor-module]');
     let clientHeight = document.documentElement.clientHeight;
     let attr = yui_anchorAttributeHandle(anchorDom, clientHeight);
     yui_anchorItemClick(anchorItemDom, attr);
@@ -156,10 +156,10 @@ function yui_anchorListener() {
  */
 function yui_anchorModuleScrollHandle(moduleDom, anchorItemDom, scrollTop, scrollCheckedTop) {
     moduleDom.forEach((item, index) => {
-        let value = item.getAttribute("yui-anchor-module");
-        let itemDom = document.querySelector("div[yui-anchor]>a[value=" + value + "]");
+        let value = item.getAttribute('yui-anchor-module');
+        let itemDom = document.querySelector('div[yui-anchor]>a[value=' + value + ']');
         if (item.offsetTop - scrollTop < scrollCheckedTop) {
-            if (!itemDom.hasAttribute("checked")) {
+            if (!itemDom.hasAttribute('checked')) {
                 yui_clearAnchorItemChecked(anchorItemDom, itemDom)
             }
         }
@@ -181,9 +181,9 @@ function yui_anchorModuleScrollHandle(moduleDom, anchorItemDom, scrollTop, scrol
  */
 function yui_anchorItemClick(anchorItemDom, attr) {
     anchorItemDom.forEach(item => {
-        item.addEventListener("click", function () {
-            let value = item.getAttribute("value");
-            let moduleDom = document.querySelector("div[yui-anchor-module=" + value + "]");
+        item.addEventListener('click', function () {
+            let value = item.getAttribute('value');
+            let moduleDom = document.querySelector('div[yui-anchor-module=' + value + ']');
             if (attr['yui-click']) {
                 let result = eval(`${attr['yui-click']}('${value}')`);
                 if (result === false) {
@@ -205,10 +205,10 @@ function yui_anchorItemClick(anchorItemDom, attr) {
  */
 function yui_clearAnchorItemChecked(anchorItemDom, dom) {
     anchorItemDom.forEach(item => {
-        item.removeAttribute("checked")
+        item.removeAttribute('checked')
     });
     if (dom) {
-        dom.setAttribute("checked", "")
+        dom.setAttribute('checked', '')
     }
 }
 
@@ -217,19 +217,19 @@ function yui_clearAnchorItemChecked(anchorItemDom, dom) {
  */
 function yui_anchorAttributeHandle(anchorDom, clientHeight) {
     let attr = yui_bulkGetAttributes(anchorDom, [
-        "align-center",
-        "scroll-top",
-        "click-top",
-        "yui-click"
+        'align-center',
+        'scroll-top',
+        'click-top',
+        'yui-click'
     ]);
     //处理位置是否需要垂直居中
     if (attr['align-center'] !== null) {
         let top = (clientHeight - anchorDom.clientHeight) / 2;
-        yui_bulkAddStyles(anchorDom, {top: top + "px"})
+        yui_bulkAddStyles(anchorDom, {top: top + 'px'})
     }
     //模块滚动触发选中时对视窗上部的距离
     let scrollTop = attr['scroll-top'];
-    if (scrollTop && scrollTop.indexOf("%") !== -1) {
+    if (scrollTop && scrollTop.indexOf('%') !== -1) {
         scrollTop = yui_string2Number(scrollTop);
         scrollTop = scrollTop ? scrollTop * clientHeight : clientHeight / 2
     } else {
@@ -238,14 +238,14 @@ function yui_anchorAttributeHandle(anchorDom, clientHeight) {
     }
     //点击时对应模块滚动到视窗上部的距离
     let clickTop = attr['click-top'];
-    if (clickTop && clickTop.indexOf("%") !== -1) {
+    if (clickTop && clickTop.indexOf('%') !== -1) {
         clickTop = yui_string2Number(clickTop);
         clickTop = clickTop ? clickTop * clientHeight : clientHeight / 4
     } else {
         clickTop = yui_string2Number(clickTop);
         clickTop = clickTop || clientHeight / 4
     }
-    return {scrollTop, clickTop, "yui-click": attr['yui-click']}
+    return {scrollTop, clickTop, 'yui-click': attr['yui-click']}
 }
 
 // anchor =================================================== end //
@@ -255,12 +255,12 @@ function yui_anchorAttributeHandle(anchorDom, clientHeight) {
  监听锚点菜单事件
  */
 function yui_anchorMenuListener() {
-    let menuDom = document.querySelector("div[yui-anchor-menu]");
+    let menuDom = document.querySelector('div[yui-anchor-menu]');
     if (menuDom === null) {
         return
     }
-    let menuItemDom = document.querySelectorAll("div[yui-anchor-menu]>a");
-    let modulesDom = document.querySelectorAll("div[yui-anchor-menu-module]");
+    let menuItemDom = document.querySelectorAll('div[yui-anchor-menu]>a');
+    let modulesDom = document.querySelectorAll('div[yui-anchor-menu-module]');
     let blankDivDom = yui_appendBlankDiv(menuDom);
     let checkedLineDom = yui_appendCheckedLine(menuDom);
     let scrollTop = document.documentElement.scrollTop;
@@ -281,10 +281,10 @@ function yui_anchorMenuListener() {
  */
 function yui_handleModuleRoll(scrollTop, modulesDom, menuItemDom, checkedLineDom, top) {
     modulesDom.forEach((module, index) => {
-        let value = module.getAttribute("yui-anchor-menu-module");
-        let menuDom = document.querySelector("div[yui-anchor-menu]>a[value=" + value + "]");
+        let value = module.getAttribute('yui-anchor-menu-module');
+        let menuDom = document.querySelector('div[yui-anchor-menu]>a[value=' + value + ']');
         if (module.offsetTop - scrollTop < top) {
-            if (!menuDom.hasAttribute("checked")) {
+            if (!menuDom.hasAttribute('checked')) {
                 yui_menuCheck(menuItemDom, menuDom);
                 //控制选中线
                 yui_menuCheckLine(checkedLineDom, menuDom);
@@ -314,8 +314,8 @@ function yui_handleModuleRoll(scrollTop, modulesDom, menuItemDom, checkedLineDom
  */
 function handleMenuClick(dom, attr, checkedLineDom) {
     dom.forEach(menu => {
-        menu.addEventListener("click", function () {
-            let value = menu.getAttribute("value");
+        menu.addEventListener('click', function () {
+            let value = menu.getAttribute('value');
             let flag = true;
             if (attr['yui-click']) {
                 flag = eval(attr['yui-click'] + `('${value}')`)
@@ -339,10 +339,10 @@ function handleMenuClick(dom, attr, checkedLineDom) {
  */
 function yui_menuCheck(items, item) {
     items.forEach(menu => {
-        menu.removeAttribute("checked");
+        menu.removeAttribute('checked');
     });
     if (item) {
-        yui_bulkAddAttributes(item, {checked: ""})
+        yui_bulkAddAttributes(item, {checked: ''})
     }
 }
 
@@ -353,13 +353,13 @@ function yui_menuCheckLine(checkedLineDom, menuItemDom) {
     if (menuItemDom) {
         //选线移动
         yui_bulkAddStyles(checkedLineDom, {
-            display: "block",
-            width: menuItemDom.offsetWidth + "px",
-            left: menuItemDom.offsetLeft + "px",
+            display: 'block',
+            width: menuItemDom.offsetWidth + 'px',
+            left: menuItemDom.offsetLeft + 'px',
         });
     } else {
         yui_bulkAddStyles(checkedLineDom, {
-            display: "none"
+            display: 'none'
         });
     }
 }
@@ -372,7 +372,7 @@ function handleAttr(dom, clientHeight) {
     //菜单滚动到距离顶部多少时固定
     let fixedTop = attr['fixed-top'];
     fixedTop = yui_string2Number(fixedTop);
-    if (fixedTop && attr['fixed-top'].indexOf("%") !== -1) {
+    if (fixedTop && attr['fixed-top'].indexOf('%') !== -1) {
         fixedTop = fixedTop * clientHeight;
     }
     if (!fixedTop) {
@@ -381,7 +381,7 @@ function handleAttr(dom, clientHeight) {
     //点击时对应模块滚动到视窗上部的距离
     let clickTop = attr['click-top'];
     clickTop = yui_string2Number(clickTop);
-    if (clickTop && attr['click-top'].indexOf("%") !== -1) {
+    if (clickTop && attr['click-top'].indexOf('%') !== -1) {
         clickTop = clickTop * clientHeight;
     }
     if (!clickTop) {
@@ -390,7 +390,7 @@ function handleAttr(dom, clientHeight) {
     //模块滚动触发选中时对视窗上部的距离
     let scrollTop = attr['scroll-top'];
     scrollTop = yui_string2Number(scrollTop);
-    if (scrollTop && attr['scroll-top'].indexOf("%") !== -1) {
+    if (scrollTop && attr['scroll-top'].indexOf('%') !== -1) {
         scrollTop = scrollTop * clientHeight;
     }
     if (!scrollTop) {
@@ -405,12 +405,12 @@ function handleAttr(dom, clientHeight) {
 function yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, attr) {
     if (menuDomOT - scrollTop < attr['fixedTop']) {
         yui_bulkAddClasses(menuDom, ['yui-anchor-menu-fixed', attr['fixed-class']]);
-        yui_bulkAddStyles(menuDom, {top: attr['fixedTop'] + "px"});
-        yui_bulkAddStyles(blankDivDom, {display: "block"});
+        yui_bulkAddStyles(menuDom, {top: attr['fixedTop'] + 'px'});
+        yui_bulkAddStyles(blankDivDom, {display: 'block'});
     } else {
         yui_bulkAddClasses(menuDom, ['yui-anchor-menu-fixed', attr['fixed-class']], 'remove');
-        yui_bulkAddStyles(menuDom, {top: ""});
-        yui_bulkAddStyles(blankDivDom, {display: "none"});
+        yui_bulkAddStyles(menuDom, {top: ''});
+        yui_bulkAddStyles(blankDivDom, {display: 'none'});
     }
 }
 
@@ -421,7 +421,7 @@ function yui_appendBlankDiv(dom) {
     let divDom = document.createElement('div');
     yui_bulkAddStyles(divDom, {
         height: dom.offsetHeight + 'px',
-        display: "none"
+        display: 'none'
     });
     dom.parentNode.insertBefore(divDom, dom);
     return divDom
@@ -432,7 +432,7 @@ function yui_appendBlankDiv(dom) {
  */
 function yui_appendCheckedLine(dom) {
     let divDom = document.createElement('div');
-    yui_bulkAddClasses(divDom, ["yui-anchor-menu-checked-line"]);
+    yui_bulkAddClasses(divDom, ['yui-anchor-menu-checked-line']);
     dom.appendChild(divDom);
     return divDom
 }
@@ -448,21 +448,21 @@ function yui_dialogMaskClickListener(selectors = 'div[yui-dialog-mask]', event) 
     let dom = document.querySelectorAll(selectors);
     dom.forEach(item => {
         let dialog = item.querySelector('div[yui-dialog]');
-        dialog.addEventListener("click", function (e) {
+        dialog.addEventListener('click', function (e) {
             e.stopPropagation();
         });
-        item.addEventListener("click", function () {
-            let attr = yui_bulkGetAttributes(item, ["click-mask-not-close", "name"]);
+        item.addEventListener('click', function () {
+            let attr = yui_bulkGetAttributes(item, ['click-mask-not-close', 'name']);
             if (attr['click-mask-not-close'] === null) {
                 if (event) {
-                    let flag = event(attr["name"], function () {
-                        yuiDialogClosed(attr["name"])
+                    let flag = event(attr['name'], function () {
+                        yuiDialogClosed(attr['name'])
                     });
                     if (flag === true) {
-                        yuiDialogClosed(attr["name"])
+                        yuiDialogClosed(attr['name'])
                     }
                 } else {
-                    yuiDialogClosed(attr["name"])
+                    yuiDialogClosed(attr['name'])
                 }
             }
         })
@@ -473,26 +473,26 @@ function yui_dialogMaskClickListener(selectors = 'div[yui-dialog-mask]', event) 
  打开对话框
  */
 function yuiDialog(name) {
-    let dom = document.querySelector("div[yui-dialog-mask][name=" + name + "]");
+    let dom = document.querySelector('div[yui-dialog-mask][name=' + name + ']');
     if (dom) {
         //关闭其他对话框
-        let allDom = document.querySelectorAll("div[yui-dialog-mask]");
+        let allDom = document.querySelectorAll('div[yui-dialog-mask]');
         allDom.forEach(item => {
-            yui_bulkAddStyles(item, {display: "none"})
+            yui_bulkAddStyles(item, {display: 'none'})
         });
         //添加动画
         let dialog = dom.querySelector('div[yui-dialog]');
-        dialog.classList.remove("yui-dialog-closed");
-        dialog.classList.add("yui-dialog-show");
-        yui_bulkAddStyles(dom, {display: "flex"});
+        dialog.classList.remove('yui-dialog-closed');
+        dialog.classList.add('yui-dialog-show');
+        yui_bulkAddStyles(dom, {display: 'flex'});
         //处理滚动条
         let hasScrollBar = yui_hasScrollbar();
         if (hasScrollBar) {
             let bodyDom = document.body;
             yui_bulkAddStyles(bodyDom, {
-                width: "calc(100% - 17px)",
-                overflow: "hidden",
-                position: "relative",
+                width: 'calc(100% - 17px)',
+                overflow: 'hidden',
+                position: 'relative',
             })
         }
     }
@@ -502,21 +502,21 @@ function yuiDialog(name) {
  关闭对话框
  */
 function yuiDialogClosed(name) {
-    let dom = document.querySelector("div[yui-dialog-mask][name=" + name + "]");
+    let dom = document.querySelector('div[yui-dialog-mask][name=' + name + ']');
     let dialog = dom.querySelector('div[yui-dialog]');
-    dialog.classList.remove("yui-dialog-show");
-    dialog.classList.add("yui-dialog-closed");
-    setTimeout(function () {
+    dialog.classList.remove('yui-dialog-show');
+    dialog.classList.add('yui-dialog-closed');
+    setTimeout(() => {
         let bodyDom = document.body;
         yui_bulkAddStyles(bodyDom, {
-            width: "",
-            overflow: "",
-            position: "",
+            width: '',
+            overflow: '',
+            position: '',
         });
-        if (dom.getAttribute("removeFromDom") !== null) {
+        if (dom.getAttribute('removeFromDom') !== null) {
             dom.remove();
         } else {
-            yui_bulkAddStyles(dom, {display: "none"});
+            yui_bulkAddStyles(dom, {display: 'none'});
         }
     }, 200)
 }
@@ -533,27 +533,27 @@ function yuiDialogClosed(name) {
  * ｝
  * @return string 消息对话框名称
  */
-function yuiMessageBox(title = "提示",
-                       content = "",
+function yuiMessageBox(title = '提示',
+                       content = '',
                        options = {}) {
     // 初始化配置
     options = yui_json2Default(options, {
         showLeftBtn: false,
         leftBtnText: '取 消',
-        leftBtnAttr: {size: "mini"},
+        leftBtnAttr: {size: 'mini'},
         leftBtnMethod: yuiDialogClosed,
         showRightBtn: true,
         rightBtnText: '确 定',
-        rightBtnAttr: {size: "mini", type: "primary"},
+        rightBtnAttr: {size: 'mini', type: 'primary'},
         rightBtnMethod: yuiDialogClosed,
         showCloseIcon: true,
         beforeClose: yuiDialogClosed,
         clickMaskNotClosed: false,
     });
     //生成名字
-    let name = "yui-dialog-" + (yui_INDEX++);
+    let name = 'yui-dialog-' + (yui_INDEX++);
     //新建dialog
-    let newDialog = document.createElement("div");
+    let newDialog = document.createElement('div');
     newDialog.innerHTML = `
             <div yui-dialog messageBox>
                 <div yui-header>
@@ -570,12 +570,12 @@ function yuiMessageBox(title = "提示",
                 </div>
             </div>`;
     // 获取底部按钮部分
-    let btnDom = newDialog.querySelector("div[yui-footer]");
+    let btnDom = newDialog.querySelector('div[yui-footer]');
     //生成按钮
     const addBtn2Dom = function (options, position, name) {
-        let dom = document.createElement("a");
+        let dom = document.createElement('a');
         yui_bulkAddAttributes(dom, {
-            "yui-button": "",
+            'yui-button': '',
             ...options[position + 'BtnAttr']
         });
         dom.innerText = options[position + 'BtnText'];
@@ -596,8 +596,8 @@ function yuiMessageBox(title = "提示",
     }
     //生成右上角图标
     if (options['showCloseIcon'] === true) {
-        let iconDom = newDialog.querySelector("div[yui-right]");
-        let closedIconDom = document.createElement("i");
+        let iconDom = newDialog.querySelector('div[yui-right]');
+        let closedIconDom = document.createElement('i');
         yui_bulkAddClasses(closedIconDom, ['iconfont', 'yui-closed']);
         iconDom.appendChild(closedIconDom);
         iconDom.onclick = function () {
@@ -608,8 +608,8 @@ function yuiMessageBox(title = "提示",
     }
     // dialog一些属性
     let attr = {
-        "removeFromDom": "",
-        "yui-dialog-mask": "",
+        'removeFromDom': '',
+        'yui-dialog-mask': '',
         name
     };
     yui_bulkAddAttributes(newDialog, attr);
@@ -619,7 +619,7 @@ function yuiMessageBox(title = "提示",
     yuiDialog(name);
     //监听点击遮罩关闭
     if (options['clickMaskNotClosed'] !== true) {
-        attr["click-mask-not-close"] = "";
+        attr['click-mask-not-close'] = '';
         if (options['beforeClose'] === yuiDialogClosed) {
             yui_dialogMaskClickListener(`div[yui-dialog-mask][name=${name}]`)
         } else {
@@ -636,43 +636,44 @@ function yuiMessageBox(title = "提示",
  * 菜单监听hover
  */
 function yui_menuHoverListener() {
-    let hasChildDom = document.querySelectorAll("div[contain-child-menu]");
+    let hasChildDom = document.querySelectorAll('div[contain-child-menu]');
     hasChildDom.forEach(childDom => {
-        let parentMenuItem = childDom.querySelector("a[yui-menu-item]");
-        let childPanelDom = childDom.querySelector("div[yui-child-menu]");
-        let iconDom = childDom.querySelector(".yui-menu-icon");
+        let parentMenuItem = childDom.querySelector('a[yui-menu-item]');
+        let childPanelDom = childDom.querySelector('div[yui-child-menu]');
+        let iconDom = childDom.querySelector('.yui-menu-icon');
         if (!iconDom) {
-            parentMenuItem.insertAdjacentHTML("beforeEnd", `<i class="iconfont yui-drop-down yui-menu-icon"></i>`);
-            iconDom = childDom.querySelector(".yui-menu-icon");
+            parentMenuItem.insertAdjacentHTML('beforeEnd', `<i class='iconfont yui-drop-down yui-menu-icon'></i>`);
+            iconDom = childDom.querySelector('.yui-menu-icon');
         }
         let childPanelDomHeight = childPanelDom.offsetHeight;
         let hideChildPanelSTO;
         let mouseListenerDom = [];
         mouseListenerDom.push(parentMenuItem, childPanelDom);
         mouseListenerDom.forEach(item => {
-            item.addEventListener("mouseenter", function () {
+            item.addEventListener('mouseenter', function () {
                 if (hideChildPanelSTO) {
                     clearTimeout(hideChildPanelSTO);
                 }
-                if (childPanelDom.style.visibility !== "visible") {
+                if (childPanelDom.style.visibility !== 'visible') {
                     yui_childrenMenuHide();
-                    yui_bulkAddStyles(iconDom, {transform: "rotate(180deg)"});
-                    yui_bulkAddStyles(childPanelDom, {height: "0"});
-                    setTimeout(function () {
+                    yui_bulkAddStyles(iconDom, {transform: 'rotate(180deg)'});
+                    yui_bulkAddStyles(childPanelDom, {height: '0'});
+                    setTimeout(() => {
                         yui_bulkAddStyles(childPanelDom, {
-                            height: childPanelDomHeight + "px",
-                            visibility: "visible"
+                            height: childPanelDomHeight + 'px',
+                            visibility: 'visible'
                         });
+
                     }, 50)
                 }
             });
-            item.addEventListener("mouseleave", function () {
-                hideChildPanelSTO = setTimeout(function () {
-                    yui_bulkAddStyles(childPanelDom, {height: "0"});
-                    setTimeout(function () {
-                        yui_bulkAddStyles(childPanelDom, {visibility: "hidden"});
+            item.addEventListener('mouseleave', function () {
+                hideChildPanelSTO = setTimeout(() => {
+                    yui_bulkAddStyles(childPanelDom, {height: '0'});
+                    setTimeout(() => {
+                        yui_bulkAddStyles(childPanelDom, {visibility: 'hidden'});
                     }, 300);
-                    yui_bulkAddStyles(iconDom, {transform: "rotate(0deg)"});
+                    yui_bulkAddStyles(iconDom, {transform: 'rotate(0deg)'});
                 }, 300)
             });
         })
@@ -683,12 +684,12 @@ function yui_menuHoverListener() {
  * 隐藏所有子菜单
  */
 function yui_childrenMenuHide() {
-    let hasChildDom = document.querySelectorAll("div[contain-child-menu]");
+    let hasChildDom = document.querySelectorAll('div[contain-child-menu]');
     hasChildDom.forEach(childDom => {
-        let childPanelDom = childDom.querySelector("div[yui-child-menu]");
-        let iconDom = childDom.querySelector(".yui-menu-icon");
-        yui_bulkAddStyles(childPanelDom, {visibility: "hidden"});
-        yui_bulkAddStyles(iconDom, {transform: "rotate(0deg)"});
+        let childPanelDom = childDom.querySelector('div[yui-child-menu]');
+        let iconDom = childDom.querySelector('.yui-menu-icon');
+        yui_bulkAddStyles(childPanelDom, {visibility: 'hidden'});
+        yui_bulkAddStyles(iconDom, {transform: 'rotate(0deg)'});
     })
 }
 
@@ -704,36 +705,36 @@ function yui_childrenMenuHide() {
  */
 function yuiMessage(content = '', options = {}) {
     options = yui_json2Default(options, {
-        type: "info",
-        theme: "light",
+        type: 'info',
+        theme: 'light',
         showIcon: true,
         delay: 5000
     });
-    let messageBoxDom = document.querySelector("div[yui-message-box]");
+    let messageBoxDom = document.querySelector('div[yui-message-box]');
     if (!messageBoxDom) {
-        messageBoxDom = document.createElement("div");
-        yui_bulkAddAttributes(messageBoxDom, {"yui-message-box": ""});
+        messageBoxDom = document.createElement('div');
+        yui_bulkAddAttributes(messageBoxDom, {'yui-message-box': ''});
         document.body.appendChild(messageBoxDom)
     }
-    let messageDom = document.createElement("div");
-    let name = "yui-message-" + (yui_INDEX++);
+    let messageDom = document.createElement('div');
+    let name = 'yui-message-' + (yui_INDEX++);
     let iconDom = `<i class='iconfont yui-${options['type']}'></i>`;
     if (options['showIcon'] === false) {
-        iconDom = ""
+        iconDom = ''
     }
     yui_bulkAddAttributes(messageDom, {
-        "yui-message": "",
+        'yui-message': '',
         name,
         type: options['type'],
         theme: options['theme']
     });
     messageDom.innerHTML = `${iconDom}${content}`;
     messageBoxDom.appendChild(messageDom);
-    setTimeout(function () {
-        yui_bulkAddStyles(messageDom, {top: "0px", opacity: 1})
+    setTimeout(() => {
+        yui_bulkAddStyles(messageDom, {top: '0px', opacity: 1})
     }, 50);
     options['delay'] = yui_string2Number(options['delay']);
-    setTimeout(function () {
+    setTimeout(() => {
         yui_messageRemove(messageDom)
     }, options['delay']);
     return name
@@ -743,8 +744,8 @@ function yuiMessage(content = '', options = {}) {
  * 移除消息dom
  */
 function yui_messageRemove(dom) {
-    yui_bulkAddStyles(dom, {marginTop: -dom.clientHeight + "px", opacity: 0});
-    setTimeout(function () {
+    yui_bulkAddStyles(dom, {marginTop: -dom.clientHeight + 'px', opacity: 0});
+    setTimeout(() => {
         dom.remove()
     }, 300);
 }
@@ -769,21 +770,21 @@ function yuiNotify(title = '提示',
         delay: 5000,
         beforeClose: yui_notifyRemove
     });
-    let notifyBoxDom = document.querySelector("div[yui-notify-box]");
+    let notifyBoxDom = document.querySelector('div[yui-notify-box]');
     if (!notifyBoxDom) {
-        notifyBoxDom = document.createElement("div");
-        yui_bulkAddAttributes(notifyBoxDom, {"yui-notify-box": ""});
+        notifyBoxDom = document.createElement('div');
+        yui_bulkAddAttributes(notifyBoxDom, {'yui-notify-box': ''});
         document.body.appendChild(notifyBoxDom)
     }
-    let notifyDom = document.createElement("div");
-    let name = "yui-message-" + (yui_INDEX++);
-    yui_bulkAddAttributes(notifyDom, {"yui-notify": "", name});
+    let notifyDom = document.createElement('div');
+    let name = 'yui-message-' + (yui_INDEX++);
+    yui_bulkAddAttributes(notifyDom, {'yui-notify': '', name});
     yui_bulkAddStyles(notifyDom, {zIndex: -yui_INDEX});
     let typeIconDom = ``;
     if (options['type']) {
         typeIconDom = `
         <div yui-left>
-            <i class="iconfont yui-${options['type']}"></i>
+            <i class='iconfont yui-${options['type']}'></i>
         </div>`
     }
     notifyDom.innerHTML = `
@@ -799,9 +800,9 @@ function yuiNotify(title = '提示',
     notifyBoxDom.appendChild(notifyDom);
     let yuiRightDom = ``;
     if (options['showCloseIcon'] === true) {
-        yuiRightDom = document.createElement("div");
-        yui_bulkAddAttributes(yuiRightDom, {"yui-right": ""});
-        let iconDom = document.createElement("i");
+        yuiRightDom = document.createElement('div');
+        yui_bulkAddAttributes(yuiRightDom, {'yui-right': ''});
+        let iconDom = document.createElement('i');
         yui_bulkAddClasses(iconDom, ['iconfont', 'yui-closed']);
         iconDom.onclick = function () {
             options['beforeClose'](name, function () {
@@ -811,12 +812,12 @@ function yuiNotify(title = '提示',
         yuiRightDom.appendChild(iconDom);
         notifyDom.appendChild(yuiRightDom);
     }
-    setTimeout(function () {
-        yui_bulkAddStyles(notifyDom, {"left": "0px", "opacity": 1})
+    setTimeout(() => {
+        yui_bulkAddStyles(notifyDom, {'left': '0px', 'opacity': 1})
     }, 50);
     if (options['delay'] !== 0) {
         options['delay'] = yui_string2Number(options['delay']);
-        setTimeout(function () {
+        setTimeout(() => {
             yui_notifyRemove(name, options['beforeClose'])
         }, options['delay'])
     }
@@ -827,10 +828,10 @@ function yuiNotify(title = '提示',
  */
 function yui_notifyRemove(name, event) {
     const closed = function (name) {
-        let dom = document.querySelector("div[yui-notify][name=" + name + "]");
+        let dom = document.querySelector('div[yui-notify][name=' + name + ']');
         if (dom) {
-            yui_bulkAddStyles(dom, {marginTop: -dom.offsetHeight - 24 + "px", opacity: 0});
-            setTimeout(function () {
+            yui_bulkAddStyles(dom, {marginTop: -dom.offsetHeight - 24 + 'px', opacity: 0});
+            setTimeout(() => {
                 dom.remove()
             }, 350)
         }
@@ -867,21 +868,21 @@ function yuiNumberRun(id, number, options) {
     }
     let numStr = '' + num;
     let length = numStr.length;
-    dom.innerText = "";
+    dom.innerText = '';
     for (let i in numStr) {
         let str = numStr[i];
         let singleNum = parseInt(str);
-        let numDom = document.createElement("span");
+        let numDom = document.createElement('span');
         if (str === '.') {
             numDom.innerText = str;
         } else {
-            numDom.innerText = "0";
-            setTimeout(function () {
+            numDom.innerText = '0';
+            setTimeout(() => {
                 numDom.innerText = '' + singleNum;
                 if (i === '0') {
-                    yui_startNumberRun(numDom, singleNum, options["count"], options["callback"], num);
+                    yui_startNumberRun(numDom, singleNum, options['count'], options['callback'], num);
                 } else {
-                    yui_startNumberRun(numDom, singleNum, options["count"]);
+                    yui_startNumberRun(numDom, singleNum, options['count']);
                 }
             }, (length - i) * 150)
         }
@@ -892,7 +893,7 @@ function yuiNumberRun(id, number, options) {
 function yui_startNumberRun(dom, value, count, callback, num) {
     let start = 0;
     let startCount = 0;
-    let interval = setInterval(function () {
+    let interval = setInterval(() => {
         start++;
         if (start === 10) {
             start = 0
@@ -916,11 +917,11 @@ function yui_startNumberRun(dom, value, count, callback, num) {
  * radio点击事件
  */
 function yui_radioClickListener() {
-    let dom = document.querySelectorAll("div[yui-radio]");
+    let dom = document.querySelectorAll('div[yui-radio]');
     dom.forEach(radio => {
-        let clickItems = radio.querySelectorAll("a");
+        let clickItems = radio.querySelectorAll('a');
         clickItems.forEach(clickItem => {
-            clickItem.addEventListener("click", function () {
+            clickItem.addEventListener('click', function () {
                 let radioAttr = yui_bulkGetAttributes(radio, ['yui-click']);
                 let clickItemAttr = yui_bulkGetAttributes(clickItem, ['disabled', 'value']);
                 if (clickItemAttr['disabled'] === null) {
@@ -943,9 +944,9 @@ function yui_radioClickListener() {
  */
 function yui_radioCheckedChange(dom, item) {
     dom.forEach(item => {
-        item.removeAttribute("checked");
+        item.removeAttribute('checked');
     });
-    item.setAttribute("checked", "")
+    item.setAttribute('checked', '')
 }
 
 // radio =================================================== end //
@@ -955,12 +956,12 @@ function yui_radioCheckedChange(dom, item) {
  * 定位ribbon位置
  */
 function yui_ribbonLocation() {
-    let dom = document.querySelectorAll("div[yui-ribbon]");
+    let dom = document.querySelectorAll('div[yui-ribbon]');
     dom.forEach(item => {
-        let position = item.getAttribute("position");
+        let position = item.getAttribute('position');
         let xOffset = item.clientWidth - item.clientWidth / 2 * Math.SQRT2;
         switch (position) {
-            case "top-left":
+            case 'top-left':
                 yui_bulkAddStyles(item, {
                     transform: 'rotate(-45deg)',
                     transformOrigin: '100% 100%',
@@ -968,7 +969,7 @@ function yui_ribbonLocation() {
                     left: -xOffset + 'px'
                 });
                 break;
-            case "bottom-left":
+            case 'bottom-left':
                 yui_bulkAddStyles(item, {
                     transform: 'rotate(45deg)',
                     transformOrigin: '100% 0',
@@ -976,7 +977,7 @@ function yui_ribbonLocation() {
                     left: -xOffset + 'px'
                 });
                 break;
-            case "bottom-right":
+            case 'bottom-right':
                 yui_bulkAddStyles(item, {
                     transform: 'rotate(-45deg)',
                     transformOrigin: '0 0',
@@ -1003,27 +1004,27 @@ function yui_ribbonLocation() {
  * tabs点击监听
  */
 function yui_tabsClickListener() {
-    let dom = document.querySelectorAll("div[yui-tabs]");
+    let dom = document.querySelectorAll('div[yui-tabs]');
     dom.forEach(tab => {
         let tabsAttr = yui_bulkGetAttributes(tab, ['yui-click', 'type', 'tab-position']);
-        let headerDom = tab.querySelector("div[yui-header]");
-        let panelsDom = tab.querySelectorAll("div[yui-body]>div[yui-tab-panel]");
+        let headerDom = tab.querySelector('div[yui-header]');
+        let panelsDom = tab.querySelectorAll('div[yui-body]>div[yui-tab-panel]');
         let checkedLineDom = yui_addTabsCheckedLine(tabsAttr);
-        let items = headerDom.querySelectorAll("div[yui-header]>a[value]");
+        let items = headerDom.querySelectorAll('div[yui-header]>a[value]');
         items.forEach(item => {
-            let itemAttr = yui_bulkGetAttributes(item, ['checked', "value", "disabled"]);
-            if (itemAttr["checked"] !== null && checkedLineDom) {
+            let itemAttr = yui_bulkGetAttributes(item, ['checked', 'value', 'disabled']);
+            if (itemAttr['checked'] !== null && checkedLineDom) {
                 if (itemAttr['disabled'] !== null) {
-                    yui_bulkAddStyles(checkedLineDom, {backgroundColor: "rgba(64, 158, 255,0.5)"})
+                    yui_bulkAddStyles(checkedLineDom, {backgroundColor: 'rgba(64, 158, 255,0.5)'})
                 }
                 headerDom.appendChild(checkedLineDom);
                 yui_tabsCheckedLineMove(item, checkedLineDom, tabsAttr)
             }
-            item.addEventListener("click", function () {
+            item.addEventListener('click', function () {
                 if (itemAttr['disabled'] === null) {
                     let flag = false;
                     if (tabsAttr['yui-click']) {
-                        flag = eval(tabsAttr['yui-click'] + `('${itemAttr["value"]}')`);
+                        flag = eval(tabsAttr['yui-click'] + `('${itemAttr['value']}')`);
                     }
                     if (!tabsAttr['yui-click'] || flag !== false) {
                         yui_tabsChange(tabsAttr, items, item, checkedLineDom);
@@ -1040,13 +1041,13 @@ function yui_tabsClickListener() {
  */
 function yui_tabsCheckedLineMove(itemDom, checkedLineDom, tabsAttr) {
     let position = tabsAttr['tab-position'];
-    let disabled = itemDom.getAttribute("disabled");
+    let disabled = itemDom.getAttribute('disabled');
     let bgc = '#409eff';
     if (disabled !== null) {
-        bgc = "rgba(64, 158, 255,0.5)";
+        bgc = 'rgba(64, 158, 255,0.5)';
     }
     yui_bulkAddStyles(checkedLineDom, {backgroundColor: bgc});
-    if (position === "left" || position === "right") {
+    if (position === 'left' || position === 'right') {
         yui_bulkAddStyles(checkedLineDom, {
             height: `${itemDom.clientHeight}px`,
             top: `${itemDom.offsetTop}px`,
@@ -1064,23 +1065,23 @@ function yui_tabsCheckedLineMove(itemDom, checkedLineDom, tabsAttr) {
  */
 function yui_tabsChange(tabsAttr, items, nextItem, checkedLineDom) {
     if (checkedLineDom) {
-        let preItem = "";
+        let preItem = '';
         items.forEach(item => {
-            let checked = item.getAttribute("checked");
+            let checked = item.getAttribute('checked');
             if (checked !== null) {
                 preItem = item
             }
         });
         if (preItem) {
             yui_tabsCheckedLineMove(nextItem, checkedLineDom, tabsAttr);
-            preItem.removeAttribute("checked");
+            preItem.removeAttribute('checked');
         }
     } else {
         items.forEach(item => {
-            item.removeAttribute("checked");
+            item.removeAttribute('checked');
         });
     }
-    nextItem.setAttribute("checked", "");
+    nextItem.setAttribute('checked', '');
 }
 
 /**
@@ -1088,11 +1089,11 @@ function yui_tabsChange(tabsAttr, items, nextItem, checkedLineDom) {
  */
 function yui_tabsPanelChange(panels, value) {
     panels.forEach(panel => {
-        let name = panel.getAttribute("yui-tab-panel");
+        let name = panel.getAttribute('yui-tab-panel');
         if (name === value) {
-            panel.setAttribute("checked", "");
+            panel.setAttribute('checked', '');
         } else {
-            panel.removeAttribute("checked");
+            panel.removeAttribute('checked');
         }
     })
 }
@@ -1101,24 +1102,24 @@ function yui_tabsPanelChange(panels, value) {
  * 非card和border-card类型的tabs添加选中线
  */
 function yui_addTabsCheckedLine(tabsAttr) {
-    if (tabsAttr['type'] === "card" || tabsAttr['type'] === "border-card") {
+    if (tabsAttr['type'] === 'card' || tabsAttr['type'] === 'border-card') {
         return
     }
-    let checkedLineDom = document.createElement("div");
+    let checkedLineDom = document.createElement('div');
     checkedLineDom.classList.add('yui-tabs-checked-line');
     let style;
     switch (tabsAttr['tab-position']) {
-        case "left":
-            style = {left: "100%", width: "2px"};
+        case 'left':
+            style = {left: '100%', width: '2px'};
             break;
-        case "right":
-            style = {right: "100%", width: "2px"};
+        case 'right':
+            style = {right: '100%', width: '2px'};
             break;
-        case "bottom":
-            style = {bottom: "100%", height: "2px"};
+        case 'bottom':
+            style = {bottom: '100%', height: '2px'};
             break;
         default:
-            style = {top: "100%", height: "2px"}
+            style = {top: '100%', height: '2px'}
     }
     yui_bulkAddStyles(checkedLineDom, style);
     return checkedLineDom
@@ -1132,34 +1133,36 @@ function yui_addTabsCheckedLine(tabsAttr) {
 function yui_tooltipListener() {
     let tooltips = document.querySelectorAll('div[yui-tooltip]');
     tooltips.forEach(tooltip => {
-        let attr = yui_bulkGetAttributes(tooltip, ['content', "position"]);
-        attr = yui_json2Default(attr, {content: "", position: "top"});
-        let textDom = tooltip.querySelector("div[yui-tooltip-text]");
+        let attr = yui_bulkGetAttributes(tooltip, ['content', 'position']);
+        attr = yui_json2Default(attr, {content: '', position: 'top'});
+        let textDom = tooltip.querySelector('div[yui-tooltip-text]');
         if (!textDom) {
-            textDom = document.createElement("div");
-            yui_bulkAddAttributes(textDom, {"yui-tooltip-text": ""});
+            textDom = document.createElement('div');
+            yui_bulkAddAttributes(textDom, {'yui-tooltip-text': ''});
             textDom.innerText = attr['content'];
             tooltip.appendChild(textDom);
         }
-        let pointDom = document.createElement("div");
+        let pointDom = document.createElement('div');
         yui_bulkAddClasses(pointDom, ['yui-tooltip-point']);
         textDom.appendChild(pointDom);
         yui_tooltipLocation(tooltip, textDom, pointDom, attr['position']);
         let hideSTO;
         //监听hover离开
-        tooltip.addEventListener("mouseleave", function () {
-            hideSTO = setTimeout(function () {
-                yui_bulkAddStyles(textDom, {opacity: "0"});
+        tooltip.addEventListener('mouseleave', function () {
+            hideSTO = setTimeout(() => {
+                yui_bulkAddStyles(textDom, {opacity: '0'});
+                setTimeout(() => {
+                }, 500);
             }, 250)
         });
         //监听hover
-        tooltip.addEventListener("mouseenter", function () {
+        tooltip.addEventListener('mouseenter', function () {
             if (hideSTO) {
                 clearTimeout(hideSTO)
             }
-            yui_bulkAddStyles(textDom, {display: "block"});
-            setTimeout(function () {
-                yui_bulkAddStyles(textDom, {opacity: "1"});
+            yui_bulkAddStyles(textDom, {display: 'block'});
+            setTimeout(() => {
+                yui_bulkAddStyles(textDom, {opacity: '1'});
             }, 100)
         });
     })
@@ -1173,18 +1176,18 @@ function yui_tooltipListener() {
  * @param position
  */
 function yui_tooltipLocation(tooltip, textDom, pointDom, position) {
-    position = position || "";
+    position = position || '';
     let firstPosition = position.split('-')[0];
-    let secondPosition = position.split('-')[1] || "";
+    let secondPosition = position.split('-')[1] || '';
     const xPositionHandle = function (textDom, pointDom, secondPosition) {
         switch (secondPosition) {
-            case "start":
-                yui_bulkAddStyles(textDom, {left: "0"});
-                yui_bulkAddStyles(pointDom, {left: "9px"});
+            case 'start':
+                yui_bulkAddStyles(textDom, {left: '0'});
+                yui_bulkAddStyles(pointDom, {left: '9px'});
                 break;
-            case "end":
-                yui_bulkAddStyles(textDom, {right: "0"});
-                yui_bulkAddStyles(pointDom, {right: "9px"});
+            case 'end':
+                yui_bulkAddStyles(textDom, {right: '0'});
+                yui_bulkAddStyles(pointDom, {right: '9px'});
                 break;
             default:
                 let tooltipWidth = tooltip.clientWidth;
@@ -1196,13 +1199,13 @@ function yui_tooltipLocation(tooltip, textDom, pointDom, position) {
     };
     const yPositionHandle = function (textDom, pointDom, secondPosition) {
         switch (secondPosition) {
-            case "start":
-                yui_bulkAddStyles(textDom, {top: "0"});
-                yui_bulkAddStyles(pointDom, {top: "9px"});
+            case 'start':
+                yui_bulkAddStyles(textDom, {top: '0'});
+                yui_bulkAddStyles(pointDom, {top: '9px'});
                 break;
-            case "end":
-                yui_bulkAddStyles(textDom, {bottom: "0"});
-                yui_bulkAddStyles(pointDom, {bottom: "9px"});
+            case 'end':
+                yui_bulkAddStyles(textDom, {bottom: '0'});
+                yui_bulkAddStyles(pointDom, {bottom: '9px'});
                 break;
             default:
                 let tooltipHeight = tooltip.clientHeight;
@@ -1213,36 +1216,36 @@ function yui_tooltipLocation(tooltip, textDom, pointDom, position) {
         }
     };
     switch (firstPosition) {
-        case "left":
-            yui_bulkAddStyles(textDom, {right: "calc(100% + 9px)"});
+        case 'left':
+            yui_bulkAddStyles(textDom, {right: 'calc(100% + 9px)'});
             yui_bulkAddStyles(pointDom, {
-                left: "100%",
-                borderColor: " transparent transparent transparent #303133"
+                left: '100%',
+                borderColor: ' transparent transparent transparent #303133'
             });
             yPositionHandle(textDom, pointDom, secondPosition);
             break;
-        case "right":
-            yui_bulkAddStyles(textDom, {left: "calc(100% + 9px)"});
+        case 'right':
+            yui_bulkAddStyles(textDom, {left: 'calc(100% + 9px)'});
             yui_bulkAddStyles(pointDom, {
-                right: "100%",
-                borderColor: " transparent #303133 transparent transparent"
+                right: '100%',
+                borderColor: ' transparent #303133 transparent transparent'
             });
             yPositionHandle(textDom, pointDom, secondPosition);
             break;
-        case "bottom":
-            yui_bulkAddStyles(textDom, {top: "calc(100% + 9px)"});
+        case 'bottom':
+            yui_bulkAddStyles(textDom, {top: 'calc(100% + 9px)'});
             yui_bulkAddStyles(pointDom, {
-                bottom: "100%",
-                borderColor: " transparent transparent #303133 transparent"
+                bottom: '100%',
+                borderColor: ' transparent transparent #303133 transparent'
             });
             xPositionHandle(textDom, pointDom, secondPosition);
             break;
         default:
-            yui_bulkAddStyles(textDom, {bottom: "calc(100% + 9px)"});
-            yui_bulkAddStyles(pointDom, {top: "100%"});
+            yui_bulkAddStyles(textDom, {bottom: 'calc(100% + 9px)'});
+            yui_bulkAddStyles(pointDom, {top: '100%'});
             xPositionHandle(textDom, pointDom, secondPosition);
     }
-    yui_bulkAddStyles(textDom, {display: "none"});
+    yui_bulkAddStyles(textDom, {display: 'none'});
 }
 
 // tooltip =================================================== end //
