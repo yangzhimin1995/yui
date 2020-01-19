@@ -64,7 +64,6 @@
         let dom = document.querySelector('#support');
         let icon = dom.querySelector('span');
         let imgDom = document.querySelector('.donate');
-        let height = imgDom.offsetHeight;
         imgDom.style.height = "0px";
         let STO = '';
         dom.addEventListener("mouseenter", function () {
@@ -73,7 +72,7 @@
             }
             icon.style.transform = "rotate(180deg)";
             imgDom.style.visibility = "visible";
-            imgDom.style.height = height + "px";
+            imgDom.style.height = "500px";
         });
         dom.addEventListener("mouseleave", function () {
             icon.style.transform = "rotate(0deg)";
