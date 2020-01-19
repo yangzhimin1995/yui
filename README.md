@@ -14,11 +14,11 @@ yui.css 、yui.js 以及 Iconfont.css 三个未压缩文件。
 
 #### 引用语句
 
-&lt;link rel="stylesheet" type="text/css" href="/yourPath/yui/yui.css"&gt;
+&lt;link rel="stylesheet" type="text/css" href="/yourPath/yui/yui-min.css"&gt;
 
-&lt;link rel="stylesheet" type="text/css" href="/yourPath/yui/iconfont.css"&gt;
+&lt;link rel="stylesheet" type="text/css" href="/yourPath/yui/iconfont-min.css"&gt;
 
-&lt;script type="text/javascript" src="/yourPath/yui/yui.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="/yourPath/yui/yui-min.js"&gt;&lt;/script&gt;
 
 
 #### 注意JS文件
