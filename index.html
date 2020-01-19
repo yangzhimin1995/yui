@@ -12,18 +12,19 @@
     <div style="text-align: center">
         <div>yui - Element UI 部分组件的HTML使用</div>
         <div style="margin-top: 30px">
-            <a href="https://github.com/yangZhiMin-China/yui" target="_blank">
-                GitHub
+            <a id="start" href="./components/alert/index.html" target="_blank">
+                Get Start
+                <i style="position: relative" class="iconfont yui-enter"></i>
             </a>
-            <a id="support" style="margin:0 50px">
+            <a style="margin:0 50px" href="https://github.com/yangZhiMin-China/yui" target="_blank">
+                GitHub
+                <i class="iconfont yui-enter"></i>
+            </a>
+            <a id="support">
                 Support
                 <span class="support-icon">
                     <i style="font-size: 14px" class="iconfont yui-drop-down"></i>
                 </span>
-            </a>
-            <a id="start" href="./components/alert/index.html" target="_blank">
-                Get Start
-                <i style="position: relative" class="iconfont yui-enter"></i>
             </a>
         </div>
         <div class="donate">
@@ -100,12 +101,13 @@
     .donate {
         display: inline-flex;
         position: relative;
-        left: -22%;
+        left: -10%;
         margin-top: 10px;
         overflow: hidden;
         visibility: hidden;
         transition: height .5s;
         padding: 5px;
+        z-index: 2020;
     }
 
     .donate img {
@@ -133,8 +135,9 @@
         color: white;
         position: absolute;
         width: 100%;
-        top: 20%;
+        top: 15%;
         left: 0;
+        z-index: 2020;
     }
 
     a {
