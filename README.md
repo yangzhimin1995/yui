@@ -1,4 +1,4 @@
-# yui - Element UI 部分组件的HTML样式
+# yui - Element UI 部分组件的HTML使用
 
 #### 使用说明
 
