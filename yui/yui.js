@@ -506,7 +506,7 @@ function yuiDialogClosed(name) {
     let dialog = dom.querySelector('div[yui-dialog]');
     dialog.classList.remove("yui-dialog-show");
     dialog.classList.add("yui-dialog-closed");
-    setTimeout(() => {
+    setTimeout(function () {
         let bodyDom = document.body;
         yui_bulkAddStyles(bodyDom, {
             width: "",
@@ -658,19 +658,18 @@ function yui_menuHoverListener() {
                     yui_childrenMenuHide();
                     yui_bulkAddStyles(iconDom, {transform: "rotate(180deg)"});
                     yui_bulkAddStyles(childPanelDom, {height: "0"});
-                    setTimeout(() => {
+                    setTimeout(function () {
                         yui_bulkAddStyles(childPanelDom, {
                             height: childPanelDomHeight + "px",
                             visibility: "visible"
                         });
-
                     }, 50)
                 }
             });
             item.addEventListener("mouseleave", function () {
-                hideChildPanelSTO = setTimeout(() => {
+                hideChildPanelSTO = setTimeout(function () {
                     yui_bulkAddStyles(childPanelDom, {height: "0"});
-                    setTimeout(() => {
+                    setTimeout(function () {
                         yui_bulkAddStyles(childPanelDom, {visibility: "hidden"});
                     }, 300);
                     yui_bulkAddStyles(iconDom, {transform: "rotate(0deg)"});
@@ -730,11 +729,11 @@ function yuiMessage(content = '', options = {}) {
     });
     messageDom.innerHTML = `${iconDom}${content}`;
     messageBoxDom.appendChild(messageDom);
-    setTimeout(() => {
+    setTimeout(function () {
         yui_bulkAddStyles(messageDom, {top: "0px", opacity: 1})
     }, 50);
     options['delay'] = yui_string2Number(options['delay']);
-    setTimeout(() => {
+    setTimeout(function () {
         yui_messageRemove(messageDom)
     }, options['delay']);
     return name
@@ -745,7 +744,7 @@ function yuiMessage(content = '', options = {}) {
  */
 function yui_messageRemove(dom) {
     yui_bulkAddStyles(dom, {marginTop: -dom.clientHeight + "px", opacity: 0});
-    setTimeout(() => {
+    setTimeout(function () {
         dom.remove()
     }, 300);
 }
@@ -812,12 +811,12 @@ function yuiNotify(title = '提示',
         yuiRightDom.appendChild(iconDom);
         notifyDom.appendChild(yuiRightDom);
     }
-    setTimeout(() => {
+    setTimeout(function () {
         yui_bulkAddStyles(notifyDom, {"left": "0px", "opacity": 1})
     }, 50);
     if (options['delay'] !== 0) {
         options['delay'] = yui_string2Number(options['delay']);
-        setTimeout(() => {
+        setTimeout(function () {
             yui_notifyRemove(name, options['beforeClose'])
         }, options['delay'])
     }
@@ -831,7 +830,7 @@ function yui_notifyRemove(name, event) {
         let dom = document.querySelector("div[yui-notify][name=" + name + "]");
         if (dom) {
             yui_bulkAddStyles(dom, {marginTop: -dom.offsetHeight - 24 + "px", opacity: 0});
-            setTimeout(() => {
+            setTimeout(function () {
                 dom.remove()
             }, 350)
         }
@@ -877,7 +876,7 @@ function yuiNumberRun(id, number, options) {
             numDom.innerText = str;
         } else {
             numDom.innerText = "0";
-            setTimeout(() => {
+            setTimeout(function () {
                 numDom.innerText = '' + singleNum;
                 if (i === '0') {
                     yui_startNumberRun(numDom, singleNum, options["count"], options["callback"], num);
@@ -893,7 +892,7 @@ function yuiNumberRun(id, number, options) {
 function yui_startNumberRun(dom, value, count, callback, num) {
     let start = 0;
     let startCount = 0;
-    let interval = setInterval(() => {
+    let interval = setInterval(function () {
         start++;
         if (start === 10) {
             start = 0
@@ -1149,10 +1148,8 @@ function yui_tooltipListener() {
         let hideSTO;
         //监听hover离开
         tooltip.addEventListener("mouseleave", function () {
-            hideSTO = setTimeout(() => {
+            hideSTO = setTimeout(function () {
                 yui_bulkAddStyles(textDom, {opacity: "0"});
-                setTimeout(() => {
-                }, 500);
             }, 250)
         });
         //监听hover
@@ -1161,7 +1158,7 @@ function yui_tooltipListener() {
                 clearTimeout(hideSTO)
             }
             yui_bulkAddStyles(textDom, {display: "block"});
-            setTimeout(() => {
+            setTimeout(function () {
                 yui_bulkAddStyles(textDom, {opacity: "1"});
             }, 100)
         });
