@@ -36,7 +36,7 @@ function yui_bulkAddStyles(dom, styles = {}) {
 }
 
 /**
- 批量增加class
+ 批量增加或者移除class
  */
 function yui_bulkAddClasses(dom, classes = [], operator = 'add') {
     classes.forEach(item => {
@@ -50,16 +50,15 @@ function yui_bulkAddClasses(dom, classes = [], operator = 'add') {
  json如果没定义就使用默认值
  */
 function yui_json2Default(data = {}, defaultData = {}, returnRemain = false) {
-    let result;
-    Object.keys(defaultData).forEach(key => {
-        if (data[key] !== undefined) {
-            defaultData[key] = data[key];
-            delete data[key];
-        }
-    });
-    result = defaultData;
+    let result = defaultData;
     if (returnRemain) {
-        result = Object.assign(data, defaultData)
+        result = Object.assign(defaultData, data);
+    } else {
+        Object.keys(defaultData).forEach(key => {
+            if (data[key] !== undefined) {
+                result[key] = data[key];
+            }
+        });
     }
     return result
 }
