@@ -4,16 +4,28 @@
     <meta charset="UTF-8">
     <title>yui</title>
     <link rel="icon" type="image/x-icon" href="/public/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="./yui/iconfont.css">
 </head>
 <body>
 <canvas></canvas>
 <div class="text">
     <div style="text-align: center">
-        <div>yui - 仿 Element UI 部分组件</div>
+        <div>yui - Element UI 部分组件的HTML实现</div>
         <div style="margin-top: 30px">
-            <a href="./components/alert/index.html">
-                Get Start -->
+            <a id="support">
+                Support
+                <span class="support-icon">
+                    <i style="font-size: 14px" class="iconfont yui-drop-down"></i>
+                </span>
             </a>
+            <a id="start" style="margin-left: 40px" href="./components/alert/index.html">
+                Get Start
+                <i style="position: relative" class="iconfont yui-enter"></i>
+            </a>
+        </div>
+        <div class="donate">
+            <img src="./public/images/alipay.png" alt="支付宝支付">
+            <img style="margin-left: 10px" src="./public/images/wechat.png" alt="微信支付">
         </div>
     </div>
 </div>
@@ -22,7 +34,7 @@
     <div class="desc">
         点击下载
         <a href="./yui/yui.rar" download="yui.rar">yui压缩包</a>
-        ，包含css、js以及iconfont（属于css文件）三个文件。
+        ，包含 CSS 、JS 以及 Iconfont（属于css文件）三个文件。
         将文件解压缩，放在你的个人项目中，在你的项目文件（一般是html文件）中正确地引用这三个文件即可看到yui效果。
         组件的示例代码请点击
         <a href="./components/alert/index.html">
@@ -41,7 +53,86 @@
     </div>
 </div>
 </body>
+<script>
+    supportHover();
+    startHover();
+
+    function supportHover() {
+        let dom = document.querySelector('#support');
+        let icon = dom.querySelector('span');
+        let imgDom = document.querySelector('.donate');
+        let height = imgDom.clientHeight;
+        imgDom.style.height = "0px";
+        let STO = '';
+        dom.addEventListener("mouseenter", function () {
+            if (STO) {
+                clearTimeout(STO);
+            }
+            icon.style.transform = "rotate(180deg)";
+            imgDom.style.visibility = "visible";
+            imgDom.style.height = height + "px";
+        });
+        dom.addEventListener("mouseleave", function () {
+            icon.style.transform = "rotate(0deg)";
+            imgDom.style.height = "0px";
+            STO = setTimeout(() => {
+                imgDom.style.visibility = "hidden";
+            }, 500)
+        })
+    }
+
+    function startHover() {
+        let dom = document.querySelector('#start');
+        let iconDom = dom.querySelector("i");
+        let num = 1;
+        setInterval(() => {
+            if (num > 8) {
+                num = 0
+            }
+            iconDom.style.left = num + "px";
+            num++
+        }, 80)
+        // let SI = "";
+        // dom.addEventListener("mouseenter", function () {
+        //     SI = setInterval(() => {
+        //         if (num > 10) {
+        //             num = 0
+        //         }
+        //         iconDom.style.left = num + "px";
+        //         num++
+        //     }, 50)
+        // });
+        // dom.addEventListener("mouseleave", function () {
+        //     if (SI) {
+        //         iconDom.style.left = "0px";
+        //         clearInterval(SI)
+        //     }
+        // });
+
+    }
+</script>
 <style>
+    .donate {
+        display: inline-flex;
+        position: relative;
+        left: -22%;
+        margin-top: 10px;
+        overflow: hidden;
+        visibility: hidden;
+        transition: height .5s;
+        padding: 5px;
+    }
+
+    .donate img {
+        border-radius: 5px;
+    }
+
+    .support-icon {
+        display: inline-block;
+        transition: transform .5s;
+        position: relative;
+    }
+
     body {
         background-color: black;
         overflow: hidden;
@@ -56,11 +147,7 @@
         color: white;
         position: absolute;
         width: 100%;
-        height: 40%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        top: 0;
+        top: 20%;
         left: 0;
     }
 
@@ -68,6 +155,7 @@
         font-size: 18px;
         color: white;
         text-decoration: none;
+        cursor: pointer;
     }
 
     .info {
@@ -98,6 +186,7 @@
     }
 
     .desc a {
+        cursor: pointer;
         font-size: 15px;
         text-decoration: underline;
     }
