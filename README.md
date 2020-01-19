@@ -9,6 +9,13 @@
 组件的示例代码请访问 [yui](http://yangzhimin.xyz/ "yui")。
 
 
+不支持IE内核浏览器！
+
+不支持IE内核浏览器！
+
+不支持IE内核浏览器！
+
+
 #### 引用语句
 
 &lt;link rel="stylesheet" type="text/css" href="/yourPath/yui/yui.css"&gt;
