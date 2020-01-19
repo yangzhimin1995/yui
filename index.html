@@ -61,7 +61,7 @@
         let dom = document.querySelector('#support');
         let icon = dom.querySelector('span');
         let imgDom = document.querySelector('.donate');
-        let height = imgDom.clientHeight;
+        let height = imgDom.offsetHeight;
         imgDom.style.height = "0px";
         let STO = '';
         dom.addEventListener("mouseenter", function () {
@@ -92,23 +92,6 @@
             iconDom.style.left = num + "px";
             num++
         }, 80)
-        // let SI = "";
-        // dom.addEventListener("mouseenter", function () {
-        //     SI = setInterval(() => {
-        //         if (num > 10) {
-        //             num = 0
-        //         }
-        //         iconDom.style.left = num + "px";
-        //         num++
-        //     }, 50)
-        // });
-        // dom.addEventListener("mouseleave", function () {
-        //     if (SI) {
-        //         iconDom.style.left = "0px";
-        //         clearInterval(SI)
-        //     }
-        // });
-
     }
 </script>
 <style>
