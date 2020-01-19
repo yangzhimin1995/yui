@@ -8,6 +8,9 @@
 
 
 #### 引用语句
-<link rel="stylesheet" type="text/css" href="/yourPath/yui/yui.css">
-<link rel="stylesheet" type="text/css" href="/yourPath/yui/iconfont.css">
-<script type="text/javascript" src="/yourPath/yui/yui.js"></script>
+
+&lt;link rel="stylesheet" type="text/css" href="/yourPath/yui/yui.css"&gt;
+
+&lt;link rel="stylesheet" type="text/css" href="/yourPath/yui/iconfont.css"&gt;
+
+&lt;script type="text/javascript" src="/yourPath/yui/yui.js"&gt;&lt;/script&gt;
