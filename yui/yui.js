@@ -50,13 +50,18 @@ function yui_bulkAddClasses(dom, classes = [], operator = 'add') {
  json如果没定义就使用默认值
  */
 function yui_json2Default(data = {}, defaultData = {}, returnRemain = false) {
+    let result;
     Object.keys(defaultData).forEach(key => {
         if (data[key] !== undefined) {
             defaultData[key] = data[key];
             delete data[key];
         }
     });
-    return returnRemain ? {...data, ...defaultData} : defaultData
+    result = defaultData;
+    if (returnRemain) {
+        result = Object.assign(data, defaultData)
+    }
+    return result
 }
 
 /**
