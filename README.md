@@ -11,11 +11,15 @@
 
 #### 引用语句
 
-&lt;link rel="stylesheet" type="text/css" href="/yourPath/yui/yui-min.css"&gt;
+```
+<link rel="stylesheet" type="text/css" href="/yourPath/yui/yui-min.css">
 
-&lt;link rel="stylesheet" type="text/css" href="/yourPath/yui/yui-iconfont-min.css"&gt;
+<link rel="stylesheet" type="text/css" href="/yourPath/yui/yui-iconfont-min.css">
+```
 
-&lt;script type="text/javascript" src="/yourPath/yui/yui-min.js"&gt;&lt;/script&gt;
+```
+<script type="text/javascript" src="/yourPath/yui/yui-min.js"></script>
+```
 
 
 #### 注意
