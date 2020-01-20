@@ -1634,3 +1634,26 @@ div[yui-tooltip][theme=light] > div[yui-tooltip-text] {
 }
 
 /*tooltip =========================================================================== end*/
+/*typing =========================================================================== start*/
+@keyframes fadeInAndOut {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.yui-typing-cursor {
+    -webkit-animation: fadeInAndOut 0.7s infinite;
+    -moz-animation: fadeInAndOut 0.7s infinite;
+    -o-animation: fadeInAndOut 0.7s infinite;
+    animation: fadeInAndOut 0.7s infinite;
+    font-weight: 100;
+    font-size: 1.2em;
+}
+
+/*typing =========================================================================== end*/

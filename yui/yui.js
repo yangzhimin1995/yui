@@ -1251,3 +1251,28 @@ function yui_tooltipLocation(tooltip, textDom, pointDom, position) {
 }
 
 // tooltip =================================================== end //
+
+// typing =================================================== start //
+function yuiTyping(id, text = "", options = {}) {
+    let dom = document.querySelector(`#${id}`);
+    if (!dom) {
+        return
+    }
+    let textDom = document.createElement("span");
+    let cursorDom = document.createElement("span");
+    yui_bulkAddClasses(cursorDom, ['yui-typing-cursor']);
+    cursorDom.innerText = " |";
+    dom.appendChild(textDom);
+    dom.appendChild(cursorDom);
+    let index = 0;
+    let length = text.length;
+    let SI = setInterval(() => {
+        index++;
+        textDom.innerText = text.substring(0, index);
+        if (index > length) {
+            clearInterval(SI);
+        }
+    }, 80)
+}
+
+// typing =================================================== end //
