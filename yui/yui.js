@@ -649,35 +649,35 @@ function yui_menuHoverListener() {
             iconDom = childDom.querySelector('.yui-menu-icon');
         }
         let childPanelDomHeight = childPanelDom.offsetHeight;
-        let hideChildPanelSTO;
+        let hideHeightSTO;
+        let hideSTO;
         let mouseListenerDom = [];
         mouseListenerDom.push(parentMenuItem, childPanelDom);
         mouseListenerDom.forEach(item => {
             item.addEventListener('mouseenter', function () {
-                if (hideChildPanelSTO) {
-                    clearTimeout(hideChildPanelSTO);
+                if (hideHeightSTO) {
+                    clearTimeout(hideHeightSTO);
                 }
-                if (childPanelDom.style.visibility !== 'visible') {
-                    yui_childrenMenuHide();
-                    yui_bulkAddStyles(iconDom, {transform: 'rotate(180deg)'});
-                    yui_bulkAddStyles(childPanelDom, {height: '0'});
-                    setTimeout(() => {
-                        yui_bulkAddStyles(childPanelDom, {
-                            height: childPanelDomHeight + 'px',
-                            visibility: 'visible'
-                        });
-
-                    }, 50)
+                if (hideSTO) {
+                    clearTimeout(hideSTO);
                 }
+                yui_childrenMenuHide(hasChildDom);
+                yui_bulkAddStyles(iconDom, {transform: 'rotate(180deg)'});
+                yui_bulkAddStyles(childPanelDom, {height: '0', visibility: 'visible'});
+                setTimeout(() => {
+                    yui_bulkAddStyles(childPanelDom, {
+                        height: childPanelDomHeight + 'px',
+                    });
+                }, 10)
             });
             item.addEventListener('mouseleave', function () {
-                hideChildPanelSTO = setTimeout(() => {
+                hideHeightSTO = setTimeout(() => {
                     yui_bulkAddStyles(childPanelDom, {height: '0'});
-                    setTimeout(() => {
+                    yui_bulkAddStyles(iconDom, {transform: 'rotate(0deg)'});
+                    hideSTO = setTimeout(() => {
                         yui_bulkAddStyles(childPanelDom, {visibility: 'hidden'});
                     }, 300);
-                    yui_bulkAddStyles(iconDom, {transform: 'rotate(0deg)'});
-                }, 300)
+                }, 200)
             });
         })
     })
@@ -686,8 +686,7 @@ function yui_menuHoverListener() {
 /**
  * 隐藏所有子菜单
  */
-function yui_childrenMenuHide() {
-    let hasChildDom = document.querySelectorAll('div[contain-child-menu]');
+function yui_childrenMenuHide(hasChildDom) {
     hasChildDom.forEach(childDom => {
         let childPanelDom = childDom.querySelector('div[yui-child-menu]');
         let iconDom = childDom.querySelector('.yui-menu-icon');
