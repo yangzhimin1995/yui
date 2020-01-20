@@ -11,13 +11,13 @@
 
 #### 引用语句
 
-```
+```html
 <link rel="stylesheet" type="text/css" href="/yourPath/yui/yui-min.css">
 
 <link rel="stylesheet" type="text/css" href="/yourPath/yui/yui-iconfont-min.css">
 ```
 
-```
+```html
 <script type="text/javascript" src="/yourPath/yui/yui-min.js"></script>
 ```
 
