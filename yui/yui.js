@@ -20,15 +20,15 @@ if (document.readyState !== 'loading') {
 /** 初始化yui组件 ========================================================== start **/
 function yuiComponentsInit() {
     yui_getScrollbarWidth();
-    yui_anchorListener();
-    yui_anchorMenuListener();
-    yui_dialogMaskClickListener();
-    yui_menuHoverListener();
-    yui_radioClickListener();
-    yui_ribbonLocation();
-    yui_tabsClickListener();
-    yui_tooltipListener();
-    yui_typingListener();
+    yui_anchor_init();
+    yui_anchorMenu_init();
+    yui_dialog_maskClick();
+    yui_menu_init();
+    yui_radio_init();
+    yui_ribbon_init();
+    yui_tabs_init();
+    yui_tooltip_init();
+    yui_typing_init();
 }
 
 /** 初始化yui组件 ========================================================== end **/
@@ -36,7 +36,9 @@ function yuiComponentsInit() {
 
 /** 公共方法 ========================================================== start **/
 /**
- 批量增加style
+ * 批量增加style
+ * @param dom
+ * @param styles
  */
 function yui_bulkAddStyles(dom, styles = {}) {
     Object.keys(styles).forEach(key => {
@@ -45,7 +47,10 @@ function yui_bulkAddStyles(dom, styles = {}) {
 }
 
 /**
- 批量增加或者移除class
+ * 批量增加或者移除class
+ * @param dom
+ * @param classes
+ * @param operator
  */
 function yui_bulkAddClasses(dom, classes = [], operator = 'add') {
     classes.forEach(item => {
@@ -56,7 +61,11 @@ function yui_bulkAddClasses(dom, classes = [], operator = 'add') {
 }
 
 /**
- json如果没定义就使用默认值
+ * json如果没定义就使用默认值
+ * @param data
+ * @param defaultData
+ * @param returnRemain
+ * @returns {{}}
  */
 function yui_json2Default(data = {}, defaultData = {}, returnRemain = false) {
     let result = defaultData;
@@ -73,7 +82,10 @@ function yui_json2Default(data = {}, defaultData = {}, returnRemain = false) {
 }
 
 /**
- 批量获取属性
+ * 批量获取dom属性
+ * @param dom
+ * @param attributes
+ * @returns {{}}
  */
 function yui_bulkGetAttributes(dom, attributes = []) {
     let result = {};
@@ -84,7 +96,9 @@ function yui_bulkGetAttributes(dom, attributes = []) {
 }
 
 /**
- 批量增加属性
+ * 批量增加属性
+ * @param dom
+ * @param attributes
  */
 function yui_bulkAddAttributes(dom, attributes = {}) {
     Object.keys(attributes).forEach(key => {
@@ -93,7 +107,9 @@ function yui_bulkAddAttributes(dom, attributes = {}) {
 }
 
 /**
- 字符串转小数，支持百分比，错误返回null
+ * 字符串转小数，支持百分比，非数字返回null
+ * @param string
+ * @returns {null|number}
  */
 function yui_string2Number(string) {
     if (typeof string === 'number') {
@@ -119,7 +135,7 @@ function yui_string2Number(string) {
 }
 
 /**
- 获取滚动条宽度
+ * 获取浏览器滚动条宽度
  */
 function yui_getScrollbarWidth() {
     let div = document.createElement('div'), i;
@@ -134,7 +150,8 @@ function yui_getScrollbarWidth() {
 }
 
 /**
- 判断是否有滚动条
+ * 判断是否有滚动条
+ * @returns {boolean}
  */
 function yui_hasScrollbar() {
     return document.body.scrollHeight > (window.innerHeight || document.documentElement.clientHeight);
@@ -145,9 +162,9 @@ function yui_hasScrollbar() {
 
 /** anchor ========================================================== end **/
 /**
- 锚点初始化
+ * 锚点初始化
  */
-function yui_anchorListener() {
+function yui_anchor_init() {
     let anchorDom = document.querySelector('div[yui-anchor]');
     if (anchorDom === null) {
         return
@@ -155,44 +172,50 @@ function yui_anchorListener() {
     let anchorItemDom = document.querySelectorAll('div[yui-anchor]>a');
     let moduleDom = document.querySelectorAll('div[yui-anchor-module]');
     let clientHeight = document.documentElement.clientHeight;
-    let attr = yui_anchorAttributeHandle(anchorDom, clientHeight);
-    yui_anchorItemClick(anchorItemDom, attr);
+    let attr = yui_anchor_handleAttr(anchorDom, clientHeight);
+    yui_anchor_menuClick(anchorItemDom, attr);
     let scrollTop = document.documentElement.scrollTop;
     window.onscroll = function (e) {
         scrollTop = document.documentElement.scrollTop;
-        yui_anchorModuleScrollHandle(moduleDom, anchorItemDom, scrollTop, attr.scrollTop)
+        yui_anchor_moduleScroll(moduleDom, anchorItemDom, scrollTop, attr.scrollTop)
     }
 }
 
 /**
- 监听模块滚动，改变锚点选中
+ * 处理模块滚动
+ * @param moduleDom
+ * @param anchorItemDom
+ * @param scrollTop
+ * @param scrollCheckedTop
  */
-function yui_anchorModuleScrollHandle(moduleDom, anchorItemDom, scrollTop, scrollCheckedTop) {
+function yui_anchor_moduleScroll(moduleDom, anchorItemDom, scrollTop, scrollCheckedTop) {
     moduleDom.forEach((item, index) => {
         let value = item.getAttribute('yui-anchor-module');
         let itemDom = document.querySelector('div[yui-anchor]>a[value=' + value + ']');
         if (item.offsetTop - scrollTop < scrollCheckedTop) {
             if (!itemDom.hasAttribute('checked')) {
-                yui_clearAnchorItemChecked(anchorItemDom, itemDom)
+                yui_anchor_menuChecked(anchorItemDom, itemDom)
             }
         }
         if (index === 0) {
             if (item.offsetTop - scrollTop > scrollCheckedTop) {
-                yui_clearAnchorItemChecked(anchorItemDom)
+                yui_anchor_menuChecked(anchorItemDom)
             }
         }
         if (index === moduleDom.length - 1) {
             if (item.offsetTop + item.clientHeight - scrollTop < scrollCheckedTop) {
-                yui_clearAnchorItemChecked(anchorItemDom)
+                yui_anchor_menuChecked(anchorItemDom)
             }
         }
     })
 }
 
 /**
- 监听点击锚点，改变模块位置
+ * 处理锚点菜单点击
+ * @param anchorItemDom
+ * @param attr
  */
-function yui_anchorItemClick(anchorItemDom, attr) {
+function yui_anchor_menuClick(anchorItemDom, attr) {
     anchorItemDom.forEach(item => {
         item.addEventListener('click', function () {
             let value = item.getAttribute('value');
@@ -203,7 +226,7 @@ function yui_anchorItemClick(anchorItemDom, attr) {
                     return
                 }
             }
-            yui_clearAnchorItemChecked(anchorItemDom, item);
+            yui_anchor_menuChecked(anchorItemDom, item);
             window.scroll({
                 left: 0,
                 top: moduleDom.offsetTop - attr['clickTop'],
@@ -214,9 +237,11 @@ function yui_anchorItemClick(anchorItemDom, attr) {
 }
 
 /**
- 清除所有锚点选中
+ * 切换锚点选中
+ * @param anchorItemDom
+ * @param dom
  */
-function yui_clearAnchorItemChecked(anchorItemDom, dom) {
+function yui_anchor_menuChecked(anchorItemDom, dom) {
     anchorItemDom.forEach(item => {
         item.removeAttribute('checked')
     });
@@ -226,9 +251,12 @@ function yui_clearAnchorItemChecked(anchorItemDom, dom) {
 }
 
 /**
- 处理锚点菜单属性
+ * 处理锚点菜单属性
+ * @param anchorDom
+ * @param clientHeight
+ * @returns {{"yui-click": *, clickTop: number, scrollTop: number}}
  */
-function yui_anchorAttributeHandle(anchorDom, clientHeight) {
+function yui_anchor_handleAttr(anchorDom, clientHeight) {
     let attr = yui_bulkGetAttributes(anchorDom, [
         'align-center',
         'scroll-top',
@@ -266,67 +294,75 @@ function yui_anchorAttributeHandle(anchorDom, clientHeight) {
 
 /** anchorMenu ========================================================== start **/
 /**
- 监听锚点菜单事件
+ * 锚点菜单初始化
  */
-function yui_anchorMenuListener() {
+function yui_anchorMenu_init() {
     let menuDom = document.querySelector('div[yui-anchor-menu]');
     if (menuDom === null) {
         return
     }
     let menuItemDom = document.querySelectorAll('div[yui-anchor-menu]>a');
     let modulesDom = document.querySelectorAll('div[yui-anchor-menu-module]');
-    let blankDivDom = yui_appendBlankDiv(menuDom);
-    let checkedLineDom = yui_appendCheckedLine(menuDom);
+    let blankDivDom = yui_anchorMenu_appendBlankDivDom(menuDom);
+    let checkedLineDom = yui_anchorMenu_createCheckedLineDom(menuDom);
     let scrollTop = document.documentElement.scrollTop;
     let menuDomOT = menuDom.offsetTop;
     let clientHeight = document.documentElement.clientHeight;
-    let attr = handleAttr(menuDom, clientHeight);
-    handleMenuClick(menuItemDom, attr, checkedLineDom);
-    yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, attr);
+    let attr = yui_anchorMenu_handleAttr(menuDom, clientHeight);
+    yui_anchorMenu_menuClick(menuItemDom, attr, checkedLineDom);
+    yui_anchorMenu_menuScroll(scrollTop, menuDomOT, menuDom, blankDivDom, attr);
     window.onscroll = function (e) {
         scrollTop = document.documentElement.scrollTop;
-        yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, attr);
-        yui_handleModuleRoll(scrollTop, modulesDom, menuItemDom, checkedLineDom, attr['scrollTop']);
+        yui_anchorMenu_menuScroll(scrollTop, menuDomOT, menuDom, blankDivDom, attr);
+        yui_anchorMenu_moduleScroll(scrollTop, modulesDom, menuItemDom, checkedLineDom, attr['scrollTop']);
     }
 }
 
 /**
- *监听模块滚动改变锚点选中
+ * 处理模块滚动
+ * @param scrollTop
+ * @param modulesDom
+ * @param menuItemDom
+ * @param checkedLineDom
+ * @param top
  */
-function yui_handleModuleRoll(scrollTop, modulesDom, menuItemDom, checkedLineDom, top) {
+function yui_anchorMenu_moduleScroll(scrollTop, modulesDom, menuItemDom, checkedLineDom, top) {
     modulesDom.forEach((module, index) => {
         let value = module.getAttribute('yui-anchor-menu-module');
         let menuDom = document.querySelector('div[yui-anchor-menu]>a[value=' + value + ']');
         if (module.offsetTop - scrollTop < top) {
             if (!menuDom.hasAttribute('checked')) {
-                yui_menuCheck(menuItemDom, menuDom);
+                yui_anchorMenu_menuChecked(menuItemDom, menuDom);
                 //控制选中线
-                yui_menuCheckLine(checkedLineDom, menuDom);
+                yui_anchorMenu_checkedLine(checkedLineDom, menuDom);
             }
         }
         if (index === 0) {
             if (module.offsetTop - scrollTop > top) {
                 //清除所有选中，选中当前
-                yui_menuCheck(menuItemDom);
+                yui_anchorMenu_menuChecked(menuItemDom);
                 //控制选中线
-                yui_menuCheckLine(checkedLineDom);
+                yui_anchorMenu_checkedLine(checkedLineDom);
             }
         }
         if (index === modulesDom.length - 1) {
             if (module.offsetTop + module.clientHeight - scrollTop < top) {
                 //清除所有选中，选中当前
-                yui_menuCheck(menuItemDom);
+                yui_anchorMenu_menuChecked(menuItemDom);
                 //控制选中线
-                yui_menuCheckLine(checkedLineDom);
+                yui_anchorMenu_checkedLine(checkedLineDom);
             }
         }
     })
 }
 
 /**
- *点击菜单时模块跳转
+ * 处理点击菜单
+ * @param dom
+ * @param attr
+ * @param checkedLineDom
  */
-function handleMenuClick(dom, attr, checkedLineDom) {
+function yui_anchorMenu_menuClick(dom, attr, checkedLineDom) {
     dom.forEach(menu => {
         menu.addEventListener('click', function () {
             let value = menu.getAttribute('value');
@@ -349,9 +385,11 @@ function handleMenuClick(dom, attr, checkedLineDom) {
 }
 
 /**
- *菜单选中
+ * 切换菜单选中
+ * @param items
+ * @param item
  */
-function yui_menuCheck(items, item) {
+function yui_anchorMenu_menuChecked(items, item) {
     items.forEach(menu => {
         menu.removeAttribute('checked');
     });
@@ -361,9 +399,11 @@ function yui_menuCheck(items, item) {
 }
 
 /**
- *选中下划线
+ * 选中下划线
+ * @param checkedLineDom
+ * @param menuItemDom
  */
-function yui_menuCheckLine(checkedLineDom, menuItemDom) {
+function yui_anchorMenu_checkedLine(checkedLineDom, menuItemDom) {
     if (menuItemDom) {
         //选线移动
         yui_bulkAddStyles(checkedLineDom, {
@@ -379,9 +419,12 @@ function yui_menuCheckLine(checkedLineDom, menuItemDom) {
 }
 
 /**
- *处理一些属性
+ * 处理锚点菜单属性
+ * @param dom
+ * @param clientHeight
+ * @returns {{fixedTop: number, clickTop: number, scrollTop: number} & {}}
  */
-function handleAttr(dom, clientHeight) {
+function yui_anchorMenu_handleAttr(dom, clientHeight) {
     let attr = yui_bulkGetAttributes(dom, ['fixed-top', 'click-top', 'scroll-top', 'yui-click', 'fixed-class']);
     //菜单滚动到距离顶部多少时固定
     let fixedTop = attr['fixed-top'];
@@ -414,9 +457,14 @@ function handleAttr(dom, clientHeight) {
 }
 
 /**
- *监听菜单滚动位置
+ *处理菜单滚动
+ * @param scrollTop
+ * @param menuDomOT
+ * @param menuDom
+ * @param blankDivDom
+ * @param attr
  */
-function yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, attr) {
+function yui_anchorMenu_menuScroll(scrollTop, menuDomOT, menuDom, blankDivDom, attr) {
     if (menuDomOT - scrollTop < attr['fixedTop']) {
         yui_bulkAddClasses(menuDom, ['yui-anchor-menu-fixed', attr['fixed-class']]);
         yui_bulkAddStyles(menuDom, {top: attr['fixedTop'] + 'px'});
@@ -429,9 +477,11 @@ function yui_handleMenuRoll(scrollTop, menuDomOT, menuDom, blankDivDom, attr) {
 }
 
 /**
- 创建等高的空div
+ * 创建等高的空div
+ * @param dom
+ * @returns {HTMLDivElement}
  */
-function yui_appendBlankDiv(dom) {
+function yui_anchorMenu_appendBlankDivDom(dom) {
     let divDom = document.createElement('div');
     yui_bulkAddStyles(divDom, {
         height: dom.offsetHeight + 'px',
@@ -442,9 +492,11 @@ function yui_appendBlankDiv(dom) {
 }
 
 /**
- 创建选中线div
+ * 创建选中线div
+ * @param dom
+ * @returns {HTMLDivElement}
  */
-function yui_appendCheckedLine(dom) {
+function yui_anchorMenu_createCheckedLineDom(dom) {
     let divDom = document.createElement('div');
     yui_bulkAddClasses(divDom, ['yui-anchor-menu-checked-line']);
     dom.appendChild(divDom);
@@ -456,9 +508,11 @@ function yui_appendCheckedLine(dom) {
 
 /** dialog ========================================================== start **/
 /**
- 监听遮罩点击事件
+ * 监听遮罩点击事件
+ * @param selectors
+ * @param event
  */
-function yui_dialogMaskClickListener(selectors = 'div[yui-dialog-mask]', event) {
+function yui_dialog_maskClick(selectors = 'div[yui-dialog-mask]', event) {
     let dom = document.querySelectorAll(selectors);
     dom.forEach(item => {
         let dialog = item.querySelector('div[yui-dialog]');
@@ -484,7 +538,8 @@ function yui_dialogMaskClickListener(selectors = 'div[yui-dialog-mask]', event) 
 }
 
 /**
- 打开对话框
+ * 打开dialog
+ * @param name
  */
 function yuiDialog(name) {
     let dom = document.querySelector('div[yui-dialog-mask][name=' + name + ']');
@@ -513,7 +568,8 @@ function yuiDialog(name) {
 }
 
 /**
- 关闭对话框
+ * 关闭dialog
+ * @param name
  */
 function yuiDialogClosed(name) {
     let dom = document.querySelector('div[yui-dialog-mask][name=' + name + ']');
@@ -536,16 +592,11 @@ function yuiDialogClosed(name) {
 }
 
 /**
- * @description js打开消息对话框
- * @param title 标题，默认提示
- * @param content 内容
- * @param options 配置｛
- * showLeftBtn,leftBtnText,leftBtnAttr,
- * showRightBtn,rightBtnText,rightBtnAttr,
- * showCloseIcon,closeIconEventName,
- * clickMaskNotClosed
- * ｝
- * @return string 消息对话框名称
+ * 打开messageBox
+ * @param title
+ * @param content
+ * @param options
+ * @returns {string}
  */
 function yuiMessageBox(title = '提示',
                        content = '',
@@ -634,9 +685,9 @@ function yuiMessageBox(title = '提示',
     if (options['clickMaskNotClosed'] !== true) {
         attr['click-mask-not-close'] = '';
         if (options['beforeClose'] === yuiDialogClosed) {
-            yui_dialogMaskClickListener(`div[yui-dialog-mask][name=${name}]`)
+            yui_dialog_maskClick(`div[yui-dialog-mask][name=${name}]`)
         } else {
-            yui_dialogMaskClickListener(`div[yui-dialog-mask][name=${name}]`, options['beforeClose'])
+            yui_dialog_maskClick(`div[yui-dialog-mask][name=${name}]`, options['beforeClose'])
         }
     }
     return name
@@ -647,9 +698,9 @@ function yuiMessageBox(title = '提示',
 
 /** menu ========================================================== start **/
 /**
- * 菜单监听hover
+ * 菜单初始化
  */
-function yui_menuHoverListener() {
+function yui_menu_init() {
     let hasChildDom = document.querySelectorAll('div[contain-child-menu]');
     hasChildDom.forEach(childDom => {
         let parentMenuItem = childDom.querySelector('a[yui-menu-item]');
@@ -672,7 +723,7 @@ function yui_menuHoverListener() {
                 if (hideSTO) {
                     clearTimeout(hideSTO);
                 }
-                yui_childrenMenuHide(hasChildDom);
+                yui_menu_menuHide(hasChildDom);
                 yui_bulkAddStyles(iconDom, {transform: 'rotate(180deg)'});
                 yui_bulkAddStyles(childPanelDom, {height: '0', visibility: 'visible'});
                 setTimeout(() => {
@@ -696,8 +747,9 @@ function yui_menuHoverListener() {
 
 /**
  * 隐藏所有子菜单
+ * @param hasChildDom
  */
-function yui_childrenMenuHide(hasChildDom) {
+function yui_menu_menuHide(hasChildDom) {
     hasChildDom.forEach(childDom => {
         let childPanelDom = childDom.querySelector('div[yui-child-menu]');
         let iconDom = childDom.querySelector('.yui-menu-icon');
@@ -711,10 +763,10 @@ function yui_childrenMenuHide(hasChildDom) {
 
 /** message ========================================================== start **/
 /**
- * @description js打开消息
- * @param content 内容
- * @param options 配置{type,theme,showIcon,delay}
- * @return string 消息对话框名称
+ * 打开message
+ * @param content
+ * @param options
+ * @returns {string}
  */
 function yuiMessage(content = '', options = {}) {
     options = yui_json2Default(options, {
@@ -748,15 +800,16 @@ function yuiMessage(content = '', options = {}) {
     }, 50);
     options['delay'] = yui_string2Number(options['delay']);
     setTimeout(() => {
-        yui_messageRemove(messageDom)
+        yui_message_removeFromDom(messageDom)
     }, options['delay']);
     return name
 }
 
 /**
- * 移除消息dom
+ * 从dom中移除message
+ * @param dom
  */
-function yui_messageRemove(dom) {
+function yui_message_removeFromDom(dom) {
     yui_bulkAddStyles(dom, {marginTop: -dom.clientHeight + 'px', opacity: 0});
     setTimeout(() => {
         dom.remove()
@@ -768,11 +821,10 @@ function yui_messageRemove(dom) {
 
 /** notify ========================================================== start **/
 /**
- * @description js打开通知
- * @param title 标题
- * @param content 内容
- * @param options 配置{type,showCloseIcon,delay}
- * @return string 消息对话框名称
+ * 打开notify
+ * @param title
+ * @param content
+ * @param options
  */
 function yuiNotify(title = '提示',
                    content = '',
@@ -781,7 +833,7 @@ function yuiNotify(title = '提示',
         type: null,
         showCloseIcon: true,
         delay: 5000,
-        beforeClose: yui_notifyRemove
+        beforeClose: yui_notify_removeFromDom
     });
     let notifyBoxDom = document.querySelector('div[yui-notify-box]');
     if (!notifyBoxDom) {
@@ -819,7 +871,7 @@ function yuiNotify(title = '提示',
         yui_bulkAddClasses(iconDom, ['iconfont', 'yui-closed']);
         iconDom.onclick = function () {
             options['beforeClose'](name, function () {
-                yui_notifyRemove(name)
+                yui_notify_removeFromDom(name)
             })
         };
         yuiRightDom.appendChild(iconDom);
@@ -831,15 +883,17 @@ function yuiNotify(title = '提示',
     if (options['delay'] !== 0) {
         options['delay'] = yui_string2Number(options['delay']);
         setTimeout(() => {
-            yui_notifyRemove(name, options['beforeClose'])
+            yui_notify_removeFromDom(name, options['beforeClose'])
         }, options['delay'])
     }
 }
 
 /**
- * 移除通知dom
+ * 从dom中移除notify
+ * @param name
+ * @param event
  */
-function yui_notifyRemove(name, event) {
+function yui_notify_removeFromDom(name, event) {
     const closed = function (name) {
         let dom = document.querySelector('div[yui-notify][name=' + name + ']');
         if (dom) {
@@ -849,9 +903,9 @@ function yui_notifyRemove(name, event) {
             }, 350)
         }
     };
-    if (event && event !== yui_notifyRemove) {
+    if (event && event !== yui_notify_removeFromDom) {
         let returnFlag = event(name, function () {
-            yui_notifyRemove(name)
+            yui_notify_removeFromDom(name)
         });
         if (returnFlag === true) {
             closed(name)
@@ -865,6 +919,12 @@ function yui_notifyRemove(name, event) {
 
 
 /** numberRun ========================================================== start **/
+/**
+ * 数字滚动
+ * @param id
+ * @param number
+ * @param options
+ */
 function yuiNumberRun(id, number, options) {
     options = yui_json2Default(options, {
         callback: null,
@@ -894,9 +954,9 @@ function yuiNumberRun(id, number, options) {
             setTimeout(() => {
                 numDom.innerText = '' + singleNum;
                 if (i === '0') {
-                    yui_startNumberRun(numDom, singleNum, options['count'], options['callback'], num);
+                    yui_numberRun_start(numDom, singleNum, options['count'], options['callback'], num);
                 } else {
-                    yui_startNumberRun(numDom, singleNum, options['count']);
+                    yui_numberRun_start(numDom, singleNum, options['count']);
                 }
             }, (length - i) * 150)
         }
@@ -904,7 +964,15 @@ function yuiNumberRun(id, number, options) {
     }
 }
 
-function yui_startNumberRun(dom, value, count, callback, num) {
+/**
+ * 数字开始滚动
+ * @param dom
+ * @param value
+ * @param count
+ * @param callback
+ * @param num
+ */
+function yui_numberRun_start(dom, value, count, callback, num) {
     let start = 0;
     let startCount = 0;
     let interval = setInterval(() => {
@@ -929,9 +997,9 @@ function yui_startNumberRun(dom, value, count, callback, num) {
 
 /** radio ========================================================== start **/
 /**
- * radio点击事件
+ * radio初始化
  */
-function yui_radioClickListener() {
+function yui_radio_init() {
     let dom = document.querySelectorAll('div[yui-radio]');
     dom.forEach(radio => {
         let clickItems = radio.querySelectorAll('a');
@@ -943,10 +1011,10 @@ function yui_radioClickListener() {
                     if (radioAttr['yui-click']) {
                         let flag = eval(radioAttr['yui-click'] + `('${clickItemAttr['value']}')`);
                         if (flag !== false) {
-                            yui_radioCheckedChange(clickItems, clickItem)
+                            yui_radio_checked(clickItems, clickItem)
                         }
                     } else {
-                        yui_radioCheckedChange(clickItems, clickItem)
+                        yui_radio_checked(clickItems, clickItem)
                     }
                 }
             })
@@ -955,9 +1023,11 @@ function yui_radioClickListener() {
 }
 
 /**
- * 改变radio选中
+ * 切换radio选中
+ * @param dom
+ * @param item
  */
-function yui_radioCheckedChange(dom, item) {
+function yui_radio_checked(dom, item) {
     dom.forEach(item => {
         item.removeAttribute('checked');
     });
@@ -969,9 +1039,9 @@ function yui_radioCheckedChange(dom, item) {
 
 /** ribbon ========================================================== start **/
 /**
- * 定位ribbon位置
+ * ribbon初始化
  */
-function yui_ribbonLocation() {
+function yui_ribbon_init() {
     let dom = document.querySelectorAll('div[yui-ribbon]');
     dom.forEach(item => {
         let position = item.getAttribute('position');
@@ -1018,15 +1088,15 @@ function yui_ribbonLocation() {
 
 /** tabs ========================================================== start **/
 /**
- * tabs点击监听
+ * tabs初始化
  */
-function yui_tabsClickListener() {
+function yui_tabs_init() {
     let dom = document.querySelectorAll('div[yui-tabs]');
     dom.forEach(tab => {
         let tabsAttr = yui_bulkGetAttributes(tab, ['yui-click', 'type', 'tab-position']);
         let headerDom = tab.querySelector('div[yui-header]');
         let panelsDom = tab.querySelectorAll('div[yui-body]>div[yui-tab-panel]');
-        let checkedLineDom = yui_addTabsCheckedLine(tabsAttr);
+        let checkedLineDom = yui_tabs_createCheckedLine(tabsAttr);
         let items = headerDom.querySelectorAll('div[yui-header]>a[value]');
         items.forEach(item => {
             let itemAttr = yui_bulkGetAttributes(item, ['checked', 'value', 'disabled']);
@@ -1035,7 +1105,7 @@ function yui_tabsClickListener() {
                     yui_bulkAddStyles(checkedLineDom, {backgroundColor: 'rgba(64, 158, 255,0.5)'})
                 }
                 headerDom.appendChild(checkedLineDom);
-                yui_tabsCheckedLineMove(item, checkedLineDom, tabsAttr)
+                yui_tabs_checkedLineMove(item, checkedLineDom, tabsAttr)
             }
             item.addEventListener('click', function () {
                 if (itemAttr['disabled'] === null) {
@@ -1044,8 +1114,8 @@ function yui_tabsClickListener() {
                         flag = eval(tabsAttr['yui-click'] + `('${itemAttr['value']}')`);
                     }
                     if (!tabsAttr['yui-click'] || flag !== false) {
-                        yui_tabsChange(tabsAttr, items, item, checkedLineDom);
-                        yui_tabsPanelChange(panelsDom, itemAttr['value'])
+                        yui_tabs_checked(tabsAttr, items, item, checkedLineDom);
+                        yui_tabs_panelChecked(panelsDom, itemAttr['value'])
                     }
                 }
             })
@@ -1055,8 +1125,11 @@ function yui_tabsClickListener() {
 
 /**
  * 非card和border-card类型的tabs移动选中线
+ * @param itemDom
+ * @param checkedLineDom
+ * @param tabsAttr
  */
-function yui_tabsCheckedLineMove(itemDom, checkedLineDom, tabsAttr) {
+function yui_tabs_checkedLineMove(itemDom, checkedLineDom, tabsAttr) {
     let position = tabsAttr['tab-position'];
     let disabled = itemDom.getAttribute('disabled');
     let bgc = '#409eff';
@@ -1078,9 +1151,13 @@ function yui_tabsCheckedLineMove(itemDom, checkedLineDom, tabsAttr) {
 }
 
 /**
- * 点击tab改变
+ * 切换tab选中
+ * @param tabsAttr
+ * @param items
+ * @param nextItem
+ * @param checkedLineDom
  */
-function yui_tabsChange(tabsAttr, items, nextItem, checkedLineDom) {
+function yui_tabs_checked(tabsAttr, items, nextItem, checkedLineDom) {
     if (checkedLineDom) {
         let preItem = '';
         items.forEach(item => {
@@ -1090,7 +1167,7 @@ function yui_tabsChange(tabsAttr, items, nextItem, checkedLineDom) {
             }
         });
         if (preItem) {
-            yui_tabsCheckedLineMove(nextItem, checkedLineDom, tabsAttr);
+            yui_tabs_checkedLineMove(nextItem, checkedLineDom, tabsAttr);
             preItem.removeAttribute('checked');
         }
     } else {
@@ -1102,9 +1179,11 @@ function yui_tabsChange(tabsAttr, items, nextItem, checkedLineDom) {
 }
 
 /**
- * 点击tab panel改变
+ * 切换panel选中
+ * @param panels
+ * @param value
  */
-function yui_tabsPanelChange(panels, value) {
+function yui_tabs_panelChecked(panels, value) {
     panels.forEach(panel => {
         let name = panel.getAttribute('yui-tab-panel');
         if (name === value) {
@@ -1116,9 +1195,10 @@ function yui_tabsPanelChange(panels, value) {
 }
 
 /**
- * 非card和border-card类型的tabs添加选中线
+ * 非card和border-card类型tabs创建选中线
+ * @param tabsAttr
  */
-function yui_addTabsCheckedLine(tabsAttr) {
+function yui_tabs_createCheckedLine(tabsAttr) {
     if (tabsAttr['type'] === 'card' || tabsAttr['type'] === 'border-card') {
         return
     }
@@ -1147,9 +1227,9 @@ function yui_addTabsCheckedLine(tabsAttr) {
 
 /** tooltip ========================================================== start **/
 /**
- * 监听tooltip hover
+ * tooltip初始化
  */
-function yui_tooltipListener() {
+function yui_tooltip_init() {
     let tooltips = document.querySelectorAll('div[yui-tooltip]');
     tooltips.forEach(tooltip => {
         let attr = yui_bulkGetAttributes(tooltip, ['content', 'position']);
@@ -1164,7 +1244,7 @@ function yui_tooltipListener() {
         let pointDom = document.createElement('div');
         yui_bulkAddClasses(pointDom, ['yui-tooltip-point']);
         textDom.appendChild(pointDom);
-        yui_tooltipLocation(tooltip, textDom, pointDom, attr['position']);
+        yui_tooltip_location(tooltip, textDom, pointDom, attr['position']);
         let hideSTO;
         //监听hover离开
         tooltip.addEventListener('mouseleave', function () {
@@ -1188,13 +1268,13 @@ function yui_tooltipListener() {
 }
 
 /**
- * 位置
+ * tooltip定位
  * @param tooltip
  * @param textDom
  * @param pointDom
  * @param position
  */
-function yui_tooltipLocation(tooltip, textDom, pointDom, position) {
+function yui_tooltip_location(tooltip, textDom, pointDom, position) {
     position = position || '';
     let firstPosition = position.split('-')[0];
     let secondPosition = position.split('-')[1] || '';
@@ -1272,11 +1352,11 @@ function yui_tooltipLocation(tooltip, textDom, pointDom, position) {
 
 /** typing ========================================================== start **/
 /**
- * 添加光标
+ * typing初始化
  */
-function yui_typingListener() {
+function yui_typing_init() {
     let dom = document.querySelectorAll(`[yui-typing]`);
-    let cursorDom = yui_createCursor();
+    let cursorDom = yui_typing_createCursorDom();
     dom.forEach(item => {
         item.appendChild(cursorDom);
     })
@@ -1284,8 +1364,9 @@ function yui_typingListener() {
 
 /**
  * 创建光标
+ * @returns {HTMLSpanElement}
  */
-function yui_createCursor() {
+function yui_typing_createCursorDom() {
     let cursorDom = document.createElement("span");
     yui_bulkAddClasses(cursorDom, ['yui-typing-cursor']);
     cursorDom.innerText = " |";
@@ -1304,7 +1385,7 @@ function yuiTyping(id, textArray = [], options = {}) {
         return
     }
     dom.innerHTML = "";
-    let cursorDom = yui_createCursor();
+    let cursorDom = yui_typing_createCursorDom();
     if (textArray.length === 0) {
         dom.appendChild(cursorDom);
         return;
@@ -1340,7 +1421,6 @@ function yuiTyping(id, textArray = [], options = {}) {
             }
         }
     }, options.delay);
-    return SI;
 }
 
 /** typing ========================================================== end **/

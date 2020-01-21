@@ -14,7 +14,7 @@ function addHeaderDom() {
         } else {
             currentMenuDom.setAttribute("checked", "");
         }
-        yui_menuHoverListener()
+        yui_menu_init()
     })
 }
 
