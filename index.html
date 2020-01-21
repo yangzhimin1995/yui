@@ -1,42 +1,337 @@
-&lt;div yui-typing id="typing-demo"&gt;&lt;/div&gt;
-&lt;a yui-button type="primary" onclick="start()"&gt;开 始&lt;/a&gt;
-&lt;a yui-button onclick="reset()"&gt;重 置&lt;/a&gt;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui</title>
+    <link rel="icon" type="image/x-icon" href="/public/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="yui/iconfont.css">
+</head>
+<body>
+<canvas></canvas>
+<div class="text">
+    <div style="text-align: center">
+        <div>yui - Element UI 部分组件的HTML使用</div>
+        <div style="margin-top: 30px">
+            <a id="start" href="./components/alert/index.html" target="_blank">
+                开 始
+                <i style="position: relative" class="iconfont yui-enter"></i>
+            </a>
+            <a id="support" style="margin:0 50px">
+                赞 助
+                <span class="support-icon">
+                    <i style="font-size: 14px" class="iconfont yui-drop-down"></i>
+                </span>
+            </a>
+            <a href="https://github.com/yangZhiMin-China/yui" target="_blank">
+                GitHub
+            </a>
+        </div>
+        <div class="donate">
+            <img src="./public/images/alipay.png" alt="支付宝支付">
+            <img style="margin-left: 10px" src="./public/images/wechat.png" alt="微信支付">
+        </div>
+    </div>
+</div>
+<div class="info">
+    <div class="title">使用说明</div>
+    <div class="desc">
+        点击下载
+        <a href="release/yui.rar" download="yui.rar">yui</a>
+        ，将文件解压缩，得到 yui-min.css 、yui-iconfont-mini.css 和 yui-min.js 三个文件。
+        将这三个文件放在你的个人项目中，在个人项目文件（一般是html文件）中正确地引用这三个文件即可看到yui效果。
+        <div>
+            如果能得到你的赞助，yui万分感谢！
+        </div>
+        <div>
+            组件的示例代码请点击
+            <a href="./components/alert/index.html">
+                这 里
+            </a>。
+        </div>
+    </div>
+    <div class="title" style="margin-top: 50px">引用语句</div>
+    <div class="desc">
+        &lt;link rel="stylesheet" type="text/css" href="/yourPath/yui/yui-min.css"&gt;
+    </div>
+    <div class="desc">
+        &lt;link rel="stylesheet" type="text/css" href="/yourPath/yui/yui-iconfont-min.css"&gt;
+    </div>
+    <div class="desc">
+        &lt;script type="text/javascript" src="/yourPath/yui/yui-min.js"&gt;&lt;/script&gt;
+    </div>
+</div>
+</body>
+<script>
+    supportHover();
+    startHover();
 
-&lt;script&gt;
-    
-    function start() {
-        yuiTyping("typing-demo", [
-            '武汉市疾病预防控制中心专家金小毛介绍，根据《中华人民共和国传染病防治法》（下称“《防治法》”）规定，传染病分为甲类、乙类和丙类。',
-            '&lt;br/&gt;', '&lt;br/&gt;',
-            '甲类传染病是指：鼠疫、霍乱；',
-            '&lt;br/&gt;', '&lt;br/&gt;',
-            '乙类传染病是指：传染性非典型肺炎、艾滋病、病毒性肝炎、脊髓灰质炎、人感染高致病性禽流感等；'
-        ], {
-            delay: 70,
-            callback: function () {
-                yuiMessage(`Typing完成后的回调`, {type: "success"})
+    function supportHover() {
+        let dom = document.querySelector('#support');
+        let icon = dom.querySelector('span');
+        let imgDom = document.querySelector('.donate');
+        imgDom.style.height = "0px";
+        let STO = '';
+        dom.addEventListener("mouseenter", function () {
+            if (STO) {
+                clearTimeout(STO);
             }
+            icon.style.transform = "rotate(180deg)";
+            imgDom.style.visibility = "visible";
+            imgDom.style.height = "500px";
+        });
+        dom.addEventListener("mouseleave", function () {
+            icon.style.transform = "rotate(0deg)";
+            imgDom.style.height = "0px";
+            STO = setTimeout(() => {
+                imgDom.style.visibility = "hidden";
+            }, 500)
         })
     }
 
-    function reset() {
-        yuiTyping("typing-demo")
+    function startHover() {
+        let dom = document.querySelector('#start');
+        let iconDom = dom.querySelector("i");
+        let num = 1;
+        setInterval(() => {
+            if (num > 8) {
+                num = 0
+            }
+            iconDom.style.left = num + "px";
+            num++
+        }, 80)
+    }
+</script>
+<style>
+    .donate {
+        display: inline-flex;
+        position: relative;
+        left: -10%;
+        margin-top: 10px;
+        overflow: hidden;
+        visibility: hidden;
+        transition: height .5s;
+        padding: 5px;
+        z-index: 2020;
     }
 
-&lt;/script&gt;
+    .donate img {
+        border-radius: 5px;
+        width: 400px;
+    }
 
-&lt;style&gt;
+    .support-icon {
+        display: inline-block;
+        transition: transform .5s;
+        position: relative;
+    }
 
-     div[yui-typing] {
-        background: #545C64;
-        width: 600px;
-        height: 200px;
-        border-radius: 4px;
+    body {
+        background-color: black;
+        overflow: hidden;
+    }
+
+    canvas {
+        width: 100%;
+    }
+
+    .text {
+        font-size: 32px;
         color: white;
-        padding: 10px;
-        margin: 0 auto 30px;
-        text-align: left;
-        font-size: 18px
+        position: absolute;
+        width: 100%;
+        top: 15%;
+        left: 0;
+        z-index: 2020;
     }
-    
-&lt;/style&gt;
+
+    a {
+        font-size: 18px;
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .info {
+        margin-top: 100px;
+        width: 650px;
+        border: 1px dashed white;
+        border-radius: 5px;
+        padding: 10px;
+        position: absolute;
+        bottom: 3px;
+        right: 3px;
+        color: white;
+        text-align: center;
+    }
+
+    .info > .title {
+        font-size: 18px;
+        margin: 5px 0;
+    }
+
+    .info > .desc {
+        font-size: 15px;
+        margin: 12px 0;
+        text-align: left;
+        padding: 5px;
+        text-indent: 2em;
+        line-height: 25px;
+    }
+
+    .info > .desc > div {
+        margin-top: 12px;
+    }
+
+    .desc a {
+        cursor: pointer;
+        font-size: 15px;
+        text-decoration: underline;
+    }
+</style>
+<script>
+    'use strict';
+
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    var RESOLUTION = 1;
+
+    var w = canvas.width = window.innerWidth * RESOLUTION;
+    var h = canvas.height = window.innerHeight * RESOLUTION;
+
+    var PARTICLE_COUNT = 400;
+    var CONNECT_DISTANCE = w * 0.05;
+    var FORCE_DISTANCE = w * 0.1;
+
+    var r = function r() {
+        var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+        return Math.random() * n;
+    };
+    var PI = Math.PI;
+    var TAU = PI * 2;
+
+    var time = new Date();
+
+    var lerp = function lerp(start, end, amt) {
+        return (1 - amt) * start + amt * end;
+    };
+
+    var distance = function distance(x1, y1, x2, y2) {
+        var a = x1 - x2;
+        var b = y1 - y2;
+        return Math.sqrt(a * a + b * b);
+    };
+
+    var angle = function angle(cx, cy, ex, ey) {
+        return Math.atan2(ey - cy, ex - cx);
+    };
+
+    var particlePrototype = function particlePrototype() {
+        return {
+            x: w * 0.5 + Math.cos(r(TAU)) * r(w * 0.5),
+            y: h * 0.5 + Math.sin(r(TAU)) * r(h * 0.5),
+            angle: r(TAU),
+            speed: r(0.15),
+            normalSpeed: r(0.15),
+            oscAmplitudeX: r(2),
+            oscSpeedX: 0.001 + r(0.008),
+            oscAmplitudeY: r(2),
+            oscSpeedY: 0.001 + r(0.008),
+            connectDistance: r(CONNECT_DISTANCE),
+            color: {
+                r: Math.round(200 + r(55)),
+                g: Math.round(150 + r(105)),
+                b: Math.round(200 + r(55))
+            }
+        };
+    };
+
+    var particles = new Array(PARTICLE_COUNT).fill({}).map(particlePrototype);
+
+    var update = function update() {
+        particles.forEach(function (p1) {
+            p1.x += (Math.cos(p1.angle) + Math.cos(time * p1.oscSpeedX) * p1.oscAmplitudeX) * p1.speed;
+            p1.y += (Math.sin(p1.angle) + Math.cos(time * p1.oscSpeedY) * p1.oscAmplitudeY) * p1.speed;
+
+            p1.speed = lerp(p1.speed, p1.normalSpeed * RESOLUTION, 0.1);
+
+            if (p1.x > w || p1.x < 0) {
+                p1.angle = PI - p1.angle;
+            }
+            if (p1.y > h || p1.y < 0) {
+                p1.angle = -p1.angle;
+            }
+
+            if (r() < 0.005) p1.oscAmplitudeX = r(2);
+            if (r() < 0.005) p1.oscSpeedX = 0.001 + r(0.008);
+            if (r() < 0.005) p1.oscAmplitudeY = r(2);
+            if (r() < 0.005) p1.oscSpeedY = 0.001 + r(0.008);
+
+            p1.x = Math.max(-0.01, Math.min(p1.x, w + 0.01));
+            p1.y = Math.max(-0.01, Math.min(p1.y, h + 0.01));
+        });
+    };
+
+    var render = function render() {
+
+        ctx.clearRect(0, 0, w, h);
+
+        particles.map(function (p1) {
+            particles.filter(function (p2) {
+                if (p1 == p2) return false;
+                if (distance(p1.x, p1.y, p2.x, p2.y) > p1.connectDistance) return false;
+                return true;
+            }).map(function (p2) {
+                var dist = distance(p1.x, p1.y, p2.x, p2.y);
+                p1.speed = lerp(p1.speed, p1.speed + 0.05 / p1.connectDistance * dist, 0.2);
+                return {
+                    p1: p1,
+                    p2: p2,
+                    color: p1.color,
+                    opacity: Math.floor(100 / p1.connectDistance * (p1.connectDistance - dist)) / 100
+                };
+            }).forEach(function (line, i) {
+                var colorSwing = Math.sin(time * line.p1.oscSpeedX);
+                ctx.beginPath();
+                ctx.globalAlpha = line.opacity;
+                ctx.moveTo(line.p1.x, line.p1.y);
+                ctx.lineTo(line.p2.x, line.p2.y);
+                ctx.strokeStyle = 'rgb(\n\t\t\t\t\t' + Math.floor(line.color.r * colorSwing) + ',\n\t\t\t\t\t' + Math.floor(line.color.g * 0.5 + line.color.g * 0.5 * colorSwing) + ',\n\t\t\t\t\t' + line.color.b + '\n\t\t\t\t)';
+                ctx.lineWidth = line.opacity * 4;
+                ctx.stroke();
+                ctx.closePath();
+            });
+        });
+    };
+
+    var loop = function loop() {
+        time = new Date();
+        update();
+        render();
+        window.requestAnimationFrame(loop);
+    };
+
+    loop();
+
+    window.addEventListener('mousemove', function (e) {
+
+        var mouseX = e.layerX * RESOLUTION;
+        var mouseY = e.layerY * RESOLUTION;
+
+        particles.forEach(function (p) {
+            var dist = distance(mouseX, mouseY, p.x, p.y);
+
+            if (dist < FORCE_DISTANCE && dist > 0) {
+                p.angle = angle(mouseX, mouseY, p.x, p.y);
+                var force = (FORCE_DISTANCE - dist) * 0.1;
+                p.speed = lerp(p.speed, force, 0.2);
+            }
+        });
+    });
+
+    window.addEventListener('resize', function (e) {
+        w = canvas.width = window.innerWidth * RESOLUTION;
+        h = canvas.height = window.innerHeight * RESOLUTION;
+    });
+</script>
+</html>
