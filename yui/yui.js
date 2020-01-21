@@ -1,17 +1,23 @@
+/** 全局变量 ========================================================== start **/
 //滚动条宽度
 let yui_SCROLL_BAR_WIDTH = 0;
 //组件索引
 let yui_INDEX = 0;
 
+/** 全局变量 ========================================================== end **/
+
+
+/** 文档加载完成 ========================================================== start **/
 if (document.readyState !== 'loading') {
     yuiComponentsInit();
 } else {
     document.addEventListener('DOMContentLoaded', yuiComponentsInit);
 }
 
-/**
- * 初始化yui组件
- */
+/** 文档加载完成 ========================================================== end **/
+
+
+/** 初始化yui组件 ========================================================== start **/
 function yuiComponentsInit() {
     yui_getScrollbarWidth();
     yui_anchorListener();
@@ -25,8 +31,10 @@ function yuiComponentsInit() {
     yui_typingListener();
 }
 
-// 公共方法 =================================================== start //
+/** 初始化yui组件 ========================================================== end **/
 
+
+/** 公共方法 ========================================================== start **/
 /**
  批量增加style
  */
@@ -132,10 +140,10 @@ function yui_hasScrollbar() {
     return document.body.scrollHeight > (window.innerHeight || document.documentElement.clientHeight);
 }
 
-// 公共方法 =================================================== end //
+/** 公共方法 ========================================================== end **/
 
-// anchor =================================================== start //
 
+/** anchor ========================================================== end **/
 /**
  锚点初始化
  */
@@ -253,9 +261,10 @@ function yui_anchorAttributeHandle(anchorDom, clientHeight) {
     return {scrollTop, clickTop, 'yui-click': attr['yui-click']}
 }
 
-// anchor =================================================== end //
+/** anchor ========================================================== end **/
 
-// anchorMenu =================================================== start //
+
+/** anchorMenu ========================================================== start **/
 /**
  监听锚点菜单事件
  */
@@ -442,10 +451,10 @@ function yui_appendCheckedLine(dom) {
     return divDom
 }
 
-// anchorMenu =================================================== end //
+/** anchorMenu ========================================================== end **/
 
-// dialog =================================================== start //
 
+/** dialog ========================================================== start **/
 /**
  监听遮罩点击事件
  */
@@ -633,9 +642,10 @@ function yuiMessageBox(title = '提示',
     return name
 }
 
-// dialog =================================================== end //
+/** dialog ========================================================== end **/
 
-// menu =================================================== start //
+
+/** menu ========================================================== start **/
 /**
  * 菜单监听hover
  */
@@ -696,10 +706,10 @@ function yui_childrenMenuHide(hasChildDom) {
     })
 }
 
-// menu =================================================== end //
+/** menu ========================================================== end **/
 
-// message =================================================== start //
 
+/** message ========================================================== start **/
 /**
  * @description js打开消息
  * @param content 内容
@@ -753,10 +763,10 @@ function yui_messageRemove(dom) {
     }, 300);
 }
 
-// message =================================================== end //
+/** message ========================================================== end **/
 
-// notify =================================================== start //
 
+/** notify ========================================================== start **/
 /**
  * @description js打开通知
  * @param title 标题
@@ -851,9 +861,10 @@ function yui_notifyRemove(name, event) {
     }
 }
 
-// notify =================================================== end //
+/** notify ========================================================== end **/
 
-// numberRun =================================================== start //
+
+/** numberRun ========================================================== start **/
 function yuiNumberRun(id, number, options) {
     options = yui_json2Default(options, {
         callback: null,
@@ -913,9 +924,10 @@ function yui_startNumberRun(dom, value, count, callback, num) {
     }, 10)
 }
 
-// numberRun =================================================== end //
+/** numberRun ========================================================== end **/
 
-// radio =================================================== start //
+
+/** radio ========================================================== start **/
 /**
  * radio点击事件
  */
@@ -952,9 +964,10 @@ function yui_radioCheckedChange(dom, item) {
     item.setAttribute('checked', '')
 }
 
-// radio =================================================== end //
+/** radio ========================================================== end **/
 
-// ribbon =================================================== start //
+
+/** ribbon ========================================================== start **/
 /**
  * 定位ribbon位置
  */
@@ -1000,9 +1013,10 @@ function yui_ribbonLocation() {
     })
 }
 
-// ribbon =================================================== end //
+/** ribbon ========================================================== end **/
 
-// tabs =================================================== start //
+
+/** tabs ========================================================== start **/
 /**
  * tabs点击监听
  */
@@ -1128,8 +1142,10 @@ function yui_addTabsCheckedLine(tabsAttr) {
     return checkedLineDom
 }
 
-// tabs =================================================== end //
-// tooltip =================================================== start //
+/** tabs ========================================================== end **/
+
+
+/** tooltip ========================================================== start **/
 /**
  * 监听tooltip hover
  */
@@ -1251,10 +1267,13 @@ function yui_tooltipLocation(tooltip, textDom, pointDom, position) {
     yui_bulkAddStyles(textDom, {display: 'none'});
 }
 
-// tooltip =================================================== end //
+/** tooltip ========================================================== end **/
 
-// typing =================================================== start //
 
+/** typing ========================================================== start **/
+/**
+ * 添加光标
+ */
 function yui_typingListener() {
     let dom = document.querySelectorAll(`[yui-typing]`);
     let cursorDom = yui_createCursor();
@@ -1263,6 +1282,9 @@ function yui_typingListener() {
     })
 }
 
+/**
+ * 创建光标
+ */
 function yui_createCursor() {
     let cursorDom = document.createElement("span");
     yui_bulkAddClasses(cursorDom, ['yui-typing-cursor']);
@@ -1321,4 +1343,4 @@ function yuiTyping(id, textArray = [], options = {}) {
     return SI;
 }
 
-// typing =================================================== end //
+/** typing ========================================================== end **/
