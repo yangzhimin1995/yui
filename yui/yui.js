@@ -22,6 +22,7 @@ function yuiComponentsInit() {
     yui_ribbonLocation();
     yui_tabsClickListener();
     yui_tooltipListener();
+    yui_typingListener();
 }
 
 // 公共方法 =================================================== start //
@@ -1253,26 +1254,75 @@ function yui_tooltipLocation(tooltip, textDom, pointDom, position) {
 // tooltip =================================================== end //
 
 // typing =================================================== start //
-function yuiTyping(id, text = "", options = {}) {
+
+function yui_typingListener() {
+    let dom = document.querySelectorAll(`[yui-typing]`);
+    let cursorDom = yui_createCursor();
+    dom.forEach(item => {
+        item.appendChild(cursorDom);
+    })
+}
+
+function yui_createCursor() {
+    let cursorDom = document.createElement("span");
+    yui_bulkAddClasses(cursorDom, ['yui-typing-cursor']);
+    cursorDom.innerText = " |";
+    return cursorDom;
+}
+
+/**
+ * 打字机效果
+ * @param id
+ * @param textArray
+ * @param options
+ */
+function yuiTyping(id, textArray = [], options = {}) {
     let dom = document.querySelector(`#${id}`);
     if (!dom) {
         return
     }
+    dom.innerHTML = "";
+    let cursorDom = yui_createCursor();
+    let SI;
+    if (textArray.length === 0) {
+        dom.appendChild(cursorDom);
+        if (SI) {
+            clearInterval(SI)
+        }
+        return;
+    }
+    yui_json2Default(options, {
+        delay: 100,
+        callback: null
+    });
     let textDom = document.createElement("span");
-    let cursorDom = document.createElement("span");
-    yui_bulkAddClasses(cursorDom, ['yui-typing-cursor']);
-    cursorDom.innerText = " |";
     dom.appendChild(textDom);
     dom.appendChild(cursorDom);
-    let index = 0;
-    let length = text.length;
-    let SI = setInterval(() => {
-        index++;
-        textDom.innerText = text.substring(0, index);
-        if (index > length) {
+    let arrayIndex = 0;
+    let textIndex = 0;
+    SI = setInterval(() => {
+        let current = textArray[arrayIndex];
+        if (!current) {
             clearInterval(SI);
+            if (options.callback) {
+                options['callback']();
+            }
+            return
         }
-    }, 80)
+        if (current === "<br/>") {
+            textDom.innerHTML = textDom.innerHTML + "<br/>";
+            arrayIndex++;
+        } else {
+            let word = current.substring(textIndex, textIndex + 1);
+            textDom.innerHTML = textDom.innerHTML + word;
+            textIndex++;
+            if (textIndex === current.length) {
+                arrayIndex++;
+                textIndex = 0
+            }
+        }
+    }, options.delay);
+    return SI;
 }
 
 // typing =================================================== end //

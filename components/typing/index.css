@@ -1,12 +1,15 @@
 .demo {
+    text-align: center;
 }
 
-.demo > div {
+div[yui-typing] {
     background: #545C64;
     width: 600px;
     height: 200px;
-    margin: 0 auto;
     border-radius: 4px;
     color: white;
     padding: 10px;
+    margin: 0 auto 30px;
+    text-align: left;
+    font-size: 18px
 }
