@@ -254,7 +254,6 @@ function yui_anchor_menuChecked(anchorItemDom, dom) {
  * 处理锚点菜单属性
  * @param anchorDom
  * @param clientHeight
- * @returns {{"yui-click": *, clickTop: number, scrollTop: number}}
  */
 function yui_anchor_handleAttr(anchorDom, clientHeight) {
     let attr = yui_bulkGetAttributes(anchorDom, [
@@ -1367,9 +1366,9 @@ function yui_typing_init() {
  * @returns {HTMLSpanElement}
  */
 function yui_typing_createCursorDom() {
-    let cursorDom = document.createElement("span");
+    let cursorDom = document.createElement('span');
     yui_bulkAddClasses(cursorDom, ['yui-typing-cursor']);
-    cursorDom.innerText = " |";
+    cursorDom.innerText = ' |';
     return cursorDom;
 }
 
@@ -1384,7 +1383,7 @@ function yuiTyping(id, textArray = [], options = {}) {
     if (!dom) {
         return
     }
-    dom.innerHTML = "";
+    dom.innerHTML = '';
     let cursorDom = yui_typing_createCursorDom();
     if (textArray.length === 0) {
         dom.appendChild(cursorDom);
@@ -1394,7 +1393,7 @@ function yuiTyping(id, textArray = [], options = {}) {
         delay: 100,
         callback: null
     });
-    let textDom = document.createElement("span");
+    let textDom = document.createElement('span');
     dom.appendChild(textDom);
     dom.appendChild(cursorDom);
     let arrayIndex = 0;
@@ -1408,8 +1407,8 @@ function yuiTyping(id, textArray = [], options = {}) {
             }
             return
         }
-        if (current === "<br/>") {
-            textDom.innerHTML = textDom.innerHTML + "<br/>";
+        if (current === '<br/>') {
+            textDom.innerHTML = textDom.innerHTML + '<br/>';
             arrayIndex++;
         } else {
             let word = current.substring(textIndex, textIndex + 1);
