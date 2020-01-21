@@ -1283,12 +1283,8 @@ function yuiTyping(id, textArray = [], options = {}) {
     }
     dom.innerHTML = "";
     let cursorDom = yui_createCursor();
-    let SI;
     if (textArray.length === 0) {
         dom.appendChild(cursorDom);
-        if (SI) {
-            clearInterval(SI)
-        }
         return;
     }
     yui_json2Default(options, {
@@ -1300,7 +1296,7 @@ function yuiTyping(id, textArray = [], options = {}) {
     dom.appendChild(cursorDom);
     let arrayIndex = 0;
     let textIndex = 0;
-    SI = setInterval(() => {
+    let SI = setInterval(() => {
         let current = textArray[arrayIndex];
         if (!current) {
             clearInterval(SI);
