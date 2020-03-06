@@ -1,0 +1,77 @@
+div[yui-alert] {
+    width: 100%;
+    padding: .5rem .9rem;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    transition: opacity .2s;
+    background-color: #f4f4f5;
+    color: #909399;
+    justify-content: space-between;
+}
+
+div[yui-alert] > span {
+    font-size: .8rem;
+    line-height: 1.2rem;
+}
+
+div[yui-alert][type='success'] {
+    background-color: #f0f9eb;
+    color: #67c23a;
+}
+
+div[yui-alert][type='warning'] {
+    background-color: #fdf6ec;
+    color: #e6a23c;
+}
+
+div[yui-alert][type='danger'] {
+    background-color: #fef0f0;
+    color: #f56c6c;
+}
+
+div[yui-alert][theme='dark'] {
+    background-color: #909399;
+    color: #fff;
+}
+
+div[yui-alert][type='success'][theme='dark'] {
+    background-color: #67c23a;
+    color: #fff;
+}
+
+div[yui-alert][type='warning'][theme='dark'] {
+    background-color: #e6a23c;
+    color: #fff;
+}
+
+div[yui-alert][type='danger'][theme='dark'] {
+    background-color: #f56c6c;
+    color: #fff;
+}
+
+div[yui-alert] > .iconfont.yui-icon-closed {
+    color: #c0c4cc;
+    font-size: .6rem;
+    cursor: pointer;
+}
+
+div[yui-alert][theme='dark'] > .iconfont.yui-icon-closed {
+    color: #fff;
+}
+
+div[yui-alert] > .closed-text {
+    color: #c0c4cc;
+    font-size: .6rem;
+    line-height: .8rem;
+    cursor: pointer;
+}
+
+div[yui-alert][theme='dark'] > .closed-text {
+    color: #fff;
+}
