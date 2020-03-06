@@ -7,8 +7,8 @@
     <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
     <!--非必须引入-->
-    <link rel="stylesheet" type="text/css" href="../../yui/iconfont/index.css"/>
-    <link rel="stylesheet" type="text/css" href="../../yui/css/alert/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/alert/index.css"/>
 </head>
 <body>
@@ -17,79 +17,125 @@
         Alert 警告
         <div class="desc">用于页面中展示重要的提示信息。</div>
     </div>
+    <!--    <div yui-alert>-->
+    <!--        <div yui-alert-content>-->
+    <!--            <i type-icon></i>-->
+    <!--            <div>-->
+    <!--                <div title></div>-->
+    <!--                <div info></div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--        <i close-icon></i>-->
+    <!--    </div>-->
+
     <div class="page-module">
         <div class="title">
             基本用法
             <div class="desc">页面中的非浮层元素，不会自动消失。</div>
         </div>
         <div yui-alert type="success">
-            <span>成功提示的文案</span>
+            <div class="left">
+                <div></div>
+            </div>
+            <div class="right">
+
+            </div>
+            成功提示的文案
         </div>
         <div yui-alert>
-            <span>消息提示的文案</span>
+            消息提示的文案
         </div>
         <div yui-alert type="warning">
-            <span>警告提示的文案</span>
+            警告提示的文案
         </div>
         <div yui-alert type="danger">
-            <span>危险提示的文案</span>
+            危险提示的文案
         </div>
     </div>
-    <div class="page-module">
-        <div class="title">
-            主题
-            <div class="desc">Alert 组件提供了两个不同的主题：light和dark。</div>
-        </div>
-        <div yui-alert type="success" theme="dark">
-            <span>成功提示的文案</span>
-        </div>
-        <div yui-alert theme="dark">
-            <span>消息提示的文案</span>
-        </div>
-        <div yui-alert type="warning" theme="dark">
-            <span>警告提示的文案</span>
-        </div>
-        <div yui-alert type="danger" theme="dark">
-            <span>危险提示的文案</span>
-        </div>
-    </div>
-    <div class="page-module">
-        <div class="title">
-            自定义关闭按钮
-            <div class="desc">自定义关闭按钮为文字或其他符号。</div>
-        </div>
-        <div yui-alert type="success" closable="false">
-            <span>不可关闭的 Alert</span>
-        </div>
-        <div yui-alert>
-            <span>自定义 close-text</span>
-            <span class="closed-text">知道了</span>
-        </div>
-        <div yui-alert type="warning" :before-close="yuiAlertClose">
-            <span>设置了回调的 Alert</span>
-        </div>
-        <div yui-alert type="danger" :before-close="yuiAlertNotClose">
-            <span>设置了回调的 Alert ，通过 return false 阻止关闭</span>
-        </div>
-    </div>
-    <div class="page-module">
-        <div class="title">
-            带有 icon
-            <div class="desc">表示某种状态时提升可读性。</div>
-        </div>
-        <div yui-alert type="success" show-icon>
-            <span>成功提示的文案</span>
-        </div>
-        <div yui-alert>
-            <span>消息提示的文案</span>
-        </div>
-        <div yui-alert type="warning">
-            <span>警告提示的文案</span>
-        </div>
-        <div yui-alert type="danger">
-            <span>危险提示的文案</span>
-        </div>
-    </div>
+    <!--    <div class="page-module">-->
+    <!--        <div class="title">-->
+    <!--            主题-->
+    <!--            <div class="desc">Alert 组件提供了两个不同的主题：light和dark。</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert type="success" theme="dark">-->
+    <!--            <div title>成功提示的文案</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert theme="dark">-->
+    <!--            <div title>消息提示的文案</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert type="warning" theme="dark">-->
+    <!--            <div title>警告提示的文案</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert type="danger" theme="dark">-->
+    <!--            <div title>危险提示的文案</div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    <div class="page-module">-->
+    <!--        <div class="title">-->
+    <!--            自定义关闭按钮-->
+    <!--            <div class="desc">自定义关闭按钮为文字或其他符号。</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert type="success" closable="false">-->
+    <!--            <div title>不可关闭的 Alert</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert close-text="知道了">-->
+    <!--            <div title>自定义 close-text</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert type="warning" before-close="yuiAlertClose">-->
+    <!--            <div title>设置了回调的 Alert</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert type="danger" before-close="yuiAlertNotClose">-->
+    <!--            <div title>设置了回调的 Alert ，通过 return false 阻止关闭</div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    <div class="page-module">-->
+    <!--        <div class="title">-->
+    <!--            带有 icon-->
+    <!--            <div class="desc">表示某种状态时提升可读性。</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert type="success" show-icon>-->
+    <!--            <div title>成功提示的文案</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert show-icon>-->
+    <!--            <div title>消息提示的文案</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert type="warning" show-icon>-->
+    <!--            <div title>警告提示的文案</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert type="danger" show-icon>-->
+    <!--            <div title>危险提示的文案</div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    <div class="page-module">-->
+    <!--        <div class="title">-->
+    <!--            文字居中-->
+    <!--            <div class="desc">使用 center 让文字水平居中。</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert type="success" show-icon center>-->
+    <!--            <div title>成功提示的文案</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert show-icon center>-->
+    <!--            <div title>消息提示的文案</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert type="warning" show-icon center>-->
+    <!--            <div title>警告提示的文案</div>-->
+    <!--        </div>-->
+    <!--        <div yui-alert type="danger" show-icon center>-->
+    <!--            <div title>危险提示的文案</div>-->
+    <!--        </div>-->
+    <!--    </div>-->
 </div>
 </body>
+<!--非必须引入-->
+<script>
+    function yuiAlertClose(dom) {
+        alert("设置了回调的 Alert")
+    }
+
+    function yuiAlertNotClose(dom) {
+        alert("设置了回调的 Alert ，通过 return false 阻止关闭");
+        return false
+    }
+</script>
+<script src="../../yui/js/index.js"></script>
 </html>

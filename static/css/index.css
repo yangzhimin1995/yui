@@ -2,48 +2,48 @@ body {
     margin: 0;
     padding: 0;
     color: #303133;
-    min-width: 66rem;
+    min-width: 1200px;
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
 
 .page-content {
-    width: 66rem;
+    width: 1200px;
     margin: 0 auto;
     box-sizing: border-box;
 }
 
 .page-title {
     text-align: center;
-    font-size: 1.4rem;
-    padding: 3rem 0 1rem 0;
+    font-size: 22px;
+    padding: 60px 0 20px 0;
     color: #1f2f3d;
     line-height: 1.5em;
 }
 
 .page-title > .desc {
     text-align: center;
-    font-size: .8rem;
+    font-size: 15px;
     color: #5e6d82;
-    line-height: 1.5em;
+    line-height: 26px;
 }
 
 .page-module {
     border: 1px solid #ebebeb;
-    padding: 1rem;
+    padding: 18px;
     background: white;
     border-radius: 4px;
-    margin: 2rem 0;
+    margin: 40px 0;
 }
 
 .page-module > .title {
     font-weight: 400;
     color: #1f2f3d;
-    font-size: 1.2rem;
+    font-size: 22px;
 }
 
 .page-module > .title > .desc {
-    font-size: .8rem;
+    font-size: 15px;
     color: #5e6d82;
-    line-height: 1.5em;
-    padding: .5rem 0 1rem 0;
+    line-height: 26px;
+    padding: 8px 0 16px 0;
 }

@@ -1,0 +1,80 @@
+/* ============================= 公共样式 start ============================= */
+
+.iconfont {
+    position: relative;
+}
+
+/* ============================= 公共样式 end ============================= */
+
+
+/* ============================= alert start ============================= */
+
+div[yui-alert] {
+    width: 100%;
+    padding: 8px 16px;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    transition: opacity .2s;
+    background-color: #f4f4f5;
+    color: #909399;
+    justify-content: space-between;
+    font-size: 13px;
+    line-height: 18px;
+}
+
+div[yui-alert][type='success'] {
+    background-color: #f0f9eb;
+    color: #67c23a;
+}
+
+div[yui-alert][type='warning'] {
+    background-color: #fdf6ec;
+    color: #e6a23c;
+}
+
+div[yui-alert][type='danger'] {
+    background-color: #fef0f0;
+    color: #f56c6c;
+}
+
+div[yui-alert][theme='dark'] {
+    background-color: #909399;
+    color: #fff;
+}
+
+div[yui-alert][type='success'][theme='dark'] {
+    background-color: #67c23a;
+    color: #fff;
+}
+
+div[yui-alert][type='warning'][theme='dark'] {
+    background-color: #e6a23c;
+    color: #fff;
+}
+
+div[yui-alert][type='danger'][theme='dark'] {
+    background-color: #f56c6c;
+    color: #fff;
+}
+
+div[yui-alert] > i[close-icon] {
+    color: #c0c4cc;
+    font-size: 13px;
+    line-height: 18px;
+    flex-shrink: 0;
+    padding-left: 8px;
+    align-self: flex-start;
+    cursor: pointer;
+}
+
+div[yui-alert][theme='dark'] > i[close-icon] {
+    color: #fff;
+}
+
+/* ============================= alert start ============================= */
