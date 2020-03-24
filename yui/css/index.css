@@ -9,7 +9,7 @@
 
 /* ============================= alert start ============================= */
 
-div[yui-alert] {
+[yui-alert] {
     width: 100%;
     padding: 8px 16px;
     margin: 0;
@@ -22,48 +22,86 @@ div[yui-alert] {
     align-items: center;
     transition: opacity .2s;
     background-color: #f4f4f5;
-    color: #909399;
     justify-content: space-between;
     font-size: 13px;
     line-height: 18px;
+    color: #909399;
 }
 
-div[yui-alert][type='success'] {
+[yui-alert] [title] {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+[yui-alert][is-rows] [title] {
+    font-weight: 700;
+}
+
+[yui-alert][is-rows] [description] {
+    margin-top: 6px;
+    font-weight: normal;
+    white-space: normal;
+}
+
+
+[yui-alert][is-rows] [type-icon] {
+    font-size: 26px;
+}
+
+[yui-alert] > [title] {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+[yui-alert][center] [type-icon] {
+    text-align: right;
+    flex-grow: 1;
+}
+
+[yui-alert][center] [title] {
+    text-align: center;
+}
+
+[yui-alert][type='success'] {
     background-color: #f0f9eb;
     color: #67c23a;
 }
 
-div[yui-alert][type='warning'] {
+[yui-alert][type='warning'] {
     background-color: #fdf6ec;
     color: #e6a23c;
 }
 
-div[yui-alert][type='danger'] {
+[yui-alert][type='danger'] {
     background-color: #fef0f0;
     color: #f56c6c;
 }
 
-div[yui-alert][theme='dark'] {
+[yui-alert][effect='dark'] {
     background-color: #909399;
     color: #fff;
 }
 
-div[yui-alert][type='success'][theme='dark'] {
+[yui-alert][type='success'][effect='dark'] {
     background-color: #67c23a;
     color: #fff;
 }
 
-div[yui-alert][type='warning'][theme='dark'] {
+[yui-alert][type='warning'][effect='dark'] {
     background-color: #e6a23c;
     color: #fff;
 }
 
-div[yui-alert][type='danger'][theme='dark'] {
+[yui-alert][type='danger'][effect='dark'] {
     background-color: #f56c6c;
     color: #fff;
 }
 
-div[yui-alert] > i[close-icon] {
+[yui-alert] [close-text] {
     color: #c0c4cc;
     font-size: 13px;
     line-height: 18px;
@@ -73,8 +111,12 @@ div[yui-alert] > i[close-icon] {
     cursor: pointer;
 }
 
-div[yui-alert][theme='dark'] > i[close-icon] {
+[yui-alert][effect='dark'] [close-text] {
     color: #fff;
+}
+
+[yui-alert] [type-icon] {
+    margin-right: 8px;
 }
 
 /* ============================= alert start ============================= */
