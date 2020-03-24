@@ -6,7 +6,9 @@
     <!--必须引入-->
     <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
     <!--非必须引入-->
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_x5v1e8o3f8f.css"/>
 </head>
 <body>
 <div class="page-content">
@@ -20,13 +22,37 @@
             <div>基础用法</div>
             <div class="desc">基础的按钮用法。</div>
         </div>
-        <div>
+        <div class="row">
             <a yui-button>默认按钮</a>
+            <a yui-button type="info">信息按钮</a>
             <a yui-button type="primary">主要按钮</a>
             <a yui-button type="success">成功按钮</a>
             <a yui-button type="warning">警告按钮</a>
             <a yui-button type="danger">危险按钮</a>
-            <a yui-button type="info">信息按钮</a>
+        </div>
+        <div class="row">
+            <a yui-button plain>默认按钮</a>
+            <a yui-button type="info" plain>信息按钮</a>
+            <a yui-button type="primary" plain>主要按钮</a>
+            <a yui-button type="success" plain>成功按钮</a>
+            <a yui-button type="warning" plain>警告按钮</a>
+            <a yui-button type="danger" plain>危险按钮</a>
+        </div>
+        <div class="row">
+            <a yui-button radius>默认按钮</a>
+            <a yui-button type="info" radius>信息按钮</a>
+            <a yui-button type="primary" radius>主要按钮</a>
+            <a yui-button type="success" radius>成功按钮</a>
+            <a yui-button type="warning" radius>警告按钮</a>
+            <a yui-button type="danger" radius>危险按钮</a>
+        </div>
+        <div class="row">
+            <a yui-button circle><i class="iconfont yui-icon-success"></i></a>
+            <a yui-button type="info" circle><i class="iconfont yui-icon-search"></i></a>
+            <a yui-button type="primary" circle><i class="iconfont yui-icon-update"></i></a>
+            <a yui-button type="success" circle><i class="iconfont yui-icon-success-plain"></i></a>
+            <a yui-button type="warning" circle><i class="iconfont yui-icon-star"></i></a>
+            <a yui-button type="danger" circle><i class="iconfont yui-icon-delete"></i></a>
         </div>
     </div>
 </div>

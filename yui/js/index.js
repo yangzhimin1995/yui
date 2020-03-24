@@ -76,9 +76,9 @@ function yui_addStyles(dom, styles = {}) {
 /** ================================= Alert start =================================*/
 
 function yuiAlert_init() {
-    let dom = document.querySelectorAll('[yui-alert]');
+    let dom = document.querySelectorAll('div[yui-alert]');
     dom.forEach(alertDom => {
-        const closeDom = alertDom.querySelector('[close-text]');
+        const closeDom = alertDom.querySelector('div[close-text]');
         if (closeDom) {
             const domRemove = dom => {
                 yui_addStyles(dom, {opacity: '0'});
@@ -88,7 +88,6 @@ function yuiAlert_init() {
             };
             const {beforeClose} = yui_getAttributes(alertDom, ['before-close']);
             closeDom.addEventListener("click", function () {
-                debugger
                 if (beforeClose) {
                     let result = eval(`${beforeClose}(alertDom)`);
                     if (result === false) {
