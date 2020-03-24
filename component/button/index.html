@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
     <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
     <!--非必须引入-->
-    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_x5v1e8o3f8f.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_915vnvq5p7.css"/>
 </head>
 <body>
 <div class="page-content">
@@ -24,35 +24,121 @@
         </div>
         <div class="row">
             <a yui-button>默认按钮</a>
-            <a yui-button type="info">信息按钮</a>
             <a yui-button type="primary">主要按钮</a>
+            <a yui-button type="info">信息按钮</a>
             <a yui-button type="success">成功按钮</a>
             <a yui-button type="warning">警告按钮</a>
             <a yui-button type="danger">危险按钮</a>
         </div>
         <div class="row">
             <a yui-button plain>默认按钮</a>
-            <a yui-button type="info" plain>信息按钮</a>
             <a yui-button type="primary" plain>主要按钮</a>
+            <a yui-button type="info" plain>信息按钮</a>
             <a yui-button type="success" plain>成功按钮</a>
             <a yui-button type="warning" plain>警告按钮</a>
             <a yui-button type="danger" plain>危险按钮</a>
         </div>
         <div class="row">
             <a yui-button radius>默认按钮</a>
-            <a yui-button type="info" radius>信息按钮</a>
             <a yui-button type="primary" radius>主要按钮</a>
+            <a yui-button type="info" radius>信息按钮</a>
             <a yui-button type="success" radius>成功按钮</a>
             <a yui-button type="warning" radius>警告按钮</a>
             <a yui-button type="danger" radius>危险按钮</a>
         </div>
         <div class="row">
-            <a yui-button circle><i class="iconfont yui-icon-success"></i></a>
-            <a yui-button type="info" circle><i class="iconfont yui-icon-search"></i></a>
+            <a yui-button circle><i class="iconfont yui-icon-check"></i></a>
             <a yui-button type="primary" circle><i class="iconfont yui-icon-update"></i></a>
+            <a yui-button type="info" circle><i class="iconfont yui-icon-search"></i></a>
             <a yui-button type="success" circle><i class="iconfont yui-icon-success-plain"></i></a>
             <a yui-button type="warning" circle><i class="iconfont yui-icon-star"></i></a>
             <a yui-button type="danger" circle><i class="iconfont yui-icon-delete"></i></a>
+        </div>
+    </div>
+    <div class="page-module">
+        <div class="title">
+            <div>禁用状态</div>
+            <div class="desc">按钮不可用状态。</div>
+        </div>
+        <div class="row">
+            <a yui-button disabled>默认按钮</a>
+            <a yui-button type="primary" disabled>主要按钮</a>
+            <a yui-button type="info" disabled>信息按钮</a>
+            <a yui-button type="success" disabled>成功按钮</a>
+            <a yui-button type="warning" disabled>警告按钮</a>
+            <a yui-button type="danger" disabled>危险按钮</a>
+        </div>
+        <div class="row">
+            <a yui-button plain disabled>默认按钮</a>
+            <a yui-button type="primary" plain disabled>主要按钮</a>
+            <a yui-button type="info" plain disabled>信息按钮</a>
+            <a yui-button type="success" plain disabled>成功按钮</a>
+            <a yui-button type="warning" plain disabled>警告按钮</a>
+            <a yui-button type="danger" plain disabled>危险按钮</a>
+        </div>
+    </div>
+    <div class="page-module">
+        <div class="title">
+            <div>文字按钮</div>
+            <div class="desc">没有边框和背景色的按钮。</div>
+        </div>
+        <div class="row">
+            <a yui-button type="text">文字按钮</a>
+            <a yui-button type="text" disabled>文字按钮</a>
+        </div>
+    </div>
+    <div class="page-module">
+        <div class="title">
+            <div>图标按钮</div>
+            <div class="desc">带图标的按钮可增强辨识度（有文字）或节省空间（无文字）。</div>
+        </div>
+        <div class="row">
+            <a yui-button type="primary"><i class="iconfont yui-icon-update"></i></a>
+            <a yui-button type="primary"><i class="iconfont yui-icon-share"></i></a>
+            <a yui-button type="primary"><i class="iconfont yui-icon-delete"></i></a>
+            <a yui-button type="primary">
+                <i class="iconfont yui-icon-search"></i> 搜索
+            </a>
+            <a yui-button type="primary">
+                上传 <i class="iconfont yui-icon-upload"></i>
+            </a>
+        </div>
+    </div>
+    <div class="page-module">
+        <div class="title">
+            <div>按钮组</div>
+            <div class="desc">以按钮组的方式出现，常用于多项类似操作。</div>
+        </div>
+        <div class="row">
+            <div yui-button-group>
+                <a yui-button type="primary">
+                    <i class="iconfont yui-icon-arrow-left"></i> 上一页
+                </a>
+                <a yui-button type="primary">
+                    下一页 <i class="iconfont yui-icon-arrow-right"></i>
+                </a>
+            </div>
+            <div yui-button-group>
+                <a yui-button type="primary"><i class="iconfont yui-icon-update"></i></a>
+                <a yui-button type="primary"><i class="iconfont yui-icon-share"></i></a>
+                <a yui-button type="primary"><i class="iconfont yui-icon-delete"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-module">
+        <div class="title">
+            <div>不同尺寸</div>
+            <div class="desc">
+                Button 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸。
+            </div>
+        </div>
+        <div class="row">
+            <a yui-button style="padding: 28px 40px">边距控制</a>
+            <a yui-button style="width: 120px;height: 48px">宽高控制</a>
+            <a yui-button>默认按钮</a>
+            <a yui-button size="medium">中等按钮</a>
+            <a yui-button size="small">小型按钮</a>
+            <a yui-button size="mini">迷你按钮</a>
         </div>
     </div>
 </div>
