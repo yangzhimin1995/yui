@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>yui - demo</title>
+    <title>yui - Badge</title>
     <!--必须引入-->
     <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
@@ -12,14 +12,41 @@
 <body>
 <div class="page-content">
     <div class="page-title">
-        demo
-        <div class="desc">demo</div>
+        Badge 标记
+        <div class="desc">出现在按钮、图标旁的数字或状态标记。</div>
     </div>
-
     <div class="page-module">
         <div class="title">
-            <div>demo</div>
-            <div class="desc">demo</div>
+            <div>基础用法</div>
+            <div class="desc">展示新消息数量。</div>
+        </div>
+        <div class="row">
+            <div yui-badge>
+                <a yui-button>评论</a>
+                <sup>12</sup>
+            </div>
+            <div yui-badge type="primary">
+                <a yui-button>回复</a>
+                <sup>1</sup>
+            </div>
+            <div yui-badge type="info">
+                <a yui-button>评论</a>
+                <sup>2</sup>
+            </div>
+            <div yui-badge type="success">
+                <a yui-button>回复</a>
+                <sup>new</sup>
+            </div>
+            <div yui-badge type="warning">
+                <div>评论</div>
+                <sup>hot</sup>
+            </div>
+        </div>
+    </div>
+    <div class="page-module">
+        <div class="title">
+            <div>小红点</div>
+            <div class="desc">以红点的形式标注需要关注的内容。</div>
         </div>
     </div>
 </div>

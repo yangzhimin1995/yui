@@ -55,3 +55,11 @@ body {
 .page-module .row:last-child {
     margin-bottom: 0;
 }
+
+div[yui-alert] {
+    margin: 16px 0;
+}
+
+div[yui-badge] {
+    margin: 0 16px;
+}

@@ -113,6 +113,50 @@ div[yui-alert][effect='dark'] div[close-text] {
 
 /* ============================= alert end ============================= */
 
+/* ============================= badge start ============================= */
+
+div[yui-badge] {
+    display: inline-block;
+    position: relative;
+}
+
+div[yui-badge] sup {
+    z-index: 1;
+    position: absolute;
+    background-color: #f56c6c;
+    border-radius: 10px;
+    color: #fff;
+    display: inline-block;
+    font-size: 12px;
+    height: 18px;
+    line-height: 18px;
+    padding: 0 6px;
+    text-align: center;
+    white-space: nowrap;
+    border: 1px solid #fff;
+    top: 0;
+    right: 10px;
+    transform: translateY(-50%) translateX(100%);
+}
+
+div[yui-badge][type='primary'] sup {
+    background-color: #409EFF;
+}
+
+div[yui-badge][type='info'] sup {
+    background-color: #909399;
+}
+
+div[yui-badge][type='success'] sup {
+    background-color: #67c23a;
+}
+
+div[yui-badge][type='warning'] sup {
+    background-color: #e6a23c;
+}
+
+/* ============================= badge end ============================= */
+
 /* ============================= button start ============================= */
 
 a[yui-button] {
