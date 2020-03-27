@@ -175,3 +175,24 @@ function yui_showModal(id, dom) {
 }
 
 /** ================================= dialog end =================================*/
+
+
+/** ================================= loading start =================================*/
+
+function startYuiLoading(id) {
+    const dom = document.querySelector(`div[yui-loading][id=${id}]`);
+    const loadingTagDom = document.createElement('div');
+    yui_addAttributes(loadingTagDom, {'yui-loading-tag': ''});
+    const iconDom = document.createElement('i');
+    yui_addClasses(iconDom, ['iconfont', 'yui-icon-closed']);
+    const textDom = document.createElement('div');
+    yui_addAttributes(textDom, {'yui-loading-text': ''});
+    textDom.innerText = '加载中...';
+    loadingTagDom.appendChild(iconDom);
+    loadingTagDom.appendChild(textDom);
+    dom.appendChild(loadingTagDom);
+    loadingTagDom.style.left = (dom.clientWidth - loadingTagDom.clientWidth) / 2 + 'px';
+    loadingTagDom.style.top = (dom.clientHeight - loadingTagDom.clientHeight) / 2 + 'px';
+}
+
+/** ================================= loading end =================================*/

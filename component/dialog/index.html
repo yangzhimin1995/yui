@@ -21,13 +21,13 @@
         <div class="title">
             <div>基本用法</div>
             <div class="desc">Dialog 弹出一个对话框，适合需要定制性更大的场景。</div>
-            <a yui-button type="text" onclick="openYuiDialog('yui-dialog-1')">
+            <a yui-button type="text" onclick="openYuiDialog('my-dialog')">
                 点击打开Dialog
             </a>
             <div style="width: 30%"
                  before-close="handleClose"
                  yui-dialog
-                 id="yui-dialog-1"
+                 id="my-dialog"
                  close-on-click-modal="false">
                 <div yui-header>
                     <div class="title">
@@ -37,8 +37,8 @@
                 </div>
                 <div>这是一段信息</div>
                 <div yui-footer>
-                    <a yui-button onclick="closeYuiDialog('yui-dialog-1')" type="primary">确定</a>
-                    <a yui-button onclick="closeYuiDialog('yui-dialog-1')">取消</a>
+                    <a yui-button onclick="closeYuiDialog('my-dialog')" type="primary">确定</a>
+                    <a yui-button onclick="closeYuiDialog('my-dialog')">取消</a>
                 </div>
             </div>
         </div>

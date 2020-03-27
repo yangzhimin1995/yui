@@ -566,3 +566,32 @@ a[yui-link][underline][type='danger']:hover:before {
 }
 
 /* ============================= link end ============================= */
+
+
+/* ============================= loading start ============================= */
+
+div[yui-loading] {
+    position: relative;
+}
+
+div[yui-loading][show]:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, .9);
+}
+
+div[yui-loading-tag] {
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+div[yui-loading-tag] > div[yui-loading-text] {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+/* ============================= loading end ============================= */
