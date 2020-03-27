@@ -4,6 +4,23 @@
     position: relative;
 }
 
+[yui-close-tag] {
+    cursor: pointer;
+}
+
+div[yui-modal] {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background: #000;
+    z-index: 2020;
+    transition: opacity .3s;
+    visibility: hidden;
+}
+
 /* ============================= 公共样式 end ============================= */
 
 
@@ -96,7 +113,7 @@ div[yui-alert][is-rows] div[description] {
     white-space: normal;
 }
 
-div[yui-alert] div[close-text] {
+div[yui-alert] div[yui-close-tag] {
     color: #c0c4cc;
     font-size: 13px;
     line-height: 18px;
@@ -106,7 +123,7 @@ div[yui-alert] div[close-text] {
     cursor: pointer;
 }
 
-div[yui-alert][effect='dark'] div[close-text] {
+div[yui-alert][effect='dark'] div[yui-close-tag] {
     color: #fff;
 }
 
@@ -383,7 +400,7 @@ div[yui-card] {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
 }
 
-div[yui-card][shadow='hover'],div[yui-card][shadow='never'] {
+div[yui-card][shadow='hover'], div[yui-card][shadow='never'] {
     box-shadow: 0 2px 12px 0 transparent;
 }
 
@@ -406,3 +423,45 @@ div[yui-card] > div[yui-body] {
 }
 
 /* ============================= card end ============================= */
+
+/* ============================= dialog start ============================= */
+
+div[yui-dialog] {
+    z-index: 2021;
+    width: 50%;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    transition: .3s;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+    box-sizing: border-box;
+    padding: 20px;
+    color: #606266;
+    font-size: 14px;
+    word-break: break-all;
+}
+
+div[yui-dialog] > div[yui-header] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 24px;
+    font-size: 18px;
+    color: #303133;
+    margin-bottom: 30px;
+}
+
+div[yui-dialog] > div[yui-header] [yui-close-tag] {
+    align-self: flex-start;
+    flex-shrink: 0;
+}
+
+div[yui-dialog] > div[yui-footer] {
+    margin-top: 30px;
+    text-align: right;
+}
+
+/* ============================= dialog end ============================= */

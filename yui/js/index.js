@@ -1,5 +1,8 @@
 /** ================================= 等待dom加载完成 start =================================*/
 
+let yuiIndex = 0;
+const windowWidth = document.body.clientWidth;
+
 if (document.readyState !== 'loading') {
     yui_init();
 } else {
@@ -12,7 +15,8 @@ if (document.readyState !== 'loading') {
 /** ================================= 初始化yui start =================================*/
 
 function yui_init() {
-    yuiAlert_init();
+    yui_alertInit();
+    yui_dialogInit();
 }
 
 /** ================================= 等待dom加载完成 end =================================*/
@@ -73,12 +77,12 @@ function yui_addStyles(dom, styles = {}) {
 /** ================================= 全局方法 end =================================*/
 
 
-/** ================================= Alert start =================================*/
+/** ================================= alert start =================================*/
 
-function yuiAlert_init() {
+function yui_alertInit() {
     let dom = document.querySelectorAll('div[yui-alert]');
     dom.forEach(alertDom => {
-        const closeDom = alertDom.querySelector('div[close-text]');
+        const closeDom = alertDom.querySelector('div[yui-close-tag]');
         if (closeDom) {
             const domRemove = dom => {
                 yui_addStyles(dom, {opacity: '0'});
@@ -100,4 +104,74 @@ function yuiAlert_init() {
     })
 }
 
-/** ================================= Alert end =================================*/
+/** ================================= alert end =================================*/
+
+
+/** ================================= dialog end =================================*/
+
+function yui_dialogInit() {
+    let dom = document.querySelectorAll('div[yui-dialog]');
+    dom.forEach(dialogDom => {
+        const closeDom = dialogDom.querySelector('[yui-close-tag]');
+        if (closeDom) {
+            const attrs = yui_getAttributes(dialogDom, ['id']);
+            closeDom.addEventListener('click', function () {
+                closeYuiDialog(attrs['id']);
+            })
+        }
+    })
+}
+
+function closeYuiDialog(id) {
+    let dom = document.querySelector(`div[yui-dialog][id=${id}]`);
+    const {beforeClose} = yui_getAttributes(dom, ['before-close']);
+    if (beforeClose) {
+        if (beforeClose) {
+            let result = eval(`${beforeClose}(id,dom)`);
+            if (result === false) {
+                return
+            }
+        }
+    }
+    let modalDom = document.querySelector('div[yui-modal]');
+    dom.style.opacity = 0;
+    dom.style.top = 0;
+    modalDom.style.opacity = 0;
+    setTimeout(() => {
+        dom.style.visibility = 'hidden';
+        modalDom.style.visibility = 'hidden';
+    }, 300)
+}
+
+function openYuiDialog(id) {
+    let dom = document.querySelector(`div[yui-dialog][id=${id}]`);
+    yui_showModal(id, dom);
+    dom.style.visibility = 'visible';
+    dom.style.left = `${(windowWidth - dom.offsetWidth) / 2}px`;
+    setTimeout(() => {
+        dom.style.opacity = '1';
+        dom.style.top = '15vh';
+    })
+}
+
+function yui_showModal(id, dom) {
+    let modalDom = document.querySelector('div[yui-modal]');
+    if (!modalDom) {
+        modalDom = document.createElement('div');
+        yui_addAttributes(modalDom, {'yui-modal': ''});
+        document.body.appendChild(modalDom);
+    }
+    yui_addAttributes(modalDom, {'yui-modal': '', id});
+    const {closeOnClickModal} = yui_getAttributes(dom, ['close-on-click-modal']);
+    if (closeOnClickModal !== 'false') {
+        modalDom.addEventListener('click', function () {
+            closeYuiDialog(id);
+        })
+    }
+    modalDom.style.visibility = 'visible';
+    setTimeout(() => {
+        modalDom.style.opacity = '.5'
+    })
+}
+
+/** ================================= dialog end =================================*/
