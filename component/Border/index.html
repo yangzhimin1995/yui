@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - Border 边框</title>
+    <!--必须引入-->
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <!--非必须引入-->
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        Border 边框
+        <div class="desc">我们对边框进行统一规范，可用于按钮、卡片、弹窗等组件里。</div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            <div>边框</div>
+            <div class="desc">我们提供了以下几种边框样式，以供选择。</div>
+            <table class="border-table">
+                <tbody>
+                <tr>
+                    <th style="width: 12%">名称</th>
+                    <th style="width: 12%">粗细</th>
+                    <th style="width: 76%">举例</th>
+                </tr>
+                <tr>
+                    <td>实线</td>
+                    <td>1px</td>
+                    <td>
+                        <div style="height: 0;border-top: 1px solid #eee;"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>虚线</td>
+                    <td>2px</td>
+                    <td>举例</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page-module">
+        <div class="title">
+            <div>圆角</div>
+            <div class="desc">我们提供了以下几种圆角样式，以供选择。</div>
+            <div class="row-flex">
+                <div class="border-radius">
+                    无圆角
+                    <div class="value">border-radius: 0px</div>
+                    <div class="box"></div>
+                </div>
+                <div class="border-radius">
+                    小圆角
+                    <div class="value">border-radius: 2px</div>
+                    <div class="box" style="border-radius: 2px"></div>
+                </div>
+                <div class="border-radius">
+                    大圆角
+                    <div class="value">border-radius: 4px</div>
+                    <div class="box" style="border-radius: 4px"></div>
+                </div>
+                <div class="border-radius">
+                    圆形圆角
+                    <div class="value">border-radius: 30px</div>
+                    <div style="border-radius: 30px" class="box"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-module">
+        <div class="title">
+            <div>投影</div>
+            <div class="desc">我们提供了以下几种投影样式，以供选择。</div>
+            <div class="row">
+                <div class="border-shadow"></div>
+                <div class="border-shadow-text">
+                    基础投影 box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+                </div>
+            </div>
+            <div class="row">
+                <div style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)" class="border-shadow"></div>
+                <div class="border-shadow-text">
+                    浅色投影 box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!--必须引入-->
+<!--非必须引入-->
+</html>

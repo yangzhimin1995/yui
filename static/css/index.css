@@ -150,3 +150,52 @@ div[yui-card].shadow-card {
             rgba(0, 0, 0, 0) 100%
     )
 }
+
+.border-table {
+    color: #606266;
+    border-collapse: collapse;
+    background-color: #fff;
+    font-size: 14px;
+    line-height: 1.5em;
+    border-spacing: 2px;
+    border-color: grey;
+    width: 100%;
+}
+
+.border-table th, .border-table td {
+    border-bottom: 1px solid #dcdfe6;
+    padding: 15px;
+    text-align: left;
+}
+
+.border-radius {
+    color: #666;
+    font-size: 18px;
+}
+
+.border-radius .value {
+    color: #333;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.border-radius .box {
+    height: 60px;
+    width: 110px;
+    border: 1px solid #d7dae2;
+    border-radius: 0;
+    margin-top: 20px;
+}
+
+.border-shadow {
+    height: 100px;
+    width: 50%;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+}
+
+.border-shadow-text {
+    line-height: 50px;
+    color: #666;
+    font-size: 14px;
+}
