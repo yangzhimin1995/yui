@@ -56,10 +56,51 @@ body {
     margin-bottom: 0;
 }
 
+.page-module .row-flex {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.page-module .row:first-child {
+    margin-top: 0;
+}
+
+.page-module .row-flex > div {
+    margin-left: 30px;
+}
+
+.page-module .row-flex > div:first-child {
+    margin-left: 0;
+}
+
 div[yui-alert] {
     margin: 16px 0;
 }
 
 div[yui-badge] {
     margin: 0 16px;
+}
+
+div[yui-card] > div[yui-body] > div {
+    margin-bottom: 18px;
+}
+
+div[yui-card] .body-style {
+    padding: 14px;
+}
+
+div[yui-card] .body-style > div {
+    display: flex;
+    margin-top: 14px;
+    color: #999;
+    font-size: 13px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div[yui-card].shadow-card {
+    padding: 14px 0;
+    width: 180px;
+    text-align: center
 }
