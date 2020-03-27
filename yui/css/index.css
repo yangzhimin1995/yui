@@ -8,6 +8,11 @@
     cursor: pointer;
 }
 
+[yui-icon] {
+    margin: 0 3px;
+    position: relative;
+}
+
 div[yui-modal] {
     position: fixed;
     left: 0;
@@ -347,11 +352,6 @@ a[yui-button][type='text'][disabled] {
     opacity: .8;
     color: #c0c4cc;
     cursor: not-allowed;
-}
-
-a[yui-button] > .iconfont {
-    margin: 0 3px;
-    position: relative;
 }
 
 div[yui-button-group] {
