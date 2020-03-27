@@ -59,19 +59,11 @@ body {
 .page-module .row-flex {
     display: flex;
     align-items: center;
-    margin-top: 20px;
-}
-
-.page-module .row:first-child {
-    margin-top: 0;
+    margin-bottom: 20px;
 }
 
 .page-module .row-flex > div {
-    margin-left: 30px;
-}
-
-.page-module .row-flex > div:first-child {
-    margin-left: 0;
+    margin-right: 30px;
 }
 
 div[yui-alert] {
@@ -101,6 +93,60 @@ div[yui-card] .body-style > div {
 
 div[yui-card].shadow-card {
     padding: 14px 0;
-    width: 180px;
+    width: 230px;
     text-align: center
+}
+
+.color-box {
+    width: 185px;
+    position: relative;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.color-box.big {
+    width: 320px;
+}
+
+.color-box.black {
+    color: #303133;
+}
+
+.color-box .text {
+    padding: 16px;
+}
+
+.color-box.big .text {
+    padding: 20px;
+}
+
+.color-box .text > div {
+    font-size: 12px;
+    opacity: .69;
+    line-height: 24px;
+}
+
+.color-box .mini-box {
+    width: 100%;
+    display: flex;
+}
+
+.color-box .mini-box > div {
+    height: 40px;
+    flex-grow: 1;
+}
+
+.color-box.transparent {
+    border: 1px solid #fcc3c3;
+    background: linear-gradient(
+            to bottom right,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0) calc(50% - 1px),
+            #fcc3c3 50%,
+            rgba(0, 0, 0, 0) calc(50% + 1px),
+            rgba(0, 0, 0, 0) 100%
+    )
 }
