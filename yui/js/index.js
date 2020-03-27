@@ -184,15 +184,20 @@ function startYuiLoading(id) {
     const loadingTagDom = document.createElement('div');
     yui_addAttributes(loadingTagDom, {'yui-loading-tag': ''});
     const iconDom = document.createElement('i');
-    yui_addClasses(iconDom, ['iconfont', 'yui-icon-closed']);
+    yui_addClasses(iconDom, ['iconfont', 'yui-icon-loading']);
     const textDom = document.createElement('div');
     yui_addAttributes(textDom, {'yui-loading-text': ''});
-    textDom.innerText = '加载中...';
+    textDom.innerText = '加载中';
     loadingTagDom.appendChild(iconDom);
     loadingTagDom.appendChild(textDom);
     dom.appendChild(loadingTagDom);
     loadingTagDom.style.left = (dom.clientWidth - loadingTagDom.clientWidth) / 2 + 'px';
     loadingTagDom.style.top = (dom.clientHeight - loadingTagDom.clientHeight) / 2 + 'px';
+    let deg = 1;
+    setInterval(() => {
+        iconDom.style.transform = "rotate(" + deg + "deg)";
+        deg++;
+    }, 1)
 }
 
 /** ================================= loading end =================================*/

@@ -589,9 +589,15 @@ div[yui-loading-tag] {
     left: 0;
 }
 
+div[yui-loading-tag] > i {
+    display: inline-block;
+    color: #409eff;
+}
+
 div[yui-loading-tag] > div[yui-loading-text] {
     margin-top: 5px;
     font-size: 14px;
+    color: #409eff;
 }
 
 /* ============================= loading end ============================= */
