@@ -135,14 +135,14 @@ function yuiFunc_setAttributes(dom, attributes = {}) {
     })
 }
 
-/**
- * 批量移除属性
- */
-function yuiFunc_removeAttributes(dom, attributes = []) {
-    attributes.forEach(attribute => {
-        dom.removeAttribute(attribute)
-    })
-}
+// /**
+//  * 批量移除属性
+//  */
+// function yuiFunc_removeAttributes(dom, attributes = []) {
+//     attributes.forEach(attribute => {
+//         dom.removeAttribute(attribute)
+//     })
+// }
 
 /**
  * 批量获取dom属性
@@ -167,16 +167,16 @@ function yuiFunc_setClasses(dom, classes = []) {
     })
 }
 
-/**
- * 批量增加class
- */
-function yuiFunc_removeClasses(dom, classes = []) {
-    classes.forEach(item => {
-        if (item) {
-            dom.classList.remove(item)
-        }
-    })
-}
+// /**
+//  * 批量增加class
+//  */
+// function yuiFunc_removeClasses(dom, classes = []) {
+//     classes.forEach(item => {
+//         if (item) {
+//             dom.classList.remove(item)
+//         }
+//     })
+// }
 
 /**
  * 批量增加style
