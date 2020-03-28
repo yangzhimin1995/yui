@@ -431,7 +431,7 @@ div[yui-dialog] {
     z-index: 2021;
     width: 50%;
     visibility: hidden;
-    position: absolute;
+    position: fixed;
     top: 0;
     opacity: 0;
     transition: .3s;
