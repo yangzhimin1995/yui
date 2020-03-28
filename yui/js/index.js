@@ -336,10 +336,10 @@ function yuiLoadingClosed(id) {
     const loadingModalDom = dom.querySelector(`div[id=${id}__loading-modal]`);
     const loadingTagDom = dom.querySelector(`div[id=${id}__loading-tag]`);
     if (loadingModalDom) {
+        loadingTagDom.style.display = 'none';
         loadingModalDom.style.background = 'transparent';
         setTimeout(() => {
             loadingModalDom.style.display = 'none';
-            loadingTagDom.style.display = 'none';
         }, 300);
         clearInterval(yuiData_loadingSIJson[id]);
     }
@@ -359,7 +359,10 @@ function yuiFullScreenLoading(options = {}) {
     if (dom) {
         dom.style.display = 'flex';
         loadingTagDom = dom.querySelector('div[yui-full-screen-loading-tag]');
-        yuiFunc_setStyles(dom, {'background': options['modalColor']});
+        setTimeout(() => {
+            loadingTagDom.style.display = 'block';
+            yuiFunc_setStyles(dom, {'background': options['modalColor']});
+        });
     } else {
         dom = document.createElement('div');
         yuiFunc_setAttributes(dom, {'yui-full-screen-loading': ''});
@@ -376,15 +379,16 @@ function yuiFullScreenLoading(options = {}) {
     yuiData_loadingSIJson['yuiFullScreenLoading'] = setInterval(() => {
         iconDom.style.transform = "rotate(" + deg + "deg)";
         deg++;
-
     }, 1)
 }
 
 function yuiFullScreenLoadingClosed() {
     yuiFunc_scrollBarUnlocked();
     const dom = document.querySelector('div[yui-full-screen-loading]');
+    const loadingTagDom = dom.querySelector('div[yui-full-screen-loading-tag]');
     if (dom) {
         dom.style.background = 'transparent';
+        loadingTagDom.style.display = 'none';
         setTimeout(() => {
             dom.style.display = 'none';
         }, 300);
