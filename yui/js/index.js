@@ -106,7 +106,7 @@ function yuiFunc_scrollBarUnlocked() {
  * 获取浏览器滚动条宽度
  */
 function yuiFunc_getScrollbarWidth() {
-    let div = document.createElement('div'), i;
+    let div = document.createElement('div');
     yuiFunc_setStyles(div, {
         width: '100px',
         height: '100px',
