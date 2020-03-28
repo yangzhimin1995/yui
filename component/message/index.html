@@ -23,6 +23,61 @@
         <div class="title">
             <div>基础用法</div>
             <div class="desc">从顶部出现，3 秒后自动消失。</div>
+            <a onclick="yuiMessage('这是一条消息提示')" yui-button>打开消息提示</a>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            <div>不同状态</div>
+            <div class="desc">用来显示「成功、警告、消息、错误」类的操作反馈。</div>
+            <a onclick="yuiMessage('这是一条消息提示')" yui-button>消息</a>
+            <a onclick="yuiMessage('恭喜你，这是一条成功消息',{type:'success'})" yui-button>成功</a>
+            <a onclick="yuiMessage('警告哦，这是一条警告消息',{type:'warning'})" yui-button>警告</a>
+            <a onclick="yuiMessage('错了哦，这是一条错误消息',{type:'danger'})" yui-button>危险</a>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            <div>主题</div>
+            <div class="desc">
+                Message 组件提供了两个不同的主题：light和dark。
+                通过设置effect属性来改变主题，默认为light。
+            </div>
+            <a onclick="yuiMessage('这是一条消息提示',{effect:'dark'})" yui-button>消息</a>
+            <a onclick="yuiMessage('恭喜你，这是一条成功消息',{type:'success',effect:'dark'})" yui-button>成功</a>
+            <a onclick="yuiMessage('警告哦，这是一条警告消息',{type:'warning',effect:'dark'})" yui-button>警告</a>
+            <a onclick="yuiMessage('错了哦，这是一条错误消息',{type:'danger',effect:'dark'})" yui-button>危险</a>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            <div>可关闭</div>
+            <div class="desc">可以添加关闭按钮。</div>
+            <a onclick="yuiMessage('这是一条消息提示',{showClose:true})" yui-button>消息</a>
+            <a onclick="yuiMessage('恭喜你，这是一条成功消息',{type:'success',showClose:true})" yui-button>成功</a>
+            <a onclick="yuiMessage('警告哦，这是一条警告消息',{type:'warning',showClose:true})" yui-button>警告</a>
+            <a onclick="yuiMessage('错了哦，这是一条错误消息',{type:'danger',showClose:true})" yui-button>危险</a>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            <div>文字居中</div>
+            <div class="desc">使用 center 属性让文字水平居中。</div>
+            <a onclick="yuiMessage('居中的文字',{center:true})" yui-button>文字居中</a>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            <div>使用 HTML 片段</div>
+            <div class="desc">message 属性支持传入 HTML 片段</div>
+            <a onclick="yuiMessage(`<strong>这是 <i>HTML</i> 片段</strong>`,{dangerouslyUseHTMLString:true})" yui-button>
+                使用 HTML 片段
+            </a>
         </div>
     </div>
 </div>
