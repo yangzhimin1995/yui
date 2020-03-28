@@ -28,6 +28,31 @@ function yui_init() {
 /** ================================= 全局方法 start =================================*/
 
 /**
+ * 字符串转数字
+ */
+function yui_string2Number() {
+    return 3000
+}
+
+/**
+ * json如果没定义就使用默认值
+ */
+function yui_json2Default(data = {}, defaultData = {}, returnRemain = false) {
+    debugger
+    let result = defaultData;
+    if (returnRemain) {
+        result = Object.assign(defaultData, data);
+    } else {
+        Object.keys(defaultData).forEach(key => {
+            if (data[key] !== undefined && data[key] !== null) {
+                result[key] = data[key];
+            }
+        });
+    }
+    return result
+}
+
+/**
  * 判断是否有滚动条
  */
 function yui_hasScrollbar() {
@@ -254,22 +279,29 @@ function yui_showModal(id, dom) {
 
 /** ================================= loading start =================================*/
 
-function startYuiLoading(id) {
+function yuiLoading(id) {
     const dom = document.querySelector(`div[yui-loading][id=${id}]`);
     let loadingModalDom = dom.querySelector(`div[id=${id}-loading-modal]`);
     let loadingTagDom = dom.querySelector(`div[id=${id}-loading-tag]`);
     let iconDom;
-    const options = yui_getAttributes(dom, ['modal-color', 'text', 'color', 'icon']);
+    let options = yui_getAttributes(dom, ['modal-color', 'text', 'color', 'icon']);
+    options = yui_json2Default(options, {
+        modalColor: 'rgba(255, 255, 255, .8)',
+        icon: ['iconfont', 'yui-icon-loading'],
+        color: '#409EFF',
+        text: '',
+    });
+    debugger
     if (loadingModalDom) {
         loadingModalDom.style.display = 'block';
         loadingTagDom.style.display = 'block';
-        yui_addStyles(loadingModalDom, {'background': options['modalColor'] || 'rgba(255, 255, 255, .8)'});
+        yui_addStyles(loadingModalDom, {'background': options['modalColor']});
     } else {
         loadingModalDom = document.createElement('div');
         yui_addAttributes(loadingModalDom, {'yui-loading-modal': '', id: id + '-loading-modal'});
         dom.appendChild(loadingModalDom);
         setTimeout(() => {
-            yui_addStyles(loadingModalDom, {'background': options['modalColor'] || 'rgba(255, 255, 255, .8)'});
+            yui_addStyles(loadingModalDom, {'background': options['modalColor']});
         });
         loadingTagDom = yui_createLoadingTagDom(options);
         yui_addAttributes(loadingTagDom, {'yui-loading-tag': '', id: id + '-loading-tag'});
@@ -285,7 +317,7 @@ function startYuiLoading(id) {
     }, 1)
 }
 
-function stopYuiLoading(id) {
+function yuiLoadingClosed(id) {
     const dom = document.querySelector(`div[yui-loading][id=${id}]`);
     const loadingModalDom = dom.querySelector(`div[id=${id}-loading-modal]`);
     const loadingTagDom = dom.querySelector(`div[id=${id}-loading-tag]`);
@@ -299,7 +331,13 @@ function stopYuiLoading(id) {
     }
 }
 
-function startYuiFullScreenLoading(options = {}) {
+function yuiFullScreenLoading(options = {}) {
+    options = yui_json2Default(options, {
+        modalColor: 'rgba(255, 255, 255, .8)',
+        icon: ['iconfont', 'yui-icon-loading'],
+        color: '#409EFF',
+        text: '',
+    });
     yui_scrollBarLocked();
     let dom = document.querySelector('div[yui-full-screen-loading]');
     let loadingTagDom;
@@ -307,12 +345,12 @@ function startYuiFullScreenLoading(options = {}) {
     if (dom) {
         dom.style.display = 'flex';
         loadingTagDom = dom.querySelector('div[yui-full-screen-loading-tag]');
-        yui_addStyles(dom, {'background': options['modalColor'] || 'rgba(255, 255, 255, .8)'});
+        yui_addStyles(dom, {'background': options['modalColor']});
     } else {
         dom = document.createElement('div');
         yui_addAttributes(dom, {'yui-full-screen-loading': ''});
         setTimeout(() => {
-            yui_addStyles(dom, {'background': options['modalColor'] || 'rgba(255, 255, 255, .8)'});
+            yui_addStyles(dom, {'background': options['modalColor']});
         });
         loadingTagDom = yui_createLoadingTagDom(options);
         yui_addAttributes(loadingTagDom, {'yui-full-screen-loading-tag': ''});
@@ -328,7 +366,7 @@ function startYuiFullScreenLoading(options = {}) {
     }, 1)
 }
 
-function stopYuiFullScreenLoading() {
+function yuiFullScreenLoadingClosed() {
     yui_scrollBarUnlocked();
     const dom = document.querySelector('div[yui-full-screen-loading]');
     if (dom) {
@@ -343,23 +381,39 @@ function stopYuiFullScreenLoading() {
 function yui_createLoadingTagDom(options = {}) {
     const loadingTagDom = document.createElement('div');
     const iconDom = document.createElement('i');
-    yui_addStyles(iconDom, {'color': options['color'] || '#409EFF'});
-    if (options['icon']) {
-        const iconArray = options['icon'].split(' ');
-        yui_addClasses(iconDom, iconArray);
-    } else {
-        yui_addClasses(iconDom, ['iconfont', 'yui-icon-loading']);
-    }
+    yui_addStyles(iconDom, {'color': options['color']});
+    yui_addClasses(iconDom, options['icon']);
     loadingTagDom.appendChild(iconDom);
     let textDom;
     if (options['text']) {
         textDom = document.createElement('div');
         yui_addAttributes(textDom, {'yui-loading-text': ''});
         textDom.innerText = options['text'];
-        yui_addStyles(textDom, {'color': options['color'] || '#409EFF'});
+        yui_addStyles(textDom, {'color': options['color']});
         loadingTagDom.appendChild(textDom);
     }
     return loadingTagDom
 }
 
 /** ================================= loading end =================================*/
+
+
+/** ================================= message start =================================*/
+
+function yuiMessage(content = '', options = {}) {
+    options = yui_json2Default(options, {
+        type: 'info',
+        effect: 'light',
+        showIcon: true,
+        delay: 5000
+    });
+}
+
+/**
+ * 从dom中移除message
+ */
+function yui_messageClosed(dom) {
+
+}
+
+/** ================================= message end =================================*/

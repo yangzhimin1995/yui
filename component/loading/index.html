@@ -23,8 +23,8 @@
             <div class="desc">在卡片等容器中加载数据时显示。</div>
         </div>
         <div style="margin-bottom: 10px">
-            <a yui-button type="primary" onclick="startYuiLoading('my-loading')">开启Loading</a>
-            <a yui-button onclick="stopYuiLoading('my-loading')">关闭Loading</a>
+            <a yui-button type="primary" onclick="yuiLoading('my-loading')">开启Loading</a>
+            <a yui-button onclick="yuiLoadingClosed('my-loading')">关闭Loading</a>
         </div>
         <div yui-loading id="my-loading">
             <div yui-card style="height: 300px;padding: 20px">
@@ -47,9 +47,9 @@
 <script src="../../yui/js/index.js"></script>
 <script>
     function startFullScreenLoading() {
-        startYuiFullScreenLoading({text: '3秒后关闭'});
+        yuiFullScreenLoading({text: '3秒后关闭'});
         setTimeout(() => {
-            stopYuiFullScreenLoading();
+            yuiFullScreenLoadingClosed();
         }, 3000)
     }
 </script>
