@@ -298,7 +298,6 @@ function yuiLoading(id) {
     const dom = document.querySelector(`div[yui-loading][id=${id}]`);
     let loadingModalDom = dom.querySelector(`div[id=${id}__loading-modal]`);
     let loadingTagDom = dom.querySelector(`div[id=${id}__loading-tag]`);
-    let iconDom;
     let options = yuiFunc_getAttributes(dom, ['modal-color', 'text', 'color', 'icon']);
     options = yuiFunc_json2Default(options, {
         modalColor: 'rgba(255, 255, 255, .8)',
@@ -323,7 +322,7 @@ function yuiLoading(id) {
         loadingTagDom.style.top = (dom.clientHeight - loadingTagDom.clientHeight) / 2 + 'px';
         dom.appendChild(loadingTagDom);
     }
-    iconDom = loadingTagDom.querySelector('i');
+    let iconDom = loadingTagDom.querySelector('i');
     let deg = 1;
     yuiData_loadingSIJson[id] = setInterval(() => {
         iconDom.style.transform = "rotate(" + deg + "deg)";
