@@ -217,11 +217,11 @@
 <script src="../../yui/js/index.js"></script>
 <script>
     function yuiAlertClose(dom) {
-        alert("设置了回调的 Alert")
+        yuiMessage("设置了回调的 Alert")
     }
 
     function yuiAlertNotClose(dom) {
-        alert("设置了回调的 Alert ，通过 return false 阻止关闭");
+        yuiMessage("设置了回调的 Alert ，通过 return false 阻止关闭");
         return false
     }
 </script>

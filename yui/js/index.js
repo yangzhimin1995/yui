@@ -247,7 +247,7 @@ function yuiDialogClosed(id) {
             }
         }
     }
-    let modalDom = document.querySelector('div[yui-modal]');
+    let modalDom = document.querySelector(`div[yui-modal][id=${id}__dialog-modal]`);
     dom.style.opacity = 0;
     dom.style.top = 0;
     modalDom.style.opacity = 0;
@@ -270,18 +270,18 @@ function yuiDialog(id) {
 }
 
 function yuiDialog_showModal(id, dom) {
-    let modalDom = document.querySelector('div[yui-modal]');
+    let modalDom = document.querySelector(`div[yui-modal][id=${id}__dialog-modal]`);
     if (!modalDom) {
         modalDom = document.createElement('div');
         yuiFunc_setAttributes(modalDom, {'yui-modal': ''});
         document.body.appendChild(modalDom);
-    }
-    yuiFunc_setAttributes(modalDom, {'yui-modal': '', id});
-    const {closeOnClickModal} = yuiFunc_getAttributes(dom, ['close-on-click-modal']);
-    if (closeOnClickModal !== 'false') {
-        modalDom.addEventListener('click', function () {
-            yuiDialogClosed(id);
-        })
+        yuiFunc_setAttributes(modalDom, {'yui-modal': '', id: id + '__dialog-modal'});
+        const {closeOnClickModal} = yuiFunc_getAttributes(dom, ['close-on-click-modal']);
+        if (closeOnClickModal !== 'false') {
+            modalDom.addEventListener('click', function () {
+                yuiDialogClosed(id);
+            })
+        }
     }
     modalDom.style.visibility = 'visible';
     setTimeout(() => {
@@ -296,8 +296,8 @@ function yuiDialog_showModal(id, dom) {
 
 function yuiLoading(id) {
     const dom = document.querySelector(`div[yui-loading][id=${id}]`);
-    let loadingModalDom = dom.querySelector(`div[id=${id}-loading-modal]`);
-    let loadingTagDom = dom.querySelector(`div[id=${id}-loading-tag]`);
+    let loadingModalDom = dom.querySelector(`div[id=${id}__loading-modal]`);
+    let loadingTagDom = dom.querySelector(`div[id=${id}__loading-tag]`);
     let iconDom;
     let options = yuiFunc_getAttributes(dom, ['modal-color', 'text', 'color', 'icon']);
     options = yuiFunc_json2Default(options, {
@@ -312,13 +312,13 @@ function yuiLoading(id) {
         yuiFunc_setStyles(loadingModalDom, {'background': options['modalColor']});
     } else {
         loadingModalDom = document.createElement('div');
-        yuiFunc_setAttributes(loadingModalDom, {'yui-loading-modal': '', id: id + '-loading-modal'});
+        yuiFunc_setAttributes(loadingModalDom, {'yui-loading-modal': '', id: id + '__loading-modal'});
         dom.appendChild(loadingModalDom);
         setTimeout(() => {
             yuiFunc_setStyles(loadingModalDom, {'background': options['modalColor']});
         });
         loadingTagDom = yuiLoading_createTagDom(options);
-        yuiFunc_setAttributes(loadingTagDom, {'yui-loading-tag': '', id: id + '-loading-tag'});
+        yuiFunc_setAttributes(loadingTagDom, {'yui-loading-tag': '', id: id + '__loading-tag'});
         loadingTagDom.style.left = (dom.clientWidth - loadingTagDom.clientWidth) / 2 + 'px';
         loadingTagDom.style.top = (dom.clientHeight - loadingTagDom.clientHeight) / 2 + 'px';
         dom.appendChild(loadingTagDom);
@@ -333,8 +333,8 @@ function yuiLoading(id) {
 
 function yuiLoadingClosed(id) {
     const dom = document.querySelector(`div[yui-loading][id=${id}]`);
-    const loadingModalDom = dom.querySelector(`div[id=${id}-loading-modal]`);
-    const loadingTagDom = dom.querySelector(`div[id=${id}-loading-tag]`);
+    const loadingModalDom = dom.querySelector(`div[id=${id}__loading-modal]`);
+    const loadingTagDom = dom.querySelector(`div[id=${id}__loading-tag]`);
     if (loadingModalDom) {
         loadingModalDom.style.background = 'transparent';
         setTimeout(() => {

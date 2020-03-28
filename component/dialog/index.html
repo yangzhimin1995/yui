@@ -24,11 +24,7 @@
             <a yui-button type="text" onclick="yuiDialog('my-dialog')">
                 点击打开Dialog
             </a>
-            <div style="width: 30%"
-                 before-close="handleClose"
-                 yui-dialog
-                 id="my-dialog"
-                 close-on-click-modal="false">
+            <div style="width: 30%" before-close="handleClose" yui-dialog id="my-dialog">
                 <div yui-header>
                     <div class="title">
                         提示
@@ -50,7 +46,7 @@
 <script src="../../yui/js/index.js"></script>
 <script>
     function handleClose(id, dom) {
-        alert("Dialog关闭前的回调");
+        yuiMessage("Dialog关闭前的回调");
     }
 </script>
 </html>
