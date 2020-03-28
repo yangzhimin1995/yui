@@ -28,10 +28,27 @@ function yuiFunc_init() {
 /** ================================= 全局方法 start =================================*/
 
 /**
- * 字符串转数字
+ * 参数转数字，支持百分比
  */
-function yuiFunc_string2Number() {
-    return 3000
+function yuiFunc_param2Number(param, defaultNum) {
+    const type = typeof param;
+    if (type === 'number') {
+        return param
+    }
+    if (!param) {
+        return defaultNum
+    }
+    let isPercent = false;
+    if (param.indexOf('%') !== -1) {
+        param = param.replace('%', '');
+        isPercent = true;
+    }
+    if (isNaN(param)) {
+        return defaultNum
+    } else {
+        return isPercent ? parseFloat(param) / 100 : parseFloat(param)
+    }
+
 }
 
 /**
@@ -447,9 +464,14 @@ function yuiMessage(content = '', options = {}) {
     setTimeout(() => {
         yuiFunc_setStyles(messageDom, {top: '0px', opacity: 1})
     });
-    setTimeout(() => {
-        yuiMessage_closed(messageDom)
-    }, 5000)
+    let duration = options.duration;
+    duration = yuiFunc_param2Number(duration, 5000);
+    if (duration !== 0) {
+        setTimeout(() => {
+            yuiMessage_closed(messageDom)
+        }, duration)
+    }
+
 }
 
 function yuiMessage_closed(dom) {
