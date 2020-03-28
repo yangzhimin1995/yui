@@ -1,6 +1,7 @@
 /** ================================= 等待dom加载完成 start =================================*/
 
 let yuiIndex = 0;
+let yuiScrollBarWidth = 0;
 const windowWidth = document.body.clientWidth;
 let loadingSIjSON = {};
 
@@ -16,6 +17,7 @@ if (document.readyState !== 'loading') {
 /** ================================= 初始化yui start =================================*/
 
 function yui_init() {
+    yui_getScrollbarWidth();
     yui_alertInit();
     yui_dialogInit();
 }
@@ -24,6 +26,56 @@ function yui_init() {
 
 
 /** ================================= 全局方法 start =================================*/
+
+/**
+ * 判断是否有滚动条
+ */
+function yui_hasScrollbar() {
+    return document.body.scrollHeight > (window.innerHeight || document.documentElement.clientHeight);
+}
+
+/**
+ * 锁定滚动条
+ */
+function yui_scrollBarLocked() {
+    //处理滚动条
+    let hasScrollBar = yui_hasScrollbar();
+    if (hasScrollBar) {
+        yui_addStyles(document.body, {
+            width: 'calc(100% - ' + yuiScrollBarWidth + 'px)',
+            overflow: 'hidden',
+        })
+    }
+}
+
+/**
+ * 恢复滚动条
+ */
+function yui_scrollBarUnlocked() {
+    //处理滚动条
+    let hasScrollBar = yui_hasScrollbar();
+    if (hasScrollBar) {
+        yui_addStyles(document.body, {
+            width: '100%',
+            overflow: 'auto',
+        })
+    }
+}
+
+/**
+ * 获取浏览器滚动条宽度
+ */
+function yui_getScrollbarWidth() {
+    let div = document.createElement('div'), i;
+    yui_addStyles(div, {
+        width: '100px',
+        height: '100px',
+        overflowY: 'scroll'
+    });
+    document.body.appendChild(div);
+    yuiScrollBarWidth = div.offsetWidth - div.clientWidth;
+    div.remove();
+}
 
 /**
  * 横杠转驼峰
@@ -144,6 +196,7 @@ function yui_dialogInit() {
 }
 
 function closeYuiDialog(id) {
+    yui_scrollBarUnlocked();
     let dom = document.querySelector(`div[yui-dialog][id=${id}]`);
     const {beforeClose} = yui_getAttributes(dom, ['before-close']);
     if (beforeClose) {
@@ -165,6 +218,7 @@ function closeYuiDialog(id) {
 }
 
 function openYuiDialog(id) {
+    yui_scrollBarLocked();
     let dom = document.querySelector(`div[yui-dialog][id=${id}]`);
     yui_showModal(id, dom);
     dom.style.visibility = 'visible';
@@ -246,6 +300,7 @@ function stopYuiLoading(id) {
 }
 
 function startYuiFullScreenLoading(options = {}) {
+    yui_scrollBarLocked();
     let dom = document.querySelector('div[yui-full-screen-loading]');
     let loadingTagDom;
     let iconDom;
@@ -274,6 +329,7 @@ function startYuiFullScreenLoading(options = {}) {
 }
 
 function stopYuiFullScreenLoading() {
+    yui_scrollBarUnlocked();
     const dom = document.querySelector('div[yui-full-screen-loading]');
     if (dom) {
         dom.style.background = 'transparent';
