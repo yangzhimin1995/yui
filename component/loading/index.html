@@ -22,18 +22,43 @@
             <div>区域加载</div>
             <div class="desc">在卡片等容器中加载数据时显示。</div>
         </div>
-        <div yui-loading id="my-loading" show>
+        <div style="margin-bottom: 10px">
+            <a yui-button type="primary" onclick="startYuiLoading('my-loading')">开启Loading</a>
+            <a yui-button onclick="stopYuiLoading('my-loading')">关闭Loading</a>
+        </div>
+        <div yui-loading id="my-loading">
             <div yui-card style="height: 300px;padding: 20px">
                 这是一段内容。
             </div>
         </div>
     </div>
+
+    <div class="page-module">
+        <div class="title">
+            <div>整页加载。</div>
+            <div class="desc">页面数据加载时显示</div>
+        </div>
+        <a yui-button type="primary" onclick="startFullScreenLoading()">开启全屏加载</a>
+    </div>
+    <!--    <div yui-full-screen-loading>-->
+    <!--        <div yui-full-screen-loading-tag>-->
+    <!--            <i class="iconfont yui-icon-loading"></i>-->
+    <!--            <div yui-loading-text>-->
+    <!--                加载中-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
 </div>
 </body>
 <!--必须引入-->
 <!--非必须引入-->
 <script src="../../yui/js/index.js"></script>
 <script>
-    startYuiLoading('my-loading')
+    function startFullScreenLoading() {
+        startYuiFullScreenLoading({text: '3秒后关闭'});
+        setTimeout(() => {
+            stopYuiFullScreenLoading();
+        }, 3000)
+    }
 </script>
 </html>

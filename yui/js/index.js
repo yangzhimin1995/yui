@@ -2,6 +2,7 @@
 
 let yuiIndex = 0;
 const windowWidth = document.body.clientWidth;
+let loadingSIjSON = {};
 
 if (document.readyState !== 'loading') {
     yui_init();
@@ -43,6 +44,15 @@ function yui_addAttributes(dom, attributes = {}) {
 }
 
 /**
+ * 批量移除属性
+ */
+function yui_removeAttributes(dom, attributes = []) {
+    attributes.forEach(attribute => {
+        dom.removeAttribute(attribute)
+    })
+}
+
+/**
  * 批量获取dom属性
  */
 function yui_getAttributes(dom, attributes = []) {
@@ -55,12 +65,23 @@ function yui_getAttributes(dom, attributes = []) {
 }
 
 /**
- * 批量增加或者移除class
+ * 批量增加class
  */
-function yui_addClasses(dom, classes = [], operator = 'add') {
+function yui_addClasses(dom, classes = []) {
     classes.forEach(item => {
         if (item) {
-            dom.classList[operator](item)
+            dom.classList.add(item)
+        }
+    })
+}
+
+/**
+ * 批量增加class
+ */
+function yui_removeClasses(dom, classes = []) {
+    classes.forEach(item => {
+        if (item) {
+            dom.classList.remove(item)
         }
     })
 }
@@ -181,23 +202,108 @@ function yui_showModal(id, dom) {
 
 function startYuiLoading(id) {
     const dom = document.querySelector(`div[yui-loading][id=${id}]`);
-    const loadingTagDom = document.createElement('div');
-    yui_addAttributes(loadingTagDom, {'yui-loading-tag': ''});
-    const iconDom = document.createElement('i');
-    yui_addClasses(iconDom, ['iconfont', 'yui-icon-loading']);
-    const textDom = document.createElement('div');
-    yui_addAttributes(textDom, {'yui-loading-text': ''});
-    textDom.innerText = '加载中';
-    loadingTagDom.appendChild(iconDom);
-    loadingTagDom.appendChild(textDom);
-    dom.appendChild(loadingTagDom);
-    loadingTagDom.style.left = (dom.clientWidth - loadingTagDom.clientWidth) / 2 + 'px';
-    loadingTagDom.style.top = (dom.clientHeight - loadingTagDom.clientHeight) / 2 + 'px';
+    let loadingModalDom = dom.querySelector(`div[id=${id}-loading-modal]`);
+    let loadingTagDom = dom.querySelector(`div[id=${id}-loading-tag]`);
+    let iconDom;
+    const options = yui_getAttributes(dom, ['modal-color', 'text', 'color', 'icon']);
+    if (loadingModalDom) {
+        loadingModalDom.style.display = 'block';
+        loadingTagDom.style.display = 'block';
+        yui_addStyles(loadingModalDom, {'background': options['modalColor'] || 'rgba(255, 255, 255, .8)'});
+    } else {
+        loadingModalDom = document.createElement('div');
+        yui_addAttributes(loadingModalDom, {'yui-loading-modal': '', id: id + '-loading-modal'});
+        dom.appendChild(loadingModalDom);
+        setTimeout(() => {
+            yui_addStyles(loadingModalDom, {'background': options['modalColor'] || 'rgba(255, 255, 255, .8)'});
+        });
+        loadingTagDom = yui_createLoadingTagDom(options);
+        yui_addAttributes(loadingTagDom, {'yui-loading-tag': '', id: id + '-loading-tag'});
+        loadingTagDom.style.left = (dom.clientWidth - loadingTagDom.clientWidth) / 2 + 'px';
+        loadingTagDom.style.top = (dom.clientHeight - loadingTagDom.clientHeight) / 2 + 'px';
+        dom.appendChild(loadingTagDom);
+    }
+    iconDom = loadingTagDom.querySelector('i');
     let deg = 1;
-    setInterval(() => {
+    loadingSIjSON[id] = setInterval(() => {
         iconDom.style.transform = "rotate(" + deg + "deg)";
         deg++;
     }, 1)
+}
+
+function stopYuiLoading(id) {
+    const dom = document.querySelector(`div[yui-loading][id=${id}]`);
+    const loadingModalDom = dom.querySelector(`div[id=${id}-loading-modal]`);
+    const loadingTagDom = dom.querySelector(`div[id=${id}-loading-tag]`);
+    if (loadingModalDom) {
+        loadingModalDom.style.background = 'transparent';
+        setTimeout(() => {
+            loadingModalDom.style.display = 'none';
+            loadingTagDom.style.display = 'none';
+        }, 300);
+        clearInterval(loadingSIjSON[id]);
+    }
+}
+
+function startYuiFullScreenLoading(options = {}) {
+    let dom = document.querySelector('div[yui-full-screen-loading]');
+    let loadingTagDom;
+    let iconDom;
+    if (dom) {
+        dom.style.display = 'flex';
+        loadingTagDom = dom.querySelector('div[yui-full-screen-loading-tag]');
+        yui_addStyles(dom, {'background': options['modalColor'] || 'rgba(255, 255, 255, .8)'});
+    } else {
+        dom = document.createElement('div');
+        yui_addAttributes(dom, {'yui-full-screen-loading': ''});
+        setTimeout(() => {
+            yui_addStyles(dom, {'background': options['modalColor'] || 'rgba(255, 255, 255, .8)'});
+        });
+        loadingTagDom = yui_createLoadingTagDom(options);
+        yui_addAttributes(loadingTagDom, {'yui-full-screen-loading-tag': ''});
+        dom.append(loadingTagDom);
+        document.body.append(dom);
+    }
+    iconDom = loadingTagDom.querySelector('i');
+    let deg = 1;
+    loadingSIjSON['yuiFullScreenLoading'] = setInterval(() => {
+        iconDom.style.transform = "rotate(" + deg + "deg)";
+        deg++;
+
+    }, 1)
+}
+
+function stopYuiFullScreenLoading() {
+    const dom = document.querySelector('div[yui-full-screen-loading]');
+    if (dom) {
+        dom.style.background = 'transparent';
+        setTimeout(() => {
+            dom.style.display = 'none';
+        }, 300);
+        clearInterval(loadingSIjSON['yuiFullScreenLoading']);
+    }
+}
+
+function yui_createLoadingTagDom(options = {}) {
+    const loadingTagDom = document.createElement('div');
+    const iconDom = document.createElement('i');
+    yui_addStyles(iconDom, {'color': options['color'] || '#409EFF'});
+    if (options['icon']) {
+        const iconArray = options['icon'].split(' ');
+        yui_addClasses(iconDom, iconArray);
+    } else {
+        yui_addClasses(iconDom, ['iconfont', 'yui-icon-loading']);
+    }
+    loadingTagDom.appendChild(iconDom);
+    let textDom;
+    if (options['text']) {
+        textDom = document.createElement('div');
+        yui_addAttributes(textDom, {'yui-loading-text': ''});
+        textDom.innerText = options['text'];
+        yui_addStyles(textDom, {'color': options['color'] || '#409EFF'});
+        loadingTagDom.appendChild(textDom);
+    }
+    return loadingTagDom
 }
 
 /** ================================= loading end =================================*/
