@@ -31,6 +31,7 @@
         <div class="title">
             <div>不同状态</div>
             <div class="desc">用来显示「成功、警告、消息、错误」类的操作反馈。</div>
+            <a onclick="yuiMessage('注意哦，这是一条主要消息',{type:'primary'})" yui-button>主要</a>
             <a onclick="yuiMessage('这是一条消息提示')" yui-button>消息</a>
             <a onclick="yuiMessage('恭喜你，这是一条成功消息',{type:'success'})" yui-button>成功</a>
             <a onclick="yuiMessage('警告哦，这是一条警告消息',{type:'warning'})" yui-button>警告</a>
@@ -45,6 +46,7 @@
                 Message 组件提供了两个不同的主题：light和dark。
                 通过设置effect属性来改变主题，默认为light。
             </div>
+            <a onclick="yuiMessage('注意哦，这是一条主要消息',{type:'primary',effect:'dark'})" yui-button>主要</a>
             <a onclick="yuiMessage('这是一条消息提示',{effect:'dark'})" yui-button>消息</a>
             <a onclick="yuiMessage('恭喜你，这是一条成功消息',{type:'success',effect:'dark'})" yui-button>成功</a>
             <a onclick="yuiMessage('警告哦，这是一条警告消息',{type:'warning',effect:'dark'})" yui-button>警告</a>
@@ -56,6 +58,7 @@
         <div class="title">
             <div>可关闭</div>
             <div class="desc">可以添加关闭按钮。</div>
+            <a onclick="yuiMessage('注意哦，这是一条主要消息',{type:'primary',showClose:true})" yui-button>主要</a>
             <a onclick="yuiMessage('这是一条消息提示',{showClose:true})" yui-button>消息</a>
             <a onclick="yuiMessage('恭喜你，这是一条成功消息',{type:'success',showClose:true})" yui-button>成功</a>
             <a onclick="yuiMessage('警告哦，这是一条警告消息',{type:'warning',showClose:true})" yui-button>警告</a>

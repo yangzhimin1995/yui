@@ -447,9 +447,9 @@ function yuiMessage(content = '', options = {}) {
     setTimeout(() => {
         yuiFunc_setStyles(messageDom, {top: '0px', opacity: 1})
     });
-    // setTimeout(() => {
-    //     yuiMessage_closed(messageDom)
-    // }, 5000)
+    setTimeout(() => {
+        yuiMessage_closed(messageDom)
+    }, 5000)
 }
 
 function yuiMessage_closed(dom) {
