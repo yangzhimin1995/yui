@@ -443,6 +443,8 @@ function yuiMessage(content = '', options = {}) {
         showClose: false,
         center: false,
         dangerouslyUseHTMLString: false,
+        onClose: function () {
+        },
     });
     let messageBoxDom = document.querySelector('div[yui-message-box]');
     if (!messageBoxDom) {
@@ -478,7 +480,10 @@ function yuiMessage(content = '', options = {}) {
         yuiFunc_setAttributes(closeDom, {'yui-message-close-icon': ''});
         messageDom.appendChild(closeDom);
         closeDom.addEventListener('click', function () {
-            yuiMessage_closed(messageDom)
+            const flag = options['onClose'](messageDom);
+            if (flag !== false) {
+                yuiMessage_closed(messageDom)
+            }
         })
     }
     setTimeout(() => {
