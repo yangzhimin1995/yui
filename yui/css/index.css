@@ -756,3 +756,65 @@ div[yui-message][center] > div[yui-message-content] {
 }
 
 /* ============================= message end ============================= */
+
+
+/* ============================= notify start ============================= */
+
+div[yui-notify-box] {
+    position: fixed;
+    width: 330px;
+    top: 26px;
+    right: 16px;
+    z-index: 2021;
+}
+
+div[yui-notify-box] > div[yui-notify] {
+    display: flex;
+    width: 330px;
+    padding: 14px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ebeef5;
+    background-color: #fff;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    transition: .3s;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 24px;
+    /*left: 330px;*/
+    /*opacity: 0;*/
+}
+
+div[yui-notify] > i[type-icon] {
+    font-size: 24px;
+    padding-right: 14px;
+
+}
+
+div[yui-notify] > div[text] {
+    flex-grow: 1;
+}
+
+div[yui-notify] > div[text] > div[title] {
+    font-weight: 700;
+    font-size: 16px;
+    color: #303133;
+    margin: 0;
+}
+
+div[yui-notify] > div[text] > div[content] {
+    font-size: 14px;
+    line-height: 21px;
+    margin: 6px 0 0;
+    color: #606266;
+    text-align: justify;
+}
+
+div[yui-notify] > i[close-icon] {
+    cursor: pointer;
+    color: #909399;
+    font-size: 16px;
+    padding-left: 14px;
+}
+
+/* ============================= notify end ============================= */

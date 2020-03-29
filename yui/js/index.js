@@ -502,3 +502,12 @@ function yuiMessage_closed(dom) {
 }
 
 /** ================================= message end =================================*/
+
+
+/** ================================= notify start =================================*/
+
+function yuiNotify(title = '提示', content = '', options = {}) {
+    options = yuiFunc_json2Default(options, {});
+}
+
+/** ================================= notify end =================================*/
