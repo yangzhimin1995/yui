@@ -176,6 +176,19 @@ div[yui-badge][type='warning'] sup {
     background-color: #e6a23c;
 }
 
+div[yui-badge][is-dot]:before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #f56c6c;
+    position: absolute;
+    border-radius: 50%;
+    top: -4px;
+    right: -4px;
+    z-index: 1;
+    border: 1px solid #fff;
+}
+
 /* ============================= badge end ============================= */
 
 /* ============================= button start ============================= */
