@@ -27,22 +27,24 @@
             '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案')">
             可自动关闭
         </a>
-        <a yui-button>不会自动关闭</a>
+        <a yui-button onclick="yuiNotify('提示','这是一条不会自动关闭的消息',{duration:0})">不会自动关闭</a>
     </div>
-    <!--    <div yui-notify-box>-->
-    <!--        <div yui-notify>-->
-    <!--            <i type-icon class="iconfont yui-icon-success"></i>-->
-    <!--            <div text>-->
-    <!--                <div title>提示</div>-->
-    <!--                <div content>-->
-    <!--                    这是一条不会自动关闭的消息-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--            <i close-icon class="iconfont yui-icon-closed"></i>-->
-    <!--        </div>-->
-    <!--    </div>-->
+
+    <div class="page-module">
+        <div class="title">
+            带有倾向性
+            <div class="desc">
+                带有 icon，常用来显示「成功、警告、消息、错误」类的系统消息
+            </div>
+        </div>
+        <a yui-button onclick="yuiNotify('消息','这是一条消息的提示消息',{type:'info'})">消息</a>
+        <a yui-button onclick="yuiNotify('成功','这是一条成功的提示消息',{type:'success'})">成功</a>
+        <a yui-button onclick="yuiNotify('警告','这是一条警告的提示消息',{type:'warning'})">警告</a>
+        <a yui-button onclick="yuiNotify('危险','这是一条危险的提示消息',{type:'danger'})">危险</a>
+    </div>
 </div>
 </body>
 <!--必须引入-->
 <!--非必须引入-->
+<script src="../../yui/js/index.js"></script>
 </html>

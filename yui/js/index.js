@@ -512,7 +512,78 @@ function yuiMessage_closed(dom) {
 /** ================================= notify start =================================*/
 
 function yuiNotify(title = '提示', content = '', options = {}) {
-    options = yuiFunc_json2Default(options, {});
+    options = yuiFunc_json2Default(options, {
+        type: null,
+        icon: null,
+        showClose: true,
+        duration: 4500,
+    });
+    let notifyBoxDom = document.querySelector('div[yui-notify-box]');
+    if (!notifyBoxDom) {
+        notifyBoxDom = document.createElement('div');
+        yuiFunc_setAttributes(notifyBoxDom, {'yui-notify-box': ''});
+        document.body.appendChild(notifyBoxDom)
+    }
+
+    let notifyDom = document.createElement('div');
+    let id = 'yui-notify-' + (yuiData_index++);
+    let attrs = {'yui-notify': '', id};
+    if (options['type']) {
+        attrs['type'] = options['type']
+    }
+    yuiFunc_setAttributes(notifyDom, attrs);
+    yuiFunc_setStyles(notifyDom, {zIndex: -yuiData_index});
+
+    notifyBoxDom.appendChild(notifyDom);
+    setTimeout(() => {
+        yuiFunc_setStyles(notifyDom, {'left': '0px', 'opacity': '1'});
+    });
+
+    if (options['icon'] !== null || options['type'] !== null) {
+        let iconDom = document.createElement('i');
+        yuiFunc_setAttributes(iconDom, {'type-icon': ''});
+        const classArray = options['type'] ? ['iconfont', `yui-icon-${options['type']}`] : options['icon'];
+        yuiFunc_setClasses(iconDom, classArray);
+        notifyDom.appendChild(iconDom);
+    }
+
+    let textDom = document.createElement('div');
+    yuiFunc_setAttributes(textDom, {text: ''});
+    notifyDom.appendChild(textDom);
+
+    let titleDom = document.createElement('div');
+    yuiFunc_setAttributes(titleDom, {title: ''});
+    titleDom.innerText = title;
+    textDom.appendChild(titleDom);
+
+    let contentDom = document.createElement('div');
+    yuiFunc_setAttributes(contentDom, {content: ''});
+    contentDom.innerText = content;
+    textDom.appendChild(contentDom);
+
+    if (options['showClose'] !== false) {
+        const closeIconDom = document.createElement('i');
+        yuiFunc_setAttributes(closeIconDom, {'close-icon': ''});
+        yuiFunc_setClasses(closeIconDom, ['iconfont', 'yui-icon-closed']);
+        notifyDom.appendChild(closeIconDom);
+        closeIconDom.addEventListener('click', function () {
+            yuiNotify_closed(notifyDom)
+        })
+    }
+
+    const duration = yuiFunc_param2Number(options['duration'], 4500);
+    if (duration !== 0) {
+        setTimeout(() => {
+            yuiNotify_closed(notifyDom)
+        }, options['duration'])
+    }
+}
+
+function yuiNotify_closed(dom) {
+    yuiFunc_setStyles(dom, {marginTop: -dom.offsetHeight - 24 + 'px', opacity: 0});
+    setTimeout(() => {
+        dom.remove()
+    }, 300)
 }
 
 /** ================================= notify end =================================*/
