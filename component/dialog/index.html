@@ -19,7 +19,7 @@
 
     <div class="page-module">
         <div class="title">
-            <div>基本用法</div>
+            基本用法
             <div class="desc">Dialog 弹出一个对话框，适合需要定制性更大的场景。</div>
         </div>
         <a yui-button type="text" onclick="yuiDialog('my-dialog')">
@@ -42,22 +42,23 @@
 
     <div class="page-module">
         <div class="title">
-            <div>全屏 Dialog</div>
-            <a yui-button type="text" onclick="yuiDialog('fullscreen-dialog')">
-                点击打开Dialog
-            </a>
-            <div fullscreen before-close="handleClose" yui-dialog id="fullscreen-dialog">
-                <div yui-header>
-                    <div class="title">
-                        提示
-                    </div>
-                    <i yui-close-tag class="iconfont yui-icon-closed"></i>
+            全屏 Dialog
+            <div class="desc">Dialog 可以撑满整个屏幕。</div>
+        </div>
+        <a yui-button type="text" onclick="yuiDialog('fullscreen-dialog')">
+            点击打开Dialog
+        </a>
+        <div fullscreen yui-dialog id="fullscreen-dialog">
+            <div yui-header>
+                <div class="title">
+                    提示
                 </div>
-                <div>这是一段信息</div>
-                <div yui-footer>
-                    <a yui-button onclick="yuiDialogClosed('fullscreen-dialog')" type="primary">确定</a>
-                    <a yui-button onclick="yuiDialogClosed('fullscreen-dialog')">取消</a>
-                </div>
+                <i yui-close-tag class="iconfont yui-icon-closed"></i>
+            </div>
+            <div>这是一段信息</div>
+            <div yui-footer>
+                <a yui-button onclick="yuiDialogClosed('fullscreen-dialog')" type="primary">确定</a>
+                <a yui-button onclick="yuiDialogClosed('fullscreen-dialog')">取消</a>
             </div>
         </div>
     </div>

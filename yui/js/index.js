@@ -262,10 +262,14 @@ function yuiDialogClosed(id) {
 }
 
 function yuiDialog(id) {
-    yuiFunc_scrollBarLocked();
     let dom = document.querySelector(`div[yui-dialog][id=${id}]`);
-    let options = yuiFunc_getAttributes(dom, ['top', 'fullscreen', 'modal']);
-    options = yuiFunc_json2Default(options, {top: '15vh', fullscreen: false, modal: true});
+    let options = yuiFunc_getAttributes(dom, ['top', 'fullscreen', 'modal', 'lock-scroll']);
+    options = yuiFunc_json2Default(options, {
+        top: '15vh', fullscreen: false, modal: true, lockScroll: true
+    });
+    if (options['lockScroll'] !== 'false') {
+        yuiFunc_scrollBarLocked();
+    }
     dom.style.visibility = 'visible';
     dom.style.opacity = '1';
     if (options['fullscreen'] !== false) {
