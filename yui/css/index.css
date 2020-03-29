@@ -458,6 +458,15 @@ div[yui-dialog] {
     word-break: break-all;
 }
 
+div[yui-dialog][fullscreen] {
+    width: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 0;
+    box-shadow: 0 1px 3px transparent;
+    height: 0;
+}
+
 div[yui-dialog] > div[yui-header] {
     display: flex;
     align-items: center;
@@ -618,7 +627,7 @@ div[yui-loading-text] {
     color: #409eff;
 }
 
-div[yui-full-screen-loading] {
+div[yui-fullscreen-loading] {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -632,11 +641,11 @@ div[yui-full-screen-loading] {
     transition: .3s;
 }
 
-div[yui-full-screen-loading-tag] {
+div[yui-fullscreen-loading-tag] {
     text-align: center;
 }
 
-div[yui-full-screen-loading-tag] > i {
+div[yui-fullscreen-loading-tag] > i {
     display: inline-block;
     color: #409eff;
     font-size: 18px;

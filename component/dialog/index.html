@@ -39,6 +39,28 @@
             </div>
         </div>
     </div>
+
+    <div class="page-module">
+        <div class="title">
+            <div>全屏 Dialog</div>
+            <a yui-button type="text" onclick="yuiDialog('fullscreen-dialog')">
+                点击打开Dialog
+            </a>
+            <div fullscreen before-close="handleClose" yui-dialog id="fullscreen-dialog">
+                <div yui-header>
+                    <div class="title">
+                        提示
+                    </div>
+                    <i yui-close-tag class="iconfont yui-icon-closed"></i>
+                </div>
+                <div>这是一段信息</div>
+                <div yui-footer>
+                    <a yui-button onclick="yuiDialogClosed('fullscreen-dialog')" type="primary">确定</a>
+                    <a yui-button onclick="yuiDialogClosed('fullscreen-dialog')">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 <!--必须引入-->

@@ -250,23 +250,36 @@ function yuiDialogClosed(id) {
     let modalDom = document.querySelector(`div[yui-modal][id=${id}__dialog-modal]`);
     dom.style.opacity = 0;
     dom.style.top = 0;
-    modalDom.style.opacity = 0;
-    setTimeout(() => {
+    if (modalDom) {
+        modalDom.style.opacity = 0;
+        setTimeout(() => {
+            dom.style.visibility = 'hidden';
+            modalDom.style.visibility = 'hidden';
+        }, 300)
+    } else {
         dom.style.visibility = 'hidden';
-        modalDom.style.visibility = 'hidden';
-    }, 300)
+    }
 }
 
 function yuiDialog(id) {
     yuiFunc_scrollBarLocked();
     let dom = document.querySelector(`div[yui-dialog][id=${id}]`);
-    yuiDialog_showModal(id, dom);
+    let options = yuiFunc_getAttributes(dom, ['top', 'fullscreen', 'modal']);
+    options = yuiFunc_json2Default(options, {top: '15vh', fullscreen: false, modal: true});
     dom.style.visibility = 'visible';
-    dom.style.left = `${(yuiData_clientWidth - dom.offsetWidth) / 2}px`;
-    setTimeout(() => {
-        dom.style.opacity = '1';
-        dom.style.top = '15vh';
-    })
+    dom.style.opacity = '1';
+    if (options['fullscreen'] !== false) {
+        dom.style.height = `100%`;
+    } else {
+        dom.style.left = `${(yuiData_clientWidth - dom.offsetWidth) / 2}px`;
+        setTimeout(() => {
+            dom.style.top = options['top'];
+        });
+        if (options['modal'] !== 'false') {
+            yuiDialog_showModal(id, dom);
+        }
+
+    }
 }
 
 function yuiDialog_showModal(id, dom) {
@@ -344,7 +357,7 @@ function yuiLoadingClosed(id) {
     }
 }
 
-function yuiFullScreenLoading(options = {}) {
+function yuifullscreenLoading(options = {}) {
     options = yuiFunc_json2Default(options, {
         modalColor: 'rgba(255, 255, 255, .8)',
         icon: ['iconfont', 'yui-icon-loading'],
@@ -352,46 +365,46 @@ function yuiFullScreenLoading(options = {}) {
         text: '',
     });
     yuiFunc_scrollBarLocked();
-    let dom = document.querySelector('div[yui-full-screen-loading]');
+    let dom = document.querySelector('div[yui-fullscreen-loading]');
     let loadingTagDom;
     let iconDom;
     if (dom) {
         dom.style.display = 'flex';
-        loadingTagDom = dom.querySelector('div[yui-full-screen-loading-tag]');
+        loadingTagDom = dom.querySelector('div[yui-fullscreen-loading-tag]');
         setTimeout(() => {
             loadingTagDom.style.display = 'block';
             yuiFunc_setStyles(dom, {'background': options['modalColor']});
         });
     } else {
         dom = document.createElement('div');
-        yuiFunc_setAttributes(dom, {'yui-full-screen-loading': ''});
+        yuiFunc_setAttributes(dom, {'yui-fullscreen-loading': ''});
         setTimeout(() => {
             yuiFunc_setStyles(dom, {'background': options['modalColor']});
         });
         loadingTagDom = yuiLoading_createTagDom(options);
-        yuiFunc_setAttributes(loadingTagDom, {'yui-full-screen-loading-tag': ''});
+        yuiFunc_setAttributes(loadingTagDom, {'yui-fullscreen-loading-tag': ''});
         dom.append(loadingTagDom);
         document.body.append(dom);
     }
     iconDom = loadingTagDom.querySelector('i');
     let deg = 1;
-    yuiData_loadingSIJson['yuiFullScreenLoading'] = setInterval(() => {
+    yuiData_loadingSIJson['yuifullscreenLoading'] = setInterval(() => {
         iconDom.style.transform = "rotate(" + deg + "deg)";
         deg++;
     }, 1)
 }
 
-function yuiFullScreenLoadingClosed() {
+function yuifullscreenLoadingClosed() {
     yuiFunc_scrollBarUnlocked();
-    const dom = document.querySelector('div[yui-full-screen-loading]');
-    const loadingTagDom = dom.querySelector('div[yui-full-screen-loading-tag]');
+    const dom = document.querySelector('div[yui-fullscreen-loading]');
+    const loadingTagDom = dom.querySelector('div[yui-fullscreen-loading-tag]');
     if (dom) {
         dom.style.background = 'transparent';
         loadingTagDom.style.display = 'none';
         setTimeout(() => {
             dom.style.display = 'none';
         }, 300);
-        clearInterval(yuiData_loadingSIJson['yuiFullScreenLoading']);
+        clearInterval(yuiData_loadingSIJson['yuifullscreenLoading']);
     }
 }
 
