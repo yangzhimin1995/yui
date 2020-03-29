@@ -21,21 +21,21 @@
         <div class="title">
             <div>基本用法</div>
             <div class="desc">Dialog 弹出一个对话框，适合需要定制性更大的场景。</div>
-            <a yui-button type="text" onclick="yuiDialog('my-dialog')">
-                点击打开Dialog
-            </a>
-            <div style="width: 30%" before-close="handleClose" yui-dialog id="my-dialog">
-                <div yui-header>
-                    <div class="title">
-                        提示
-                    </div>
-                    <i yui-close-tag class="iconfont yui-icon-closed"></i>
+        </div>
+        <a yui-button type="text" onclick="yuiDialog('my-dialog')">
+            点击打开Dialog
+        </a>
+        <div style="width: 30%" before-close="handleClose" yui-dialog id="my-dialog">
+            <div yui-header>
+                <div class="title">
+                    提示
                 </div>
-                <div>这是一段信息</div>
-                <div yui-footer>
-                    <a yui-button onclick="yuiDialogClosed('my-dialog')" type="primary">确定</a>
-                    <a yui-button onclick="yuiDialogClosed('my-dialog')">取消</a>
-                </div>
+                <i yui-close-tag class="iconfont yui-icon-closed"></i>
+            </div>
+            <div>这是一段信息</div>
+            <div yui-footer>
+                <a yui-button onclick="yuiDialogClosed('my-dialog')" type="primary">确定</a>
+                <a yui-button onclick="yuiDialogClosed('my-dialog')">取消</a>
             </div>
         </div>
     </div>
