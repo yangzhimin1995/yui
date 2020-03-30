@@ -942,7 +942,7 @@ a[yui-radio][border][checked] {
 }
 
 a[yui-radio][border]:before {
-    left: 12px;
+    left: 12.5%;
 }
 
 div[yui-radio-group][size='medium'] > a[yui-radio][border] {
