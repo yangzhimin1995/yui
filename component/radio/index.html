@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - Radio 单选框</title>
+    <!--必须引入-->
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <!--非必须引入-->
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        Radio 单选框
+        <div class="desc">在一组备选项中进行单选</div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            单选框组
+            <div class="desc">适用于在多个互斥的选项中选择的场景</div>
+        </div>
+        <div yui-radio-group change="radioChange">
+            <a value="北京" yui-radio checked disabled>北京</a>
+            <a value="上海" yui-radio>上海</a>
+            <a value="厦门" yui-radio>厦门</a>
+            <a value="深圳" yui-radio>深圳</a>
+            <a value="广州" yui-radio>广州</a>
+            <a value="福州" yui-radio>福州</a>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            按钮样式
+            <div class="desc">按钮样式的单选组合。</div>
+        </div>
+        <div class="row">
+            <div yui-radio-group>
+                <a value="北京" yui-radio-button checked disabled>北京</a>
+                <a value="上海" yui-radio-button>上海</a>
+                <a value="厦门" yui-radio-button>厦门</a>
+                <a value="深圳" yui-radio-button>深圳</a>
+                <a value="广州" yui-radio-button>广州</a>
+                <a value="福州" yui-radio-button>福州</a>
+            </div>
+        </div>
+        <div class="row">
+            <div yui-radio-group size="medium">
+                <a value="北京" yui-radio-button checked disabled>北京</a>
+                <a value="上海" yui-radio-button>上海</a>
+                <a value="厦门" yui-radio-button>厦门</a>
+                <a value="深圳" yui-radio-button>深圳</a>
+                <a value="广州" yui-radio-button>广州</a>
+                <a value="福州" yui-radio-button>福州</a>
+            </div>
+        </div>
+        <div class="row">
+            <div yui-radio-group size="small">
+                <a value="北京" yui-radio-button checked disabled>北京</a>
+                <a value="上海" yui-radio-button>上海</a>
+                <a value="厦门" yui-radio-button>厦门</a>
+                <a value="深圳" yui-radio-button>深圳</a>
+                <a value="广州" yui-radio-button>广州</a>
+                <a value="福州" yui-radio-button>福州</a>
+            </div>
+        </div>
+        <div class="row">
+            <div yui-radio-group size="mini">
+                <a value="北京" yui-radio-button checked disabled>北京</a>
+                <a value="上海" yui-radio-button>上海</a>
+                <a value="厦门" yui-radio-button>厦门</a>
+                <a value="深圳" yui-radio-button>深圳</a>
+                <a value="广州" yui-radio-button>广州</a>
+                <a value="福州" yui-radio-button>福州</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!--必须引入-->
+<!--非必须引入-->
+<script src="../../yui/js/index.js"></script>
+<script>
+    function radioChange(value) {
+        if (value === "深圳") {
+            yuiMessage(`拒绝选中 ${value}`, {type: "danger"});
+            return false
+        }
+        yuiMessage(`选中 ${value}`, {type: "success"});
+    }
+</script>
+</html>

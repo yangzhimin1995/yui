@@ -20,6 +20,7 @@ function yuiFunc_init() {
     yuiFunc_getScrollbarWidth();
     yuiAlert_init();
     yuiDialog_init();
+    yuiRadio_init();
 }
 
 /** ================================= 等待dom加载完成 end =================================*/
@@ -135,14 +136,14 @@ function yuiFunc_setAttributes(dom, attributes = {}) {
     })
 }
 
-// /**
-//  * 批量移除属性
-//  */
-// function yuiFunc_removeAttributes(dom, attributes = []) {
-//     attributes.forEach(attribute => {
-//         dom.removeAttribute(attribute)
-//     })
-// }
+/**
+ * 批量移除属性
+ */
+function yuiFunc_removeAttributes(dom, attributes = []) {
+    attributes.forEach(attribute => {
+        dom.removeAttribute(attribute)
+    })
+}
 
 /**
  * 批量获取dom属性
@@ -641,3 +642,46 @@ function yuiNotify_closed(dom) {
 }
 
 /** ================================= notify end =================================*/
+
+
+/** ================================= radio start =================================*/
+
+function yuiRadio_init() {
+    let dom = document.querySelectorAll('div[yui-radio-group]');
+    dom.forEach(groupDom => {
+        let options = yuiFunc_getAttributes(groupDom, ['change']);
+        yuiRadio_handleGroup(groupDom, options['change']);
+    })
+}
+
+function yuiRadio_handleGroup(dom, change) {
+    let radiosDom = dom.querySelectorAll('a[yui-radio]');
+    if (radiosDom.length === 0) {
+        radiosDom = dom.querySelectorAll('a[yui-radio-button]');
+    }
+    radiosDom.forEach(radioDom => {
+        let options = yuiFunc_getAttributes(radioDom, ['disabled', 'value']);
+        if (options['disabled'] === null) {
+            radioDom.addEventListener('click', function () {
+                let flag = true;
+                if (change) {
+                    flag = eval(change + `('${options['value']}')`);
+                }
+                if (flag !== false) {
+                    yuiRadio_changeChecked(radiosDom, radioDom);
+                }
+            })
+        } else {
+            yuiFunc_removeAttributes(radioDom, ['onclick'])
+        }
+    })
+}
+
+function yuiRadio_changeChecked(radiosDom, dom) {
+    radiosDom.forEach(radioDom => {
+        yuiFunc_removeAttributes(radioDom, ['checked'])
+    });
+    yuiFunc_setAttributes(dom, {'checked': ''})
+}
+
+/** ================================= radio end =================================*/
