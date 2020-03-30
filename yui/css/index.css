@@ -692,11 +692,6 @@ div[yui-message-box] > div[yui-message][effect='dark'] {
     color: white;
 }
 
-div[yui-message-box] > div[yui-message][effect='dark'][type='primary'] {
-    background-color: #409eff;
-    border-color: #409eff;
-}
-
 div[yui-message-box] > div[yui-message][effect='dark'][type='success'] {
     background-color: #67c23a;
     border-color: #67c23a;
@@ -712,13 +707,13 @@ div[yui-message-box] > div[yui-message][effect='dark'][type='danger'] {
     border-color: #f56c6c;
 }
 
-div[yui-message] > div[yui-message-content] {
+div[yui-message] > div[body] {
     flex-grow: 1;
     display: flex;
     align-items: center;
 }
 
-div[yui-message] > div[yui-message-content] > [yui-message-type-icon] {
+div[yui-message] > div[body] > [icon] {
     margin-right: 12px;
 }
 
@@ -728,7 +723,7 @@ div[yui-message] > [yui-message-close-icon] {
     font-size: 12px;
 }
 
-div[yui-message][center] > div[yui-message-content] {
+div[yui-message][center] > div[body] {
     justify-content: center;
 }
 
@@ -780,11 +775,11 @@ div[yui-notify][type='danger'] > i[type-icon] {
     color: #f56c6c;
 }
 
-div[yui-notify] > div[text] {
+div[yui-notify] > div[body] {
     flex-grow: 1;
 }
 
-div[yui-notify] > div[text] > div[title] {
+div[yui-notify] > div[body] > div[title] {
     font-weight: 700;
     font-size: 16px;
     color: #303133;
@@ -792,7 +787,7 @@ div[yui-notify] > div[text] > div[title] {
     padding-top: 1px;
 }
 
-div[yui-notify] > div[text] > div[content] {
+div[yui-notify] > div[body] > div[content] {
     font-size: 14px;
     line-height: 21px;
     margin: 6px 0 0;
