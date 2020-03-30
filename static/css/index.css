@@ -200,3 +200,26 @@ div[yui-card].shadow-card {
     color: #666;
     font-size: 14px;
 }
+
+.tooltip-demo {
+    text-align: center;
+}
+
+.tooltip-demo a[yui-button] {
+    margin: 0 10px;
+    width: 120px;
+    height: 50px;
+}
+
+.tooltip-demo.align {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.tooltip-demo.align a[yui-button] {
+    margin: 10px 0;
+    height: 100px;
+    width: auto;
+}

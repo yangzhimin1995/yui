@@ -1085,3 +1085,41 @@ div[yui-tag] > [close-icon] {
 }
 
 /* ============================= tag end ============================= */
+
+
+/* ============================= tooltip start ============================= */
+
+div[yui-tooltip] {
+    position: relative;
+}
+
+div[yui-tooltip] > div[text] {
+    position: absolute;
+    z-index: 1;
+    background: #303133;
+    color: #fff;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 12px;
+    display: block;
+    white-space: nowrap;
+    /*opacity: 0;*/
+    transition: .3s;
+    text-align: left;
+    bottom: calc(100% + 8px);
+    left: 5%;
+}
+
+div[yui-tooltip] > div[text]:before {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-style: solid;
+    border-width: 6px;
+    border-color: #303133 transparent transparent transparent;
+    top: 100%;
+    left: 8px;
+}
+
+/* ============================= tooltip end ============================= */
