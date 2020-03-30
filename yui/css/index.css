@@ -928,4 +928,33 @@ div[yui-radio-group][size='mini'] > a[yui-radio-button] {
     padding: 7px 15px;
 }
 
+a[yui-radio][border] {
+    border-style: solid;
+    border-color: #dcdfe6;
+    border-width: 1px;
+    padding: 12px 20px 12px 34px;
+    border-radius: 4px;
+    position: relative;
+}
+
+a[yui-radio][border][checked] {
+    border-color: #409eff;
+}
+
+a[yui-radio][border]:before {
+    left: 12px;
+}
+
+div[yui-radio-group][size='medium'] > a[yui-radio][border] {
+    padding: 10px 18px 10px 32px;
+}
+
+div[yui-radio-group][size='small'] > a[yui-radio][border] {
+    padding: 9px 15px 9px 29px;
+}
+
+div[yui-radio-group][size='mini'] > a[yui-radio][border] {
+    padding: 7px 15px 7px 29px;
+}
+
 /* ============================= radio end ============================= */
