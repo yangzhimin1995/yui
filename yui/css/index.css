@@ -604,51 +604,28 @@ div[yui-loading-modal] {
     left: 0;
     background: transparent;
     z-index: 0;
+    opacity: 0;
     transition: .3s;
-}
-
-div[yui-loading-tag] {
-    text-align: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
-div[yui-loading-tag] > i {
-    display: inline-block;
-    color: #409eff;
-    font-size: 18px;
-}
-
-div[yui-loading-text] {
-    margin-top: 5px;
-    font-size: 14px;
-    color: #409eff;
-}
-
-div[yui-fullscreen-loading] {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    left: 0;
-    top: 0;
-    z-index: 2020;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: .3s;
+    visibility: hidden;
 }
 
-div[yui-fullscreen-loading-tag] {
+div[yui-loading-modal] > div[content] {
     text-align: center;
-}
-
-div[yui-fullscreen-loading-tag] > i {
-    display: inline-block;
     color: #409eff;
     font-size: 18px;
+    transition: 3s;
+}
+
+div[yui-loading-modal] > div[content] > i[icon] {
+    display: block;
+}
+
+div[yui-loading-modal] > div[content] > div[text] {
+    margin-top: 5px;
+    font-size: 14px;
 }
 
 /* ============================= loading end ============================= */

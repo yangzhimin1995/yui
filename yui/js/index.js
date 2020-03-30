@@ -197,24 +197,25 @@ function yuiAlert_init() {
     dom.forEach(alertDom => {
         const closeDom = alertDom.querySelector('div[yui-close-tag]');
         if (closeDom) {
-            const domRemove = dom => {
-                yuiFunc_setStyles(dom, {opacity: '0'});
-                setTimeout(() => {
-                    dom.remove()
-                }, 200)
-            };
-            const {beforeClose} = yuiFunc_getAttributes(alertDom, ['before-close']);
-            closeDom.addEventListener("click", function () {
-                if (beforeClose) {
-                    let result = eval(`${beforeClose}(alertDom)`);
-                    if (result === false) {
-                        return
-                    }
-                }
-                domRemove(alertDom)
-            });
+            yuiAlert_handleCloseDom(alertDom, closeDom);
         }
     })
+}
+
+function yuiAlert_handleCloseDom(alertDom, closeDom) {
+    const {beforeClose} = yuiFunc_getAttributes(alertDom, ['before-close']);
+    closeDom.addEventListener("click", function () {
+        if (beforeClose) {
+            let result = eval(`${beforeClose}(alertDom)`);
+            if (result === false) {
+                return
+            }
+        }
+        yuiFunc_setStyles(alertDom, {opacity: '0'});
+        setTimeout(() => {
+            alertDom.remove()
+        }, 200)
+    });
 }
 
 /** ================================= alert end =================================*/
@@ -235,32 +236,6 @@ function yuiDialog_init() {
     })
 }
 
-function yuiDialogClosed(id) {
-    yuiFunc_scrollBarUnlocked();
-    let dom = document.querySelector(`div[yui-dialog][id=${id}]`);
-    const {beforeClose} = yuiFunc_getAttributes(dom, ['before-close']);
-    if (beforeClose) {
-        if (beforeClose) {
-            let result = eval(`${beforeClose}(id,dom)`);
-            if (result === false) {
-                return
-            }
-        }
-    }
-    let modalDom = document.querySelector(`div[yui-modal][id=${id}__dialog-modal]`);
-    dom.style.opacity = 0;
-    dom.style.top = 0;
-    if (modalDom) {
-        modalDom.style.opacity = 0;
-        setTimeout(() => {
-            dom.style.visibility = 'hidden';
-            modalDom.style.visibility = 'hidden';
-        }, 300)
-    } else {
-        dom.style.visibility = 'hidden';
-    }
-}
-
 function yuiDialog(id) {
     let dom = document.querySelector(`div[yui-dialog][id=${id}]`);
     let options = yuiFunc_getAttributes(dom, ['top', 'fullscreen', 'modal', 'lock-scroll']);
@@ -272,6 +247,10 @@ function yuiDialog(id) {
     }
     dom.style.visibility = 'visible';
     dom.style.opacity = '1';
+    yuiDialog_handleFullscreen(id, dom, options);
+}
+
+function yuiDialog_handleFullscreen(id, dom, options) {
     if (options['fullscreen'] !== false) {
         dom.style.height = `100%`;
     } else {
@@ -282,28 +261,58 @@ function yuiDialog(id) {
         if (options['modal'] !== 'false') {
             yuiDialog_showModal(id, dom);
         }
-
     }
 }
 
 function yuiDialog_showModal(id, dom) {
     let modalDom = document.querySelector(`div[yui-modal][id=${id}__dialog-modal]`);
+    const {closeOnClickModal} = yuiFunc_getAttributes(dom, ['close-on-click-modal']);
     if (!modalDom) {
-        modalDom = document.createElement('div');
-        yuiFunc_setAttributes(modalDom, {'yui-modal': ''});
-        document.body.appendChild(modalDom);
-        yuiFunc_setAttributes(modalDom, {'yui-modal': '', id: id + '__dialog-modal'});
-        const {closeOnClickModal} = yuiFunc_getAttributes(dom, ['close-on-click-modal']);
-        if (closeOnClickModal !== 'false') {
-            modalDom.addEventListener('click', function () {
-                yuiDialogClosed(id);
-            })
-        }
+        modalDom = yuiDialog_createModal(id, closeOnClickModal);
     }
     modalDom.style.visibility = 'visible';
     setTimeout(() => {
         modalDom.style.opacity = '.5'
     })
+}
+
+function yuiDialog_createModal(id, closeOnClickModal) {
+    let dom = document.createElement('div');
+    yuiFunc_setAttributes(dom, {'yui-modal': ''});
+    document.body.appendChild(dom);
+    yuiFunc_setAttributes(dom, {'yui-modal': '', id: id + '__dialog-modal'});
+    if (closeOnClickModal !== 'false') {
+        dom.addEventListener('click', function () {
+            yuiDialogClosed(id);
+        })
+    }
+    return dom;
+}
+
+function yuiDialogClosed(id) {
+    yuiFunc_scrollBarUnlocked();
+    let dom = document.querySelector(`div[yui-dialog][id=${id}]`);
+    const {beforeClose} = yuiFunc_getAttributes(dom, ['before-close']);
+    if (beforeClose) {
+        let result = eval(`${beforeClose}(id,dom)`);
+        if (result === false) {
+            return
+        }
+    }
+    dom.style.opacity = 0;
+    dom.style.top = 0;
+    dom.style.visibility = 'hidden';
+    yuiDialog_modalClosed(id);
+}
+
+function yuiDialog_modalClosed(id) {
+    let modalDom = document.querySelector(`div[yui-modal][id=${id}__dialog-modal]`);
+    if (modalDom) {
+        modalDom.style.opacity = 0;
+        setTimeout(() => {
+            modalDom.style.visibility = 'hidden';
+        }, 300)
+    }
 }
 
 /** ================================= dialog end =================================*/
@@ -313,120 +322,81 @@ function yuiDialog_showModal(id, dom) {
 
 function yuiLoading(id) {
     const dom = document.querySelector(`div[yui-loading][id=${id}]`);
-    let loadingModalDom = dom.querySelector(`div[id=${id}__loading-modal]`);
-    let loadingTagDom = dom.querySelector(`div[id=${id}__loading-tag]`);
-    let options = yuiFunc_getAttributes(dom, ['modal-color', 'text', 'color', 'icon']);
-    options = yuiFunc_json2Default(options, {
-        modalColor: 'rgba(255, 255, 255, .8)',
-        icon: ['iconfont', 'yui-icon-loading'],
-        color: '#409EFF',
-        text: '',
-    });
-    if (loadingModalDom) {
-        loadingModalDom.style.display = 'block';
-        loadingTagDom.style.display = 'block';
-        yuiFunc_setStyles(loadingModalDom, {'background': options['modalColor']});
-    } else {
-        loadingModalDom = document.createElement('div');
-        yuiFunc_setAttributes(loadingModalDom, {'yui-loading-modal': '', id: id + '__loading-modal'});
-        dom.appendChild(loadingModalDom);
-        setTimeout(() => {
-            yuiFunc_setStyles(loadingModalDom, {'background': options['modalColor']});
+    let modalDom = dom.querySelector(`div[yui-loading-modal]`);
+    if (!modalDom) {
+        let options = yuiFunc_getAttributes(dom, ['text', 'icon', 'background']);
+        options = yuiFunc_json2Default(options, {
+            text: '', icon: ['iconfont', 'yui-icon-loading'], background: 'rgba(255, 255, 255, .8)'
         });
-        loadingTagDom = yuiLoading_createTagDom(options);
-        yuiFunc_setAttributes(loadingTagDom, {'yui-loading-tag': '', id: id + '__loading-tag'});
-        loadingTagDom.style.left = (dom.clientWidth - loadingTagDom.clientWidth) / 2 + 'px';
-        loadingTagDom.style.top = (dom.clientHeight - loadingTagDom.clientHeight) / 2 + 'px';
-        dom.appendChild(loadingTagDom);
+        modalDom = yuiLoading_createModal(id, options);
+        dom.appendChild(modalDom);
     }
-    let iconDom = loadingTagDom.querySelector('i');
+    yuiLoading_showModal(id, modalDom)
+}
+
+function yuiLoading_createModal(id, options) {
+    const dom = document.createElement('div');
+    yuiFunc_setAttributes(dom, {'yui-loading-modal': '', id: id + '__loading-modal'});
+    yuiFunc_setStyles(dom, {'background': options['background']});
+    const contentDom = document.createElement('div');
+    yuiFunc_setAttributes(contentDom, {'content': ''});
+    dom.appendChild(contentDom);
+    const iconDom = document.createElement('i');
+    yuiFunc_setAttributes(iconDom, {'icon': ''});
+    yuiFunc_setClasses(iconDom, options['icon']);
+    contentDom.appendChild(iconDom);
+    if (options['text']) {
+        const textDom = document.createElement('div');
+        textDom.innerText = options['text'];
+        yuiFunc_setAttributes(textDom, {'text': ''});
+        contentDom.appendChild(textDom);
+    }
+    return dom;
+}
+
+function yuiLoading_showModal(id, modalDom) {
+    if (yuiData_loadingSIJson[id]) {
+        return
+    }
+    yuiFunc_setStyles(modalDom, {'visibility': 'visible'});
+    const iconDom = modalDom.querySelector('i[icon]');
     let deg = 1;
     yuiData_loadingSIJson[id] = setInterval(() => {
         iconDom.style.transform = "rotate(" + deg + "deg)";
         deg++;
-    }, 1)
+    }, 1);
+    setTimeout(() => {
+        yuiFunc_setStyles(modalDom, {'opacity': '1'});
+    })
 }
 
 function yuiLoadingClosed(id) {
-    const dom = document.querySelector(`div[yui-loading][id=${id}]`);
-    const loadingModalDom = dom.querySelector(`div[id=${id}__loading-modal]`);
-    const loadingTagDom = dom.querySelector(`div[id=${id}__loading-tag]`);
-    if (loadingModalDom) {
-        loadingTagDom.style.display = 'none';
-        loadingModalDom.style.background = 'transparent';
-        setTimeout(() => {
-            loadingModalDom.style.display = 'none';
-        }, 300);
+    const dom = document.querySelector(`div[id=${id}__loading-modal]`);
+    yuiFunc_setStyles(dom, {'opacity': '0'});
+    setTimeout(() => {
         clearInterval(yuiData_loadingSIJson[id]);
-    }
+        delete yuiData_loadingSIJson[id];
+        yuiFunc_setStyles(dom, {'visibility': 'hidden'});
+    }, 300)
 }
 
-function yuifullscreenLoading(options = {}) {
+function yuiFullscreenLoading(options) {
+    const id = 'yui-fullscreen-loading';
     options = yuiFunc_json2Default(options, {
-        modalColor: 'rgba(255, 255, 255, .8)',
-        icon: ['iconfont', 'yui-icon-loading'],
-        color: '#409EFF',
-        text: '',
+        text: '', icon: ['iconfont', 'yui-icon-loading'], background: 'rgba(255, 255, 255, .8)'
     });
-    yuiFunc_scrollBarLocked();
-    let dom = document.querySelector('div[yui-fullscreen-loading]');
-    let loadingTagDom;
-    let iconDom;
-    if (dom) {
-        dom.style.display = 'flex';
-        loadingTagDom = dom.querySelector('div[yui-fullscreen-loading-tag]');
-        setTimeout(() => {
-            loadingTagDom.style.display = 'block';
-            yuiFunc_setStyles(dom, {'background': options['modalColor']});
-        });
-    } else {
-        dom = document.createElement('div');
-        yuiFunc_setAttributes(dom, {'yui-fullscreen-loading': ''});
-        setTimeout(() => {
-            yuiFunc_setStyles(dom, {'background': options['modalColor']});
-        });
-        loadingTagDom = yuiLoading_createTagDom(options);
-        yuiFunc_setAttributes(loadingTagDom, {'yui-fullscreen-loading-tag': ''});
-        dom.append(loadingTagDom);
-        document.body.append(dom);
+    let dom = document.querySelector(`div[yui-loading-modal][id=${id}__loading-modal]`);
+    debugger
+    if (!dom) {
+        dom = yuiLoading_createModal(id, options);
+        document.body.appendChild(dom);
     }
-    iconDom = loadingTagDom.querySelector('i');
-    let deg = 1;
-    yuiData_loadingSIJson['yuifullscreenLoading'] = setInterval(() => {
-        iconDom.style.transform = "rotate(" + deg + "deg)";
-        deg++;
-    }, 1)
+    yuiLoading_showModal(id, dom)
 }
 
-function yuifullscreenLoadingClosed() {
-    yuiFunc_scrollBarUnlocked();
-    const dom = document.querySelector('div[yui-fullscreen-loading]');
-    const loadingTagDom = dom.querySelector('div[yui-fullscreen-loading-tag]');
-    if (dom) {
-        dom.style.background = 'transparent';
-        loadingTagDom.style.display = 'none';
-        setTimeout(() => {
-            dom.style.display = 'none';
-        }, 300);
-        clearInterval(yuiData_loadingSIJson['yuifullscreenLoading']);
-    }
-}
-
-function yuiLoading_createTagDom(options = {}) {
-    const loadingTagDom = document.createElement('div');
-    const iconDom = document.createElement('i');
-    yuiFunc_setStyles(iconDom, {'color': options['color']});
-    yuiFunc_setClasses(iconDom, options['icon']);
-    loadingTagDom.appendChild(iconDom);
-    let textDom;
-    if (options['text']) {
-        textDom = document.createElement('div');
-        yuiFunc_setAttributes(textDom, {'yui-loading-text': ''});
-        textDom.innerText = options['text'];
-        yuiFunc_setStyles(textDom, {'color': options['color']});
-        loadingTagDom.appendChild(textDom);
-    }
-    return loadingTagDom
+function yuiFullscreenLoadingClosed() {
+    const id = 'yui-fullscreen-loading';
+    yuiLoadingClosed(id)
 }
 
 /** ================================= loading end =================================*/

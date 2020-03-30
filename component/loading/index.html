@@ -38,7 +38,7 @@
             <div>整页加载。</div>
             <div class="desc">页面数据加载时显示</div>
         </div>
-        <a yui-button type="primary" onclick="startfullscreenLoading()">开启全屏加载</a>
+        <a yui-button type="primary" onclick="startFullscreenLoading()">开启全屏加载</a>
     </div>
 </div>
 </body>
@@ -46,10 +46,10 @@
 <!--非必须引入-->
 <script src="../../yui/js/index.js"></script>
 <script>
-    function startfullscreenLoading() {
-        yuifullscreenLoading({text: '3秒后关闭'});
+    function startFullscreenLoading() {
+        yuiFullscreenLoading({text: '3秒后关闭'});
         setTimeout(() => {
-            yuifullscreenLoadingClosed();
+            yuiFullscreenLoadingClosed();
         }, 3000)
     }
 </script>
