@@ -735,8 +735,6 @@ div[yui-message][center] > div[body] {
 div[yui-notify-box] {
     position: fixed;
     width: 330px;
-    top: 26px;
-    right: 16px;
     z-index: 2021;
 }
 
@@ -787,7 +785,7 @@ div[yui-notify] > div[body] > div[title] {
     padding-top: 1px;
 }
 
-div[yui-notify] > div[body] > div[content] {
+div[yui-notify] > div[body] > div[message] {
     font-size: 14px;
     line-height: 21px;
     margin: 6px 0 0;

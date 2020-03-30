@@ -42,6 +42,19 @@
         <a yui-button onclick="yuiNotify('警告','这是一条警告的提示消息',{type:'warning'})">警告</a>
         <a yui-button onclick="yuiNotify('危险','这是一条危险的提示消息',{type:'danger'})">危险</a>
     </div>
+
+    <div class="page-module">
+        <div class="title">
+            自定义弹出位置
+            <div class="desc">
+                可以让 Notification 从屏幕四角中的任意一角弹出
+            </div>
+        </div>
+        <a yui-button onclick="yuiNotify('自定义位置','右上角弹出的消息')">右上角</a>
+        <a yui-button onclick="yuiNotify('自定义位置','右下角弹出的消息',{position:'bottom-right'})">右下角</a>
+        <a yui-button onclick="yuiNotify('自定义位置','左下角弹出的消息',{position:'bottom-left'})">左下角</a>
+        <a yui-button onclick="yuiNotify('自定义位置','左上角弹出的消息',{position:'top-left'})">左上角</a>
+    </div>
 </div>
 </body>
 <!--必须引入-->

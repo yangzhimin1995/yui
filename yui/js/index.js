@@ -502,11 +502,62 @@ function yuiMessage_closed(dom) {
 
 /** ================================= notify start =================================*/
 
-function yuiNotify_createBoxDom() {
-    let dom = document.querySelector('div[yui-notify-box]');
+function yuiNotify(title = '提示', message = '', options = {}) {
+    options = yuiFunc_json2Default(options, {
+        type: null,
+        icon: null,
+        showClose: true,
+        duration: 4500,
+        position: 'top-right'
+    });
+    const notifyBoxDom = yuiNotify_createBoxDom(options['position']);
+    const notifyDom = yuiNotify_createDom(options);
+    yuiNotify_insert2BoxDom(notifyBoxDom, notifyDom, options['position']);
+    yuiNotify_createIconDom(notifyDom, options);
+    yuiNotify_createBodyDom(title, message, notifyDom, options);
+    yuiNotify_handleShowClose(notifyDom, options);
+    yuiNotify_handleDuration(notifyDom, options);
+    setTimeout(() => {
+        yuiFunc_setStyles(notifyDom, {'left': '0px', 'opacity': '1'});
+    }, 10);
+}
+
+function yuiNotify_insert2BoxDom(notifyBoxDom, notifyDom, position) {
+    switch (position) {
+        case 'bottom-right':
+            notifyBoxDom.insertBefore(notifyDom, notifyBoxDom.childNodes[0]);
+            break;
+        case 'bottom-left':
+            notifyBoxDom.insertBefore(notifyDom, notifyBoxDom.childNodes[0]);
+            break;
+        case 'top-left':
+            notifyBoxDom.appendChild(notifyDom);
+            break;
+        default:
+            notifyBoxDom.appendChild(notifyDom);
+            break
+    }
+}
+
+function yuiNotify_createBoxDom(position) {
+    let dom = document.querySelector(`div[yui-notify-box][position=${position}]`);
     if (!dom) {
         dom = document.createElement('div');
-        yuiFunc_setAttributes(dom, {'yui-notify-box': ''});
+        yuiFunc_setAttributes(dom, {'yui-notify-box': '', position});
+        switch (position) {
+            case 'bottom-right':
+                yuiFunc_setStyles(dom, {bottom: '26px', right: '16px'});
+                break;
+            case 'bottom-left':
+                yuiFunc_setStyles(dom, {bottom: '26px', left: '16px'});
+                break;
+            case 'top-left':
+                yuiFunc_setStyles(dom, {top: '26px', left: '16px'});
+                break;
+            default:
+                yuiFunc_setStyles(dom, {top: '26px', right: '16px'});
+                break
+        }
         document.body.appendChild(dom)
     }
     return dom
@@ -521,6 +572,14 @@ function yuiNotify_createDom(options) {
     }
     yuiFunc_setAttributes(dom, attrs);
     yuiFunc_setStyles(dom, {zIndex: -yuiData_index});
+    switch (options['position']) {
+        case 'bottom-left':
+            yuiFunc_setStyles(dom, {left: '-330px'});
+            break;
+        case 'top-left':
+            yuiFunc_setStyles(dom, {left: '-330px'});
+            break;
+    }
     return dom
 }
 
@@ -534,7 +593,7 @@ function yuiNotify_createIconDom(notifyDom, options) {
     }
 }
 
-function yuiNotify_createBodyDom(title, content, notifyDom) {
+function yuiNotify_createBodyDom(title, message, notifyDom) {
     let textDom = document.createElement('div');
     yuiFunc_setAttributes(textDom, {body: ''});
     notifyDom.appendChild(textDom);
@@ -542,29 +601,10 @@ function yuiNotify_createBodyDom(title, content, notifyDom) {
     yuiFunc_setAttributes(titleDom, {title: ''});
     titleDom.innerText = title;
     textDom.appendChild(titleDom);
-    let contentDom = document.createElement('div');
-    yuiFunc_setAttributes(contentDom, {content: ''});
-    contentDom.innerText = content;
-    textDom.appendChild(contentDom);
-}
-
-function yuiNotify(title = '提示', content = '', options = {}) {
-    options = yuiFunc_json2Default(options, {
-        type: null,
-        icon: null,
-        showClose: true,
-        duration: 4500,
-    });
-    const notifyBoxDom = yuiNotify_createBoxDom();
-    const notifyDom = yuiNotify_createDom(options);
-    notifyBoxDom.appendChild(notifyDom);
-    setTimeout(() => {
-        yuiFunc_setStyles(notifyDom, {'left': '0px', 'opacity': '1'});
-    });
-    yuiNotify_createIconDom(notifyDom, options);
-    yuiNotify_createBodyDom(title, content, notifyDom, options);
-    yuiNotify_handleShowClose(notifyDom, options);
-    yuiNotify_handleDuration(notifyDom, options);
+    let messageDom = document.createElement('div');
+    yuiFunc_setAttributes(messageDom, {message: ''});
+    messageDom.innerText = message;
+    textDom.appendChild(messageDom);
 }
 
 function yuiNotify_handleDuration(notifyDom, options) {
