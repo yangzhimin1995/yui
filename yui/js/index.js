@@ -409,19 +409,29 @@ function yuiMessage(content = '', options = {}) {
         type: 'info',
         effect: 'light',
         icon: ['iconfont', 'yui-icon-info'],
-        duration: 5000,
+        duration: 3000,
         showClose: false,
         center: false,
         dangerouslyUseHTMLString: false,
         onClose: function () {
         },
     });
-    let messageBoxDom = document.querySelector('div[yui-message-box]');
-    if (!messageBoxDom) {
-        messageBoxDom = document.createElement('div');
-        yuiFunc_setAttributes(messageBoxDom, {'yui-message-box': ''});
-        document.body.appendChild(messageBoxDom)
+    const messageBoxDom = yuiMessage_createBox();
+    const messageDom = yuiMessage_create(content, options);
+    messageBoxDom.appendChild(messageDom);
+}
+
+function yuiMessage_createBox() {
+    let dom = document.querySelector('div[yui-message-box]');
+    if (!dom) {
+        dom = document.createElement('div');
+        yuiFunc_setAttributes(dom, {'yui-message-box': ''});
+        document.body.appendChild(dom)
     }
+    return dom
+}
+
+function yuiMessage_create(content, options) {
     let messageDom = document.createElement('div');
     const id = 'yui-message-' + (yuiData_index++);
     let messageAttrs = {'yui-message': '', id, type: options['type'], effect: options['effect']};
@@ -429,21 +439,44 @@ function yuiMessage(content = '', options = {}) {
         messageAttrs['center'] = ''
     }
     yuiFunc_setAttributes(messageDom, messageAttrs);
-    messageBoxDom.appendChild(messageDom);
-    const contentDom = document.createElement('div');
-    yuiFunc_setAttributes(contentDom, {'yui-message-content': ''});
+    const contentDom = yuiMessage_createContent(content, options);
+    messageDom.appendChild(contentDom);
+    yuiMessage_handleCloseIcon(messageDom, options);
+    yuiMessage_handleDuration(messageDom, options);
+    setTimeout(() => {
+        yuiFunc_setStyles(messageDom, {top: '0px', opacity: 1})
+    });
+    return messageDom
+}
+
+function yuiMessage_handleDuration(messageDom, options) {
+    let duration = options.duration;
+    duration = yuiFunc_param2Number(duration, 5000);
+    if (duration !== 0) {
+        setTimeout(() => {
+            yuiMessage_closed(messageDom)
+        }, duration)
+    }
+}
+
+function yuiMessage_createContent(content, options) {
+    const dom = document.createElement('div');
+    yuiFunc_setAttributes(dom, {'yui-message-content': ''});
     const iconDom = document.createElement('i');
     yuiFunc_setClasses(iconDom, ['iconfont', `yui-icon-${options['type']}`]);
     yuiFunc_setAttributes(iconDom, {'yui-message-type-icon': ''});
-    contentDom.appendChild(iconDom);
+    dom.appendChild(iconDom);
     const textDom = document.createElement('span');
     if (options.dangerouslyUseHTMLString === true) {
         textDom.innerHTML = content;
     } else {
         textDom.innerText = content;
     }
-    contentDom.appendChild(textDom);
-    messageDom.appendChild(contentDom);
+    dom.appendChild(textDom);
+    return dom
+}
+
+function yuiMessage_handleCloseIcon(messageDom, options) {
     if (options['showClose'] === true) {
         const closeDom = document.createElement('i');
         yuiFunc_setClasses(closeDom, ['iconfont', 'yui-icon-closed']);
@@ -456,17 +489,6 @@ function yuiMessage(content = '', options = {}) {
             }
         })
     }
-    setTimeout(() => {
-        yuiFunc_setStyles(messageDom, {top: '0px', opacity: 1})
-    });
-    let duration = options.duration;
-    duration = yuiFunc_param2Number(duration, 5000);
-    if (duration !== 0) {
-        setTimeout(() => {
-            yuiMessage_closed(messageDom)
-        }, duration)
-    }
-
 }
 
 function yuiMessage_closed(dom) {
@@ -481,34 +503,29 @@ function yuiMessage_closed(dom) {
 
 /** ================================= notify start =================================*/
 
-function yuiNotify(title = '提示', content = '', options = {}) {
-    options = yuiFunc_json2Default(options, {
-        type: null,
-        icon: null,
-        showClose: true,
-        duration: 4500,
-    });
-    let notifyBoxDom = document.querySelector('div[yui-notify-box]');
-    if (!notifyBoxDom) {
-        notifyBoxDom = document.createElement('div');
-        yuiFunc_setAttributes(notifyBoxDom, {'yui-notify-box': ''});
-        document.body.appendChild(notifyBoxDom)
+function yuiNotify_createBoxDom() {
+    let dom = document.querySelector('div[yui-notify-box]');
+    if (!dom) {
+        dom = document.createElement('div');
+        yuiFunc_setAttributes(dom, {'yui-notify-box': ''});
+        document.body.appendChild(dom)
     }
+    return dom
+}
 
-    let notifyDom = document.createElement('div');
+function yuiNotify_createDom(options) {
+    let dom = document.createElement('div');
     let id = 'yui-notify-' + (yuiData_index++);
     let attrs = {'yui-notify': '', id};
     if (options['type']) {
         attrs['type'] = options['type']
     }
-    yuiFunc_setAttributes(notifyDom, attrs);
-    yuiFunc_setStyles(notifyDom, {zIndex: -yuiData_index});
+    yuiFunc_setAttributes(dom, attrs);
+    yuiFunc_setStyles(dom, {zIndex: -yuiData_index});
+    return dom
+}
 
-    notifyBoxDom.appendChild(notifyDom);
-    setTimeout(() => {
-        yuiFunc_setStyles(notifyDom, {'left': '0px', 'opacity': '1'});
-    });
-
+function yuiNotify_createIconDom(notifyDom, options) {
     if (options['icon'] !== null || options['type'] !== null) {
         let iconDom = document.createElement('i');
         yuiFunc_setAttributes(iconDom, {'type-icon': ''});
@@ -516,21 +533,51 @@ function yuiNotify(title = '提示', content = '', options = {}) {
         yuiFunc_setClasses(iconDom, classArray);
         notifyDom.appendChild(iconDom);
     }
+}
 
+function yuiNotify_createTextDom(title, content, notifyDom) {
     let textDom = document.createElement('div');
     yuiFunc_setAttributes(textDom, {text: ''});
     notifyDom.appendChild(textDom);
-
     let titleDom = document.createElement('div');
     yuiFunc_setAttributes(titleDom, {title: ''});
     titleDom.innerText = title;
     textDom.appendChild(titleDom);
-
     let contentDom = document.createElement('div');
     yuiFunc_setAttributes(contentDom, {content: ''});
     contentDom.innerText = content;
     textDom.appendChild(contentDom);
+}
 
+function yuiNotify(title = '提示', content = '', options = {}) {
+    options = yuiFunc_json2Default(options, {
+        type: null,
+        icon: null,
+        showClose: true,
+        duration: 4500,
+    });
+    const notifyBoxDom = yuiNotify_createBoxDom();
+    const notifyDom = yuiNotify_createDom(options);
+    notifyBoxDom.appendChild(notifyDom);
+    setTimeout(() => {
+        yuiFunc_setStyles(notifyDom, {'left': '0px', 'opacity': '1'});
+    });
+    yuiNotify_createIconDom(notifyDom, options);
+    yuiNotify_createTextDom(title, content, notifyDom, options);
+    yuiNotify_handleShowClose(notifyDom, options);
+    yuiNotify_handleDuration(notifyDom, options);
+}
+
+function yuiNotify_handleDuration(notifyDom, options) {
+    const duration = yuiFunc_param2Number(options['duration'], 4500);
+    if (duration !== 0) {
+        setTimeout(() => {
+            yuiNotify_closed(notifyDom)
+        }, duration)
+    }
+}
+
+function yuiNotify_handleShowClose(notifyDom, options) {
     if (options['showClose'] !== false) {
         const closeIconDom = document.createElement('i');
         yuiFunc_setAttributes(closeIconDom, {'close-icon': ''});
@@ -539,13 +586,6 @@ function yuiNotify(title = '提示', content = '', options = {}) {
         closeIconDom.addEventListener('click', function () {
             yuiNotify_closed(notifyDom)
         })
-    }
-
-    const duration = yuiFunc_param2Number(options['duration'], 4500);
-    if (duration !== 0) {
-        setTimeout(() => {
-            yuiNotify_closed(notifyDom)
-        }, options['duration'])
     }
 }
 
