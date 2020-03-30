@@ -39,13 +39,14 @@ body {
     font-weight: 400;
     color: #1f2f3d;
     font-size: 18px;
+    padding-bottom: 16px;
 }
 
 .page-module > .title > .desc {
     font-size: 15px;
     color: #5e6d82;
     line-height: 26px;
-    padding: 8px 0 16px 0;
+    padding-top: 8px;
 }
 
 .page-module .row {

@@ -21,6 +21,7 @@ function yuiFunc_init() {
     yuiAlert_init();
     yuiDialog_init();
     yuiRadio_init();
+    yuiTag_init();
 }
 
 /** ================================= 等待dom加载完成 end =================================*/
@@ -168,16 +169,16 @@ function yuiFunc_setClasses(dom, classes = []) {
     })
 }
 
-// /**
-//  * 批量增加class
-//  */
-// function yuiFunc_removeClasses(dom, classes = []) {
-//     classes.forEach(item => {
-//         if (item) {
-//             dom.classList.remove(item)
-//         }
-//     })
-// }
+/**
+ * 批量移除class
+ */
+function yuiFunc_removeClasses(dom, classes = []) {
+    classes.forEach(item => {
+        if (item) {
+            dom.classList.remove(item)
+        }
+    })
+}
 
 /**
  * 批量增加style
@@ -685,3 +686,39 @@ function yuiRadio_changeChecked(radiosDom, dom) {
 }
 
 /** ================================= radio end =================================*/
+
+
+/** ================================= tag start =================================*/
+
+function yuiTag_init() {
+    let dom = document.querySelectorAll('div[yui-tag]');
+    dom.forEach(tagDom => {
+        const options = yuiFunc_getAttributes(tagDom, ['closable']);
+        if (options['closable'] !== null) {
+            const closeIconDom = document.createElement('i');
+            yuiFunc_setAttributes(closeIconDom, {'close-icon': ''});
+            yuiFunc_setClasses(closeIconDom, ['iconfont', 'yui-icon-closed']);
+            tagDom.appendChild(closeIconDom);
+            yuiTag_handleEvent(tagDom, closeIconDom)
+        }
+    })
+}
+
+function yuiTag_handleEvent(tagDom, closeIconDom) {
+    closeIconDom.addEventListener('mouseenter', function () {
+        yuiFunc_removeClasses(closeIconDom, ['yui-icon-closed']);
+        yuiFunc_setClasses(closeIconDom, ['yui-icon-danger'])
+    });
+    closeIconDom.addEventListener('mouseleave', function () {
+        yuiFunc_removeClasses(closeIconDom, ['yui-icon-danger']);
+        yuiFunc_setClasses(closeIconDom, ['yui-icon-closed'])
+    });
+    closeIconDom.addEventListener('click', function () {
+        yuiFunc_setStyles(tagDom, {'transform': 'rotateY(90deg)'});
+        setTimeout(() => {
+            tagDom.remove();
+        }, 300)
+    })
+}
+
+/** ================================= tag end =================================*/

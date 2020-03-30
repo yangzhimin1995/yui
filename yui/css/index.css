@@ -958,3 +958,130 @@ div[yui-radio-group][size='mini'] > a[yui-radio][border] {
 }
 
 /* ============================= radio end ============================= */
+
+
+/* ============================= tag start ============================= */
+
+div[yui-tag] {
+    background-color: #ecf5ff;
+    display: inline-flex;
+    padding: 0 10px;
+    line-height: 30px;
+    font-size: 12px;
+    color: #409eff;
+    border: 1px solid #d9ecff;
+    border-radius: 4px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    justify-content: center;
+    align-items: center;
+    cursor: text;
+    transition: .3s;
+    transform: rotateY(0deg);
+}
+
+div[yui-tag][type=info] {
+    background-color: #f4f4f5;
+    border-color: #e9e9eb;
+    color: #909399;
+}
+
+div[yui-tag][type=success] {
+    background-color: #f0f9eb;
+    border-color: #e1f3d8;
+    color: #67C23A;
+}
+
+div[yui-tag][type=warning] {
+    background-color: #fdf6ec;
+    border-color: #faecd8;
+    color: #e6a23c;
+}
+
+div[yui-tag][type=danger] {
+    background-color: #fef0f0;
+    border-color: #fde2e2;
+    color: #f56c6c;
+}
+
+div[yui-tag][effect="dark"] {
+    background-color: #409eff;
+    color: #fff;
+    border-color: #409eff;
+}
+
+div[yui-tag][type=info][effect="dark"] {
+    background-color: #909399;
+    border-color: #909399;
+    color: white;
+}
+
+div[yui-tag][type=success][effect="dark"] {
+    background-color: #67C23A;
+    border-color: #67C23A;
+    color: white;
+}
+
+div[yui-tag][type=warning][effect="dark"] {
+    background-color: #e6a23c;
+    border-color: #e6a23c;
+    color: white;
+}
+
+div[yui-tag][type=danger][effect="dark"] {
+    background-color: #f56c6c;
+    border-color: #f56c6c;
+    color: white;
+}
+
+div[yui-tag][effect="plain"] {
+    background-color: #fff;
+    border-color: #b3d8ff;
+    color: #409eff;
+}
+
+div[yui-tag][type=info][effect="plain"] {
+    background-color: #fff;
+    border-color: #d3d4d6;
+    color: #909399;
+}
+
+div[yui-tag][type=success][effect="plain"] {
+    background-color: #fff;
+    border-color: #c2e7b0;
+    color: #67c23a;
+}
+
+div[yui-tag][type=warning][effect="plain"] {
+    background-color: #fff;
+    border-color: #f5dab1;
+    color: #e6a23c;
+}
+
+div[yui-tag][type=danger][effect="plain"] {
+    background-color: #fff;
+    border-color: #fbc4c4;
+    color: #f56c6c;
+}
+
+div[yui-tag][size='medium'] {
+    line-height: 26px;
+}
+
+div[yui-tag][size=small] {
+    padding: 0 8px;
+    line-height: 22px;
+}
+
+div[yui-tag][size=mini] {
+    padding: 0 5px;
+    line-height: 19px;
+}
+
+div[yui-tag] > [close-icon] {
+    font-size: 12px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+/* ============================= tag end ============================= */
