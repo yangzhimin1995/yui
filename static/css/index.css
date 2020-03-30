@@ -74,7 +74,7 @@ div[yui-badge] {
     margin: 0 16px;
 }
 
-div[yui-card] > div[yui-body] > div {
+div[yui-card] > div[body] > div {
     margin-bottom: 18px;
 }
 
