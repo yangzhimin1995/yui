@@ -55,6 +55,29 @@
         <a yui-button onclick="yuiNotify('自定义位置','左下角弹出的消息',{position:'bottom-left'})">左下角</a>
         <a yui-button onclick="yuiNotify('自定义位置','左上角弹出的消息',{position:'top-left'})">左上角</a>
     </div>
+
+    <div class="page-module">
+        <div class="title">
+            使用 HTML 片段
+            <div class="desc">
+                message 属性支持传入 HTML 片段
+            </div>
+        </div>
+        <a yui-button onclick="yuiNotify('HTML 片段',
+        '<strong>这是 <i>HTML</i> 片段</strong>',{dangerouslyUseHTMLString:true})">
+            使用 HTML 片段
+        </a>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            隐藏关闭按钮
+            <div class="desc">可以不显示关闭按钮</div>
+        </div>
+        <a yui-button onclick="yuiNotify('Info','这是一条没有关闭按钮的消息',{showClose:false,type:'success'})">
+            隐藏关闭按钮
+        </a>
+    </div>
 </div>
 </body>
 <!--必须引入-->

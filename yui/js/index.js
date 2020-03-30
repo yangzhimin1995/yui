@@ -508,7 +508,8 @@ function yuiNotify(title = '提示', message = '', options = {}) {
         icon: null,
         showClose: true,
         duration: 4500,
-        position: 'top-right'
+        position: 'top-right',
+        dangerouslyUseHTMLString: false
     });
     const notifyBoxDom = yuiNotify_createBoxDom(options['position']);
     const notifyDom = yuiNotify_createDom(options);
@@ -593,7 +594,7 @@ function yuiNotify_createIconDom(notifyDom, options) {
     }
 }
 
-function yuiNotify_createBodyDom(title, message, notifyDom) {
+function yuiNotify_createBodyDom(title, message, notifyDom, options) {
     let textDom = document.createElement('div');
     yuiFunc_setAttributes(textDom, {body: ''});
     notifyDom.appendChild(textDom);
@@ -603,7 +604,11 @@ function yuiNotify_createBodyDom(title, message, notifyDom) {
     textDom.appendChild(titleDom);
     let messageDom = document.createElement('div');
     yuiFunc_setAttributes(messageDom, {message: ''});
-    messageDom.innerText = message;
+    if (options['dangerouslyUseHTMLString'] === true) {
+        messageDom.innerHTML = message;
+    } else {
+        messageDom.innerText = message;
+    }
     textDom.appendChild(messageDom);
 }
 
