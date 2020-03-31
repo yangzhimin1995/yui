@@ -22,6 +22,7 @@ function yuiFunc_init() {
     yuiDialog_init();
     yuiRadio_init();
     yuiTag_init();
+    yuiTooltip_init();
 }
 
 /** ================================= 等待dom加载完成 end =================================*/
@@ -184,6 +185,9 @@ function yuiFunc_removeClasses(dom, classes = []) {
  * 批量增加style
  */
 function yuiFunc_setStyles(dom, styles = {}) {
+    if (!styles) {
+        return
+    }
     Object.keys(styles).forEach(key => {
         dom.style[key] = styles[key]
     })
@@ -722,3 +726,52 @@ function yuiTag_handleEvent(tagDom, closeIconDom) {
 }
 
 /** ================================= tag end =================================*/
+
+
+/** ================================= tooltip start =================================*/
+
+function yuiTooltip_init() {
+    const dom = document.querySelectorAll('div[yui-tooltip]');
+    const placementArray = ['top-start', 'top', 'top-end', 'left-start', 'left', 'left-end',
+        'right-start', 'right', 'right-end', 'bottom-start', 'bottom', 'bottom-end'];
+    dom.forEach(tooltipDom => {
+        let {placement, effect} = yuiFunc_getAttributes(tooltipDom, ['placement', 'effect']);
+        if (placementArray.indexOf(placement) === -1) {
+            placement = 'bottom';
+            yuiFunc_setAttributes(tooltipDom, {placement})
+        }
+        const pointDom = document.createElement('div');
+        yuiFunc_setAttributes(pointDom, {'point': ''});
+        tooltipDom.appendChild(pointDom);
+        yuiTooltip_handleCenter(tooltipDom, pointDom, placement);
+        yuiTooltip_handlePointDom(pointDom, placement);
+    })
+}
+
+function yuiTooltip_handlePointDom(pointDom, placement) {
+    const firstPlacement = placement.split('-')[0];
+    let style = {};
+    let key = firstPlacement.replace(firstPlacement[0], firstPlacement[0].toUpperCase());
+    key = 'border' + key + 'Color';
+    style[key] = '#303133';
+    yuiFunc_setStyles(pointDom, style)
+}
+
+function yuiTooltip_handleCenter(tooltipDom, pointDom, placement) {
+    if (placement.indexOf('-') === -1) {
+        let pointDomStyle;
+        let textDomStyle;
+        const textDom = tooltipDom.querySelector('div[text]');
+        if (placement === 'top' || placement === 'bottom') {
+            pointDomStyle = {left: `${(tooltipDom.clientWidth) / 2 - 6}px`};
+            textDomStyle = {left: `${(tooltipDom.clientWidth - textDom.clientWidth) / 2}px`};
+        } else {
+            pointDomStyle = {top: `${(tooltipDom.clientHeight) / 2 - 6}px`};
+            textDomStyle = {top: `${(tooltipDom.clientHeight - textDom.clientHeight) / 2}px`};
+        }
+        yuiFunc_setStyles(pointDom, pointDomStyle);
+        yuiFunc_setStyles(textDom, textDomStyle);
+    }
+}
+
+/** ================================= tooltip end =================================*/

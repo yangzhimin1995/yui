@@ -1091,6 +1091,7 @@ div[yui-tag] > [close-icon] {
 
 div[yui-tooltip] {
     position: relative;
+    display: inline-block;
 }
 
 div[yui-tooltip] > div[text] {
@@ -1103,23 +1104,143 @@ div[yui-tooltip] > div[text] {
     font-size: 12px;
     display: block;
     white-space: nowrap;
-    /*opacity: 0;*/
+    opacity: 0;
     transition: .3s;
     text-align: left;
-    bottom: calc(100% + 8px);
-    left: 5%;
 }
 
-div[yui-tooltip] > div[text]:before {
-    content: '';
+div[yui-tooltip] > div[point] {
     width: 0;
     height: 0;
     position: absolute;
     border-style: solid;
     border-width: 6px;
-    border-color: #303133 transparent transparent transparent;
-    top: 100%;
-    left: 8px;
+    border-color: transparent;
+    opacity: 0;
+    transition: .3s;
+    z-index: 1;
+}
+
+div[yui-tooltip][effect='light'] > div[text] {
+    border: 1px solid #303133;
+    background-color: #fff;
+    color: #303133;
+}
+
+div[yui-tooltip][placement='top-start'] > div[text] {
+    left: 0;
+    bottom: calc(100% + 8px);
+}
+
+div[yui-tooltip][placement='top-start'] > div[point] {
+    left: 6px;
+    top: -8px;
+}
+
+div[yui-tooltip][placement='top'] > div[text] {
+    bottom: calc(100% + 8px);
+}
+
+div[yui-tooltip][placement='top'] > div[point] {
+    top: -8px;
+}
+
+div[yui-tooltip][placement='top-end'] > div[text] {
+    bottom: calc(100% + 8px);
+}
+
+div[yui-tooltip][placement='top-end'] > div[point] {
+    right: 6px;
+    top: -8px;
+}
+
+div[yui-tooltip][placement='left-start'] > div[text] {
+    right: calc(100% + 8px);
+}
+
+div[yui-tooltip][placement='left-start'] > div[point] {
+    left: -8px;
+    top: 6px;
+}
+
+div[yui-tooltip][placement='left'] > div[text] {
+    right: calc(100% + 8px);
+}
+
+div[yui-tooltip][placement='left'] > div[point] {
+    left: -8px;
+}
+
+div[yui-tooltip][placement='left-end'] > div[text] {
+    right: calc(100% + 8px);
+    bottom: 0
+}
+
+div[yui-tooltip][placement='left-end'] > div[point] {
+    left: -8px;
+    bottom: 6px;
+}
+
+div[yui-tooltip][placement='right-start'] > div[text] {
+    left: calc(100% + 8px);
+}
+
+div[yui-tooltip][placement='right-start'] > div[point] {
+    right: -8px;
+    top: 6px;
+}
+
+div[yui-tooltip][placement='right'] > div[text] {
+    left: calc(100% + 8px);
+}
+
+div[yui-tooltip][placement='right'] > div[point] {
+    right: -8px;
+}
+
+div[yui-tooltip][placement='right-end'] > div[text] {
+    left: calc(100% + 8px);
+    bottom: 0
+}
+
+div[yui-tooltip][placement='right-end'] > div[point] {
+    right: -8px;
+    bottom: 6px;
+}
+
+div[yui-tooltip][placement='bottom-start'] > div[text] {
+    top: calc(100% + 8px);
+}
+
+div[yui-tooltip][placement='bottom-start'] > div[point] {
+    left: 6px;
+    bottom: -8px;
+}
+
+div[yui-tooltip][placement='bottom'] > div[text] {
+    top: calc(100% + 8px);
+}
+
+div[yui-tooltip][placement='bottom'] > div[point] {
+    bottom: -8px;
+}
+
+div[yui-tooltip][placement='bottom-end'] > div[text] {
+    right: 0;
+    top: calc(100% + 8px);
+}
+
+div[yui-tooltip][placement='bottom-end'] > div[point] {
+    right: 6px;
+    bottom: -8px;
+}
+
+div[yui-tooltip]:hover > div[text] {
+    opacity: 1;
+}
+
+div[yui-tooltip]:hover > div[point] {
+    opacity: 1;
 }
 
 /* ============================= tooltip end ============================= */
