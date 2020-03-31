@@ -19,6 +19,7 @@ if (document.readyState !== 'loading') {
 function yuiFunc_init() {
     yuiFunc_getScrollbarWidth();
     yuiAlert_init();
+    yuiCheckbox_init();
     yuiDialog_init();
     yuiRadio_init();
     yuiTag_init();
@@ -225,6 +226,35 @@ function yuiAlert_handleClose(alertDom, closeDom) {
 }
 
 /** ================================= alert end =================================*/
+
+
+/** ================================= checkbox start =================================*/
+
+function yuiCheckbox_init() {
+    const dom = document.querySelectorAll('div[yui-checkbox-group]');
+    dom.forEach(groupDom => {
+        const checkboxesDom = groupDom.querySelectorAll('a[yui-checkbox]');
+        yuiCheckbox_handleGroupDom(checkboxesDom)
+    })
+}
+
+function yuiCheckbox_handleGroupDom(dom) {
+    dom.forEach(checkboxDom => {
+        const boxDom = document.createElement('div');
+        yuiFunc_setAttributes(boxDom, {'box': ''});
+        checkboxDom.insertBefore(boxDom, checkboxDom.firstChild);
+        checkboxDom.addEventListener('click', function () {
+            const {checked} = yuiFunc_getAttributes(checkboxDom, ['checked']);
+            if (checked === null) {
+                yuiFunc_setAttributes(checkboxDom, {'checked': ''})
+            } else {
+                yuiFunc_removeAttributes(checkboxDom, ['checked'])
+            }
+        })
+    })
+}
+
+/** ================================= checkbox end =================================*/
 
 
 /** ================================= dialog end =================================*/
