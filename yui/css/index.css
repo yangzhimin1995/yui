@@ -477,10 +477,6 @@ a[yui-checkbox] > div[box] {
     margin: 0 6px;
 }
 
-div[yui-checkbox-group] > a[yui-checkbox]:hover {
-    color: #409eff;
-}
-
 a[yui-checkbox]:hover > div[box] {
     border-color: #409eff;
 }
@@ -508,6 +504,21 @@ a[yui-checkbox][checked] > div[box]:after {
     width: 3px;
     transition: transform .15s ease-in .05s;
     transform-origin: center;
+}
+
+div[yui-checkbox-group] > a[yui-checkbox][disabled] {
+    color: #c0c4cc;
+    cursor: not-allowed;
+}
+
+a[yui-checkbox][disabled] > div[box] {
+    background-color: #edf2fc;
+    border-color: #dcdfe6;
+    cursor: not-allowed;
+}
+
+a[yui-checkbox][disabled] > div[box]:after {
+    border-color: #c0c4cc;
 }
 
 /* ============================= checkbox end ============================= */

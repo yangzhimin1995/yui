@@ -243,6 +243,13 @@ function yuiCheckbox_handleGroupDom(dom) {
         const boxDom = document.createElement('div');
         yuiFunc_setAttributes(boxDom, {'box': ''});
         checkboxDom.insertBefore(boxDom, checkboxDom.firstChild);
+        yuiCheckbox_handleClick(checkboxDom);
+    })
+}
+
+function yuiCheckbox_handleClick(checkboxDom) {
+    const {disabled} = yuiFunc_getAttributes(checkboxDom, ['disabled']);
+    if (disabled === null) {
         checkboxDom.addEventListener('click', function () {
             const {checked} = yuiFunc_getAttributes(checkboxDom, ['checked']);
             if (checked === null) {
@@ -251,7 +258,22 @@ function yuiCheckbox_handleGroupDom(dom) {
                 yuiFunc_removeAttributes(checkboxDom, ['checked'])
             }
         })
-    })
+    }
+}
+
+function getYuiCheckboxState(id) {
+    const dom = document.querySelector(`div[yui-checkbox-group][id=${id}]`);
+    const checkboxesDom = dom.querySelectorAll('a[yui-checkbox]');
+    let data = {checked: [], unchecked: []};
+    checkboxesDom.forEach(checkboxDom => {
+        const {checked, value} = yuiFunc_getAttributes(checkboxDom, ['checked', 'value']);
+        if (checked === null) {
+            data.unchecked.push(value)
+        } else {
+            data.checked.push(value)
+        }
+    });
+    return data
 }
 
 /** ================================= checkbox end =================================*/
