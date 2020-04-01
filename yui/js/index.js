@@ -581,14 +581,13 @@ function yuiMessage_closed(dom) {
 
 const $yuiMessageBox = {
     alert: (title, message, options) => {
-        const newOptions = {};
-        newOptions['callback'] = options['callback'];
-        yuiMessageBox(title, message, newOptions);
+        options['showCancelBtn'] = false;
+        yuiMessageBox(title, message, options);
     },
     confirm: (title, message, options) => {
-        const newOptions = {showCancelBtn: true, showTypeIcon: true};
-        newOptions['callback'] = options['callback'];
-        yuiMessageBox(title, message, newOptions);
+        options['showTypeIcon'] = true;
+        options['showCancelBtn'] = true;
+        yuiMessageBox(title, message, options);
     }
 };
 
@@ -715,6 +714,7 @@ function yuiMessageBox_createBodyDom(message, options) {
         const typeIconDom = document.createElement('i');
         yuiFunc_setAttributes(typeIconDom, {'type-icon': ''});
         yuiFunc_setClasses(typeIconDom, options['icon']);
+        yuiFunc_setStyles(typeIconDom, {color: options['iconColor']});
         dom.appendChild(typeIconDom);
     }
     const messageDom = document.createElement('div');
