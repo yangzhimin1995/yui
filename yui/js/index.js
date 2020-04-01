@@ -608,45 +608,48 @@ function yuiMessageBox(title, message, options) {
     const modalDom = yuiMessageBox_createModal();
     yuiFunc_setStyles(modalDom, {'visibility': 'visible'});
     const {dom, closeIconDom, confirmBtnDom, cancelBtnDom} = yuiMessageBox_createDom(title, message, options);
-    yuiMessageBox_handleConfirmClick(modalDom, dom, confirmBtnDom, options);
-    yuiMessageBox_handleCancelClick(modalDom, dom, cancelBtnDom, options);
-    yuiMessageBox_handleCloseIconClick(modalDom, dom, closeIconDom, options);
     modalDom.appendChild(dom);
     setTimeout(() => {
         yuiFunc_setStyles(modalDom, {'opacity': '1'});
         yuiFunc_setStyles(dom, {'opacity': '1', 'top': '0'});
-    })
+    });
+    yuiMessageBox_handleConfirmClick(modalDom, dom, confirmBtnDom, options);
+    yuiMessageBox_handleCancelClick(modalDom, dom, cancelBtnDom, options);
+    yuiMessageBox_handleCloseIconClick(modalDom, dom, closeIconDom, options);
 }
 
 function yuiMessageBox_handleConfirmClick(modalDom, dom, confirmBtnDom, options) {
-    confirmBtnDom.addEventListener('click', function () {
+    return confirmBtnDom.addEventListener('click', function () {
         const callback = options['callback'];
         if (callback) {
             callback('confirm');
         }
-        yuiMessageBox_closed(modalDom, dom)
-    });
+        yuiMessageBox_closed(modalDom, dom);
+        return callback ? undefined : true;
+    })
 }
 
 function yuiMessageBox_handleCancelClick(modalDom, dom, cancelBtnDom, options) {
     if (cancelBtnDom) {
-        cancelBtnDom.addEventListener('click', function () {
+        return cancelBtnDom.addEventListener('click', function () {
             const callback = options['callback'];
             if (callback) {
                 callback('cancel');
             }
-            yuiMessageBox_closed(modalDom, dom)
+            yuiMessageBox_closed(modalDom, dom);
+            return callback ? undefined : false;
         });
     }
 }
 
 function yuiMessageBox_handleCloseIconClick(modalDom, dom, closeIconDom, options) {
-    closeIconDom.addEventListener('click', function () {
+    return closeIconDom.addEventListener('click', function () {
         const callback = options['callback'];
         if (callback) {
             callback('close');
         }
-        yuiMessageBox_closed(modalDom, dom)
+        yuiMessageBox_closed(modalDom, dom);
+        return callback ? undefined : false;
     });
 }
 
