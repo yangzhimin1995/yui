@@ -580,14 +580,110 @@ function yuiMessage_closed(dom) {
 /** ================================= messageBox start =================================*/
 
 const $yuiMessageBox = {
-    alert: (title, message, options) => {
-        options['showCloseBtn'] = false;
-        yuiMessageBox(title, message, options);
+    alert: (title, message) => {
+        yuiMessageBox(title, message);
     }
 };
 
 function yuiMessageBox(title, message, options) {
+    options = yuiFunc_json2Default(options, {
+        showClose: true,
+        showTypeIcon: false,
+        icon: ['iconfont', 'yui-icon-warning'],
+        iconColor: '#e6a23c',
+        confirmBtnText: '确定',
+        confirmBtnAttrs: {},
+        showCancelBtn: false,
+        cancelBtnText: '取消',
+        cancelBtnAttrs: {},
+    });
+    const modalDom = yuiMessageBox_createModal();
+    yuiFunc_setStyles(modalDom, {'visibility': 'visible'});
+    const dom = yuiMessageBox_createDom(title, message, options);
+    modalDom.appendChild(dom);
+    setTimeout(() => {
+        yuiFunc_setStyles(modalDom, {'opacity': '1'});
+        yuiFunc_setStyles(dom, {'opacity': '1', 'top': '0'});
+    })
+}
 
+function yuiMessageBox_createModal() {
+    const dom = document.createElement('div');
+    yuiFunc_setAttributes(dom, {'yui-modal': ''});
+    document.body.appendChild(dom);
+    return dom
+}
+
+function yuiMessageBox_createDom(title, message, options) {
+    const dom = document.createElement('div');
+    yuiFunc_setAttributes(dom, {'yui-message-box': ''});
+    const headerDom = yuiMessageBox_createHeaderDom(title, options);
+    dom.appendChild(headerDom);
+    const bodyDom = yuiMessageBox_createBodyDom(message, options);
+    dom.appendChild(bodyDom);
+    const footerDom = yuiMessageBox_createFooterDom(options);
+    dom.appendChild(footerDom);
+    return dom
+}
+
+function yuiMessageBox_createFooterDom(options) {
+    const dom = document.createElement('div');
+    yuiFunc_setAttributes(dom, {'footer': ''});
+    yuiMessageBox_createConfirmBtnDom(dom, options);
+    yuiMessageBox_createCancelBtnDom(dom, options);
+    return dom
+}
+
+function yuiMessageBox_createCancelBtnDom(dom, options) {
+    if (options['showCancelBtn'] === true) {
+        const cancelBtnDom = document.createElement('a');
+        cancelBtnDom.innerText = options['cancelBtnText'];
+        let cancelBtnAttrs = {'yui-button': '', 'size': 'small'};
+        cancelBtnAttrs = Object.assign(cancelBtnAttrs, options['cancelBtnAttrs']);
+        yuiFunc_setAttributes(cancelBtnDom, cancelBtnAttrs);
+        dom.appendChild(cancelBtnDom);
+    }
+}
+
+function yuiMessageBox_createConfirmBtnDom(dom, options) {
+    const confirmBtnDom = document.createElement('a');
+    confirmBtnDom.innerText = options['confirmBtnText'];
+    let confirmBtnAttrs = {'yui-button': '', 'type': 'primary', 'size': 'small'};
+    confirmBtnAttrs = Object.assign(confirmBtnAttrs, options['confirmBtnAttrs']);
+    yuiFunc_setAttributes(confirmBtnDom, confirmBtnAttrs);
+    dom.appendChild(confirmBtnDom);
+}
+
+function yuiMessageBox_createBodyDom(message, options) {
+    const dom = document.createElement('div');
+    yuiFunc_setAttributes(dom, {'body': ''});
+    if (options['showTypeClose'] === true) {
+        const typeIconDom = document.createElement('i');
+        yuiFunc_setAttributes(typeIconDom, {'type-icon': ''});
+        yuiFunc_setClasses(typeIconDom, options['icon']);
+        dom.appendChild(typeIconDom);
+    }
+    const messageDom = document.createElement('div');
+    yuiFunc_setAttributes(messageDom, {'message': ''});
+    messageDom.innerText = message;
+    dom.appendChild(messageDom);
+    return dom
+}
+
+function yuiMessageBox_createHeaderDom(title, options) {
+    const dom = document.createElement('div');
+    yuiFunc_setAttributes(dom, {'header': ''});
+    const titleDom = document.createElement('div');
+    yuiFunc_setAttributes(titleDom, {'title': ''});
+    titleDom.innerText = title;
+    dom.appendChild(titleDom);
+    if (options['showClose'] === true) {
+        const closeIconDom = document.createElement('i');
+        yuiFunc_setAttributes(closeIconDom, {'close-icon': ''});
+        yuiFunc_setClasses(closeIconDom, ['iconfont', 'yui-icon-closed']);
+        dom.appendChild(closeIconDom);
+    }
+    return dom
 }
 
 /** ================================= messageBox end =================================*/

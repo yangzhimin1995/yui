@@ -22,11 +22,11 @@ div[yui-modal] {
     opacity: 0;
     background: rgba(0, 0, 0, .5);
     z-index: 2020;
-    transition: opacity .3s;
     visibility: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: .3s;
 }
 
 /* ============================= 公共样式 end ============================= */
@@ -254,7 +254,6 @@ a[yui-button][type='danger'] {
 
 a[yui-button][plain] {
     background: #fff;
-    color: #909399;
 }
 
 a[yui-button][type='info'][plain] {
@@ -834,6 +833,10 @@ div[yui-message-box] {
     color: #303133;
     padding: 15px 15px 10px;
     box-sizing: border-box;
+    transition: .3s;
+    position: relative;
+    top: -30px;
+    opacity: 0;
 }
 
 div[yui-message-box] > div[header] {
@@ -856,10 +859,32 @@ div[yui-message-box] > div[body] {
     padding: 20px 0 15px 0;
     color: #606266;
     font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+div[yui-message-box] > div[body] > i[type-icon] {
+    display: block;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    color: #e6a23c;
+    margin-right: 12px;
+}
+
+div[yui-message-box] > div[body] > div[message] {
+    flex-grow: 1;
 }
 
 div[yui-message-box] > div[footer] {
     text-align: right;
+}
+
+div[yui-message-box] > div[footer] > a[yui-button] {
+    margin: 0 3px;
 }
 
 /* ============================= messageBox end ============================= */
