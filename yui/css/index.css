@@ -20,7 +20,7 @@ div[yui-modal] {
     width: 100%;
     height: 100%;
     opacity: 0;
-    background: #000;
+    background: rgba(0, 0, 0, .5);
     z-index: 2020;
     transition: opacity .3s;
     visibility: hidden;
@@ -722,7 +722,7 @@ div[yui-loading-modal] > div[body] > div[text] {
 
 /* ============================= message start ============================= */
 
-div[yui-message-box] {
+div[yui-message-container] {
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
@@ -730,7 +730,7 @@ div[yui-message-box] {
     top: 0;
 }
 
-div[yui-message-box] > div[yui-message] {
+div[yui-message-container] > div[yui-message] {
     min-width: 380px;
     box-sizing: border-box;
     border-radius: 4px;
@@ -751,47 +751,47 @@ div[yui-message-box] > div[yui-message] {
     opacity: 0;
 }
 
-div[yui-message-box] > div[yui-message][type='primary'] {
+div[yui-message-container] > div[yui-message][type='primary'] {
     color: #409eff;
     background-color: #ecf5ff;
     border-color: #b3d8ff;
 }
 
-div[yui-message-box] > div[yui-message][type='success'] {
+div[yui-message-container] > div[yui-message][type='success'] {
     background-color: #f0f9eb;
     border-color: #e1f3d8;
     color: #67c23a;
 }
 
-div[yui-message-box] > div[yui-message][type='warning'] {
+div[yui-message-container] > div[yui-message][type='warning'] {
     background-color: #fdf6ec;
     border-color: #faecd8;
     color: #e6a23c;
 }
 
-div[yui-message-box] > div[yui-message][type='danger'] {
+div[yui-message-container] > div[yui-message][type='danger'] {
     background-color: #fef0f0;
     border-color: #fde2e2;
     color: #f56c6c;
 }
 
-div[yui-message-box] > div[yui-message][effect='dark'] {
+div[yui-message-container] > div[yui-message][effect='dark'] {
     background-color: #909399;
     border-color: #909399;
     color: white;
 }
 
-div[yui-message-box] > div[yui-message][effect='dark'][type='success'] {
+div[yui-message-container] > div[yui-message][effect='dark'][type='success'] {
     background-color: #67c23a;
     border-color: #67c23a;
 }
 
-div[yui-message-box] > div[yui-message][effect='dark'][type='warning'] {
+div[yui-message-container] > div[yui-message][effect='dark'][type='warning'] {
     background-color: #e6a23c;
     border-color: #e6a23c;
 }
 
-div[yui-message-box] > div[yui-message][effect='dark'][type='danger'] {
+div[yui-message-container] > div[yui-message][effect='dark'][type='danger'] {
     background-color: #f56c6c;
     border-color: #f56c6c;
 }
@@ -819,15 +819,61 @@ div[yui-message][center] > div[body] {
 /* ============================= message end ============================= */
 
 
+/* ============================= messageBox start ============================= */
+
+div[yui-message-box] {
+    width: 420px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #ebeef5;
+    font-size: 18px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    text-align: left;
+    overflow: hidden;
+    backface-visibility: hidden;
+    color: #303133;
+    padding: 15px 15px 10px;
+    box-sizing: border-box;
+}
+
+div[yui-message-box] > div[header] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+div[yui-message-box] > div[header] > div[title] {
+    flex-grow: 1;
+}
+
+div[yui-message-box] > div[header] > i[close-icon] {
+    margin-left: 10px;
+    display: block;
+}
+
+div[yui-message-box] > div[body] {
+    padding: 20px 0 15px 0;
+    color: #606266;
+    font-size: 14px;
+}
+
+div[yui-message-box] > div[footer] {
+    text-align: right;
+}
+
+/* ============================= messageBox end ============================= */
+
+
 /* ============================= notify start ============================= */
 
-div[yui-notify-box] {
+div[yui-notify-container] {
     position: fixed;
     width: 330px;
     z-index: 2021;
 }
 
-div[yui-notify-box] > div[yui-notify] {
+div[yui-notify-container] > div[yui-notify] {
     display: flex;
     width: 330px;
     padding: 14px;

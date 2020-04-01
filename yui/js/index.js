@@ -330,7 +330,7 @@ function yuiDialog_showModal(id, dom) {
     }
     modalDom.style.visibility = 'visible';
     setTimeout(() => {
-        modalDom.style.opacity = '.5'
+        modalDom.style.opacity = '1'
     })
 }
 
@@ -384,7 +384,7 @@ function yuiLoading(id) {
     if (!modalDom) {
         let options = yuiFunc_getAttributes(dom, ['text', 'icon', 'background']);
         options = yuiFunc_json2Default(options, {
-            text: '', icon: ['iconfont', 'yui-icon-loading'], background: 'rgba(255, 255, 255, .8)'
+            text: '', icon: ['iconfont', 'yui-icon-loading'], background: 'rgba(0, 0, 0, .5)'
         });
         modalDom = yuiLoading_createModalDom(id, options);
         dom.appendChild(modalDom);
@@ -441,7 +441,7 @@ function yuiLoadingClosed(id) {
 function yuiFullscreenLoading(options) {
     const id = 'yui-fullscreen-loading';
     options = yuiFunc_json2Default(options, {
-        text: '', icon: ['iconfont', 'yui-icon-loading'], background: 'rgba(255, 255, 255, .8)'
+        text: '', icon: ['iconfont', 'yui-icon-loading'], background: 'rgba(0, 0, 0, .5)'
     });
     let dom = document.querySelector(`div[yui-loading-modal][id=${id}__loading-modal]`);
     if (!dom) {
@@ -479,10 +479,10 @@ function yuiMessage(content = '', options = {}) {
 }
 
 function yuiMessage_createDomBoxDom() {
-    let dom = document.querySelector('div[yui-message-box]');
+    let dom = document.querySelector('div[yui-message-container]');
     if (!dom) {
         dom = document.createElement('div');
-        yuiFunc_setAttributes(dom, {'yui-message-box': ''});
+        yuiFunc_setAttributes(dom, {'yui-message-container': ''});
         document.body.appendChild(dom)
     }
     return dom
@@ -558,6 +558,22 @@ function yuiMessage_closed(dom) {
 /** ================================= message end =================================*/
 
 
+/** ================================= messageBox start =================================*/
+
+const $yuiMessageBox = {
+    alert: (title, message, options) => {
+        options['showCloseBtn'] = false;
+        yuiMessageBox(title, message, options);
+    }
+};
+
+function yuiMessageBox(title, message, options) {
+
+}
+
+/** ================================= messageBox end =================================*/
+
+
 /** ================================= notify start =================================*/
 
 function yuiNotify(title = '提示', message = '', options = {}) {
@@ -599,10 +615,10 @@ function yuiNotify_insert2BoxDom(notifyBoxDom, notifyDom, position) {
 }
 
 function yuiNotify_createBoxDom(position) {
-    let dom = document.querySelector(`div[yui-notify-box][position=${position}]`);
+    let dom = document.querySelector(`div[yui-notify-container][position=${position}]`);
     if (!dom) {
         dom = document.createElement('div');
-        yuiFunc_setAttributes(dom, {'yui-notify-box': '', position});
+        yuiFunc_setAttributes(dom, {'yui-notify-container': '', position});
         switch (position) {
             case 'bottom-right':
                 yuiFunc_setStyles(dom, {bottom: '26px', right: '16px'});

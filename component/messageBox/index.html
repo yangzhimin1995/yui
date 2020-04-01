@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - MessageBox 弹框</title>
+    <!--必须引入-->
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <!--非必须引入-->
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_sp4avpx238.css"/>
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        MessageBox 弹框
+        <div class="desc">
+            模拟系统的消息提示框而实现的一套模态对话框组件，用于消息提示、确认消息和提交内容。
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            消息提示
+            <div class="desc">
+                当用户进行操作时会被触发，该对话框中断用户操作，直到用户确认知晓后才可关闭。
+            </div>
+        </div>
+        <div yui-modal style="opacity: 1;visibility: visible">
+            <div yui-message-box>
+                <div header>
+                    <div title>标题名称</div>
+                    <i close-icon class="iconfont yui-icon-closed"></i>
+                </div>
+                <div body>
+                    这是一段内容
+                </div>
+                <div footer>
+                    <a type="primary" size="small" yui-button>确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!--必须引入-->
+<!--非必须引入-->
+<script src="../../yui/js/index.js"></script>
+</html>
