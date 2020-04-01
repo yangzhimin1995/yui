@@ -220,6 +220,7 @@ a[yui-button] {
     -ms-user-select: none;
     user-select: none;
     text-decoration: none;
+    line-height: 1;
 }
 
 a[yui-button][type='primary'] {
@@ -877,6 +878,7 @@ div[yui-message-box] > div[body] > i[type-icon] {
 
 div[yui-message-box] > div[body] > div[message] {
     flex-grow: 1;
+    line-height: 1;
 }
 
 div[yui-message-box] > div[footer] {

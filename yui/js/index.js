@@ -586,7 +586,7 @@ const $yuiMessageBox = {
         yuiMessageBox(title, message, newOptions);
     },
     confirm: (title, message, options) => {
-        const newOptions = {showCancelBtn: true};
+        const newOptions = {showCancelBtn: true, showTypeIcon: true};
         newOptions['callback'] = options['callback'];
         yuiMessageBox(title, message, newOptions);
     }
@@ -619,37 +619,34 @@ function yuiMessageBox(title, message, options) {
 }
 
 function yuiMessageBox_handleConfirmClick(modalDom, dom, confirmBtnDom, options) {
-    return confirmBtnDom.addEventListener('click', function () {
+    confirmBtnDom.addEventListener('click', function () {
         const callback = options['callback'];
         if (callback) {
             callback('confirm');
         }
         yuiMessageBox_closed(modalDom, dom);
-        return callback ? undefined : true;
     })
 }
 
 function yuiMessageBox_handleCancelClick(modalDom, dom, cancelBtnDom, options) {
     if (cancelBtnDom) {
-        return cancelBtnDom.addEventListener('click', function () {
+        cancelBtnDom.addEventListener('click', function () {
             const callback = options['callback'];
             if (callback) {
                 callback('cancel');
             }
             yuiMessageBox_closed(modalDom, dom);
-            return callback ? undefined : false;
         });
     }
 }
 
 function yuiMessageBox_handleCloseIconClick(modalDom, dom, closeIconDom, options) {
-    return closeIconDom.addEventListener('click', function () {
+    closeIconDom.addEventListener('click', function () {
         const callback = options['callback'];
         if (callback) {
             callback('close');
         }
         yuiMessageBox_closed(modalDom, dom);
-        return callback ? undefined : false;
     });
 }
 
@@ -714,7 +711,7 @@ function yuiMessageBox_createConfirmBtnDom(dom, options) {
 function yuiMessageBox_createBodyDom(message, options) {
     const dom = document.createElement('div');
     yuiFunc_setAttributes(dom, {'body': ''});
-    if (options['showTypeClose'] === true) {
+    if (options['showTypeIcon'] === true) {
         const typeIconDom = document.createElement('i');
         yuiFunc_setAttributes(typeIconDom, {'type-icon': ''});
         yuiFunc_setClasses(typeIconDom, options['icon']);
