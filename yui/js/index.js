@@ -595,6 +595,25 @@ function yuiMessageBox(title, message, options) {
 
 /** ================================= notify start =================================*/
 
+const $yuiNotify = {
+    info: (title = '提示', message = '', options = {}) => {
+        options['type'] = 'info';
+        yuiNotify(title, message, options)
+    },
+    success: (title = '提示', message = '', options = {}) => {
+        options['type'] = 'success';
+        yuiNotify(title, message, options)
+    },
+    warning: (title = '提示', message = '', options = {}) => {
+        options['type'] = 'warning';
+        yuiNotify(title, message, options)
+    },
+    danger: (title = '提示', message = '', options = {}) => {
+        options['type'] = 'danger';
+        yuiNotify(title, message, options)
+    },
+};
+
 function yuiNotify(title = '提示', message = '', options = {}) {
     options = yuiFunc_json2Default(options, {
         type: null,
