@@ -580,8 +580,9 @@ function yuiMessage_closed(dom) {
 /** ================================= messageBox start =================================*/
 
 const $yuiMessageBox = {
-    alert: (title, message) => {
-        yuiMessageBox(title, message);
+    alert: (title, message, options) => {
+        const {callback} = options;
+        yuiMessageBox(title, message, {callback});
     }
 };
 
@@ -596,15 +597,59 @@ function yuiMessageBox(title, message, options) {
         showCancelBtn: false,
         cancelBtnText: '取消',
         cancelBtnAttrs: {},
+        callback: null,
     });
     const modalDom = yuiMessageBox_createModal();
     yuiFunc_setStyles(modalDom, {'visibility': 'visible'});
-    const dom = yuiMessageBox_createDom(title, message, options);
+    const {dom, closeIconDom, confirmBtnDom, cancelBtnDom} = yuiMessageBox_createDom(title, message, options);
+    yuiMessageBox_handleCloseIconClick(modalDom, dom, closeIconDom, options);
+    yuiMessageBox_handleConfirmClick(modalDom, dom, confirmBtnDom, options);
+    yuiMessageBox_handleCancelClick(modalDom, dom, cancelBtnDom, options);
     modalDom.appendChild(dom);
     setTimeout(() => {
         yuiFunc_setStyles(modalDom, {'opacity': '1'});
         yuiFunc_setStyles(dom, {'opacity': '1', 'top': '0'});
     })
+}
+
+function yuiMessageBox_handleConfirmClick(modalDom, dom, confirmBtnDom, options) {
+    confirmBtnDom.addEventListener('click', function () {
+        const callback = options['callback'];
+        if (callback) {
+            callback('confirm');
+        }
+        yuiMessageBox_closed(modalDom, dom)
+    });
+}
+
+function yuiMessageBox_handleCancelClick(modalDom, dom, cancelBtnDom, options) {
+    if (cancelBtnDom) {
+        cancelBtnDom.addEventListener('click', function () {
+            const callback = options['callback'];
+            if (callback) {
+                callback('cancel');
+            }
+            yuiMessageBox_closed(modalDom, dom)
+        });
+    }
+}
+
+function yuiMessageBox_handleCloseIconClick(modalDom, dom, closeIconDom, options) {
+    closeIconDom.addEventListener('click', function () {
+        const callback = options['callback'];
+        if (callback) {
+            callback('close');
+        }
+        yuiMessageBox_closed(modalDom, dom)
+    });
+}
+
+function yuiMessageBox_closed(modalDom, dom) {
+    yuiFunc_setStyles(modalDom, {'opacity': '0'});
+    yuiFunc_setStyles(dom, {'opacity': '0', 'top': '-30px'});
+    setTimeout(() => {
+        modalDom.remove();
+    }, 300)
 }
 
 function yuiMessageBox_createModal() {
@@ -617,32 +662,34 @@ function yuiMessageBox_createModal() {
 function yuiMessageBox_createDom(title, message, options) {
     const dom = document.createElement('div');
     yuiFunc_setAttributes(dom, {'yui-message-box': ''});
-    const headerDom = yuiMessageBox_createHeaderDom(title, options);
-    dom.appendChild(headerDom);
+    const headerDomJson = yuiMessageBox_createHeaderDom(title, options);
+    dom.appendChild(headerDomJson['headerDom']);
     const bodyDom = yuiMessageBox_createBodyDom(message, options);
     dom.appendChild(bodyDom);
-    const footerDom = yuiMessageBox_createFooterDom(options);
-    dom.appendChild(footerDom);
-    return dom
+    const footerDomJson = yuiMessageBox_createFooterDom(options);
+    dom.appendChild(footerDomJson['footerDom']);
+    return {dom, ...headerDomJson, ...footerDomJson}
 }
 
 function yuiMessageBox_createFooterDom(options) {
-    const dom = document.createElement('div');
-    yuiFunc_setAttributes(dom, {'footer': ''});
-    yuiMessageBox_createConfirmBtnDom(dom, options);
-    yuiMessageBox_createCancelBtnDom(dom, options);
-    return dom
+    const footerDom = document.createElement('div');
+    yuiFunc_setAttributes(footerDom, {'footer': ''});
+    const confirmBtnDom = yuiMessageBox_createConfirmBtnDom(footerDom, options);
+    const cancelBtnDom = yuiMessageBox_createCancelBtnDom(footerDom, options);
+    return {footerDom, confirmBtnDom, cancelBtnDom}
 }
 
 function yuiMessageBox_createCancelBtnDom(dom, options) {
+    let cancelBtnDom;
     if (options['showCancelBtn'] === true) {
-        const cancelBtnDom = document.createElement('a');
+        cancelBtnDom = document.createElement('a');
         cancelBtnDom.innerText = options['cancelBtnText'];
         let cancelBtnAttrs = {'yui-button': '', 'size': 'small'};
         cancelBtnAttrs = Object.assign(cancelBtnAttrs, options['cancelBtnAttrs']);
         yuiFunc_setAttributes(cancelBtnDom, cancelBtnAttrs);
         dom.appendChild(cancelBtnDom);
     }
+    return cancelBtnDom
 }
 
 function yuiMessageBox_createConfirmBtnDom(dom, options) {
@@ -652,6 +699,7 @@ function yuiMessageBox_createConfirmBtnDom(dom, options) {
     confirmBtnAttrs = Object.assign(confirmBtnAttrs, options['confirmBtnAttrs']);
     yuiFunc_setAttributes(confirmBtnDom, confirmBtnAttrs);
     dom.appendChild(confirmBtnDom);
+    return confirmBtnDom
 }
 
 function yuiMessageBox_createBodyDom(message, options) {
@@ -671,19 +719,20 @@ function yuiMessageBox_createBodyDom(message, options) {
 }
 
 function yuiMessageBox_createHeaderDom(title, options) {
-    const dom = document.createElement('div');
-    yuiFunc_setAttributes(dom, {'header': ''});
+    const headerDom = document.createElement('div');
+    yuiFunc_setAttributes(headerDom, {'header': ''});
     const titleDom = document.createElement('div');
     yuiFunc_setAttributes(titleDom, {'title': ''});
     titleDom.innerText = title;
-    dom.appendChild(titleDom);
+    headerDom.appendChild(titleDom);
+    let closeIconDom;
     if (options['showClose'] === true) {
-        const closeIconDom = document.createElement('i');
+        closeIconDom = document.createElement('i');
         yuiFunc_setAttributes(closeIconDom, {'close-icon': ''});
         yuiFunc_setClasses(closeIconDom, ['iconfont', 'yui-icon-closed']);
-        dom.appendChild(closeIconDom);
+        headerDom.appendChild(closeIconDom);
     }
-    return dom
+    return {headerDom, closeIconDom}
 }
 
 /** ================================= messageBox end =================================*/

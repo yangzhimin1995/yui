@@ -26,7 +26,7 @@
                 当用户进行操作时会被触发，该对话框中断用户操作，直到用户确认知晓后才可关闭。
             </div>
         </div>
-        <a onclick="$yuiMessageBox.alert('标题名称','这是一段内容')" yui-button type="text">点击打开 Message Box</a>
+        <a onclick="openAlert()" yui-button type="text">点击打开 Message Box</a>
         <!--        <div yui-modal style="opacity: 1;visibility: visible">-->
         <!--            <div yui-message-box>-->
         <!--                <div header>-->
@@ -49,4 +49,16 @@
 <!--必须引入-->
 <!--非必须引入-->
 <script src="../../yui/js/index.js"></script>
+<script>
+    function openAlert() {
+        $yuiMessageBox.alert('标题名称', '这是一段内容', {
+            callback: action => {
+                debugger
+                yuiMessage(`action: ${action}`, {
+                    message: `action: ${action}`
+                });
+            }
+        })
+    }
+</script>
 </html>
