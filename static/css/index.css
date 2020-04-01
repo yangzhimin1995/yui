@@ -229,3 +229,7 @@ div[yui-card].shadow-card {
     height: 100px;
     width: auto;
 }
+
+input[yui-input] {
+    width: 180px;
+}
