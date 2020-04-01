@@ -581,8 +581,14 @@ function yuiMessage_closed(dom) {
 
 const $yuiMessageBox = {
     alert: (title, message, options) => {
-        const {callback} = options;
-        yuiMessageBox(title, message, {callback});
+        const newOptions = {};
+        newOptions['callback'] = options['callback'];
+        yuiMessageBox(title, message, newOptions);
+    },
+    confirm: (title, message, options) => {
+        const newOptions = {showCancelBtn: true};
+        newOptions['callback'] = options['callback'];
+        yuiMessageBox(title, message, newOptions);
     }
 };
 
@@ -602,9 +608,9 @@ function yuiMessageBox(title, message, options) {
     const modalDom = yuiMessageBox_createModal();
     yuiFunc_setStyles(modalDom, {'visibility': 'visible'});
     const {dom, closeIconDom, confirmBtnDom, cancelBtnDom} = yuiMessageBox_createDom(title, message, options);
-    yuiMessageBox_handleCloseIconClick(modalDom, dom, closeIconDom, options);
     yuiMessageBox_handleConfirmClick(modalDom, dom, confirmBtnDom, options);
     yuiMessageBox_handleCancelClick(modalDom, dom, cancelBtnDom, options);
+    yuiMessageBox_handleCloseIconClick(modalDom, dom, closeIconDom, options);
     modalDom.appendChild(dom);
     setTimeout(() => {
         yuiFunc_setStyles(modalDom, {'opacity': '1'});

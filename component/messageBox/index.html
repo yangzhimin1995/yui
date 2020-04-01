@@ -27,22 +27,16 @@
             </div>
         </div>
         <a onclick="openAlert()" yui-button type="text">点击打开 Message Box</a>
-        <!--        <div yui-modal style="opacity: 1;visibility: visible">-->
-        <!--            <div yui-message-box>-->
-        <!--                <div header>-->
-        <!--                    <div title>标题名称</div>-->
-        <!--                    <i close-icon class="iconfont yui-icon-closed"></i>-->
-        <!--                </div>-->
-        <!--                <div body>-->
-        <!--                    <i type-icon class="iconfont yui-icon-warning"></i>-->
-        <!--                    <div message>这是一段内容</div>-->
-        <!--                </div>-->
-        <!--                <div footer>-->
-        <!--                    <a plain size="small" yui-button>取消</a>-->
-        <!--                    <a type="primary" size="small" yui-button>确定</a>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            确认消息
+            <div class="desc">
+                提示用户确认其已经触发的动作，并询问是否进行此操作时会用到此对话框。
+            </div>
+        </div>
+        <a onclick="openConfirm()" yui-button type="text">点击打开 Message Box</a>
     </div>
 </div>
 </body>
@@ -52,6 +46,16 @@
 <script>
     function openAlert() {
         $yuiMessageBox.alert('标题名称', '这是一段内容', {
+            callback: action => {
+                debugger
+                yuiMessage(`action: ${action}`, {
+                    message: `action: ${action}`
+                });
+            }
+        })
+    }
+    function openConfirm() {
+        $yuiMessageBox.confirm('标题名称', '这是一段内容', {
             callback: action => {
                 debugger
                 yuiMessage(`action: ${action}`, {
