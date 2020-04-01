@@ -461,6 +461,25 @@ function yuiFullscreenLoadingClosed() {
 
 /** ================================= message start =================================*/
 
+const $yuiMessage = {
+    info: (content = '', options = {}) => {
+        options['type'] = 'info';
+        yuiMessage(content, options)
+    },
+    success: (content = '', options = {}) => {
+        options['type'] = 'success';
+        yuiMessage(content, options)
+    },
+    warning: (content = '', options = {}) => {
+        options['type'] = 'warning';
+        yuiMessage(content, options)
+    },
+    danger: (content = '', options = {}) => {
+        options['type'] = 'danger';
+        yuiMessage(content, options)
+    },
+};
+
 function yuiMessage(content = '', options = {}) {
     options = yuiFunc_json2Default(options, {
         type: 'info',

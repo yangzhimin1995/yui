@@ -46,10 +46,10 @@
                 通过设置effect属性来改变主题，默认为light。
             </div>
         </div>
-        <a onclick="yuiMessage('这是一条消息提示',{effect:'dark'})" yui-button>消息</a>
-        <a onclick="yuiMessage('恭喜你，这是一条成功消息',{type:'success',effect:'dark'})" yui-button>成功</a>
-        <a onclick="yuiMessage('警告哦，这是一条警告消息',{type:'warning',effect:'dark'})" yui-button>警告</a>
-        <a onclick="yuiMessage('错了哦，这是一条错误消息',{type:'danger',effect:'dark'})" yui-button>危险</a>
+        <a onclick="$yuiMessage.info('这是一条消息提示',{effect:'dark'})" yui-button>消息</a>
+        <a onclick="$yuiMessage.success('恭喜你，这是一条成功消息',{effect:'dark'})" yui-button>成功</a>
+        <a onclick="$yuiMessage.warning('警告哦，这是一条警告消息',{effect:'dark'})" yui-button>警告</a>
+        <a onclick="$yuiMessage.danger('错了哦，这是一条错误消息',{effect:'dark'})" yui-button>危险</a>
     </div>
 
     <div class="page-module">
@@ -58,9 +58,9 @@
             <div class="desc">可以添加关闭按钮。</div>
         </div>
         <a onclick="yuiMessage('这是一条消息提示',{showClose:true})" yui-button>消息</a>
-        <a onclick="yuiMessage('恭喜你，这是一条成功消息',{type:'success',showClose:true})" yui-button>成功</a>
-        <a onclick="yuiMessage('警告哦，这是一条警告消息',{type:'warning',showClose:true})" yui-button>警告</a>
-        <a onclick="yuiMessage('错了哦，这是一条错误消息',{type:'danger',showClose:true})" yui-button>危险</a>
+        <a onclick="$yuiMessage.success('恭喜你，这是一条成功消息',{showClose:true})" yui-button>成功</a>
+        <a onclick="$yuiMessage.warning('警告哦，这是一条警告消息',{showClose:true})" yui-button>警告</a>
+        <a onclick="$yuiMessage.danger('错了哦，这是一条错误消息',{showClose:true})" yui-button>危险</a>
     </div>
 
     <div class="page-module">
