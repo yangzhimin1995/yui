@@ -24,6 +24,9 @@ div[yui-modal] {
     z-index: 2020;
     transition: opacity .3s;
     visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* ============================= 公共样式 end ============================= */
