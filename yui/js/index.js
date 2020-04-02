@@ -279,7 +279,7 @@ function getYuiCheckboxState(id) {
 /** ================================= checkbox end =================================*/
 
 
-/** ================================= dialog end =================================*/
+/** ================================= dialog start =================================*/
 
 function yuiDialog_init() {
     let dom = document.querySelectorAll('div[yui-dialog]');
@@ -374,6 +374,18 @@ function yuiDialog_modalClosed(id) {
 }
 
 /** ================================= dialog end =================================*/
+
+
+/** ================================= input start =================================*/
+
+function yuiInput_init() {
+    // const dom = document.querySelectorAll('div[yui-input]');
+    // dom.forEach(inputDom => {
+    //     const {clearable} = yuiFunc_getAttributes(inputDom, ['clearable']);
+    // })
+}
+
+/** ================================= input end =================================*/
 
 
 /** ================================= loading start =================================*/

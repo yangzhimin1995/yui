@@ -581,8 +581,15 @@ div[yui-dialog] > div[footer] {
 
 /* ============================= input start ============================= */
 
-input[yui-input] {
+div[yui-input] {
+    position: relative;
     font-size: 14px;
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+}
+
+div[yui-input] [yui-input-inner] {
     -webkit-appearance: none;
     background-color: #fff;
     background-image: none;
@@ -591,28 +598,46 @@ input[yui-input] {
     box-sizing: border-box;
     color: #606266;
     display: inline-block;
+    font-size: inherit;
     height: 40px;
     line-height: 40px;
     outline: none;
     padding: 0 15px;
     transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     width: 100%;
+    cursor: pointer;
 }
 
-input[yui-input]::-webkit-input-placeholder {
+input::-webkit-input-placeholder {
     color: #C0C4CC;
 }
 
-input[yui-input]:focus {
+div[yui-input] [yui-input-inner]:focus {
     outline: none;
     border-color: #409eff;
 }
 
-input[yui-input][disabled] {
+div[yui-input] [yui-input-inner][disabled] {
     background-color: #f5f7fa;
     border-color: #e4e7ed;
     color: #c0c4cc;
     cursor: not-allowed;
+}
+
+div[yui-input][suffix] > [suffix-icons] {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    box-sizing: border-box;
+    right: 5px;
+    display: flex;
+    align-items: center;
+}
+
+div[yui-input] textarea[yui-input-inner] {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 42px;
 }
 
 /* ============================= input end ============================= */

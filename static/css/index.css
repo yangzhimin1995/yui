@@ -230,6 +230,6 @@ div[yui-card].shadow-card {
     width: auto;
 }
 
-input[yui-input] {
+div[yui-input] {
     width: 180px;
 }

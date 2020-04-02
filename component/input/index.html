@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
     <!--非必须引入-->
-    <!--    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_sp4avpx238.css"/>-->
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_sp4avpx238.css"/>
 </head>
 <body>
 <div class="page-content">
@@ -21,40 +21,62 @@
         <div class="title">
             基础用法
         </div>
-        <label>
-            <input type="text" placeholder="请输入内容" yui-input/>
-        </label>
+        <div yui-input>
+            <label>
+                <input type="text" autocomplete="off" placeholder="请输入内容" yui-input-inner/>
+            </label>
+        </div>
     </div>
 
     <div class="page-module">
         <div class="title">
             禁用状态
         </div>
-        <label>
-            <input type="text" placeholder="请输入内容" yui-input disabled/>
-        </label>
+        <div yui-input>
+            <label>
+                <input disabled type="text" autocomplete="off" placeholder="请输入内容" yui-input-inner/>
+            </label>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            可清空
+        </div>
+        <div yui-input clearable>
+            <label>
+                <input type="text" autocomplete="off" placeholder="请输入内容" yui-input-inner/>
+            </label>
+            <!--            <div suffix-icons>-->
+            <!--                <i class="iconfont yui-icon-danger"></i>-->
+            <!--            </div>-->
+        </div>
     </div>
 
     <div class="page-module">
         <div class="title">
             密码框
         </div>
-        <label>
-            <input type="password" placeholder="请输入内容" yui-input/>
-        </label>
+        <div yui-input>
+            <label>
+                <input type="password" autocomplete="off" placeholder="请输入内容" yui-input-inner/>
+            </label>
+        </div>
     </div>
 
     <div class="page-module">
         <div class="title">
             文本域
         </div>
-        <label>
-           <textarea yui-input></textarea>
-        </label>
+        <div yui-input>
+            <label>
+                <textarea yui-input-inner placeholder="请输入内容"></textarea>
+            </label>
+        </div>
     </div>
 </div>
 </body>
 <!--必须引入-->
 <!--非必须引入-->
-<!--<script src="../../yui/js/index.js"></script>-->
+<script src="../../yui/js/index.js"></script>
 </html>
