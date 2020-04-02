@@ -1004,7 +1004,7 @@ function yuiTooltip_init() {
     const placementArray = ['top-start', 'top', 'top-end', 'left-start', 'left', 'left-end',
         'right-start', 'right', 'right-end', 'bottom-start', 'bottom', 'bottom-end'];
     dom.forEach(tooltipDom => {
-        let {placement, effect} = yuiFunc_getAttributes(tooltipDom, ['placement', 'effect']);
+        let {placement, popover, trigger} = yuiFunc_getAttributes(tooltipDom, ['placement', 'popover', 'trigger']);
         if (placementArray.indexOf(placement) === -1) {
             placement = 'bottom';
             yuiFunc_setAttributes(tooltipDom, {placement})
@@ -1012,25 +1012,43 @@ function yuiTooltip_init() {
         const pointDom = document.createElement('div');
         yuiFunc_setAttributes(pointDom, {'point': ''});
         tooltipDom.appendChild(pointDom);
-        yuiTooltip_handleCenter(tooltipDom, pointDom, placement);
-        yuiTooltip_handlePointDom(pointDom, placement);
+        const textDom = tooltipDom.querySelector('div[text]');
+        yuiTooltip_handleCenter(tooltipDom, textDom, pointDom, placement);
+        yuiTooltip_handlePointDom(pointDom, placement, popover);
+        yuiTooltip_handleShow(tooltipDom, textDom, pointDom, trigger)
     })
 }
 
-function yuiTooltip_handlePointDom(pointDom, placement) {
+function yuiTooltip_handleShow(tooltipDom, textDom, pointDom, trigger) {
+    if (!trigger) {
+        trigger = 'hover'
+    }
+    if (trigger === 'click') {
+        tooltipDom.addEventListener('click', function () {
+            let opacity = textDom.style.opacity;
+            opacity = opacity === '1' ? '0' : '1';
+            yuiFunc_setStyles(textDom, {opacity});
+            yuiFunc_setStyles(pointDom, {opacity})
+        })
+    }
+}
+
+function yuiTooltip_handlePointDom(pointDom, placement, popover) {
     const firstPlacement = placement.split('-')[0];
     let style = {};
     let key = firstPlacement.replace(firstPlacement[0], firstPlacement[0].toUpperCase());
     key = 'border' + key + 'Color';
     style[key] = '#303133';
+    if (popover !== null) {
+        style[key] = '#fff';
+    }
     yuiFunc_setStyles(pointDom, style)
 }
 
-function yuiTooltip_handleCenter(tooltipDom, pointDom, placement) {
+function yuiTooltip_handleCenter(tooltipDom, textDom, pointDom, placement) {
     if (placement.indexOf('-') === -1) {
         let pointDomStyle;
         let textDomStyle;
-        const textDom = tooltipDom.querySelector('div[text]');
         if (placement === 'top' || placement === 'bottom') {
             pointDomStyle = {left: `${(tooltipDom.clientWidth) / 2 - 6}px`};
             textDomStyle = {left: `${(tooltipDom.clientWidth - textDom.clientWidth) / 2}px`};

@@ -1040,6 +1040,25 @@ div[yui-notify] > i[close-icon] {
 /* ============================= notify end ============================= */
 
 
+/* ============================= popover start ============================= */
+
+div[yui-tooltip][popover] > div[text] {
+    background: #fff;
+    min-width: 150px;
+    border-radius: 4px;
+    padding: 12px;
+    z-index: 2000;
+    color: #606266;
+    line-height: 1.4;
+    text-align: justify;
+    font-size: 14px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .15);
+    word-break: break-all;
+}
+
+/* ============================= popover end ============================= */
+
+
 /* ============================= radio start ============================= */
 
 div[yui-radio-group] {
@@ -1373,7 +1392,7 @@ div[yui-tooltip] > div[point] {
     border-color: transparent;
     opacity: 0;
     transition: .3s;
-    z-index: 1;
+    z-index: 2020;
 }
 
 div[yui-tooltip][effect='light'] > div[text] {
@@ -1490,12 +1509,12 @@ div[yui-tooltip][placement='bottom-end'] > div[point] {
     bottom: -8px;
 }
 
-div[yui-tooltip]:hover > div[text] {
-    opacity: 1;
-}
+/*div[yui-tooltip]:hover > div[text] {*/
+/*    opacity: 1;*/
+/*}*/
 
-div[yui-tooltip]:hover > div[point] {
-    opacity: 1;
-}
+/*div[yui-tooltip]:hover > div[point] {*/
+/*    opacity: 1;*/
+/*}*/
 
 /* ============================= tooltip end ============================= */
