@@ -13,22 +13,6 @@
     position: relative;
 }
 
-div[yui-modal] {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    background: rgba(0, 0, 0, .5);
-    z-index: 2020;
-    visibility: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: .3s;
-}
-
 /* ============================= 公共样式 end ============================= */
 
 
@@ -529,6 +513,22 @@ a[yui-checkbox][disabled] > div[box]:after {
 
 /* ============================= dialog start ============================= */
 
+div[yui-modal] {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background: rgba(0, 0, 0, .5);
+    z-index: 2020;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .3s;
+}
+
 div[yui-dialog] {
     z-index: 2021;
     width: 50%;
@@ -589,7 +589,7 @@ div[yui-input] {
     overflow: hidden;
 }
 
-div[yui-input] [yui-input-inner] {
+[yui-input-inner] {
     -webkit-appearance: none;
     background-color: #fff;
     background-image: none;
@@ -615,7 +615,7 @@ input::-webkit-input-placeholder {
     font-size: 14px;
 }
 
-div[yui-input] [yui-input-inner]:focus {
+[yui-input-inner]:focus {
     outline: none;
     border-color: #409eff;
 }
@@ -627,17 +627,17 @@ div[yui-input] [yui-input-inner][disabled] {
     cursor: not-allowed;
 }
 
-div[yui-input][suffix] > [suffix-icons] {
-    position: absolute;
-    height: 100%;
-    top: 0;
-    box-sizing: border-box;
-    right: 5px;
-    display: flex;
-    align-items: center;
-}
+/*div[yui-input][suffix] > [suffix-icons] {*/
+/*    position: absolute;*/
+/*    height: 100%;*/
+/*    top: 0;*/
+/*    box-sizing: border-box;*/
+/*    right: 5px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*}*/
 
-div[yui-input] textarea[yui-input-inner] {
+textarea[yui-input-inner] {
     resize: vertical;
     padding: 5px 15px;
     line-height: 1.5;
@@ -649,6 +649,7 @@ textarea::-webkit-input-placeholder {
     font-family: "微软雅黑", serif;
     font-size: 14px;
 }
+
 /* ============================= input end ============================= */
 
 
@@ -1193,6 +1194,25 @@ div[yui-radio-group][size='mini'] > a[yui-radio][border] {
 }
 
 /* ============================= radio end ============================= */
+
+
+/* ============================= select start ============================= */
+
+div[yui-select] {
+    display: inline-block;
+    position: relative;
+}
+
+div[yui-select] > div[panel] {
+    position: absolute;
+    width: 100%;
+    height: 400px;
+    top: 100%;
+    left: 0;
+    background-color: #409eff;
+}
+
+/* ============================= select end ============================= */
 
 
 /* ============================= tag start ============================= */
