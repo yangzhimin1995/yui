@@ -598,7 +598,8 @@ div[yui-input] [yui-input-inner] {
     box-sizing: border-box;
     color: #606266;
     display: inline-block;
-    font-size: inherit;
+    font-family: "微软雅黑", serif;
+    font-size: 14px;
     height: 40px;
     line-height: 40px;
     outline: none;
@@ -610,6 +611,8 @@ div[yui-input] [yui-input-inner] {
 
 input::-webkit-input-placeholder {
     color: #C0C4CC;
+    font-family: "微软雅黑", serif;
+    font-size: 14px;
 }
 
 div[yui-input] [yui-input-inner]:focus {
@@ -635,11 +638,17 @@ div[yui-input][suffix] > [suffix-icons] {
 }
 
 div[yui-input] textarea[yui-input-inner] {
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 42px;
+    resize: vertical;
+    padding: 5px 15px;
+    line-height: 1.5;
+    min-height: 55px;
 }
 
+textarea::-webkit-input-placeholder {
+    color: #C0C4CC;
+    font-family: "微软雅黑", serif;
+    font-size: 14px;
+}
 /* ============================= input end ============================= */
 
 
