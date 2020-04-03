@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - Card 卡片</title>
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_4lv9jsj494.css"/>
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        Card 卡片
+        <div class="desc">将信息聚合在卡片容器中展示。</div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            基础用法
+        </div>
+        <div yui-card>
+            <div header>
+                <div class="left">卡片名称</div>
+                <div class="right">
+                    <a yui-button type="text">操作按钮</a>
+                </div>
+            </div>
+            <div body>
+                <div>列表内容 1</div>
+                <div>列表内容 2</div>
+                <div>列表内容 3</div>
+                <div>列表内容 4</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            卡片阴影
+        </div>
+        <div class="row-flex">
+            <div yui-card class="shadow-card">
+                总是显示
+            </div>
+            <div shadow="hover" yui-card class="shadow-card">
+                鼠标悬浮时显示
+            </div>
+            <div shadow="never" yui-card class="shadow-card">
+                从不显示
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../../yui/js/index.js"></script>
+<style>
+    .row-flex div[yui-card]{
+        padding: 20px 10px;
+        width: 200px;
+    }
+</style>
+</html>

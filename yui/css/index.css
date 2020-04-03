@@ -350,3 +350,40 @@ a[yui-button][size='mini'] {
 }
 
 /* ============================= button end ============================= */
+
+
+/* ============================= card start ============================= */
+
+div[yui-card] {
+    border-radius: 4px;
+    border: 1px solid #ebeef5;
+    background-color: #fff;
+    overflow: hidden;
+    color: #303133;
+    transition: .3s;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+}
+
+div[yui-card][shadow='hover'], div[yui-card][shadow='never'] {
+    box-shadow: 0 2px 12px 0 transparent;
+}
+
+div[yui-card][shadow='hover']:hover {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+}
+
+div[yui-card] > div[header] {
+    padding: 18px 20px;
+    border-bottom: 1px solid #ebeef5;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+}
+
+div[yui-card] > div[body] {
+    padding: 20px;
+    color: #303133;
+    font-size: 14px;
+}
+
+/* ============================= card end ============================= */
