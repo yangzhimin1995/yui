@@ -1,16 +1,11 @@
 /* ============================= 公共样式 start ============================= */
 
-.iconfont {
+.yuiIcon {
     position: relative;
 }
 
-[close-icon] {
+.yuiIcon.closed {
     cursor: pointer;
-}
-
-[yui-icon] {
-    margin: 0 3px;
-    position: relative;
 }
 
 /* ============================= 公共样式 end ============================= */
@@ -71,17 +66,8 @@ div[yui-alert][type='danger'][effect='dark'] {
     color: #fff;
 }
 
-div[yui-alert] div[icon] {
-    margin-right: 8px;
-}
-
-div[yui-alert][is-rows] div[icon] {
-    font-size: 26px;
-}
-
-div[yui-alert][center] div[icon] {
-    text-align: right;
-    flex-grow: 1;
+div[yui-alert] .yuiIcon {
+    margin-right: 10px;
 }
 
 div[yui-alert] > div[title] {
@@ -91,8 +77,8 @@ div[yui-alert] > div[title] {
     white-space: nowrap;
 }
 
-div[yui-alert][center] div[title] {
-    text-align: center;
+div[yui-alert][is-rows] .yuiIcon {
+    font-size: 26px;
 }
 
 div[yui-alert][is-rows] div[title] {
@@ -103,20 +89,6 @@ div[yui-alert][is-rows] div[description] {
     margin-top: 6px;
     font-weight: normal;
     white-space: normal;
-}
-
-div[yui-alert] div[close-icon] {
-    color: #c0c4cc;
-    font-size: 13px;
-    line-height: 18px;
-    flex-shrink: 0;
-    padding-left: 8px;
-    align-self: flex-start;
-    cursor: pointer;
-}
-
-div[yui-alert][effect='dark'] div[close-icon] {
-    color: #fff;
 }
 
 /* ============================= alert end ============================= */
@@ -316,16 +288,6 @@ a[yui-button][type='danger']:not([disabled]):hover {
     background-color: #f56c6c;
     border-color: #f56c6c;
     opacity: .8;
-}
-
-a[yui-button][radius] {
-    border-radius: 20px;
-}
-
-a[yui-button][circle] {
-    border-radius: 100%;
-    height: 40px;
-    width: 40px;
 }
 
 a[yui-button][disabled] {

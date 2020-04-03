@@ -103,102 +103,14 @@ div[yui-card].shadow-card {
     position: relative;
     border-radius: 4px;
     box-sizing: border-box;
-    color: #fff;
     font-size: 14px;
     overflow: hidden;
+    padding: 20px 10px;
+    display: inline-block;
 }
 
-.color-box.big {
-    width: 320px;
-}
-
-.color-box.black {
-    color: #303133;
-}
-
-.color-box .text {
-    padding: 16px;
-}
-
-.color-box.big .text {
-    padding: 20px;
-}
-
-.color-box .text > div {
-    font-size: 12px;
-    opacity: .69;
-    line-height: 24px;
-}
-
-.color-box .mini-box {
-    width: 100%;
-    display: flex;
-}
-
-.color-box .mini-box > div {
-    height: 40px;
-    flex-grow: 1;
-}
-
-.color-box.transparent {
-    border: 1px solid #fcc3c3;
-    background: linear-gradient(
-            to bottom right,
-            rgba(0, 0, 0, 0) 0%,
-            rgba(0, 0, 0, 0) calc(50% - 1px),
-            #fcc3c3 50%,
-            rgba(0, 0, 0, 0) calc(50% + 1px),
-            rgba(0, 0, 0, 0) 100%
-    )
-}
-
-.border-table {
-    color: #606266;
-    border-collapse: collapse;
-    background-color: #fff;
-    font-size: 14px;
-    line-height: 1.5em;
-    border-spacing: 2px;
-    border-color: grey;
-    width: 100%;
-}
-
-.border-table th, .border-table td {
-    border-bottom: 1px solid #dcdfe6;
-    padding: 15px;
-    text-align: left;
-}
-
-.border-radius {
-    color: #666;
-    font-size: 18px;
-}
-
-.border-radius .value {
-    color: #333;
-    font-size: 16px;
-    margin: 10px 0;
-}
-
-.border-radius .box {
-    height: 60px;
-    width: 110px;
-    border: 1px solid #d7dae2;
-    border-radius: 0;
-    margin-top: 20px;
-}
-
-.border-shadow {
-    height: 100px;
-    width: 50%;
-    border: 1px solid #eee;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
-}
-
-.border-shadow-text {
-    line-height: 50px;
-    color: #666;
-    font-size: 14px;
+.color-box.white {
+    color: #fff;
 }
 
 .tooltip-demo {

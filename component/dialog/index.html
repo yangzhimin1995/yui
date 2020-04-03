@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
     <!--非必须引入-->
-    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_sp4avpx238.css"/>
+    <link rel="stylesheet" type="text/css" href=" //at.alicdn.com/t/font_1521392_esyoq1kq996.css"/>
 </head>
 <body>
 <div class="page-content">
@@ -19,18 +19,17 @@
 
     <div class="page-module">
         <div class="title">
-            基本用法
-            <div class="desc">Dialog 弹出一个对话框，适合需要定制性更大的场景。</div>
+            对话框
         </div>
         <a yui-button type="text" onclick="yuiDialog('my-dialog')">
             点击打开Dialog
         </a>
-        <div style="width: 30%" before-close="handleClose" yui-dialog id="my-dialog">
+        <div style="width: 30%" yui-dialog id="my-dialog">
             <div header>
                 <div class="title">
                     提示
                 </div>
-                <i close-icon class="iconfont yui-icon-closed"></i>
+                <i onclick="yuiDialogClosed('my-dialog')" class="yuiIcon closed"></i>
             </div>
             <div>这是一段信息</div>
             <div footer>
@@ -39,37 +38,9 @@
             </div>
         </div>
     </div>
-
-    <div class="page-module">
-        <div class="title">
-            全屏 Dialog
-            <div class="desc">Dialog 可以撑满整个屏幕。</div>
-        </div>
-        <a yui-button type="text" onclick="yuiDialog('fullscreen-dialog')">
-            点击打开Dialog
-        </a>
-        <div fullscreen yui-dialog id="fullscreen-dialog">
-            <div header>
-                <div class="title">
-                    提示
-                </div>
-                <i close-icon class="iconfont yui-icon-closed"></i>
-            </div>
-            <div>这是一段信息</div>
-            <div footer>
-                <a yui-button onclick="yuiDialogClosed('fullscreen-dialog')" type="primary">确定</a>
-                <a yui-button onclick="yuiDialogClosed('fullscreen-dialog')">取消</a>
-            </div>
-        </div>
-    </div>
 </div>
 </body>
 <!--必须引入-->
 <!--非必须引入-->
 <script src="../../yui/js/index.js"></script>
-<script>
-    function handleClose(id, dom) {
-        yuiMessage("Dialog关闭前的回调");
-    }
-</script>
 </html>
