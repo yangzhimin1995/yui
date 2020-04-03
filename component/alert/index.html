@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - Alert 警告</title>
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_4lv9jsj494.css"/>
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        Alert 警告
+        <div class="desc">用于页面中展示重要的提示信息。</div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            浅色
+        </div>
+        <div yui-alert>
+            <i class="yui-icon info"></i>
+            <div content>消息</div>
+        </div>
+        <div yui-alert type="success">
+            <i class="yui-icon success"></i>
+            <div content>成功</div>
+        </div>
+        <div yui-alert type="warning">
+            <i class="yui-icon warning"></i>
+            <div content>警告</div>
+        </div>
+        <div yui-alert type="danger">
+            <i class="yui-icon danger"></i>
+            <div content>危险</div>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            深色
+        </div>
+        <div yui-alert effect="dark">
+            <i class="yui-icon info"></i>
+            <div content>消息</div>
+        </div>
+        <div yui-alert type="success" effect="dark">
+            <i class="yui-icon success"></i>
+            <div content>成功</div>
+        </div>
+        <div yui-alert type="warning" effect="dark">
+            <i class="yui-icon warning"></i>
+            <div content>警告</div>
+        </div>
+        <div yui-alert type="danger" effect="dark">
+            <i class="yui-icon danger"></i>
+            <div content>危险</div>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            带有辅助性文字
+        </div>
+        <div yui-alert has-info>
+            <i class="yui-icon info"></i>
+            <div content>
+                <div title>带辅助性文字介绍</div>
+                <div info>
+                    这是一句绕口令：黑灰化肥会挥发发灰黑化肥挥发；灰黑化肥会挥发发黑灰化肥发挥。 黑灰化肥会挥发发灰黑化肥黑灰挥发化为灰……
+                </div>
+            </div>
+        </div>
+        <div yui-alert effect="dark" has-info>
+            <i class="yui-icon info"></i>
+            <div content>
+                <div title>带辅助性文字介绍</div>
+                <div info>
+                    这是一句绕口令：黑灰化肥会挥发发灰黑化肥挥发；灰黑化肥会挥发发黑灰化肥发挥。 黑灰化肥会挥发发灰黑化肥黑灰挥发化为灰……
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="../../yui/js/index.js"></script>
+</html>

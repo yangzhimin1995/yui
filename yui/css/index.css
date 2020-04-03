@@ -1,0 +1,85 @@
+/* ============================= alert start ============================= */
+
+div[yui-alert] {
+    width: 100%;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    transition: opacity .2s;
+    background-color: #f4f4f5;
+    font-size: 13px;
+    line-height: 1;
+    color: #909399;
+}
+
+div[yui-alert][type='success'] {
+    background-color: #f0f9eb;
+    color: #67c23a;
+}
+
+div[yui-alert][type='warning'] {
+    background-color: #fdf6ec;
+    color: #e6a23c;
+}
+
+div[yui-alert][type='danger'] {
+    background-color: #fef0f0;
+    color: #f56c6c;
+}
+
+div[yui-alert][effect='dark'] {
+    background-color: #909399;
+    color: #fff;
+}
+
+div[yui-alert][type='success'][effect='dark'] {
+    background-color: #67c23a;
+    color: #fff;
+}
+
+div[yui-alert][type='warning'][effect='dark'] {
+    background-color: #e6a23c;
+    color: #fff;
+}
+
+div[yui-alert][type='danger'][effect='dark'] {
+    background-color: #f56c6c;
+    color: #fff;
+}
+
+div[yui-alert] > .yui-icon {
+    margin-right: 8px;
+}
+
+div[yui-alert] > div[content] {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+div[yui-alert][has-info] .yui-icon {
+    font-size: 24px;
+}
+
+div[yui-alert][has-info] > div[content] {
+    line-height: 1.3;
+}
+
+div[yui-alert][has-info] > div[content] > div[title] {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+div[yui-alert][has-info] > div[content] > div[info] {
+    font-size: 12px;
+    margin: 5px 0 0;
+    white-space: normal;
+}
+
+
+/* ============================= alert end ============================= */
