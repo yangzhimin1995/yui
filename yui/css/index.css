@@ -600,10 +600,10 @@ div[yui-message-container] > div[yui-message] {
     font-size: 14px;
     line-height: 1;
     position: relative;
-    margin: 18px 0;
+    margin: 20px 0;
     color: #909399;
     z-index: 1995;
-    top: -18px;
+    top: -20px;
     opacity: 0;
 }
 

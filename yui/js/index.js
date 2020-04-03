@@ -225,10 +225,21 @@ function yuiMessage(message = '', options = {}) {
     yuiMessage_show(messageDom);
 }
 
+function yuiMessage_autoClose(dom) {
+    yuiFunc_setStyles(dom, {opacity: '0', marginTop: -dom.clientHeight + 'px',});
+    setTimeout(() => {
+        dom.remove();
+    }, 350)
+}
+
+
 function yuiMessage_show(dom) {
     setTimeout(() => {
-        yuiFunc_setStyles(dom, {opacity: '1',top:'0'})
-    })
+        yuiFunc_setStyles(dom, {opacity: '1', top: '0'})
+    });
+    setTimeout(() => {
+        yuiMessage_autoClose(dom)
+    }, 3000);
 }
 
 function yuiMessage_createDom(message, options) {
