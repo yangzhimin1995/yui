@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - Badge 标记</title>
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_4lv9jsj494.css"/>
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        Badge 标记
+        <div class="desc">出现在按钮、图标旁的数字或状态标记。</div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            基础用法
+        </div>
+        <div yui-badge>
+            <a yui-button>评论</a>
+            <sup>12</sup>
+        </div>
+        <div yui-badge type="success">
+            <a yui-button>回复</a>
+            <sup>new</sup>
+        </div>
+        <div yui-badge is-dot>
+            <a yui-button type="text">数据查询</a>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../../yui/js/index.js"></script>
+<style>
+    div[yui-badge] {
+        margin: 0 15px;
+    }
+</style>
+</html>

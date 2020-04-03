@@ -42,13 +42,6 @@ body {
     padding-bottom: 16px;
 }
 
-.page-module > .title > .desc {
-    font-size: 15px;
-    color: #5e6d82;
-    line-height: 26px;
-    padding-top: 8px;
-}
-
 .page-module .row {
     margin-bottom: 20px;
 }
@@ -65,83 +58,4 @@ body {
 
 .page-module .row-flex > div {
     margin-right: 30px;
-}
-
-div[yui-alert] {
-    margin: 16px 0;
-}
-
-div[yui-badge] {
-    margin: 0 16px;
-}
-
-div[yui-card] > div[body] > div {
-    margin-bottom: 18px;
-}
-
-div[yui-card] .body-style {
-    padding: 14px;
-}
-
-div[yui-card] .body-style > div {
-    display: flex;
-    margin-top: 14px;
-    color: #999;
-    font-size: 13px;
-    justify-content: space-between;
-    align-items: center;
-}
-
-div[yui-card].shadow-card {
-    padding: 14px 0;
-    width: 230px;
-    text-align: center
-}
-
-.color-box {
-    width: 185px;
-    position: relative;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
-    overflow: hidden;
-    padding: 20px 10px;
-    display: inline-block;
-}
-
-.color-box.white {
-    color: #fff;
-}
-
-.tooltip-demo {
-    text-align: center;
-}
-
-.tooltip-demo > div[yui-tooltip] {
-    margin: 0 20px;
-}
-
-.tooltip-demo a[yui-button] {
-    width: 120px;
-    height: 50px;
-}
-
-.tooltip-demo.align {
-    display: flex;
-    justify-content: space-between;
-    width: 60%;
-    margin: 0 auto;
-}
-
-.tooltip-demo.align div[yui-tooltip] {
-    margin: 20px 0;
-}
-
-.tooltip-demo.align a[yui-button] {
-    height: 100px;
-    width: auto;
-}
-
-div[yui-input] {
-    width: 180px;
 }
