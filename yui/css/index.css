@@ -553,6 +553,58 @@ a[yui-link][underline][type='danger']:hover:before {
 /* ============================= link end ============================= */
 
 
+/* ============================= table start ============================= */
+
+table[yui-table] {
+    font-size: 14px;
+    color: #606266;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table[yui-table] thead {
+    color: #909399;
+    font-weight: 500;
+}
+
+table[yui-table] th,
+table[yui-table] td {
+    padding: 12px 10px;
+    min-width: 0;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    position: relative;
+    text-align: left;
+    overflow: hidden;
+    user-select: none;
+    background-color: #fff;
+    border-bottom: 1px solid #ebeef5;
+}
+
+table[yui-table] tr:hover td {
+    background-color: #f5f7fa!important;
+}
+
+table[yui-table][stripe] tr:nth-child(even) td {
+    background-color: #fafafa;
+}
+
+table[yui-table][has-border] th,
+table[yui-table][has-border] td {
+    border-right: 1px solid #ebeef5;
+    border-top: 1px solid #ebeef5;
+}
+
+table[yui-table][has-border] tr td:first-child,
+table[yui-table][has-border] tr th:first-child {
+    border-left: 1px solid #ebeef5;
+}
+
+/* ============================= table end ============================= */
+
+
 /* ============================= tag start ============================= */
 
 div[yui-tag] {
