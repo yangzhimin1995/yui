@@ -19,10 +19,10 @@
         <div class="title">
             多选框组
         </div>
-        <div yui-checkbox-group id="my-checkbox">
-            <a value="复选款A" yui-checkbox checked>复选款 A</a>
+        <div yui-checkbox-group id="my-checkbox" change="myCheckboxChange">
+            <a value="复选款A" yui-checkbox>复选款 A</a>
             <a value="复选款B" yui-checkbox>复选款 B</a>
-            <a value="复选款C" yui-checkbox>复选款 C</a>
+            <a value="复选款C" yui-checkbox checked>复选款 C</a>
             <a value="禁用" yui-checkbox disabled>禁用</a>
             <a value="选中且禁用" yui-checkbox checked disabled>选中且禁用</a>
         </div>
@@ -35,10 +35,18 @@
 </body>
 <script src="../../yui/js/index.js"></script>
 <script>
+    function myCheckboxChange(value) {
+        if (value === "复选款A") {
+            yui.message.danger(`拒绝选中 ${value}`);
+            return false
+        }
+        yui.message.success(`选中 ${value}`);
+    }
+
     function getCheckboxChecked() {
         const data = yuiCheckboxData("my-checkbox");
-        yui.message.success(`选中：${JSON.stringify(data['checked'])}`);
-        yuiMessage(`未选中：${JSON.stringify(data['unchecked'])}`);
+        yui.message.success(`选中：${JSON.stringify(data['checked'])}`, {effect: 'dark'});
+        yuiMessage(`未选中：${JSON.stringify(data['unchecked'])}`, {effect: 'dark'});
     }
 </script>
 </html>

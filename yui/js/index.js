@@ -219,29 +219,36 @@ function yuiFunc_setStyles(dom, styles = {}) {
 function yuiCheckbox_init() {
     const dom = document.querySelectorAll('div[yui-checkbox-group]');
     dom.forEach(groupDom => {
+        const {change} = yuiFunc_getAttributes(groupDom, ['change']);
         const checkboxesDom = groupDom.querySelectorAll('a[yui-checkbox]');
-        yuiCheckbox_handleGroupDom(checkboxesDom)
+        yuiCheckbox_handleGroupDom(checkboxesDom, change)
     })
 }
 
-function yuiCheckbox_handleGroupDom(dom) {
+function yuiCheckbox_handleGroupDom(dom, change) {
     dom.forEach(checkboxDom => {
         const boxDom = document.createElement('div');
         yuiFunc_setAttributes(boxDom, {'box': ''});
         checkboxDom.insertBefore(boxDom, checkboxDom.firstChild);
-        yuiCheckbox_handleClick(checkboxDom);
+        yuiCheckbox_handleClick(checkboxDom, change);
     })
 }
 
-function yuiCheckbox_handleClick(checkboxDom) {
-    const {disabled} = yuiFunc_getAttributes(checkboxDom, ['disabled']);
+function yuiCheckbox_handleClick(checkboxDom, change) {
+    const {disabled, value} = yuiFunc_getAttributes(checkboxDom, ['disabled', 'value']);
     if (disabled === null) {
         checkboxDom.addEventListener('click', function () {
-            const {checked} = yuiFunc_getAttributes(checkboxDom, ['checked']);
-            if (checked === null) {
-                yuiFunc_setAttributes(checkboxDom, {'checked': ''})
-            } else {
-                yuiFunc_removeAttributes(checkboxDom, ['checked'])
+            let flag = true;
+            if (change) {
+                flag = eval(change + `(value)`);
+            }
+            if (flag !== false) {
+                const {checked} = yuiFunc_getAttributes(checkboxDom, ['checked']);
+                if (checked === null) {
+                    yuiFunc_setAttributes(checkboxDom, {'checked': ''})
+                } else {
+                    yuiFunc_removeAttributes(checkboxDom, ['checked'])
+                }
             }
         })
     }
