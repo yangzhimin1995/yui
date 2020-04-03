@@ -389,6 +389,29 @@ div[yui-card] > div[body] {
 /* ============================= card end ============================= */
 
 
+/* ============================= divider start ============================= */
+
+div[yui-divider] {
+    display: block;
+    height: 1px;
+    width: 100%;
+    margin: 24px 0;
+    background-color: #dcdfe6;
+    position: relative;
+}
+
+div[yui-divider][vertical] {
+    display: inline-block;
+    width: 1px;
+    height: 1em;
+    margin: 0 8px;
+    vertical-align: middle;
+    position: relative;
+}
+
+/* ============================= divider end ============================= */
+
+
 /* ============================= input start ============================= */
 
 div[yui-input] {
@@ -584,7 +607,7 @@ table[yui-table] td {
 }
 
 table[yui-table] tr:hover td {
-    background-color: #f5f7fa!important;
+    background-color: #f5f7fa !important;
 }
 
 table[yui-table][stripe] tr:nth-child(even) td {
