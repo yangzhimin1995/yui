@@ -39,6 +39,7 @@ if (document.readyState !== 'loading') {
 
 function yuiFunc_init() {
     yuiFunc_getScrollbarWidth();
+    yuiCheckbox_init();
 }
 
 /** ================================= 等待dom加载完成 end =================================*/
@@ -212,7 +213,61 @@ function yuiFunc_setStyles(dom, styles = {}) {
 /** ================================= 全局方法 end =================================*/
 
 
-/** ================================= message end =================================*/
+/** ================================= checkbox start =================================*/
+
+function yuiCheckbox_init() {
+    const dom = document.querySelectorAll('div[yui-checkbox-group]');
+    dom.forEach(groupDom => {
+        const checkboxesDom = groupDom.querySelectorAll('a[yui-checkbox]');
+        yuiCheckbox_handleGroupDom(checkboxesDom)
+    })
+}
+
+function yuiCheckbox_handleGroupDom(dom) {
+    dom.forEach(checkboxDom => {
+        const boxDom = document.createElement('div');
+        yuiFunc_setAttributes(boxDom, {'box': ''});
+        checkboxDom.insertBefore(boxDom, checkboxDom.firstChild);
+        yuiCheckbox_handleClick(checkboxDom);
+    })
+}
+
+function yuiCheckbox_handleClick(checkboxDom) {
+    const {disabled} = yuiFunc_getAttributes(checkboxDom, ['disabled']);
+    if (disabled === null) {
+        checkboxDom.addEventListener('click', function () {
+            const {checked} = yuiFunc_getAttributes(checkboxDom, ['checked']);
+            if (checked === null) {
+                yuiFunc_setAttributes(checkboxDom, {'checked': ''})
+            } else {
+                yuiFunc_removeAttributes(checkboxDom, ['checked'])
+            }
+        })
+    }
+}
+
+function yuiCheckboxData(id) {
+    const dom = document.querySelector(`div[yui-checkbox-group][id=${id}]`);
+    if (!dom) {
+        return
+    }
+    const checkboxesDom = dom.querySelectorAll('a[yui-checkbox]');
+    let data = {checked: [], unchecked: []};
+    checkboxesDom.forEach(checkboxDom => {
+        const {checked, value} = yuiFunc_getAttributes(checkboxDom, ['checked', 'value']);
+        if (checked === null) {
+            data.unchecked.push(value)
+        } else {
+            data.checked.push(value)
+        }
+    });
+    return data
+}
+
+/** ================================= checkbox end =================================*/
+
+
+/** ================================= message start =================================*/
 
 function yuiMessage(message = '', options = {}) {
     options = yuiFunc_json2Default(options, {
@@ -265,4 +320,4 @@ function yuiMessage_getContainerDom() {
     return dom
 }
 
-/** ================================= 等待dom加载完成 end =================================*/
+/** ================================= message end =================================*/
