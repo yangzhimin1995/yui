@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - Message 消息提示</title>
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_4lv9jsj494.css"/>
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        Message 消息提示
+        <div class="desc">
+            常用于主动操作后的反馈提示。
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            基础用法
+        </div>
+        <a onclick="yuiMessage('这是一条消息提示')" yui-button>消息</a>
+        <a onclick="yui.message.success('恭喜你，这是一条成功消息')" yui-button>成功</a>
+        <a onclick="yuiMessage('警告哦，这是一条警告消息',{type:'warning'})" yui-button>警告</a>
+        <a onclick="yui.message.danger('错了哦，这是一条错误消息')" yui-button>危险</a>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            深色
+        </div>
+        <a onclick="yuiMessage('这是一条消息提示',{effect:'dark'})" yui-button>消息</a>
+        <a onclick="yui.message.success('恭喜你，这是一条成功消息',{effect:'dark'})" yui-button>成功</a>
+        <a onclick="yuiMessage('警告哦，这是一条警告消息',{type:'warning',effect:'dark'})" yui-button>警告</a>
+        <a onclick="yui.message.danger('错了哦，这是一条错误消息',{effect:'dark'})" yui-button>危险</a>
+    </div>
+    <!--    <div yui-message-container>-->
+    <!--        <div yui-message>-->
+    <!--            <i class="yui-icon info"></i>-->
+    <!--            这是一条消息提示-->
+    <!--        </div>-->
+    <!--    </div>-->
+</div>
+</body>
+<script src="../../yui/js/index.js"></script>
+</html>
