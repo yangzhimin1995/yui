@@ -40,6 +40,7 @@ if (document.readyState !== 'loading') {
 function yuiFunc_init() {
     yuiFunc_getScrollbarWidth();
     yuiCheckbox_init();
+    yuiRadio_init();
 }
 
 /** ================================= 等待dom加载完成 end =================================*/
@@ -321,3 +322,64 @@ function yuiMessage_getContainerDom() {
 }
 
 /** ================================= message end =================================*/
+
+
+/** ================================= radio start =================================*/
+
+function yuiRadio_init() {
+    let dom = document.querySelectorAll('div[yui-radio-group]');
+    dom.forEach(groupDom => {
+        let options = yuiFunc_getAttributes(groupDom, ['change']);
+        yuiRadio_handleGroup(groupDom, options['change']);
+    })
+}
+
+function yuiRadio_handleGroup(dom, change) {
+    let radiosDom = dom.querySelectorAll('a[yui-radio]');
+    if (radiosDom.length === 0) {
+        radiosDom = dom.querySelectorAll('a[yui-radio-button]');
+    }
+    radiosDom.forEach(radioDom => {
+        let options = yuiFunc_getAttributes(radioDom, ['disabled', 'value']);
+        if (options['disabled'] === null) {
+            radioDom.addEventListener('click', function () {
+                let flag = true;
+                if (change) {
+                    flag = eval(change + `('${options['value']}')`);
+                }
+                if (flag !== false) {
+                    yuiRadio_changeChecked(radiosDom, radioDom);
+                }
+            })
+        }
+    })
+}
+
+function yuiRadio_changeChecked(radiosDom, dom) {
+    radiosDom.forEach(radioDom => {
+        yuiFunc_removeAttributes(radioDom, ['checked'])
+    });
+    yuiFunc_setAttributes(dom, {'checked': ''})
+}
+
+function yuiRadioData(id) {
+    const dom = document.querySelector(`div[yui-radio-group][id=${id}]`);
+    if (!dom) {
+        return
+    }
+    let radiosDom = dom.querySelectorAll('a[yui-radio]');
+    if (radiosDom.length === 0) {
+        radiosDom = dom.querySelectorAll('a[yui-radio-button]');
+    }
+    let currentVal = undefined;
+    radiosDom.forEach(radioDom => {
+        const {checked} = yuiFunc_getAttributes(radioDom, ['checked']);
+        if (checked !== null) {
+            const {value} = yuiFunc_getAttributes(radioDom, ['value']);
+            currentVal = value
+        }
+    });
+    return currentVal
+}
+
+/** ================================= radio end =================================*/
