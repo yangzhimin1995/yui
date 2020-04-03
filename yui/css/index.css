@@ -387,3 +387,67 @@ div[yui-card] > div[body] {
 }
 
 /* ============================= card end ============================= */
+
+
+/* ============================= input start ============================= */
+
+div[yui-input] {
+    position: relative;
+    font-size: 14px;
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+}
+
+div[yui-input] [inner] {
+    -webkit-appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-family: "微软雅黑", serif;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    padding: 0 15px;
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    width: 100%;
+    cursor: pointer;
+}
+
+input::-webkit-input-placeholder {
+    color: #C0C4CC;
+    font-family: "微软雅黑", serif;
+    font-size: 14px;
+}
+
+div[yui-input] [inner]:focus {
+    outline: none;
+    border-color: #409eff;
+}
+
+div[yui-input] [inner][disabled] {
+    background-color: #f5f7fa;
+    border-color: #e4e7ed;
+    color: #c0c4cc;
+    cursor: not-allowed;
+}
+
+div[yui-input] textarea[inner] {
+    resize: vertical;
+    padding: 5px 15px;
+    line-height: 1.5;
+    min-height: 55px;
+}
+
+textarea::-webkit-input-placeholder {
+    color: #C0C4CC;
+    font-family: "微软雅黑", serif;
+    font-size: 14px;
+}
+
+/* ============================= input end ============================= */

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - Input 输入框</title>
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_4lv9jsj494.css"/>
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        Input 输入框
+        <div class="desc">通过鼠标或键盘输入字符</div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            基础用法
+        </div>
+        <div yui-input>
+            <label>
+                <input type="text" autocomplete="off" placeholder="请输入内容" inner/>
+            </label>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            禁用状态
+        </div>
+        <div yui-input>
+            <label>
+                <input disabled type="text" autocomplete="off" placeholder="请输入内容" inner/>
+            </label>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            密码框
+        </div>
+        <div yui-input>
+            <label>
+                <input type="password" autocomplete="off" placeholder="请输入内容" inner/>
+            </label>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            文本域
+        </div>
+        <div yui-input>
+            <label>
+                <textarea inner placeholder="请输入内容"></textarea>
+            </label>
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="../../yui/js/index.js"></script>
+<style>
+    div[yui-input] {
+        width: 180px;
+    }
+</style>
+</html>
