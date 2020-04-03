@@ -362,6 +362,7 @@ div[yui-card] {
     color: #303133;
     transition: .3s;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    font-size: 14px;
 }
 
 div[yui-card][shadow='hover'], div[yui-card][shadow='never'] {
@@ -377,13 +378,12 @@ div[yui-card] > div[header] {
     border-bottom: 1px solid #ebeef5;
     box-sizing: border-box;
     display: flex;
+    font-size: 16px;
     justify-content: space-between;
 }
 
 div[yui-card] > div[body] {
     padding: 20px;
-    color: #303133;
-    font-size: 14px;
 }
 
 /* ============================= card end ============================= */
