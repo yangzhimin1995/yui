@@ -406,6 +406,7 @@ div[yui-checkbox-group] > a[yui-checkbox] {
     white-space: nowrap;
     margin-right: 24px;
     transition: .3s;
+    user-select: none;
 }
 
 div[yui-checkbox-group] > a[yui-checkbox]:last-child {
@@ -761,6 +762,7 @@ a[yui-radio] {
     position: relative;
     cursor: pointer;
     background-color: white;
+    user-select: none;
 }
 
 a[yui-radio]:before {
@@ -891,6 +893,7 @@ div[yui-switch] > span[switch] {
     transition: border-color .3s, background-color .3s;
     vertical-align: middle;
     background-color: #409eff;
+    user-select: none;
 }
 
 div[yui-switch] > span[switch]:before {
