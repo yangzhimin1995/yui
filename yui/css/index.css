@@ -871,6 +871,99 @@ div[yui-radio-group][size='mini'] > a[yui-radio-button] {
 /* ============================= radio end ============================= */
 
 
+/* ============================= switch start ============================= */
+
+div[yui-switch] {
+    display: inline-flex;
+    align-items: center;
+}
+
+div[yui-switch] > span[switch] {
+    margin: 0 8px;
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 20px;
+    outline: none;
+    border-radius: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: border-color .3s, background-color .3s;
+    vertical-align: middle;
+    background-color: #409eff;
+}
+
+div[yui-switch] > span[switch]:before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    border-radius: 100%;
+    transition: all .3s;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    left: calc(100% - 17px);
+}
+
+div[yui-switch][value='false'] > span[switch] {
+    /*border-color: #FF4949;*/
+    background-color: #dcdfe6;
+}
+
+div[yui-switch][value='false'] > span[switch]:before {
+    left: 1px;
+}
+
+div[yui-switch] > span[inactive-text] {
+    font-size: 14px;
+    display: inline-block;
+    transition: .2s;
+    height: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    vertical-align: middle;
+    color: #303133;
+}
+
+div[yui-switch] > span[active-text] {
+    font-size: 14px;
+    display: inline-block;
+    transition: .2s;
+    height: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    vertical-align: middle;
+    color: #409eff;
+}
+
+div[yui-switch][value='false'] > span[inactive-text] {
+    color: #409eff;
+}
+
+div[yui-switch][value='false'] > span[active-text] {
+    color: #303133;
+}
+
+div[yui-switch][disabled] {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+div[yui-switch][disabled] > span[inactive-text] {
+    cursor: not-allowed;
+}
+
+div[yui-switch][disabled] > span[switch] {
+    cursor: not-allowed;
+}
+
+div[yui-switch][disabled] > span[active-text] {
+    cursor: not-allowed;
+}
+
+/* ============================= switch end ============================= */
+
+
 /* ============================= table start ============================= */
 
 table[yui-table] {

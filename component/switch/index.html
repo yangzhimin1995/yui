@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - Switch 开关</title>
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_4lv9jsj494.css"/>
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        Switch 开关
+        <div class="desc">表示两种相互对立的状态间的切换，多用于触发「开/关」。</div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            基本用法
+        </div>
+        <div yui-switch class="my-switch">
+            <span switch></span>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            文字描述
+        </div>
+        <div style="margin:10px 0 30px">
+            <div yui-switch value="false">
+                <span inactive-text>按年付费</span>
+                <span switch></span>
+                <span active-text>按月付费</span>
+            </div>
+        </div>
+        <div yui-switch change="mySwitchChange">
+            <span inactive-text>关闭</span>
+            <span switch></span>
+            <span active-text>开启</span>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            禁用状态
+        </div>
+        <div yui-switch disabled>
+            <span switch></span>
+        </div>
+        <div yui-switch disabled value="false">
+            <span switch></span>
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="../../yui/js/index.js"></script>
+<script>
+    function mySwitchChange(value) {
+        if (value) {
+            yui.message.success('成功关闭')
+        } else {
+            yui.message.danger('权限不足');
+            return false
+        }
+    }
+</script>
+<style>
+    div.my-switch > span[switch] {
+        background-color: #13CE66;
+    }
+
+    div[value='false'].my-switch > span[switch] {
+        background-color: #FF4949;
+    }
+</style>
+</html>

@@ -41,6 +41,7 @@ function yuiFunc_init() {
     yuiFunc_getScrollbarWidth();
     yuiCheckbox_init();
     yuiRadio_init();
+    yuiSwitch_init();
 }
 
 /** ================================= 等待dom加载完成 end =================================*/
@@ -391,3 +392,64 @@ function yuiRadioData(id) {
 }
 
 /** ================================= radio end =================================*/
+
+
+/** ================================= switch start =================================*/
+
+function yuiSwitch_init() {
+    const dom = document.querySelectorAll(`div[yui-switch]`);
+    dom.forEach(yuiSwitchDom => {
+        yuiSwitch_handleValueInit(yuiSwitchDom);
+        const {change, disabled} = yuiFunc_getAttributes(yuiSwitchDom, ['change', 'disabled']);
+        if (disabled !== null) {
+            return
+        }
+        const inactiveTextDom = yuiSwitchDom.querySelector('span[inactive-text]');
+        const activeTextDom = yuiSwitchDom.querySelector('span[active-text]');
+        yuiSwitch_handleTextClick(yuiSwitchDom, inactiveTextDom, 'false', change);
+        yuiSwitch_handleTextClick(yuiSwitchDom, activeTextDom, 'true', change);
+        const switchDom = yuiSwitchDom.querySelector('span[switch]');
+        yuiSwitch_handleSwitchClick(yuiSwitchDom, switchDom, change);
+    })
+}
+
+function yuiSwitch_handleValueInit(dom) {
+    const {value} = yuiFunc_getAttributes(dom, ['value']);
+    if (value !== 'true' && value !== 'false') {
+        yuiFunc_setAttributes(dom, {'value': 'true'})
+    }
+}
+
+function yuiSwitch_handleTextClick(dom, textDom, state, change) {
+    if (!textDom) {
+        return
+    }
+    textDom.addEventListener('click', function () {
+        const {value} = yuiFunc_getAttributes(dom, ['value']);
+        let flag = true;
+        if (change) {
+            flag = eval(change + `(${value === 'true'})`)
+        }
+        if (flag !== false) {
+            if (value !== state) {
+                yuiFunc_setAttributes(dom, {'value': state})
+            }
+        }
+    })
+}
+
+function yuiSwitch_handleSwitchClick(dom, switchDom, change) {
+    switchDom.addEventListener('click', function () {
+        const {value} = yuiFunc_getAttributes(dom, ['value']);
+        let flag = true;
+        if (change) {
+            flag = eval(change + `(${value === 'true'})`)
+        }
+        if (flag !== false) {
+            const state = value === 'true' ? 'false' : 'true';
+            yuiFunc_setAttributes(dom, {'value': state})
+        }
+    })
+}
+
+/** ================================= switch end =================================*/
