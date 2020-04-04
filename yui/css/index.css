@@ -874,8 +874,8 @@ div[yui-radio-group][size='mini'] > a[yui-radio-button] {
 /* ============================= switch start ============================= */
 
 div[yui-switch] {
-    display: inline-flex;
-    align-items: center;
+    display: inline-block;
+    line-height: 20px;
 }
 
 div[yui-switch] > span[switch] {
@@ -906,7 +906,6 @@ div[yui-switch] > span[switch]:before {
 }
 
 div[yui-switch][value='false'] > span[switch] {
-    /*border-color: #FF4949;*/
     background-color: #dcdfe6;
 }
 
