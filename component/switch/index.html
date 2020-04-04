@@ -19,8 +19,11 @@
         <div class="title">
             基本用法
         </div>
-        <div yui-switch class="my-switch">
+        <div yui-switch id="my-switch">
             <span switch></span>
+        </div>
+        <div style="margin-top: 16px">
+            <a onclick="getSwitchValue()" type="primary" yui-button plain>获取Switch值</a>
         </div>
     </div>
 
@@ -35,7 +38,7 @@
                 <span active-text>按月付费</span>
             </div>
         </div>
-        <div yui-switch change="mySwitchChange">
+        <div yui-switch change="mySwitchChange" class="my-switch">
             <span inactive-text>关闭</span>
             <span switch></span>
             <span active-text>开启</span>
@@ -60,11 +63,15 @@
 <script>
     function mySwitchChange(value) {
         if (value) {
-            yui.message.success('成功关闭')
+            yui.message.danger('已关闭')
         } else {
-            yui.message.danger('权限不足');
-            return false
+            yui.message.success('已开启')
         }
+    }
+
+    function getSwitchValue() {
+        const value = yuiSwitchData('my-switch');
+        yui.message[value ? 'success' : 'danger'](`开关状态：${value ? '开启' : '关闭'}`)
     }
 </script>
 <style>
@@ -74,6 +81,14 @@
 
     div[value='false'].my-switch > span[switch] {
         background-color: #FF4949;
+    }
+
+    div.my-switch > span[active-text] {
+        color: #13CE66;
+    }
+
+    div[value='false'].my-switch > span[inactive-text] {
+        color: #FF4949;
     }
 </style>
 </html>

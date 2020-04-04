@@ -452,4 +452,13 @@ function yuiSwitch_handleSwitchClick(dom, switchDom, change) {
     })
 }
 
+function yuiSwitchData(id) {
+    const dom = document.querySelector(`div[yui-switch][id=${id}]`);
+    if (!dom) {
+        return
+    }
+    const {value} = yuiFunc_getAttributes(dom, ['value']);
+    return value === 'true';
+}
+
 /** ================================= switch end =================================*/
