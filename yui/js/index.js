@@ -238,12 +238,13 @@ function yuiCheckbox_handleClick(checkboxDom, change) {
     const {disabled, value} = yuiFunc_getAttributes(checkboxDom, ['disabled', 'value']);
     if (disabled === null) {
         checkboxDom.addEventListener('click', function () {
+            const {checked} = yuiFunc_getAttributes(checkboxDom, ['checked']);
             let flag = true;
             if (change) {
-                flag = eval(change + `(value)`);
+                const state = checked !== null;
+                flag = eval(change + `(value,state)`);
             }
             if (flag !== false) {
-                const {checked} = yuiFunc_getAttributes(checkboxDom, ['checked']);
                 if (checked === null) {
                     yuiFunc_setAttributes(checkboxDom, {'checked': ''})
                 } else {
