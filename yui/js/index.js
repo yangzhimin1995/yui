@@ -39,6 +39,7 @@ if (document.readyState !== 'loading') {
 
 function yuiFunc_init() {
     yuiFunc_getScrollbarWidth();
+    yuiBackTop_init();
     yuiCheckbox_init();
     yuiRadio_init();
     yuiSwitch_init();
@@ -213,6 +214,45 @@ function yuiFunc_setStyles(dom, styles = {}) {
 }
 
 /** ================================= 全局方法 end =================================*/
+
+
+/** ================================= backTop start =================================*/
+
+function yuiBackTop_init() {
+    const dom = document.querySelector('div[yui-back-top]');
+    if (dom) {
+        yuiBackTop_handleClick(dom);
+        let top = document.documentElement.scrollTop;
+        let isHide = top === 0;
+        if (top > 0) {
+            yuiFunc_setStyles(dom, {opacity: '1', visibility: 'visible'});
+        } else {
+            yuiFunc_setStyles(dom, {opacity: '0', visibility: 'hidden'});
+        }
+        window.onscroll = function () {
+            top = document.documentElement.scrollTop;
+            if (top > 0 && isHide) {
+                yuiFunc_setStyles(dom, {opacity: '1', visibility: 'visible'});
+                isHide = false
+            }
+            if (top === 0) {
+                yuiFunc_setStyles(dom, {opacity: '0', visibility: 'hidden'});
+                isHide = true
+            }
+        }
+    }
+}
+
+function yuiBackTop_handleClick(dom) {
+    dom.addEventListener('click', function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    })
+}
+
+/** ================================= backTop end =================================*/
 
 
 /** ================================= checkbox start =================================*/
