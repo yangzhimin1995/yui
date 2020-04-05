@@ -321,6 +321,17 @@ function yuiCheckboxData(id) {
 
 const yuiLoadingSI = {};
 
+function yuiLoading(id) {
+    const dom = document.querySelector(`div[yui-loading][id=${id}]`);
+    const {modalDom, contentDom, iconDom, textDom} = yuiLoading_getModalDom(dom);
+    yuiLoading_showLoading(id, modalDom, iconDom);
+}
+
+function yuiLoadingClose(id) {
+    const dom = document.querySelector(`div[yui-loading][id=${id}]`);
+    yuiLoading_closeLoading(id, dom)
+}
+
 function yuiPageLoading() {
     let dom = document.querySelector(`div[yui-loading][page]`);
     if (!dom) {
@@ -330,13 +341,17 @@ function yuiPageLoading() {
     }
     yuiFunc_setStyles(dom, {visibility: 'visible'});
     const {modalDom, contentDom, iconDom, textDom} = yuiLoading_getModalDom(dom);
+    yuiFunc_scrollBarLocked();
     yuiLoading_showLoading('yui-page-loading-si', modalDom, iconDom);
 }
 
-function yuiLoading(id) {
-    const dom = document.querySelector(`div[yui-loading][id=${id}]`);
-    const {modalDom, contentDom, iconDom, textDom} = yuiLoading_getModalDom(dom);
-    yuiLoading_showLoading(id, modalDom, iconDom);
+function yuiPageLoadingClose() {
+    const dom = document.querySelector(`div[yui-loading][page]`);
+    yuiLoading_closeLoading('yui-page-loading-si', dom);
+    setTimeout(() => {
+        yuiFunc_scrollBarUnlocked();
+        yuiFunc_setStyles(dom, {visibility: 'hidden'});
+    }, 300)
 }
 
 function yuiLoading_showLoading(id, modalDom, iconDom) {
@@ -354,20 +369,7 @@ function yuiLoading_showLoading(id, modalDom, iconDom) {
     }, 10)
 }
 
-function yuiPageLoadingClose() {
-    const dom = document.querySelector(`div[yui-loading][page]`);
-    yuiLoading_close('yui-page-loading-si', dom);
-    setTimeout(() => {
-        yuiFunc_setStyles(dom, {visibility: 'hidden'});
-    }, 300)
-}
-
-function yuiLoadingClose(id) {
-    const dom = document.querySelector(`div[yui-loading][id=${id}]`);
-    yuiLoading_close(id, dom)
-}
-
-function yuiLoading_close(id, dom) {
+function yuiLoading_closeLoading(id, dom) {
     if (!yuiLoadingSI[id]) {
         return
     }
