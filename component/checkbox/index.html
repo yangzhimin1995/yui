@@ -44,7 +44,7 @@
     }
 
     function getCheckboxChecked() {
-        const data = yuiCheckboxData("my-checkbox");
+        const data = yui.checkbox.data("my-checkbox");
         yui.message.success(`选中：${JSON.stringify(data['checked'])}`, {effect: 'dark'});
         yuiMessage(`未选中：${JSON.stringify(data['unchecked'])}`, {effect: 'dark'});
     }

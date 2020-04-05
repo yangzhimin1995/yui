@@ -6,6 +6,27 @@ const yuiData_clientWidth = document.body.clientWidth;
 let yuiData_loadingSIJson = {};
 
 const yui = {
+    checkbox: {
+        data: (id) => {
+            return yuiCheckbox_getData(id)
+        }
+    },
+    loading: {
+        start: (id) => {
+            yuiLoading_start(id)
+        },
+        close: (id) => {
+            yuiLoading_close(id)
+        },
+        fullscreen: {
+            start: (id) => {
+                yuiLoading_fullscreenStart(id)
+            },
+            close: (id) => {
+                yuiLoading_fullscreenClose(id)
+            },
+        }
+    },
     message: {
         info: (message = '', option = {}) => {
             option['type'] = 'info';
@@ -23,7 +44,17 @@ const yui = {
             option['type'] = 'danger';
             yuiMessage(message, option)
         },
-    }
+    },
+    radio: {
+        data: (id) => {
+            return yuiRadio_getData(id)
+        }
+    },
+    switch: {
+        data: (id) => {
+            return yuiSwitch_getData(id)
+        }
+    },
 };
 
 if (document.readyState !== 'loading') {
@@ -296,7 +327,7 @@ function yuiCheckbox_handleClick(checkboxDom, change) {
     }
 }
 
-function yuiCheckboxData(id) {
+function yuiCheckbox_getData(id) {
     const dom = document.querySelector(`div[yui-checkbox-group][id=${id}]`);
     if (!dom) {
         return
@@ -321,18 +352,18 @@ function yuiCheckboxData(id) {
 
 const yuiLoadingSI = {};
 
-function yuiLoading(id) {
+function yuiLoading_start(id) {
     const dom = document.querySelector(`div[yui-loading][id=${id}]`);
     const {modalDom, contentDom, iconDom, textDom} = yuiLoading_getModalDom(dom);
     yuiLoading_showLoading(id, modalDom, iconDom);
 }
 
-function yuiLoadingClose(id) {
+function yuiLoading_close(id) {
     const dom = document.querySelector(`div[yui-loading][id=${id}]`);
     yuiLoading_closeLoading(id, dom)
 }
 
-function yuiPageLoading() {
+function yuiLoading_fullscreenStart() {
     let dom = document.querySelector(`div[yui-loading][page]`);
     if (!dom) {
         dom = document.createElement('div');
@@ -345,7 +376,7 @@ function yuiPageLoading() {
     yuiLoading_showLoading('yui-page-loading-si', modalDom, iconDom);
 }
 
-function yuiPageLoadingClose() {
+function yuiLoading_fullscreenClose() {
     const dom = document.querySelector(`div[yui-loading][page]`);
     yuiLoading_closeLoading('yui-page-loading-si', dom);
     setTimeout(() => {
@@ -509,7 +540,7 @@ function yuiRadio_changeChecked(radiosDom, dom) {
     yuiFunc_setAttributes(dom, {'checked': ''})
 }
 
-function yuiRadioData(id) {
+function yuiRadio_getData(id) {
     const dom = document.querySelector(`div[yui-radio-group][id=${id}]`);
     if (!dom) {
         return
@@ -590,7 +621,7 @@ function yuiSwitch_handleSwitchClick(dom, switchDom, change) {
     })
 }
 
-function yuiSwitchData(id) {
+function yuiSwitch_getData(id) {
     const dom = document.querySelector(`div[yui-switch][id=${id}]`);
     if (!dom) {
         return

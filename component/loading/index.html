@@ -20,8 +20,8 @@
             区域加载
         </div>
         <div>
-            <a yui-button type="primary" onclick="yuiLoading('my-loading')">开启加载</a>
-            <a yui-button onclick="yuiLoadingClose('my-loading')">关闭加载</a>
+            <a yui-button type="primary" onclick="yui.loading.start('my-loading');">开启加载</a>
+            <a yui-button onclick="yui.loading.close('my-loading');">关闭加载</a>
         </div>
         <div yui-loading id="my-loading">
             <table yui-table>
@@ -66,12 +66,12 @@
 </body>
 <script src="../../yui/js/index.js"></script>
 <script>
-    yuiLoading('my-loading');
+    yui.loading.start('my-loading');
 
     function openPageLoading() {
-        yuiPageLoading();
+        yui.loading.fullscreen.start();
         setTimeout(() => {
-            yuiPageLoadingClose()
+            yui.loading.fullscreen.close();
         }, 3000)
     }
 </script>
