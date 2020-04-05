@@ -322,10 +322,10 @@ function yuiCheckboxData(id) {
 const yuiLoadingSI = {};
 
 function yuiPageLoading() {
-    let dom = document.querySelector(`div[yui-page-loading]`);
+    let dom = document.querySelector(`div[yui-loading][page]`);
     if (!dom) {
         dom = document.createElement('div');
-        yuiFunc_setAttributes(dom, {'yui-page-loading': ''});
+        yuiFunc_setAttributes(dom, {'yui-loading': '', 'page': ''});
         document.body.appendChild(dom)
     }
     yuiFunc_setStyles(dom, {visibility: 'visible'});
@@ -355,7 +355,7 @@ function yuiLoading_showLoading(id, modalDom, iconDom) {
 }
 
 function yuiPageLoadingClose() {
-    const dom = document.querySelector(`div[yui-page-loading]`);
+    const dom = document.querySelector(`div[yui-loading][page]`);
     yuiLoading_close('yui-page-loading-si', dom);
     setTimeout(() => {
         yuiFunc_setStyles(dom, {visibility: 'hidden'});
