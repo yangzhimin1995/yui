@@ -698,6 +698,56 @@ a[yui-link][underline][type='danger']:hover:before {
 /* ============================= link end ============================= */
 
 
+/* ============================= loading start ============================= */
+
+div[yui-loading] {
+    position: relative;
+}
+
+div[yui-page-loading] {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+div[yui-loading] > div[modal],
+div[yui-page-loading] > div[modal] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(255, 255, 255, .8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+}
+
+div[yui-loading] > div[modal] > div[content],
+div[yui-page-loading] > div[modal] > div[content] {
+    text-align: center;
+    color: #409eff;
+    font-size: 14px;
+}
+
+div[yui-loading] > div[modal] > div[content] > i.yui-icon.loading,
+div[yui-page-loading] > div[modal] > div[content] > i.yui-icon.loading {
+    display: inline-block;
+}
+
+div[yui-loading] > div[modal] > div[content] > div[text],
+div[yui-page-loading] > div[modal] > div[content] > div[text] {
+    margin-top: 6px;
+}
+
+/* ============================= loading end ============================= */
+
+
 /* ============================= message start ============================= */
 
 div[yui-message-container] {

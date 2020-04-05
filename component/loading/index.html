@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - demo</title>
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_4lv9jsj494.css"/>
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        Loading 加载
+        <div class="desc">加载数据时显示动效。</div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            区域加载
+        </div>
+        <div>
+            <a yui-button type="primary" onclick="yuiLoading('my-loading')">开启加载</a>
+            <a yui-button onclick="yuiLoadingClose('my-loading')">关闭加载</a>
+        </div>
+        <div yui-loading id="my-loading">
+            <table yui-table>
+                <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>姓名</th>
+                    <th>地址</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>2016-05-02</td>
+                    <td>王小虎</td>
+                    <td>上海市普陀区金沙江路 1518 弄</td>
+                </tr>
+                <tr>
+                    <td>2016-05-02</td>
+                    <td>王小虎</td>
+                    <td>上海市普陀区金沙江路 1518 弄</td>
+                </tr>
+                <tr>
+                    <td>2016-05-02</td>
+                    <td>王小虎</td>
+                    <td>上海市普陀区金沙江路 1518 弄</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            全屏加载
+        </div>
+        <div>
+            <a yui-button type="primary" onclick="openPageLoading()">开启全屏加载，3s后自动关闭</a>
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="../../yui/js/index.js"></script>
+<script>
+    yuiLoading('my-loading');
+
+    function openPageLoading() {
+        yuiPageLoading();
+        setTimeout(() => {
+            yuiPageLoadingClose()
+        }, 3000)
+    }
+</script>
+</html>

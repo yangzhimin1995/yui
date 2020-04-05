@@ -317,6 +317,102 @@ function yuiCheckboxData(id) {
 /** ================================= checkbox end =================================*/
 
 
+/** ================================= loading start =================================*/
+
+const yuiLoadingSI = {};
+
+function yuiPageLoading() {
+    let dom = document.querySelector(`div[yui-page-loading]`);
+    if (!dom) {
+        dom = document.createElement('div');
+        yuiFunc_setAttributes(dom, {'yui-page-loading': ''});
+        document.body.appendChild(dom)
+    }
+    yuiFunc_setStyles(dom, {visibility: 'visible'});
+    const {modalDom, contentDom, iconDom, textDom} = yuiLoading_getModalDom(dom);
+    yuiLoading_showLoading('yui-page-loading-si', modalDom, iconDom);
+}
+
+function yuiLoading(id) {
+    const dom = document.querySelector(`div[yui-loading][id=${id}]`);
+    const {modalDom, contentDom, iconDom, textDom} = yuiLoading_getModalDom(dom);
+    yuiLoading_showLoading(id, modalDom, iconDom);
+}
+
+function yuiLoading_showLoading(id, modalDom, iconDom) {
+    if (yuiLoadingSI[id]) {
+        return
+    }
+    yuiFunc_setStyles(modalDom, {visibility: 'visible'});
+    let deg = 1;
+    yuiLoadingSI[id] = setInterval(() => {
+        yuiFunc_setStyles(iconDom, {transform: 'rotate(' + deg + 'deg)'});
+        deg++
+    });
+    setTimeout(() => {
+        yuiFunc_setStyles(modalDom, {opacity: '1'});
+    }, 10)
+}
+
+function yuiPageLoadingClose() {
+    const dom = document.querySelector(`div[yui-page-loading]`);
+    yuiLoading_close('yui-page-loading-si', dom);
+    setTimeout(() => {
+        yuiFunc_setStyles(dom, {visibility: 'hidden'});
+    }, 300)
+}
+
+function yuiLoadingClose(id) {
+    const dom = document.querySelector(`div[yui-loading][id=${id}]`);
+    yuiLoading_close(id, dom)
+}
+
+function yuiLoading_close(id, dom) {
+    if (!yuiLoadingSI[id]) {
+        return
+    }
+    const modalDom = dom.querySelector('div[modal]');
+    yuiFunc_setStyles(modalDom, {opacity: '0'});
+    setTimeout(() => {
+        yuiFunc_setStyles(modalDom, {visibility: 'hidden'});
+        clearInterval(yuiLoadingSI[id]);
+        delete yuiLoadingSI[id]
+    }, 300)
+}
+
+function yuiLoading_getModalDom(dom) {
+    const modalDom = dom.querySelector('div[modal]');
+    if (modalDom) {
+        const contentDom = modalDom.querySelector('div[content]');
+        const iconDom = modalDom.querySelector('i.yui-icon.loading');
+        const textDom = modalDom.querySelector('div[text]');
+        return {modalDom, contentDom, iconDom, textDom}
+    } else {
+        const {modalDom, contentDom, iconDom, textDom} = yuiLoading_createModalDom();
+        dom.appendChild(modalDom);
+        return {modalDom, contentDom, iconDom, textDom}
+    }
+}
+
+function yuiLoading_createModalDom() {
+    const modalDom = document.createElement('div');
+    yuiFunc_setAttributes(modalDom, {modal: ''});
+    const contentDom = document.createElement('div');
+    yuiFunc_setAttributes(contentDom, {content: ''});
+    const iconDom = document.createElement('i');
+    yuiFunc_setClasses(iconDom, ['yui-icon', 'loading']);
+    const textDom = document.createElement('div');
+    yuiFunc_setAttributes(textDom, {text: ''});
+    textDom.innerText = '加载中';
+    contentDom.appendChild(iconDom);
+    contentDom.appendChild(textDom);
+    modalDom.appendChild(contentDom);
+    return {modalDom, contentDom, iconDom, textDom}
+}
+
+/** ================================= loading end =================================*/
+
+
 /** ================================= message start =================================*/
 
 function yuiMessage(message = '', options = {}) {
