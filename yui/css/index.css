@@ -834,6 +834,7 @@ div[yui-menu] {
     display: flex;
     box-sizing: border-box;
     justify-content: space-between;
+    z-index: 2020;
 }
 
 div[yui-menu] > div[left] {
@@ -860,15 +861,22 @@ div[yui-menu] a[menu-item] {
     border-style: solid;
     border-color: transparent;
     border-width: 0 0 2px 0;
+    display: block;
+    text-align: center;
 }
 
-div[yui-menu] a[menu-item]:hover {
+div[yui-menu] a[menu-item]:hover,
+div[yui-menu] div[submenu]:hover > a[menu-item] {
     color: #409eff;
 }
 
 div[yui-menu] a[menu-item][checked] {
     color: #409eff;
     border-bottom-color: #409eff;
+}
+
+div[yui-menu] a[menu-item][text-checked] {
+    color: #409eff;
 }
 
 div[yui-menu] a[menu-item][disabled] {
@@ -886,26 +894,29 @@ div[yui-menu] a[menu-item][only-text] {
     cursor: text;
 }
 
-div[yui-menu][effect='dark'] {
-    background-color: #545C64;
+div[yui-menu] div[submenu] {
+    position: relative;
 }
 
-div[yui-menu][effect='dark'] a[menu-item] {
-    color: #fff;
+div[yui-menu] div[submenu] div[panel] {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    min-width: 100%;
+    z-index: 2021;
+    border: none;
+    padding: 5px 0;
+    border-radius: 0 0 2px 2px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    background-color: white;
+    display: none;
+    opacity: 0;
+    transition: .3s;
+    overflow: hidden;
 }
 
-div[yui-menu][effect='dark'] a[menu-item]:not([only-text]):hover {
-    color: #fff;
-    background-color: #434A50;
-}
-
-div[yui-menu][effect='dark'] a[menu-item][checked] {
-    color: #FFD04B;
-    border-bottom-color: #FFD04B;
-}
-
-div[yui-menu][effect='dark'] a[menu-item][only-text] {
-    cursor: text;
+div[yui-menu] div[submenu] div[panel] > a[menu-item] {
+    padding: 10px;
 }
 
 /* ============================= menu end ============================= */

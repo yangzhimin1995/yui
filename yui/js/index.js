@@ -91,6 +91,7 @@ function yuiFunc_init() {
     yuiBackTop_init();
     yuiCheckbox_init();
     yuiDialog_init();
+    yuiMenu_init();
     yuiRadio_init();
     yuiSwitch_init();
 }
@@ -537,6 +538,46 @@ function yuiLoading_createModalDom() {
 }
 
 /** ================================= loading end =================================*/
+
+
+/** ================================= menu start =================================*/
+
+function yuiMenu_init() {
+    const dom = document.querySelectorAll('div[yui-menu] div[submenu]');
+    dom.forEach(submenuDom => {
+        const panelDom = submenuDom.querySelector('div[panel]');
+        let hideTO;
+        submenuDom.addEventListener('mouseenter', function () {
+            if (hideTO) {
+                clearTimeout(hideTO);
+            }
+            yuiMenu_hidePanel(dom);
+            yuiFunc_setStyles(panelDom, {display: 'block'});
+            const height = panelDom.clientHeight;
+            yuiFunc_setStyles(panelDom, {height: '0px'});
+            setTimeout(() => {
+                yuiFunc_setStyles(panelDom, {height: height - 10 + 'px', opacity: '1'});
+            }, 10)
+        });
+        submenuDom.addEventListener('mouseleave', function () {
+            hideTO = setTimeout(() => {
+                yuiFunc_setStyles(panelDom, {height: '0px', opacity: '0'});
+                hideTO = setTimeout(() => {
+                    yuiFunc_setStyles(panelDom, {display: 'none', height: ''})
+                }, 300)
+            }, 200);
+        })
+    })
+}
+
+function yuiMenu_hidePanel(dom) {
+    dom.forEach(submenuDom => {
+        const panelDom = submenuDom.querySelector('div[panel]');
+        yuiFunc_setStyles(panelDom, {display: 'none', height: ''})
+    })
+}
+
+/** ================================= menu end =================================*/
 
 
 /** ================================= message start =================================*/
