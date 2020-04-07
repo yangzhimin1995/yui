@@ -56,11 +56,11 @@ const yui = {
     messageBox: {
         alert: (message = '', title = '提示', options = {}) => {
             options['showCancelBtn'] = false;
-            yuiMessageBox(message, title, options)
+            return yuiMessageBox(message, title, options)
         },
         confirm: (message = '', title = '提示', options = {}) => {
             options['showCancelBtn'] = true;
-            yuiMessageBox(message, title, options)
+            return yuiMessageBox(message, title, options)
         },
     },
     radio: {
@@ -615,9 +615,28 @@ function yuiMessageBox(message = '', title = '提示', options = {}) {
     dom.appendChild(footerDom);
     yuiMessageBox_show(modalDom, dom);
     const callback = options['callback'];
-    yuiMessageBox_handleClick(modalDom, dom, closeIconDom, 'close', callback);
-    yuiMessageBox_handleClick(modalDom, dom, confirmBtnDom, 'confirm', callback);
-    yuiMessageBox_handleClick(modalDom, dom, cancelBtnDom, 'cancel', callback);
+    if (callback) {
+        yuiMessageBox_handleClick(modalDom, dom, closeIconDom, 'close', callback);
+        yuiMessageBox_handleClick(modalDom, dom, confirmBtnDom, 'confirm', callback);
+        yuiMessageBox_handleClick(modalDom, dom, cancelBtnDom, 'cancel', callback);
+        return
+    }
+    return new Promise(function (resolve, reject) {
+        closeIconDom.addEventListener('click', function () {
+            yuiMessageBox_close(modalDom, dom);
+            reject('close')
+        });
+        confirmBtnDom.addEventListener('click', function () {
+            yuiMessageBox_close(modalDom, dom);
+            resolve('confirm')
+        });
+        if (cancelBtnDom) {
+            cancelBtnDom.addEventListener('click', function () {
+                yuiMessageBox_close(modalDom, dom);
+                reject('cancel')
+            })
+        }
+    });
 }
 
 function yuiMessageBox_handleClick(modalDom, dom, clickDom, text, callback) {
