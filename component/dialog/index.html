@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - Dialog 对话框</title>
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_4lv9jsj494.css"/>
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        Dialog 对话框
+        <div class="desc">在保留当前页面状态的情况下，告知用户并承载相关操作。</div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            基本用法
+        </div>
+        <a yui-button type="text" onclick="yui.dialog.open('my-dialog')">点击打开Dialog</a>
+        <div yui-dialog id="my-dialog" align-center>
+            <div header>
+                <div title>提示</div>
+                <i class="yui-icon closed" onclick="yui.dialog.close('my-dialog')"></i>
+            </div>
+            <div body>这是一段信息</div>
+            <div footer>
+                <a yui-button type="primary" onclick="yui.dialog.close('my-dialog')">确定</a>
+                <a yui-button onclick="yui.dialog.close('my-dialog')">取消</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            全屏Dialog
+        </div>
+        <a yui-button type="text" onclick="yui.dialog.open('fullscreen-dialog')">点击打开全屏Dialog</a>
+        <div yui-dialog id="fullscreen-dialog" fullscreen>
+            <div header>
+                <div title>提示</div>
+                <i class="yui-icon closed" onclick="yui.dialog.close('fullscreen-dialog')"></i>
+            </div>
+            <div body>
+                这是一段信息
+            </div>
+            <div footer>
+                <a yui-button type="primary" onclick="yui.dialog.close('fullscreen-dialog')">确定</a>
+                <a yui-button onclick="yui.dialog.close('fullscreen-dialog')">取消</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="../../yui/js/index.js"></script>
+</html>

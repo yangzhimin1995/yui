@@ -11,6 +11,14 @@ const yui = {
             return yuiCheckbox_getData(id)
         }
     },
+    dialog: {
+        open: (id) => {
+            yuiDialog_show(id);
+        },
+        close: (id) => {
+            yuiDialog_close(id);
+        }
+    },
     loading: {
         start: (id) => {
             yuiLoading_start(id)
@@ -72,6 +80,7 @@ function yuiFunc_init() {
     yuiFunc_getScrollbarWidth();
     yuiBackTop_init();
     yuiCheckbox_init();
+    yuiDialog_init();
     yuiRadio_init();
     yuiSwitch_init();
 }
@@ -348,6 +357,76 @@ function yuiCheckbox_getData(id) {
 /** ================================= checkbox end =================================*/
 
 
+/** ================================= dialog start =================================*/
+
+function yuiDialog_init() {
+    const dom = document.querySelectorAll('div[yui-dialog]');
+    dom.forEach(dialogDom => {
+        const {id, fullscreen} = yuiFunc_getAttributes(dialogDom, ['id', 'fullscreen']);
+        if (fullscreen !== null) {
+            return
+        }
+        const modalDom = document.createElement('div');
+        yuiFunc_setAttributes(modalDom, {'yui-modal': '', id: id + '__modal'});
+        modalDom.appendChild(dialogDom);
+        yuiFunc_setStyles(dialogDom, {display: 'block'});
+        document.body.appendChild(modalDom);
+    })
+}
+
+function yuiDialog_show(id) {
+    const dom = document.querySelector(`div[yui-modal][id=${id}__modal]`);
+    if (!dom) {
+        yuiDialog_showFullscreen(id);
+        return
+    }
+    const dialogDom = dom.querySelector(`div[yui-dialog][id=${id}]`);
+    yuiFunc_setStyles(dom, {display: 'flex'});
+    setTimeout(() => {
+        yuiFunc_setStyles(dom, {opacity: '1'});
+        yuiFunc_setStyles(dialogDom, {top: '15vh'});
+    })
+}
+
+function yuiDialog_showFullscreen(id) {
+    const dom = document.querySelector(`div[yui-dialog][fullscreen][id=${id}]`);
+    if (!dom) {
+        return
+    }
+    yuiFunc_setStyles(dom, {display: 'block'});
+    setTimeout(() => {
+        yuiFunc_setStyles(dom, {opacity: '1', top: '0'});
+    })
+}
+
+function yuiDialog_close(id) {
+    const dom = document.querySelector(`div[yui-modal][id=${id}__modal]`);
+    if (!dom) {
+        yuiDialog_closeFullscreen(id);
+        return
+    }
+    const dialogDom = dom.querySelector(`div[yui-dialog][id=${id}]`);
+    yuiFunc_setStyles(dom, {opacity: '0'});
+    yuiFunc_setStyles(dialogDom, {top: ''});
+    setTimeout(() => {
+        yuiFunc_setStyles(dom, {display: 'none'});
+    }, 300)
+}
+
+function yuiDialog_closeFullscreen(id) {
+    const dom = document.querySelector(`div[yui-dialog][fullscreen][id=${id}]`);
+    if (!dom) {
+        return
+    }
+    yuiFunc_setStyles(dom, {opacity: '0', top: ''});
+    setTimeout(() => {
+        yuiFunc_setStyles(dom, {display: 'none'});
+    }, 300)
+}
+
+/** ================================= dialog end =================================*/
+
+
 /** ================================= loading start =================================*/
 
 const yuiLoadingSI = {};
@@ -364,21 +443,21 @@ function yuiLoading_close(id) {
 }
 
 function yuiLoading_fullscreenStart() {
-    let dom = document.querySelector(`div[yui-loading][page]`);
+    let dom = document.querySelector(`div[yui-loading][fullscreen]`);
     if (!dom) {
         dom = document.createElement('div');
-        yuiFunc_setAttributes(dom, {'yui-loading': '', 'page': ''});
+        yuiFunc_setAttributes(dom, {'yui-loading': '', 'fullscreen': ''});
         document.body.appendChild(dom)
     }
     yuiFunc_setStyles(dom, {visibility: 'visible'});
     const {modalDom, contentDom, iconDom, textDom} = yuiLoading_getModalDom(dom);
     yuiFunc_scrollBarLocked();
-    yuiLoading_showLoading('yui-page-loading-si', modalDom, iconDom);
+    yuiLoading_showLoading('yui-fullscreen-loading-si', modalDom, iconDom);
 }
 
 function yuiLoading_fullscreenClose() {
-    const dom = document.querySelector(`div[yui-loading][page]`);
-    yuiLoading_closeLoading('yui-page-loading-si', dom);
+    const dom = document.querySelector(`div[yui-loading][fullscreen]`);
+    yuiLoading_closeLoading('yui-fullscreen-loading-si', dom);
     setTimeout(() => {
         yuiFunc_scrollBarUnlocked();
         yuiFunc_setStyles(dom, {visibility: 'hidden'});
