@@ -950,7 +950,7 @@ div[yui-message-box] > div[body] {
 
 div[yui-message-box] > div[body] > i.yui-icon {
     margin-right: 8px;
-    font-size: 18px;
+    font-size: 22px;
     color: #909399;
 }
 
@@ -969,6 +969,10 @@ div[yui-message-box][type='danger'] > div[body] > i.yui-icon {
 div[yui-message-box] > div[footer] {
     text-align: right;
     padding: 5px 15px 0;
+}
+
+div[yui-message-box] > div[footer] > a[yui-button] {
+    margin-left: 6px;
 }
 
 /* ============================= messageBox end ============================= */

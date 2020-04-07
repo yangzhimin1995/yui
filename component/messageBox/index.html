@@ -25,12 +25,31 @@
             点击打开 Message Box
         </a>
     </div>
+
+    <div class="page-module">
+        <div class="title">
+            确认消息
+        </div>
+        <a yui-button type="text" onclick="openConfirm()">
+            点击打开 Message Box
+        </a>
+    </div>
+
 </div>
 </body>
 <script src="../../yui/js/index.js"></script>
 <script>
     function openAlert() {
         yui.messageBox.alert('这是一段内容', '标题名称', {
+            callback: action => {
+                yui.message.info(`action: ${action}`)
+            }
+        });
+    }
+
+    function openConfirm() {
+        yui.messageBox.confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+            type: 'warning',
             callback: action => {
                 yui.message.info(`action: ${action}`)
             }

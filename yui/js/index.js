@@ -57,7 +57,11 @@ const yui = {
         alert: (message = '', title = '提示', options = {}) => {
             options['showCancelBtn'] = false;
             yuiMessageBox(message, title, options)
-        }
+        },
+        confirm: (message = '', title = '提示', options = {}) => {
+            options['showCancelBtn'] = true;
+            yuiMessageBox(message, title, options)
+        },
     },
     radio: {
         data: (id) => {
@@ -692,7 +696,7 @@ function yuiMessageBox_createHeaderDom(title) {
     return {headerDom, closeIconDom};
 }
 
-function yuiMessageBox_createDom(modalDom, type) {
+function yuiMessageBox_createDom(type) {
     const dom = document.createElement('div');
     const domAttrs = {'yui-message-box': ''};
     if (type) {
