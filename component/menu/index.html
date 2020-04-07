@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - demo</title>
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_4lv9jsj494.css"/>
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        NavMenu 导航菜单
+        <div class="desc">为网站提供导航功能的菜单。</div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            顶栏
+        </div>
+        <div yui-menu>
+            <div left>
+                <a href="#" menu-item checked>处理中心</a>
+                <a href="#" menu-item submenu-title>
+                    我的工作台
+                </a>
+                <a href="#" menu-item disabled>消息中心</a>
+                <a href="#" menu-item>订单管理</a>
+            </div>
+            <div right>
+                <a href="#" menu-item>登录</a>
+                <a href="#" menu-item>注册</a>
+                <a style="margin-left: auto" menu-item only-text>联系方式：123456</a>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 30px">
+            <div yui-menu effect="dark">
+                <div left>
+                    <a href="#" menu-item checked>处理中心</a>
+                    <a href="#" menu-item submenu-title>
+                        我的工作台
+                    </a>
+                    <a href="#" menu-item disabled>消息中心</a>
+                    <a href="#" menu-item>订单管理</a>
+                </div>
+                <div right>
+                    <a href="#" menu-item>登录</a>
+                    <a href="#" menu-item>注册</a>
+                    <a style="margin-left: auto" menu-item only-text>联系方式：123456</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="../../yui/js/index.js"></script>
+</html>
