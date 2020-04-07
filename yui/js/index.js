@@ -382,6 +382,7 @@ function yuiDialog_show(id) {
     }
     const dialogDom = dom.querySelector(`div[yui-dialog][id=${id}]`);
     yuiFunc_setStyles(dom, {display: 'flex'});
+    yuiFunc_scrollBarLocked();
     setTimeout(() => {
         yuiFunc_setStyles(dom, {opacity: '1'});
         yuiFunc_setStyles(dialogDom, {top: '15vh'});
@@ -393,6 +394,7 @@ function yuiDialog_showFullscreen(id) {
     if (!dom) {
         return
     }
+    yuiFunc_scrollBarLocked();
     yuiFunc_setStyles(dom, {display: 'block'});
     setTimeout(() => {
         yuiFunc_setStyles(dom, {opacity: '1', top: '0'});
@@ -410,6 +412,7 @@ function yuiDialog_close(id) {
     yuiFunc_setStyles(dialogDom, {top: ''});
     setTimeout(() => {
         yuiFunc_setStyles(dom, {display: 'none'});
+        yuiFunc_scrollBarUnlocked();
     }, 300)
 }
 
@@ -421,6 +424,7 @@ function yuiDialog_closeFullscreen(id) {
     yuiFunc_setStyles(dom, {opacity: '0', top: ''});
     setTimeout(() => {
         yuiFunc_setStyles(dom, {display: 'none'});
+        yuiFunc_scrollBarUnlocked();
     }, 300)
 }
 
