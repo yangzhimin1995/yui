@@ -53,6 +53,12 @@ const yui = {
             yuiMessage(message, option)
         },
     },
+    messageBox: {
+        alert: (message = '', title = '提示', options = {}) => {
+            options['showCancelBtn'] = false;
+            yuiMessageBox(message, title, options)
+        }
+    },
     radio: {
         data: (id) => {
             return yuiRadio_getData(id)
@@ -583,6 +589,129 @@ function yuiMessage_getContainerDom() {
 }
 
 /** ================================= message end =================================*/
+
+
+/** ================================= messageBox start =================================*/
+
+function yuiMessageBox(message = '', title = '提示', options = {}) {
+    options = yuiFunc_json2Default(options, {
+        type: null,
+        showCancelBtn: false,
+        callback: null,
+    });
+    const modalDom = yuiMessageBox_createModalDom();
+    document.body.appendChild(modalDom);
+    const dom = yuiMessageBox_createDom(options['type']);
+    modalDom.appendChild(dom);
+    const {headerDom, closeIconDom} = yuiMessageBox_createHeaderDom(title);
+    dom.appendChild(headerDom);
+    const bodyDom = yuiMessageBox_createBodyDom(message, options['type']);
+    dom.appendChild(bodyDom);
+    const {footerDom, confirmBtnDom, cancelBtnDom} = yuiMessageBox_createFooterDom(options['showCancelBtn']);
+    dom.appendChild(footerDom);
+    yuiMessageBox_show(modalDom, dom);
+    const callback = options['callback'];
+    yuiMessageBox_handleClick(modalDom, dom, closeIconDom, 'close', callback);
+    yuiMessageBox_handleClick(modalDom, dom, confirmBtnDom, 'confirm', callback);
+    yuiMessageBox_handleClick(modalDom, dom, cancelBtnDom, 'cancel', callback);
+}
+
+function yuiMessageBox_handleClick(modalDom, dom, clickDom, text, callback) {
+    if (!clickDom) {
+        return
+    }
+    clickDom.addEventListener('click', function () {
+        let flag = true;
+        if (callback) {
+            flag = callback(text);
+        }
+        if (flag !== false) {
+            yuiMessageBox_close(modalDom, dom)
+        }
+    })
+}
+
+function yuiMessageBox_close(modalDom, dom) {
+    setTimeout(() => {
+        yuiFunc_setStyles(modalDom, {opacity: '0'});
+        yuiFunc_setStyles(dom, {top: '-20px'});
+    });
+    setTimeout(() => {
+        modalDom.remove();
+    }, 300)
+}
+
+function yuiMessageBox_show(modalDom, dom) {
+    setTimeout(() => {
+        yuiFunc_setStyles(modalDom, {opacity: '1'});
+        yuiFunc_setStyles(dom, {top: '0'});
+    })
+}
+
+function yuiMessageBox_createFooterDom(showCancelBtn) {
+    const footerDom = document.createElement('div');
+    yuiFunc_setAttributes(footerDom, {'footer': ''});
+    let cancelBtnDom;
+    if (showCancelBtn) {
+        cancelBtnDom = document.createElement('a');
+        yuiFunc_setAttributes(cancelBtnDom, {'yui-button': '', 'size': 'small'});
+        cancelBtnDom.innerText = '取消';
+        footerDom.appendChild(cancelBtnDom);
+    }
+    const confirmBtnDom = document.createElement('a');
+    yuiFunc_setAttributes(confirmBtnDom, {'yui-button': '', 'size': 'small', type: 'primary'});
+    confirmBtnDom.innerText = '确定';
+    footerDom.appendChild(confirmBtnDom);
+    return {footerDom, confirmBtnDom, cancelBtnDom};
+}
+
+function yuiMessageBox_createBodyDom(message, type) {
+    const bodyDom = document.createElement('div');
+    yuiFunc_setAttributes(bodyDom, {'body': ''});
+    if (type) {
+        const iconDom = document.createElement('i');
+        yuiFunc_setClasses(iconDom, ['yui-icon', `${type}`]);
+        bodyDom.appendChild(iconDom);
+    }
+    const messageDom = document.createElement('span');
+    messageDom.innerText = message;
+    bodyDom.appendChild(messageDom);
+    return bodyDom;
+}
+
+function yuiMessageBox_createHeaderDom(title) {
+    const headerDom = document.createElement('div');
+    yuiFunc_setAttributes(headerDom, {'header': ''});
+    const titleDom = document.createElement('div');
+    yuiFunc_setAttributes(titleDom, {'title': ''});
+    titleDom.innerText = title;
+    headerDom.appendChild(titleDom);
+    const closeIconDom = document.createElement('i');
+    yuiFunc_setClasses(closeIconDom, ['yui-icon', 'closed']);
+    headerDom.appendChild(closeIconDom);
+    return {headerDom, closeIconDom};
+}
+
+function yuiMessageBox_createDom(modalDom, type) {
+    const dom = document.createElement('div');
+    const domAttrs = {'yui-message-box': ''};
+    if (type) {
+        domAttrs['type'] = type;
+    }
+    yuiFunc_setAttributes(dom, domAttrs);
+    return dom;
+}
+
+function yuiMessageBox_createModalDom() {
+    const id = `yui-messageBox-modal__${yuiData_index++}`;
+    const dom = document.createElement('div');
+    yuiFunc_setAttributes(dom, {'yui-modal': '', id});
+    yuiFunc_setStyles(dom, {display: 'flex'});
+    document.body.appendChild(dom);
+    return dom
+}
+
+/** ================================= messageBox end =================================*/
 
 
 /** ================================= radio start =================================*/

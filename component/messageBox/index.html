@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - MessageBox 弹框</title>
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_4lv9jsj494.css"/>
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        MessageBox 弹框
+        <div class="desc">
+            模拟系统的消息提示框而实现的一套模态对话框组件，用于消息提示、确认消息和提交内容。
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            消息提示
+        </div>
+        <a yui-button type="text" onclick="openAlert()">
+            点击打开 Message Box
+        </a>
+    </div>
+</div>
+</body>
+<script src="../../yui/js/index.js"></script>
+<script>
+    function openAlert() {
+        yui.messageBox.alert('这是一段内容', '标题名称', {
+            callback: action => {
+                yui.message.info(`action: ${action}`)
+            }
+        });
+    }
+</script>
+</html>

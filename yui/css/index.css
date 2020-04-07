@@ -909,6 +909,70 @@ div[yui-message-container] > div[yui-message] > .yui-icon {
 /* ============================= message end ============================= */
 
 
+/* ============================= messageBox start ============================= */
+
+div[yui-message-box] {
+    width: 420px;
+    padding-bottom: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #ebeef5;
+    font-size: 18px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    text-align: left;
+    overflow: hidden;
+    align-self: center;
+    position: relative;
+    top: -20px;
+    transition: .3s;
+}
+
+div[yui-message-box] > div[header] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 15px 10px;
+}
+
+div[yui-message-box] > div[header] > i.yui-icon.closed {
+    cursor: pointer;
+}
+
+div[yui-message-box] > div[body] {
+    line-height: 24px;
+    color: #606266;
+    font-size: 14px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+}
+
+div[yui-message-box] > div[body] > i.yui-icon {
+    margin-right: 8px;
+    font-size: 18px;
+    color: #909399;
+}
+
+div[yui-message-box][type='success'] > div[body] > i.yui-icon {
+    color: #67c23a;
+}
+
+div[yui-message-box][type='warning'] > div[body] > i.yui-icon {
+    color: #e6a23c;
+}
+
+div[yui-message-box][type='danger'] > div[body] > i.yui-icon {
+    color: #f56c6c;
+}
+
+div[yui-message-box] > div[footer] {
+    text-align: right;
+    padding: 5px 15px 0;
+}
+
+/* ============================= messageBox end ============================= */
+
+
 /* ============================= radio start ============================= */
 
 div[yui-radio-group] {
