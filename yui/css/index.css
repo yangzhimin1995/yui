@@ -898,6 +898,11 @@ div[yui-menu] div[submenu] {
     position: relative;
 }
 
+div[yui-menu] div[submenu] i.yui-icon.arrow-down {
+    font-size: 12px;
+    margin-left: 3px;
+}
+
 div[yui-menu] div[submenu] div[panel] {
     position: absolute;
     left: 0;

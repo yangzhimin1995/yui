@@ -546,27 +546,40 @@ function yuiMenu_init() {
     const dom = document.querySelectorAll('div[yui-menu] div[submenu]');
     dom.forEach(submenuDom => {
         const panelDom = submenuDom.querySelector('div[panel]');
-        let hideTO;
-        submenuDom.addEventListener('mouseenter', function () {
-            if (hideTO) {
-                clearTimeout(hideTO);
-            }
-            yuiMenu_hidePanel(dom);
-            yuiFunc_setStyles(panelDom, {display: 'block'});
-            const height = panelDom.clientHeight;
-            yuiFunc_setStyles(panelDom, {height: '0px'});
-            setTimeout(() => {
-                yuiFunc_setStyles(panelDom, {height: height - 10 + 'px', opacity: '1'});
-            }, 10)
-        });
-        submenuDom.addEventListener('mouseleave', function () {
+        const menuItemDom = submenuDom.querySelector('a[menu-item]');
+        yuiMenu_handleMouseMove(dom, submenuDom, menuItemDom, panelDom);
+        const iconDom = document.createElement('i');
+        yuiFunc_setClasses(iconDom, ['yui-icon', 'arrow-down']);
+        menuItemDom.appendChild(iconDom)
+    })
+}
+
+function yuiMenu_handleMouseMove(dom, submenuDom, menuItemDom, panelDom) {
+    const {disabled} = yuiFunc_getAttributes(menuItemDom, ['disabled']);
+    debugger
+    if (disabled !== null) {
+        return
+    }
+    let hideTO;
+    submenuDom.addEventListener('mouseenter', function () {
+        if (hideTO) {
+            clearTimeout(hideTO);
+        }
+        yuiMenu_hidePanel(dom);
+        yuiFunc_setStyles(panelDom, {display: 'block'});
+        const height = panelDom.clientHeight;
+        yuiFunc_setStyles(panelDom, {height: '0px'});
+        setTimeout(() => {
+            yuiFunc_setStyles(panelDom, {height: height - 10 + 'px', opacity: '1'});
+        }, 10)
+    });
+    submenuDom.addEventListener('mouseleave', function () {
+        hideTO = setTimeout(() => {
+            yuiFunc_setStyles(panelDom, {height: '0px', opacity: '0'});
             hideTO = setTimeout(() => {
-                yuiFunc_setStyles(panelDom, {height: '0px', opacity: '0'});
-                hideTO = setTimeout(() => {
-                    yuiFunc_setStyles(panelDom, {display: 'none', height: ''})
-                }, 300)
-            }, 200);
-        })
+                yuiFunc_setStyles(panelDom, {display: 'none', height: ''})
+            }, 300)
+        }, 200);
     })
 }
 
