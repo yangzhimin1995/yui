@@ -1081,6 +1081,117 @@ div[yui-message-box] > div[footer] > a[yui-button] {
 /* ============================= messageBox end ============================= */
 
 
+/* ============================= popover start ============================= */
+
+div[yui-popover] {
+    display: inline-block;
+    position: relative;
+}
+
+div[yui-popover] > div[panel] {
+    position: absolute;
+    min-width: 150px;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #ebeef5;
+    padding: 12px;
+    z-index: 2000;
+    color: #606266;
+    line-height: 1.4;
+    text-align: justify;
+    font-size: 14px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    word-break: break-all;
+    transition: opacity .3s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+div[yui-popover] > div[panel] > div[title] {
+    color: #303133;
+    font-size: 16px;
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+div[arrow] {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 6px;
+    filter: drop-shadow(0 2px 12px rgba(0, 0, 0, .03));
+}
+
+div[arrow]:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 6px;
+}
+
+div[yui-popover] > div[panel][top] {
+    bottom: calc(100% + 8px);
+}
+
+div[yui-popover] div[arrow][top], div[yui-popover] div[arrow][top]:after {
+    border-bottom-width: 0;
+    border-top-color: #ebeef5;
+    bottom: -6px;
+}
+
+div[yui-popover] div[arrow][top]:after {
+    bottom: 1px;
+    border-top-color: #fff;
+    margin-left: -6px;
+}
+
+div[yui-popover] > div[panel][bottom] {
+    top: calc(100% + 8px);
+}
+
+div[yui-popover] div[arrow][bottom],
+div[yui-popover] div[arrow][bottom]:after {
+    border-top-width: 0;
+    border-bottom-color: #ebeef5;
+    top: -6px;
+}
+
+div[yui-popover] div[arrow][bottom]:after {
+    border-bottom-color: #fff;
+    top: 1px;
+    margin-left: -6px;
+}
+
+div[yui-popover] > div[panel][top][start],
+div[yui-popover] > div[panel][bottom][start] {
+    left: 0;
+}
+
+div[yui-popover] div[arrow][top][start],
+div[yui-popover] div[arrow][bottom][start] {
+    left: 6px;
+}
+
+div[yui-popover] > div[panel][top][end],
+div[yui-popover] > div[panel][bottom][end] {
+    right: 0;
+}
+
+div[yui-popover] div[arrow][top][end],
+div[yui-popover] div[arrow][bottom][end] {
+    right: 6px;
+}
+
+/* ============================= popover end ============================= */
+
+
 /* ============================= radio start ============================= */
 
 div[yui-radio-group] {

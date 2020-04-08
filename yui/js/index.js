@@ -92,6 +92,7 @@ function yuiFunc_init() {
     yuiCheckbox_init();
     yuiDialog_init();
     yuiMenu_init();
+    yuiPopover_init();
     yuiRadio_init();
     yuiSwitch_init();
 }
@@ -785,6 +786,75 @@ function yuiMessageBox_createModalDom() {
 }
 
 /** ================================= messageBox end =================================*/
+
+
+/** ================================= popover start =================================*/
+
+// const yuiData_placementArray = [
+//     'top-start', 'top', 'top-end',
+//     'bottom-start', 'bottom', 'bottom-end',
+//     'left-start', 'left', 'left-end',
+//     'right-start', 'right', 'right-end',
+// ];
+
+function yuiPopover_init() {
+    const dom = document.querySelectorAll('div[yui-popover]');
+    dom.forEach(popoverDom => {
+        let options = yuiFunc_getAttributes(popoverDom, ['placement', 'trigger']);
+        options = yuiFunc_json2Default(options, {
+            placement: 'bottom',
+            trigger: 'click'
+        });
+        yuiPopover_handleDom(popoverDom, options)
+    })
+}
+
+function yuiPopover_handleDom(dom, options) {
+    const panelDom = dom.querySelector('div[panel]');
+    const arrowDom = yuiPopover_createArrowDom(panelDom);
+    const placementArray = options['placement'].split('-');
+    yuiPopover_addPlacementAttrs(panelDom, arrowDom, placementArray);
+    yuiPopover_handleClick(dom, panelDom, options['trigger']);
+}
+
+function yuiPopover_handleClick(dom, panelDom, trigger) {
+    if (trigger === 'click') {
+        dom.addEventListener('click', function () {
+            yuiPopover_show(panelDom);
+        });
+        document.body.addEventListener('mousedown', function () {
+            yuiPopover_hide(panelDom)
+        })
+    }
+}
+
+function yuiPopover_show(dom) {
+    yuiFunc_setStyles(dom, {opacity: '1', visibility: 'visible'})
+}
+
+function yuiPopover_hide(dom) {
+    yuiFunc_setStyles(dom, {opacity: '0', visibility: 'hidden'})
+}
+
+function yuiPopover_createArrowDom(dom) {
+    const arrowDom = document.createElement('div');
+    yuiFunc_setAttributes(arrowDom, {'arrow': ''});
+    dom.appendChild(arrowDom);
+    return arrowDom;
+}
+
+
+function yuiPopover_addPlacementAttrs(panelDom, arrowDom, array) {
+    let json = {};
+    array.forEach(item => {
+        json[item] = '';
+    });
+    debugger
+    yuiFunc_setAttributes(panelDom, json);
+    yuiFunc_setAttributes(arrowDom, json);
+}
+
+/** ================================= popover end =================================*/
 
 
 /** ================================= radio start =================================*/
