@@ -6,22 +6,96 @@
     <link rel="icon" type="image/x-icon" href="./static/images/logo.png"/>
 </head>
 <body>
-<canvas></canvas>
+<div class="title">
+    yui - Element UI 部分组件的HTML使用
+    <div class="btn">
+        <a href="#">
+            赞助
+        </a>
+        <a href="#">
+            Github
+        </a>
+        <a href="/yui/component/alert" class="icon-list">
+            开始
+            <span style="margin-left: 3px">》</span>
+            <span>》</span>
+            <span>》</span>
+            <span>》</span>
+            <span>》</span>
+            <span>》</span>
+        </a>
+    </div>
+</div>
 </body>
 <style>
     body {
         background-color: black;
         overflow: hidden;
+        color: #fff;
+        text-align: center;
+        min-width: 1200px;
     }
 
     canvas {
         width: 100%;
+        position: fixed;
+        height: 100%;
+        left: 0;
+        top: 0;
+        min-width: 1200px;
+        z-index: -1;
+    }
+
+    .title {
+        position: relative;
+        font-size: 28px;
+        margin-top: 6%;
+        min-width: 1200px;
+    }
+
+    .title .btn {
+        margin-top: 3%;
+    }
+
+    .title .btn a {
+        font-size: 18px;
+        color: #fff;
+        text-decoration: none;
+        margin: 0 2%;
+        cursor: pointer;
+    }
+
+    .title .btn a.icon-list > span {
+        font-size: 12px;
+        position: relative;
+        top: -2px;
+        color: #8c939d;
     }
 </style>
 <script>
-    'use strict';
+    let index = 0;
+    const iconListDom = document.querySelectorAll('a.icon-list>span');
+    iconListDom[index].style.color = '#FFF';
+    const length = iconListDom.length;
+    setInterval(() => {
+        index++;
+        if (index > length - 1) {
+            removeColor(iconListDom);
+            index = 0
+        }
+        iconListDom[index].style.color = '#FFF';
+    }, 130);
 
-    let canvas = document.querySelector('canvas');
+    function removeColor(dom) {
+        dom.forEach(item => {
+            item.style.color = '';
+        })
+    }
+</script>
+<script>
+    'use strict';
+    let canvas = document.createElement('canvas');
+    document.body.appendChild(canvas);
     let ctx = canvas.getContext('2d');
 
     let RESOLUTION = 1;
