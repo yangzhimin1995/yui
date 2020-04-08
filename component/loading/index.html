@@ -52,6 +52,40 @@
                 </tbody>
             </table>
         </div>
+        <pre><code class="html">
+        &lt;a yui-button type="primary" onclick="yui.loading.start('my-loading');"&gt;开启加载&lt;/a&gt;
+        &lt;a yui-button onclick="yui.loading.close('my-loading');"&gt;关闭加载&lt;/a&gt;
+
+
+        &lt;div yui-loading id="my-loading"&gt;
+            &lt;table yui-table&gt;
+                &lt;thead&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;日期&lt;/th&gt;
+                    &lt;th&gt;姓名&lt;/th&gt;
+                    &lt;th&gt;地址&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;2016-05-02&lt;/td&gt;
+                    &lt;td&gt;王小虎&lt;/td&gt;
+                    &lt;td&gt;上海市普陀区金沙江路 1518 弄&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;2016-05-02&lt;/td&gt;
+                    &lt;td&gt;王小虎&lt;/td&gt;
+                    &lt;td&gt;上海市普陀区金沙江路 1518 弄&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;2016-05-02&lt;/td&gt;
+                    &lt;td&gt;王小虎&lt;/td&gt;
+                    &lt;td&gt;上海市普陀区金沙江路 1518 弄&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;/tbody&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+        </code></pre>
     </div>
 
     <div class="page-module">
@@ -61,6 +95,20 @@
         <div>
             <a yui-button type="primary" onclick="openPageLoading()">开启全屏加载，3s后自动关闭</a>
         </div>
+        <pre><code class="html">
+        &lt;a yui-button type="primary" onclick="openPageLoading()"&gt;开启全屏加载，3s后自动关闭&lt;/a&gt;
+
+        &lt;script&gt;
+
+            function openPageLoading() {
+                yui.loading.fullscreen.start();
+                setTimeout(() => {
+                    yui.loading.fullscreen.close();
+                }, 3000)
+            }
+
+        &lt;/script&gt;
+        </code></pre>
     </div>
 
 </div>

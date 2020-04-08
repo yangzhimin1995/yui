@@ -32,6 +32,21 @@
                 <a yui-button onclick="yui.dialog.close('my-dialog')">取消</a>
             </div>
         </div>
+        <pre><code class="html">
+        &lt;a yui-button type="text" onclick="yui.dialog.open('my-dialog')"&gt;点击打开Dialog&lt;/a&gt;
+
+        &lt;div yui-dialog id="my-dialog"&gt;
+            &lt;div header&gt;
+                &lt;div title&gt;提示&lt;/div&gt;
+                &lt;i class="yui-icon closed" onclick="yui.dialog.close('my-dialog')"&gt;&lt;/i&gt;
+            &lt;/div&gt;
+            &lt;div body&gt;这是一段信息&lt;/div&gt;
+            &lt;div footer&gt;
+                &lt;a yui-button type="primary" onclick="yui.dialog.close('my-dialog')"&gt;确定&lt;/a&gt;
+                &lt;a yui-button onclick="yui.dialog.close('my-dialog')"&gt;取消&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        </code></pre>
     </div>
 
     <div class="page-module">
@@ -52,6 +67,23 @@
                 <a yui-button onclick="yui.dialog.close('fullscreen-dialog')">取消</a>
             </div>
         </div>
+        <pre><code class="html">
+        &lt;a yui-button type="text" onclick="yui.dialog.open('fullscreen-dialog')"&gt;点击打开全屏Dialog&lt;/a&gt;
+
+        &lt;div yui-dialog id="fullscreen-dialog" fullscreen&gt;
+            &lt;div header&gt;
+                &lt;div title&gt;提示&lt;/div&gt;
+                &lt;i class="yui-icon closed" onclick="yui.dialog.close('fullscreen-dialog')"&gt;&lt;/i&gt;
+            &lt;/div&gt;
+            &lt;div body&gt;
+                这是一段信息
+            &lt;/div&gt;
+            &lt;div footer&gt;
+                &lt;a yui-button type="primary" onclick="yui.dialog.close('fullscreen-dialog')"&gt;确定&lt;/a&gt;
+                &lt;a yui-button onclick="yui.dialog.close('fullscreen-dialog')"&gt;取消&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        </code></pre>
     </div>
 
 </div>

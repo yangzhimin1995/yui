@@ -30,6 +30,34 @@
         <div style="margin-top: 16px">
             <a onclick="getRadioChecked()" type="primary" yui-button plain>获取选中数据</a>
         </div>
+        <pre><code class="html">
+        &lt;div yui-radio-group id="my-radio" change="myRadioChange"&gt;
+            &lt;a value="备选项A" yui-radio&gt;备选项 A&lt;/a&gt;
+            &lt;a value="备选项B" yui-radio&gt;备选项 B&lt;/a&gt;
+            &lt;a value="备选项C" yui-radio&gt;备选项 C&lt;/a&gt;
+            &lt;a value="禁用" yui-radio disabled&gt;禁用&lt;/a&gt;
+            &lt;a value="禁用并选中" yui-radio checked disabled&gt;禁用并选中&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;a onclick="getRadioChecked()" type="primary" yui-button plain&gt;获取选中数据&lt;/a&gt;
+
+        &lt;script&gt;
+
+            function myRadioChange(value) {
+                if (value === "备选项A") {
+                    yui.message.danger(`拒绝选中 ${value}`);
+                    return false
+                }
+                yui.message.success(`选中 ${value}`);
+            }
+
+            function getRadioChecked() {
+                const value = yui.radio.data('my-radio');
+                yui.message.success(`当前选中：${value}`, {effect: 'dark'});
+            }
+
+        &lt;/script&gt;
+        </code></pre>
     </div>
 
     <div class="page-module">

@@ -30,6 +30,35 @@
         <div style="margin-top: 16px">
             <a onclick="getCheckboxChecked()" type="primary" yui-button plain>获取状态数据</a>
         </div>
+        <pre><code class="html">
+        &lt;div yui-checkbox-group id="my-checkbox" change="myCheckboxChange"&gt;
+            &lt;a value="复选款A" yui-checkbox&gt;复选款 A&lt;/a&gt;
+            &lt;a value="复选款B" yui-checkbox&gt;复选款 B&lt;/a&gt;
+            &lt;a value="复选款C" yui-checkbox checked&gt;复选款 C&lt;/a&gt;
+            &lt;a value="禁用" yui-checkbox disabled&gt;禁用&lt;/a&gt;
+            &lt;a value="选中且禁用" yui-checkbox checked disabled&gt;选中且禁用&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;a onclick="getCheckboxChecked()" type="primary" yui-button plain&gt;获取状态数据&lt;/a&gt;
+
+        &lt;script&gt;
+
+            function myCheckboxChange(value, checked) {
+                if (value === "复选款A") {
+                    yui.message.danger(`拒绝${checked ? '取消选中' : '选中'} ${value}`);
+                    return false
+                }
+                yui.message.info(`${checked ? '取消选中' : '选中'} ${value}`);
+            }
+
+            function getCheckboxChecked() {
+                const data = yui.checkbox.data("my-checkbox");
+                yui.message.success(`选中：${JSON.stringify(data['checked'])}`, {effect: 'dark'});
+                yuiMessage(`未选中：${JSON.stringify(data['unchecked'])}`, {effect: 'dark'});
+            }
+
+        &lt;/script&gt;
+        </code></pre>
     </div>
 
 </div>

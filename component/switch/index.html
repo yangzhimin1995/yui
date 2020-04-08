@@ -26,6 +26,22 @@
         <div style="margin-top: 16px">
             <a onclick="getSwitchValue()" type="primary" yui-button plain>获取开关状态</a>
         </div>
+        <pre><code class="html">
+        &lt;div yui-switch id="my-switch"&gt;
+            &lt;span switch&gt;&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;a onclick="getSwitchValue()" type="primary" yui-button plain&gt;获取开关状态&lt;/a&gt;
+
+        &lt;script&gt;
+
+            function getSwitchValue() {
+                const value = yui.switch.data('my-switch');
+                yui.message[value ? 'success' : 'danger'](`开关状态：${value ? '开启' : '关闭'}`)
+            }
+
+        &lt;/script&gt;
+        </code></pre>
     </div>
 
     <div class="page-module">
@@ -44,6 +60,51 @@
             <span switch></span>
             <span active-text>开启</span>
         </div>
+        <pre><code class="html">
+        &lt;div yui-switch value="false"&gt;
+            &lt;span inactive-text&gt;按年付费&lt;/span&gt;
+            &lt;span switch style="background-color: #409eff"&gt;&lt;/span&gt;
+            &lt;span active-text&gt;按月付费&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div yui-switch change="mySwitchChange" class="my-switch"&gt;
+            &lt;span inactive-text&gt;关闭&lt;/span&gt;
+            &lt;span switch&gt;&lt;/span&gt;
+            &lt;span active-text&gt;开启&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;script&gt;
+
+            function mySwitchChange(value) {
+                if (value) {
+                    yui.message.danger('已关闭')
+                } else {
+                    yui.message.success('已开启')
+                }
+            }
+
+        &lt;/script&gt;
+
+        &lt;style&gt;
+
+            div.my-switch > span[switch] {
+                background-color: #13CE66;
+            }
+
+            div[value='false'].my-switch > span[switch] {
+                background-color: #FF4949;
+            }
+
+            div.my-switch > span[active-text] {
+                color: #13CE66;
+            }
+
+            div[value='false'].my-switch > span[inactive-text] {
+                color: #FF4949;
+            }
+
+        &lt;/style&gt;
+        </code></pre>
     </div>
 
     <div class="page-module">
@@ -56,6 +117,15 @@
         <div yui-switch disabled value="false">
             <span switch></span>
         </div>
+        <pre><code class="html">
+        &lt;div yui-switch disabled&gt;
+            &lt;span switch&gt;&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div yui-switch disabled value="false"&gt;
+            &lt;span switch&gt;&lt;/span&gt;
+        &lt;/div&gt;
+        </code></pre>
     </div>
 
 </div>

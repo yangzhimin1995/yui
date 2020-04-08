@@ -34,6 +34,22 @@
                 <div>列表内容 4</div>
             </div>
         </div>
+        <pre><code class="html">
+        &lt;div yui-card&gt;
+            &lt;div header&gt;
+                &lt;div class="left"&gt;卡片名称&lt;/div&gt;
+                &lt;div class="right"&gt;
+                    &lt;a yui-button type="text"&gt;操作按钮&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div body&gt;
+                &lt;div&gt;列表内容 1&lt;/div&gt;
+                &lt;div&gt;列表内容 2&lt;/div&gt;
+                &lt;div&gt;列表内容 3&lt;/div&gt;
+                &lt;div&gt;列表内容 4&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        </code></pre>
     </div>
 
     <div class="page-module">
@@ -51,14 +67,28 @@
                 从不显示
             </div>
         </div>
+        <pre><code class="html">
+        &lt;div yui-card&gt;
+            总是显示
+        &lt;/div&gt;
+
+        &lt;div shadow="hover" yui-card&gt;
+            鼠标悬浮时显示
+        &lt;/div&gt;
+
+        &lt;div shadow="never" yui-card&gt;
+            从不显示
+        &lt;/div&gt;
+        </code></pre>
     </div>
+
 </div>
 </body>
 <script src="../../yui/js/index.js"></script>
 <script src="../../plugins/highLight/highlight.pack.js"></script>
 <script src="../../static/js/index.js"></script>
 <style>
-    .row-flex div[yui-card]{
+    .row-flex div[yui-card] {
         padding: 20px 10px;
         width: 200px;
     }
