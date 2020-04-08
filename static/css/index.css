@@ -88,3 +88,7 @@ body {
 .page-module .row-flex > div {
     margin-right: 30px;
 }
+
+.hljs {
+    border-radius: 5px;
+}

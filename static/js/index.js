@@ -1,4 +1,5 @@
 addPageHeader();
+hljs.initHighlightingOnLoad();
 
 function addPageHeader() {
     const headerDom = document.createElement('div');
