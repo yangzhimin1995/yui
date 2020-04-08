@@ -822,7 +822,7 @@ function yuiPopover_handleClick(dom, panelDom, trigger) {
         dom.addEventListener('click', function () {
             yuiPopover_show(panelDom);
         });
-        document.body.addEventListener('mousedown', function () {
+        document.addEventListener('mousedown', function () {
             yuiPopover_hide(panelDom)
         })
     }
