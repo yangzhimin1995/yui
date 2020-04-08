@@ -527,6 +527,8 @@ div[yui-modal] {
     z-index: 2021;
     opacity: 0;
     transition: .3s;
+    text-align: left;
+    color: #303133;
 }
 
 div[yui-dialog] {

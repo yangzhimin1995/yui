@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>yui - Element UI 部分组件的HTML使用</title>
     <link rel="icon" type="image/x-icon" href="./static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="./yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_4lv9jsj494.css"/>
 </head>
 <body>
 <div class="title">
     yui - Element UI 部分组件的HTML使用
     <div class="btn">
-        <a href="#">
+        <a onclick="yui.dialog.open('my-dialog')">
             赞助
         </a>
         <a href="https://github.com/yangzhimin1995/yui">
@@ -26,13 +28,29 @@
         </a>
     </div>
 </div>
+<div yui-dialog id="my-dialog" style="width: 700px">
+    <div header>
+        <div title>赞助</div>
+        <i class="yui-icon closed" onclick="yui.dialog.close('my-dialog')"></i>
+    </div>
+    <div body>
+        <div style="padding: 20px 0;text-align: center">
+            感谢支持！
+        </div>
+        <div style="display: flex;align-items: center;justify-content: space-around">
+            <img style="width: 280px;border: 1px solid #EBEEF5" src="./static/images/alipay.png" alt="">
+            <img style="width: 280px;border: 1px solid #EBEEF5" src="./static/images/wechat.png" alt="">
+        </div>
+    </div>
+    <div footer>
+        <a yui-button onclick="yui.dialog.close('my-dialog')">关闭</a>
+    </div>
+</div>
 </body>
 <style>
     body {
         background-color: black;
         overflow: hidden;
-        color: #fff;
-        text-align: center;
         min-width: 1200px;
     }
 
@@ -51,6 +69,8 @@
         font-size: 28px;
         margin-top: 6%;
         min-width: 1200px;
+        color: #fff;
+        text-align: center;
     }
 
     .title .btn {
@@ -72,6 +92,7 @@
         color: #8c939d;
     }
 </style>
+<script src="./yui/js/index.js"></script>
 <script>
     let index = 0;
     const iconListDom = document.querySelectorAll('a.icon-list>span');
