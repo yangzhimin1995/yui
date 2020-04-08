@@ -551,6 +551,7 @@ div[yui-dialog][fullscreen] {
     border-radius: 0;
     left: 0;
     top: -20px;
+    z-index: 2021;
 }
 
 div[yui-dialog] > div[header] {

@@ -548,15 +548,11 @@ function yuiMenu_init() {
         const panelDom = submenuDom.querySelector('div[panel]');
         const menuItemDom = submenuDom.querySelector('a[menu-item]');
         yuiMenu_handleMouseMove(dom, submenuDom, menuItemDom, panelDom);
-        const iconDom = document.createElement('i');
-        yuiFunc_setClasses(iconDom, ['yui-icon', 'arrow-down']);
-        menuItemDom.appendChild(iconDom)
     })
 }
 
 function yuiMenu_handleMouseMove(dom, submenuDom, menuItemDom, panelDom) {
     const {disabled} = yuiFunc_getAttributes(menuItemDom, ['disabled']);
-    debugger
     if (disabled !== null) {
         return
     }

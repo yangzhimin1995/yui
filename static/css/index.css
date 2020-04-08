@@ -6,6 +6,35 @@ body {
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
 
+.page-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 2020;
+    min-width: 1200px;
+}
+
+.page-header > div[yui-menu] {
+    padding: 0 5%;
+}
+
+.page-header .submenu-panel {
+    width: 600px;
+    left: -210px !important;
+}
+
+.page-header .submenu-panel .submenu-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.page-header .submenu-panel .submenu-list > a[menu-item] {
+    width: 200px;
+    text-align: left;
+}
+
 .page-content {
     width: 1200px;
     margin: 0 auto;
@@ -15,7 +44,7 @@ body {
 .page-title {
     text-align: center;
     font-size: 22px;
-    padding: 60px 0 20px 0;
+    padding: 120px 0 20px 0;
     color: #1f2f3d;
     line-height: 1.5em;
 }
