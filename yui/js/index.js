@@ -814,7 +814,6 @@ function yuiPopover_handleDom(dom, options) {
 }
 
 function yuiPopover_handleFocus(dom, panelDom, trigger) {
-    debugger
     if (trigger === 'focus') {
         dom.addEventListener('mousedown', function () {
             yuiPopover_show(panelDom);
@@ -836,8 +835,8 @@ function yuiPopover_handleHover(dom, panelDom, trigger) {
         });
         dom.addEventListener('mouseleave', function () {
             hideTO = setTimeout(() => {
-                yuiPopover_hide(panelDom);
-            }, 200)
+                hideTO = yuiPopover_hide(panelDom, hideTO);
+            }, 300)
         })
     }
 }
@@ -897,11 +896,18 @@ function yuiPopover_show(dom) {
     })
 }
 
-function yuiPopover_hide(dom) {
+function yuiPopover_hide(dom, hideTO) {
     yuiFunc_setStyles(dom, {opacity: '0'});
-    setTimeout(() => {
-        yuiFunc_setStyles(dom, {visibility: 'hidden'});
-    }, 300)
+    if (hideTO !== undefined) {
+        hideTO = setTimeout(() => {
+            yuiFunc_setStyles(dom, {visibility: 'hidden'});
+        }, 300);
+        return hideTO;
+    } else {
+        setTimeout(() => {
+            yuiFunc_setStyles(dom, {visibility: 'hidden'});
+        }, 300);
+    }
 }
 
 function yuiPopover_createArrowDom(dom) {
