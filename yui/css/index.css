@@ -679,7 +679,6 @@ div[yui-input] {
     font-size: 14px;
     display: inline-block;
     width: 100%;
-    overflow: hidden;
 }
 
 div[yui-input] [inner] {
@@ -1158,6 +1157,7 @@ div[yui-popover] > div[panel] {
     transition: opacity .3s;
     opacity: 0;
     visibility: hidden;
+    box-sizing: border-box;
 }
 
 div[yui-popover] > div[panel] > div[title] {
@@ -1432,6 +1432,39 @@ div[yui-radio-group][size='mini'] > a[yui-radio-button] {
 }
 
 /* ============================= radio end ============================= */
+
+
+/* ============================= select start ============================= */
+
+div[yui-select][yui-popover] > div[panel] {
+    min-width: 100%;
+    padding: 10px 0;
+}
+
+div[yui-select][yui-popover] > div[panel] > a[menu-item] {
+    display: block;
+    font-size: 14px;
+    padding: 0 20px;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #606266;
+    height: 34px;
+    line-height: 34px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+div[yui-select][yui-popover] > div[panel] > a[menu-item]:hover {
+    background-color: #f5f7fa;
+}
+
+div[yui-select][yui-popover] > div[panel] > a[menu-item][checked] {
+    color: #409eff;
+}
+
+/* ============================= select end ============================= */
 
 
 /* ============================= switch start ============================= */
