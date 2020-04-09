@@ -981,6 +981,7 @@ div[yui-menu] div[submenu] div[panel] {
 
 div[yui-menu] div[submenu] div[panel] > a[menu-item] {
     padding: 10px;
+    height: auto;
 }
 
 /* ============================= menu end ============================= */
