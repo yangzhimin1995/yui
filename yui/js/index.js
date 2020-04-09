@@ -1031,8 +1031,11 @@ function yuiSelect_handleClick(panelDom, inputDom) {
     const menuItemsDom = panelDom.querySelectorAll('a[menu-item]');
     menuItemsDom.forEach(menuItemDom => {
         menuItemDom.addEventListener('click', function () {
+            let {value, disabled} = yuiFunc_getAttributes(menuItemDom, ['value', 'disabled']);
+            if (disabled !== null) {
+                return
+            }
             yuiSelect_removeChecked(menuItemsDom);
-            let {value} = yuiFunc_getAttributes(menuItemDom, ['value']);
             const label = menuItemDom.innerText;
             if (!value) {
                 value = label
