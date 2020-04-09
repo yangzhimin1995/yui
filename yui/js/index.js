@@ -1022,12 +1022,12 @@ function yuiSelect_init() {
         yuiFunc_setAttributes(selectDom, options);
         const inputDom = selectDom.querySelector('input');
         yuiFunc_setAttributes(inputDom, {readOnly: '', 'inner': ''});
-        yuiSelect_handleClick(selectDom, inputDom);
+        const panelDom = selectDom.querySelector('div[panel]');
+        yuiSelect_handleClick(panelDom, inputDom);
     });
 }
 
-function yuiSelect_handleClick(dom, inputDom) {
-    const panelDom = dom.querySelector('div[panel]');
+function yuiSelect_handleClick(panelDom, inputDom) {
     const menuItemsDom = panelDom.querySelectorAll('a[menu-item]');
     menuItemsDom.forEach(menuItemDom => {
         menuItemDom.addEventListener('click', function () {

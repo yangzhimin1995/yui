@@ -1458,8 +1458,6 @@ div[yui-select] span[suffix] {
 div[yui-select] span[suffix] > i.yui-icon.arrow-down {
     color: #c0c4cc;
     font-size: 14px;
-    transition: transform .3s;
-    /*transform: rotate(180deg);*/
     cursor: pointer;
 }
 
