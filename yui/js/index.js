@@ -68,6 +68,11 @@ const yui = {
             return yuiRadio_getData(id)
         }
     },
+    select: {
+        data: (id) => {
+            return yuiSelect_getData(id)
+        }
+    },
     switch: {
         data: (id) => {
             return yuiSwitch_getData(id)
@@ -1036,7 +1041,7 @@ function yuiSelect_handleClick(panelDom, inputDom, change) {
             if (disabled !== null) {
                 return
             }
-            const label = menuItemDom.innerText;
+            const label = menuItemDom.text;
             if (change) {
                 let flag = eval(change + `(value,label)`);
                 if (flag === false) {
@@ -1055,6 +1060,16 @@ function yuiSelect_removeChecked(dom) {
     dom.forEach(menuItemDom => {
         yuiFunc_removeAttributes(menuItemDom, ['checked'])
     })
+}
+
+function yuiSelect_getData(id) {
+    const dom = document.querySelector(`div[yui-select][id='${id}'] a[menu-item][checked]`);
+    if (dom) {
+        let options = yuiFunc_getAttributes(dom, ['value']);
+        options['label'] = dom.text;
+        return options;
+    }
+    return {};
 }
 
 /** ================================= select end =================================*/

@@ -20,7 +20,7 @@
         <div class="title">
             基础用法
         </div>
-        <div yui-select change="mySelectChange">
+        <div yui-select change="mySelectChange" id="my-select">
             <label>
                 <input type="text" autocomplete="off" placeholder="请选择"/>
                 <span suffix><i class="yui-icon arrow-down"></i></span>
@@ -32,6 +32,9 @@
                 <a value="4" menu-item disabled>双皮奶</a>
                 <a value="5" menu-item>蚵仔煎</a>
             </div>
+        </div>
+        <div style="margin-top: 12px">
+            <a type="primary" plain yui-button onclick="getSelectData()">获取选中数据</a>
         </div>
     </div>
 </div>
@@ -46,6 +49,11 @@
             return false
         }
         yui.message.success(`选中 ${label}`);
+    }
+
+    function getSelectData() {
+        const {value, label} = yui.select.data('my-select');
+        yui.message.success(`选中 label: ${label},value: ${value}`, {effect: 'dark'});
     }
 </script>
 <style>
