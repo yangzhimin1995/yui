@@ -1037,10 +1037,7 @@ function yuiSelect_handleClick(panelDom, inputDom) {
             }
             yuiSelect_removeChecked(menuItemsDom);
             const label = menuItemDom.innerText;
-            if (!value) {
-                value = label
-            }
-            inputDom.value = label;
+            inputDom.value = label || value;
             yuiFunc_setAttributes(menuItemDom, {checked: ''});
             yuiPopover_hide(panelDom)
         })
