@@ -1140,13 +1140,15 @@ div[yui-popover] > div[panel][top] {
     bottom: calc(100% + 8px);
 }
 
-div[yui-popover] div[arrow][top], div[yui-popover] div[arrow][top]:after {
+div[yui-popover] div[arrow][top] {
     border-bottom-width: 0;
     border-top-color: #ebeef5;
     bottom: -6px;
+    left: calc(50% - 6px);
 }
 
 div[yui-popover] div[arrow][top]:after {
+    border-bottom-width: 0;
     bottom: 1px;
     border-top-color: #fff;
     margin-left: -6px;
@@ -1186,6 +1188,7 @@ div[yui-popover] > div[panel][bottom][end] {
 
 div[yui-popover] div[arrow][top][end],
 div[yui-popover] div[arrow][bottom][end] {
+    left: auto;
     right: 6px;
 }
 
@@ -1193,13 +1196,14 @@ div[yui-popover] > div[panel][left] {
     right: calc(100% + 8px);
 }
 
-div[yui-popover] div[arrow][left], div[yui-popover] div[arrow][left]:after {
+div[yui-popover] div[arrow][left] {
     border-right-width: 0;
     border-left-color: #ebeef5;
     right: -6px;
 }
 
 div[yui-popover] div[arrow][left]:after {
+    border-right-width: 0;
     right: 1px;
     border-left-color: #fff;
     margin-top: -6px;
