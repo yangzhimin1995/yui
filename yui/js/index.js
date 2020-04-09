@@ -793,12 +793,13 @@ function yuiMessageBox_createModalDom() {
 function yuiPopover_init() {
     const dom = document.querySelectorAll('div[yui-popover]');
     dom.forEach(popoverDom => {
-        let options = yuiFunc_getAttributes(popoverDom, ['placement', 'trigger']);
+        let options = yuiFunc_getAttributes(popoverDom, ['placement', 'trigger', 'yui-dropDown']);
         options = yuiFunc_json2Default(options, {
             placement: 'bottom',
-            trigger: 'click'
+            trigger: 'click',
+            yuiDropDown: null,
         });
-        yuiPopover_handleDom(popoverDom, options)
+        yuiPopover_handleDom(popoverDom, options);
     })
 }
 

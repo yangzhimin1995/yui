@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - Dropdown 下拉菜单</title>
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_4lv9jsj494.css"/>
+    <link rel="stylesheet" type="text/css" href="../../plugins/highLight/monokai-sublime.css">
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        Dropdown 下拉菜单
+        <div class="desc">将动作或菜单折叠到下拉菜单中。</div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            基础用法
+        </div>
+        hover 激活：
+        <div yui-popover yui-dropdown trigger="hover">
+            <a yui-button type="text">
+                下拉菜单 <i class="yui-icon arrow-down"></i>
+            </a>
+            <div panel style="width: 100px">
+                <a menu-item>黄金糕</a>
+                <a menu-item>狮子头</a>
+                <a menu-item>螺蛳粉</a>
+                <a menu-item disabled>双皮奶</a>
+                <a menu-item divided>蚵仔煎</a>
+            </div>
+        </div>
+        <span style="margin-left: 30px">click 激活：</span>
+        <div yui-popover yui-dropdown trigger="click">
+            <a yui-button type="text">
+                下拉菜单 <i class="yui-icon arrow-down"></i>
+            </a>
+            <div panel style="width: 100px">
+                <a menu-item>黄金糕</a>
+                <a menu-item>狮子头</a>
+                <a menu-item>螺蛳粉</a>
+                <a menu-item disabled>双皮奶</a>
+                <a menu-item divided>蚵仔煎</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../../yui/js/index.js"></script>
+<script src="../../plugins/highLight/highlight.pack.js"></script>
+<script src="../../static/js/index.js"></script>
+</html>
+
+
+
+
+
+
+
+
