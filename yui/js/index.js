@@ -790,13 +790,6 @@ function yuiMessageBox_createModalDom() {
 
 /** ================================= popover start =================================*/
 
-// const yuiData_placementArray = [
-//     'top-start', 'top', 'top-end',
-//     'bottom-start', 'bottom', 'bottom-end',
-//     'left-start', 'left', 'left-end',
-//     'right-start', 'right', 'right-end',
-// ];
-
 function yuiPopover_init() {
     const dom = document.querySelectorAll('div[yui-popover]');
     dom.forEach(popoverDom => {
@@ -819,11 +812,30 @@ function yuiPopover_handleDom(dom, options) {
 
 function yuiPopover_handleClick(dom, panelDom, trigger) {
     if (trigger === 'click') {
-        dom.addEventListener('click', function () {
-            yuiPopover_show(panelDom);
+        let hideTO;
+        document.addEventListener('click', function () {
+            hideTO = setTimeout(() => {
+                yuiPopover_hide(panelDom)
+            }, 10)
         });
-        document.addEventListener('mousedown', function () {
-            yuiPopover_hide(panelDom)
+        dom.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (hideTO) {
+                clearTimeout(hideTO)
+            }
+            if (panelDom.style.visibility === 'visible') {
+                hideTO = setTimeout(() => {
+                    yuiPopover_hide(panelDom)
+                }, 10)
+            } else {
+                yuiPopover_show(panelDom);
+            }
+        });
+        panelDom.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (hideTO) {
+                clearTimeout(hideTO)
+            }
         })
     }
 }
@@ -849,7 +861,6 @@ function yuiPopover_addPlacementAttrs(panelDom, arrowDom, array) {
     array.forEach(item => {
         json[item] = '';
     });
-    debugger
     yuiFunc_setAttributes(panelDom, json);
     yuiFunc_setAttributes(arrowDom, json);
 }
