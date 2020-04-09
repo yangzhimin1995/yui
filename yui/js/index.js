@@ -1023,11 +1023,12 @@ function yuiSelect_init() {
         const inputDom = selectDom.querySelector('input');
         yuiFunc_setAttributes(inputDom, {readOnly: '', 'inner': ''});
         const panelDom = selectDom.querySelector('div[panel]');
-        yuiSelect_handleClick(panelDom, inputDom);
+        const {change} = yuiFunc_getAttributes(selectDom, ['change']);
+        yuiSelect_handleClick(panelDom, inputDom, change);
     });
 }
 
-function yuiSelect_handleClick(panelDom, inputDom) {
+function yuiSelect_handleClick(panelDom, inputDom, change) {
     const menuItemsDom = panelDom.querySelectorAll('a[menu-item]');
     menuItemsDom.forEach(menuItemDom => {
         menuItemDom.addEventListener('click', function () {
@@ -1035,8 +1036,14 @@ function yuiSelect_handleClick(panelDom, inputDom) {
             if (disabled !== null) {
                 return
             }
-            yuiSelect_removeChecked(menuItemsDom);
             const label = menuItemDom.innerText;
+            if (change) {
+                let flag = eval(change + `(value,label)`);
+                if (flag === false) {
+                    return;
+                }
+            }
+            yuiSelect_removeChecked(menuItemsDom);
             inputDom.value = label || value;
             yuiFunc_setAttributes(menuItemDom, {checked: ''});
             yuiPopover_hide(panelDom)

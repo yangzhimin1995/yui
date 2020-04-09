@@ -20,13 +20,13 @@
         <div class="title">
             基础用法
         </div>
-        <div yui-select>
+        <div yui-select change="mySelectChange">
             <label>
                 <input type="text" autocomplete="off" placeholder="请选择"/>
                 <span suffix><i class="yui-icon arrow-down"></i></span>
             </label>
             <div panel>
-                <a value="1" menu-item checked>黄金糕</a>
+                <a value="1" menu-item>黄金糕</a>
                 <a value="2" menu-item>狮子头</a>
                 <a value="3" menu-item>螺蛳粉</a>
                 <a value="4" menu-item disabled>双皮奶</a>
@@ -39,6 +39,15 @@
 <script src="../../yui/js/index.js"></script>
 <script src="../../plugins/highLight/highlight.pack.js"></script>
 <script src="../../static/js/index.js"></script>
+<script>
+    function mySelectChange(value, label) {
+        if (value === '3') {
+            yui.message.danger(`拒绝选中 ${label}`);
+            return false
+        }
+        yui.message.success(`选中 ${label}`);
+    }
+</script>
 <style>
     div[yui-input] {
         width: 240px;
