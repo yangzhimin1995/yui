@@ -812,14 +812,18 @@ function yuiPopover_handleDom(dom, options) {
 
 function yuiPopover_handleClick(dom, panelDom, trigger) {
     if (trigger === 'click') {
-        let hideTO;
-        document.addEventListener('click', function () {
+        let hideTO, isShow = false;
+        document.addEventListener('click', function (e) {
+            if (isShow) {
+                isShow = false;
+                return
+            }
             hideTO = setTimeout(() => {
                 yuiPopover_hide(panelDom)
-            }, 10)
+            })
         });
         dom.addEventListener('click', function (e) {
-            e.stopPropagation();
+            isShow = true;
             if (hideTO) {
                 clearTimeout(hideTO)
             }
