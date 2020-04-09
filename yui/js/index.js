@@ -807,7 +807,22 @@ function yuiPopover_handleDom(dom, options) {
     const arrowDom = yuiPopover_createArrowDom(panelDom);
     const placementArray = options['placement'].split('-');
     yuiPopover_addPlacementAttrs(panelDom, arrowDom, placementArray);
+    yuiPopover_handlePlacement(dom, panelDom, placementArray);
     yuiPopover_handleClick(dom, panelDom, options['trigger']);
+}
+
+function yuiPopover_handlePlacement(dom, panelDom, placementArray) {
+    if (placementArray.length === 1) {
+        const placement = placementArray[0];
+        let panelDomStyle;
+        if (placement === 'top' || placement === 'bottom') {
+            panelDomStyle = {left: `${(dom.clientWidth - panelDom.clientWidth) / 2}px`};
+        }
+        if (placement === 'left' || placement === 'right') {
+            panelDomStyle = {top: `${(dom.clientHeight - panelDom.clientHeight) / 2}px`};
+        }
+        yuiFunc_setStyles(panelDom, panelDomStyle);
+    }
 }
 
 function yuiPopover_handleClick(dom, panelDom, trigger) {
@@ -822,7 +837,7 @@ function yuiPopover_handleClick(dom, panelDom, trigger) {
                 yuiPopover_hide(panelDom)
             })
         });
-        dom.addEventListener('click', function (e) {
+        dom.addEventListener('click', function () {
             isShow = true;
             if (hideTO) {
                 clearTimeout(hideTO)
@@ -830,7 +845,7 @@ function yuiPopover_handleClick(dom, panelDom, trigger) {
             if (panelDom.style.visibility === 'visible') {
                 hideTO = setTimeout(() => {
                     yuiPopover_hide(panelDom)
-                }, 10)
+                })
             } else {
                 yuiPopover_show(panelDom);
             }
