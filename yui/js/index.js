@@ -809,6 +809,24 @@ function yuiPopover_handleDom(dom, options) {
     yuiPopover_addPlacementAttrs(panelDom, arrowDom, placementArray);
     yuiPopover_handlePlacement(dom, panelDom, placementArray);
     yuiPopover_handleClick(dom, panelDom, options['trigger']);
+    yuiPopover_handleHover(dom, panelDom, options['trigger']);
+}
+
+function yuiPopover_handleHover(dom, panelDom, trigger) {
+    if (trigger === 'hover') {
+        let hideTO;
+        dom.addEventListener('mouseenter', function () {
+            if (hideTO) {
+                clearTimeout(hideTO)
+            }
+            yuiPopover_show(panelDom);
+        });
+        dom.addEventListener('mouseleave', function () {
+            hideTO = setTimeout(() => {
+                yuiPopover_hide(panelDom);
+            }, 200)
+        })
+    }
 }
 
 function yuiPopover_handlePlacement(dom, panelDom, placementArray) {
@@ -860,11 +878,17 @@ function yuiPopover_handleClick(dom, panelDom, trigger) {
 }
 
 function yuiPopover_show(dom) {
-    yuiFunc_setStyles(dom, {opacity: '1', visibility: 'visible'})
+    yuiFunc_setStyles(dom, {visibility: 'visible'});
+    setTimeout(() => {
+        yuiFunc_setStyles(dom, {opacity: '1'});
+    })
 }
 
 function yuiPopover_hide(dom) {
-    yuiFunc_setStyles(dom, {opacity: '0', visibility: 'hidden'})
+    yuiFunc_setStyles(dom, {opacity: '0'});
+    setTimeout(() => {
+        yuiFunc_setStyles(dom, {visibility: 'hidden'});
+    }, 300)
 }
 
 function yuiPopover_createArrowDom(dom) {
