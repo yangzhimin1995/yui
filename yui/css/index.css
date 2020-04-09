@@ -1189,6 +1189,59 @@ div[yui-popover] div[arrow][bottom][end] {
     right: 6px;
 }
 
+div[yui-popover] > div[panel][left] {
+    right: calc(100% + 8px);
+}
+
+div[yui-popover] div[arrow][left], div[yui-popover] div[arrow][left]:after {
+    border-right-width: 0;
+    border-left-color: #ebeef5;
+    right: -6px;
+}
+
+div[yui-popover] div[arrow][left]:after {
+    right: 1px;
+    border-left-color: #fff;
+    margin-top: -6px;
+}
+
+div[yui-popover] > div[panel][right] {
+    left: calc(100% + 8px);
+}
+
+div[yui-popover] div[arrow][right],
+div[yui-popover] div[arrow][right]:after {
+    border-left-width: 0;
+    border-right-color: #ebeef5;
+    left: -6px;
+}
+
+div[yui-popover] div[arrow][right]:after {
+    border-right-color: #fff;
+    left: 1px;
+    margin-top: -6px;
+}
+
+div[yui-popover] > div[panel][left][start],
+div[yui-popover] > div[panel][right][start] {
+    top: 0
+}
+
+div[yui-popover] div[arrow][left][start],
+div[yui-popover] div[arrow][right][start] {
+    top: 6px;
+}
+
+div[yui-popover] > div[panel][left][end],
+div[yui-popover] > div[panel][right][end] {
+    bottom: 0;
+}
+
+div[yui-popover] div[arrow][left][end],
+div[yui-popover] div[arrow][right][end] {
+    bottom: 6px;
+}
+
 /* ============================= popover end ============================= */
 
 
