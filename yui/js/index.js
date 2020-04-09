@@ -91,10 +91,13 @@ function yuiFunc_init() {
     yuiBackTop_init();
     yuiCheckbox_init();
     yuiDialog_init();
+    yuiDropdown_init();
     yuiMenu_init();
-    yuiPopover_init();
     yuiRadio_init();
+    yuiSelect_init();
     yuiSwitch_init();
+    //某些组件依赖popover,此方法放在最后执行
+    yuiPopover_init();
 }
 
 /** ================================= 等待dom加载完成 end =================================*/
@@ -441,6 +444,24 @@ function yuiDialog_closeFullscreen(id) {
 }
 
 /** ================================= dialog end =================================*/
+
+
+/** ================================= dropdown start =================================*/
+
+function yuiDropdown_init() {
+    const dom = document.querySelectorAll('div[yui-dropdown]');
+    dom.forEach(dropdownDom => {
+        let options = yuiFunc_getAttributes(dropdownDom, ['trigger']);
+        if (!options['trigger']) {
+            options['trigger'] = 'hover'
+        }
+        options['placement'] = 'bottom';
+        options['yui-popover'] = '';
+        yuiFunc_setAttributes(dropdownDom, options);
+    });
+}
+
+/** ================================= dropdown end =================================*/
 
 
 /** ================================= loading start =================================*/
@@ -790,14 +811,13 @@ function yuiMessageBox_createModalDom() {
 
 /** ================================= popover start =================================*/
 
-function yuiPopover_init() {
-    const dom = document.querySelectorAll('div[yui-popover]');
+function yuiPopover_init(dom) {
+    dom = document.querySelectorAll('div[yui-popover]');
     dom.forEach(popoverDom => {
-        let options = yuiFunc_getAttributes(popoverDom, ['placement', 'trigger', 'yui-dropDown']);
+        let options = yuiFunc_getAttributes(popoverDom, ['placement', 'trigger']);
         options = yuiFunc_json2Default(options, {
             placement: 'bottom',
             trigger: 'click',
-            yuiDropDown: null,
         });
         yuiPopover_handleDom(popoverDom, options);
     })
@@ -990,6 +1010,46 @@ function yuiRadio_getData(id) {
 }
 
 /** ================================= radio end =================================*/
+
+
+/** ================================= select start =================================*/
+
+function yuiSelect_init() {
+    const dom = document.querySelectorAll('div[yui-select]');
+    dom.forEach(selectDom => {
+        let options = {trigger: 'click', placement: 'bottom-start', 'yui-input': '', 'yui-popover': ''};
+        yuiFunc_setAttributes(selectDom, options);
+        const inputDom = selectDom.querySelector('input');
+        yuiFunc_setAttributes(inputDom, {readOnly: '', 'inner': ''});
+        yuiSelect_handleClick(selectDom, inputDom);
+    });
+}
+
+function yuiSelect_handleClick(dom, inputDom) {
+    const panelDom = dom.querySelector('div[panel]');
+    const menuItemsDom = panelDom.querySelectorAll('a[menu-item]');
+    menuItemsDom.forEach(menuItemDom => {
+        menuItemDom.addEventListener('click', function () {
+            yuiSelect_removeChecked(menuItemsDom);
+            let {value} = yuiFunc_getAttributes(menuItemDom, ['value']);
+            const label = menuItemDom.innerText;
+            if (!value) {
+                value = label
+            }
+            inputDom.value = label;
+            yuiFunc_setAttributes(menuItemDom, {checked: ''});
+            yuiPopover_hide(panelDom)
+        })
+    })
+}
+
+function yuiSelect_removeChecked(dom) {
+    dom.forEach(menuItemDom => {
+        yuiFunc_removeAttributes(menuItemDom, ['checked'])
+    })
+}
+
+/** ================================= select end =================================*/
 
 
 /** ================================= switch start =================================*/

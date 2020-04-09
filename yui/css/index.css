@@ -633,6 +633,10 @@ div[yui-popover][yui-dropdown] > div[panel][bottom] {
     padding: 10px 0;
 }
 
+div[yui-popover][yui-dropdown] > div[panel] {
+    visibility: hidden;
+}
+
 div[yui-popover][yui-dropdown] > div[panel] > a[menu-item] {
     display: block;
     line-height: 36px;
@@ -690,7 +694,7 @@ div[yui-input] [inner] {
     box-sizing: border-box;
     color: #606266;
     display: inline-block;
-    font-family: "微软雅黑", serif;
+    font-family: inherit;
     font-size: 14px;
     height: 40px;
     line-height: 40px;
@@ -703,7 +707,7 @@ div[yui-input] [inner] {
 
 input::-webkit-input-placeholder {
     color: #C0C4CC;
-    font-family: "微软雅黑", serif;
+    font-family: inherit;
     font-size: 14px;
 }
 
@@ -728,7 +732,7 @@ div[yui-input] textarea[inner] {
 
 textarea::-webkit-input-placeholder {
     color: #C0C4CC;
-    font-family: "微软雅黑", serif;
+    font-family: inherit;
     font-size: 14px;
 }
 
@@ -1436,9 +1440,34 @@ div[yui-radio-group][size='mini'] > a[yui-radio-button] {
 
 /* ============================= select start ============================= */
 
+div[yui-select] [inner] {
+    padding-right: 30px;
+}
+
+div[yui-select] span[suffix] {
+    position: absolute;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    right: 0;
+    top: 0;
+    width: 30px;
+    justify-content: center;
+}
+
+div[yui-select] span[suffix] > i.yui-icon.arrow-down {
+    color: #c0c4cc;
+    font-size: 14px;
+    transition: transform .3s;
+    /*transform: rotate(180deg);*/
+    cursor: pointer;
+    display: inline-block;
+}
+
 div[yui-select][yui-popover] > div[panel] {
     min-width: 100%;
     padding: 10px 0;
+    visibility: hidden;
 }
 
 div[yui-select][yui-popover] > div[panel] > a[menu-item] {
