@@ -1483,12 +1483,17 @@ div[yui-select][yui-popover] > div[panel] > a[menu-item] {
     cursor: pointer;
 }
 
-div[yui-select][yui-popover] > div[panel] > a[menu-item]:hover {
+div[yui-select][yui-popover] > div[panel] > a[menu-item]:not([disabled]):hover {
     background-color: #f5f7fa;
 }
 
 div[yui-select][yui-popover] > div[panel] > a[menu-item][checked] {
     color: #409eff;
+}
+
+div[yui-select][yui-popover] > div[panel] > a[menu-item][disabled] {
+    color: #c0c4cc;
+    cursor: not-allowed;
 }
 
 /* ============================= select end ============================= */
