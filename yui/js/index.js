@@ -888,7 +888,8 @@ function yuiPopover_handleClick(dom, panelDom, trigger) {
                 yuiPopover_hide(panelDom)
             })
         });
-        dom.addEventListener('click', function () {
+        dom.addEventListener('click', function (e) {
+            e.preventDefault();
             isShow = true;
             if (hideTO) {
                 clearTimeout(hideTO)

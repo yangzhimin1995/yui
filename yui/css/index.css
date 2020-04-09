@@ -1461,7 +1461,6 @@ div[yui-select] span[suffix] > i.yui-icon.arrow-down {
     transition: transform .3s;
     /*transform: rotate(180deg);*/
     cursor: pointer;
-    display: inline-block;
 }
 
 div[yui-select][yui-popover] > div[panel] {
