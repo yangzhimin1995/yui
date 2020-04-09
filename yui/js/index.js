@@ -810,6 +810,19 @@ function yuiPopover_handleDom(dom, options) {
     yuiPopover_handlePlacement(dom, panelDom, placementArray);
     yuiPopover_handleClick(dom, panelDom, options['trigger']);
     yuiPopover_handleHover(dom, panelDom, options['trigger']);
+    yuiPopover_handleFocus(dom, panelDom, options['trigger']);
+}
+
+function yuiPopover_handleFocus(dom, panelDom, trigger) {
+    debugger
+    if (trigger === 'focus') {
+        dom.addEventListener('mousedown', function () {
+            yuiPopover_show(panelDom);
+        });
+        dom.addEventListener('mouseup', function () {
+            yuiPopover_hide(panelDom);
+        })
+    }
 }
 
 function yuiPopover_handleHover(dom, panelDom, trigger) {
