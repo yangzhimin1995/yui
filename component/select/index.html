@@ -36,7 +36,42 @@
         <div style="margin-top: 12px">
             <a type="primary" plain yui-button onclick="getSelectData()">获取选中数据</a>
         </div>
+        <pre><code class="html">
+        &lt;div yui-select change="mySelectChange" id="my-select"&gt;
+            &lt;label&gt;
+                &lt;input type="text" autocomplete="off" placeholder="请选择"/&gt;
+                &lt;span suffix&gt;&lt;i class="yui-icon arrow-down"&gt;&lt;/i&gt;&lt;/span&gt;
+            &lt;/label&gt;
+            &lt;div panel&gt;
+                &lt;a value="1" menu-item&gt;黄金糕&lt;/a&gt;
+                &lt;a value="2" menu-item&gt;狮子头&lt;/a&gt;
+                &lt;a value="3" menu-item&gt;螺蛳粉&lt;/a&gt;
+                &lt;a value="4" menu-item disabled&gt;双皮奶&lt;/a&gt;
+                &lt;a value="5" menu-item&gt;蚵仔煎&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;a type="primary" plain yui-button onclick="getSelectData()"&gt;获取选中数据&lt;/a&gt;
+
+        &lt;script&gt;
+
+            function mySelectChange(value, label) {
+                if (value === '3') {
+                    yui.message.danger(`拒绝选中 ${label}`);
+                    return false
+                }
+                yui.message.success(`选中 ${label}`);
+            }
+
+            function getSelectData() {
+                const {value, label} = yui.select.data('my-select');
+                yui.message.success(`选中 label: ${label},value: ${value}`, {effect: 'dark'});
+            }
+
+        &lt;/script&gt;
+        </code></pre>
     </div>
+
 </div>
 </body>
 <script src="../../yui/js/index.js"></script>
