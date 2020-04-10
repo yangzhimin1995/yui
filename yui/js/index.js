@@ -63,6 +63,24 @@ const yui = {
             return yuiMessageBox(message, title, options)
         },
     },
+    notify: {
+        info: (options = {}) => {
+            options['type'] = 'info';
+            yuiNotify(options)
+        },
+        success: (options = {}) => {
+            options['type'] = 'success';
+            yuiNotify(options)
+        },
+        warning: (options = {}) => {
+            options['type'] = 'warning';
+            yuiNotify(options)
+        },
+        danger: (options = {}) => {
+            options['type'] = 'danger';
+            yuiNotify(options)
+        },
+    },
     radio: {
         data: (id) => {
             return yuiRadio_getData(id)
@@ -812,6 +830,100 @@ function yuiMessageBox_createModalDom() {
 }
 
 /** ================================= messageBox end =================================*/
+
+
+/** ================================= notify start =================================*/
+
+function yuiNotify(options = {}) {
+    options = yuiFunc_json2Default(options, {
+        title: '提示',
+        message: '',
+        type: null,
+        duration: 4500,
+    });
+    const containerDom = yuiNotify_createContainerDom(options['position']);
+    const notifyDom = yuiNotify_createDom(containerDom, options);
+    yuiNotify_createIconDom(notifyDom, options);
+    yuiNotify_createContentDom(notifyDom, options);
+    yuiNotify_createCloseDom(notifyDom);
+    setTimeout(() => {
+        yuiFunc_setStyles(notifyDom, {'left': '0px', 'opacity': '1'});
+    });
+    yuiNotify_handleDuration(notifyDom, options);
+}
+
+function yuiNotify_createContainerDom() {
+    let dom = document.querySelector(`div[yui-notify-container]`);
+    if (!dom) {
+        dom = document.createElement('div');
+        yuiFunc_setAttributes(dom, {'yui-notify-container': ''});
+        document.body.appendChild(dom)
+    }
+    return dom
+}
+
+function yuiNotify_createDom(containerDom, options) {
+    let dom = document.createElement('div');
+    let attrs = {'yui-notify': ''};
+    if (options['type']) {
+        attrs['type'] = options['type']
+    }
+    yuiFunc_setAttributes(dom, attrs);
+    yuiFunc_setStyles(dom, {zIndex: -yuiData_index});
+    containerDom.appendChild(dom);
+    yuiData_index++;
+    return dom
+}
+
+function yuiNotify_createIconDom(notifyDom, options) {
+    if (options['type'] !== null) {
+        let iconDom = document.createElement('i');
+        yuiFunc_setAttributes(iconDom, {'icon': ''});
+        yuiFunc_setClasses(iconDom, ['yui-icon', `${options['type']}`]);
+        notifyDom.appendChild(iconDom);
+    }
+}
+
+function yuiNotify_createContentDom(notifyDom, options) {
+    const contentDom = document.createElement('div');
+    yuiFunc_setAttributes(contentDom, {content: ''});
+    notifyDom.appendChild(contentDom);
+    const titleDom = document.createElement('div');
+    yuiFunc_setAttributes(titleDom, {title: ''});
+    titleDom.innerText = options['title'];
+    contentDom.appendChild(titleDom);
+    const messageDom = document.createElement('div');
+    yuiFunc_setAttributes(messageDom, {message: ''});
+    messageDom.innerText = options['message'];
+    contentDom.appendChild(messageDom);
+}
+
+function yuiNotify_handleDuration(notifyDom, options) {
+    const duration = yuiFunc_param2Number(options['duration'], 4500);
+    if (duration !== 0) {
+        setTimeout(() => {
+            yuiNotify_closed(notifyDom)
+        }, duration)
+    }
+}
+
+function yuiNotify_createCloseDom(notifyDom) {
+    const closeIconDom = document.createElement('i');
+    yuiFunc_setClasses(closeIconDom, ['yui-icon', 'closed']);
+    notifyDom.appendChild(closeIconDom);
+    closeIconDom.addEventListener('click', function () {
+        yuiNotify_closed(notifyDom)
+    })
+}
+
+function yuiNotify_closed(dom) {
+    yuiFunc_setStyles(dom, {marginTop: -dom.offsetHeight - 24 + 'px', opacity: 0});
+    setTimeout(() => {
+        dom.remove()
+    }, 300)
+}
+
+/** ================================= notify end =================================*/
 
 
 /** ================================= popover start =================================*/

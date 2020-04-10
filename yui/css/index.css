@@ -1138,6 +1138,84 @@ div[yui-message-box] > div[footer] > a[yui-button] {
 /* ============================= messageBox end ============================= */
 
 
+/* ============================= notify start ============================= */
+
+div[yui-notify-container] {
+    position: fixed;
+    width: 330px;
+    z-index: 2021;
+    top: 26px;
+    right: 16px
+}
+
+div[yui-notify-container] > div[yui-notify] {
+    display: flex;
+    width: 330px;
+    padding: 14px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ebeef5;
+    background-color: #fff;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    transition: .3s;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 24px;
+    left: 330px;
+    opacity: 0;
+}
+
+div[yui-notify] > i.yui-icon {
+    font-size: 24px;
+    padding-right: 8px;
+    color: #909399;
+    line-height: 1;
+}
+
+div[yui-notify][type='success'] > i.yui-icon.success {
+    color: #67c23a;
+}
+
+div[yui-notify][type='warning'] > i.yui-icon.warning {
+    color: #e6a23c;
+}
+
+div[yui-notify][type='danger'] > i.yui-icon.danger {
+    color: #f56c6c;
+}
+
+div[yui-notify] > div[content] {
+    flex-grow: 1;
+}
+
+div[yui-notify] > div[content] > div[title] {
+    font-weight: 700;
+    font-size: 16px;
+    color: #303133;
+    margin: 0;
+    padding-top: 5px;
+    line-height: 1;
+}
+
+div[yui-notify] > div[content] > div[message] {
+    font-size: 14px;
+    line-height: 21px;
+    margin: 6px 0 0;
+    color: #606266;
+    text-align: justify;
+}
+
+div[yui-notify] > i.yui-icon.closed {
+    cursor: pointer;
+    color: #909399;
+    font-size: 16px;
+    padding-left: 8px;
+    margin-top: 4px;
+}
+
+/* ============================= notify end ============================= */
+
+
 /* ============================= popover start ============================= */
 
 div[yui-popover] {
