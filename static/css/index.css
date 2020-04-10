@@ -92,4 +92,6 @@ body {
 
 .hljs {
     border-radius: 5px;
+    line-height: 18px;
+    font-size: 14px;
 }
