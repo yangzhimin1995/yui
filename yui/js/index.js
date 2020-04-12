@@ -1147,13 +1147,18 @@ function yuiSelect_init() {
 
 function yuiSelect_handleClick(panelDom, inputDom, change) {
     const menuItemsDom = panelDom.querySelectorAll('a[menu-item]');
+    const initVal = inputDom.value;
     menuItemsDom.forEach(menuItemDom => {
+        let {value, disabled} = yuiFunc_getAttributes(menuItemDom, ['value', 'disabled']);
+        const label = menuItemDom.text;
+        if (initVal && initVal === value) {
+            inputDom.value = label || value;
+            yuiFunc_setAttributes(menuItemDom, {checked: ''});
+        }
         menuItemDom.addEventListener('click', function () {
-            let {value, disabled} = yuiFunc_getAttributes(menuItemDom, ['value', 'disabled']);
             if (disabled !== null) {
                 return
             }
-            const label = menuItemDom.text;
             if (change) {
                 let flag = eval(change + `(value,label)`);
                 if (flag === false) {
