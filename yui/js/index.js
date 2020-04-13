@@ -119,6 +119,7 @@ function yuiFunc_init() {
     yuiRadio_init();
     yuiSelect_init();
     yuiSwitch_init();
+    yuiTabs_init();
     //某些组件依赖popover,此方法放在最后执行
     yuiPopover_init();
 }
@@ -1147,13 +1148,11 @@ function yuiSelect_init() {
 
 function yuiSelect_handleClick(panelDom, inputDom, change) {
     const menuItemsDom = panelDom.querySelectorAll('a[menu-item]');
-    const initVal = inputDom.value;
     menuItemsDom.forEach(menuItemDom => {
-        let {value, disabled} = yuiFunc_getAttributes(menuItemDom, ['value', 'disabled']);
+        let {value, disabled, checked} = yuiFunc_getAttributes(menuItemDom, ['value', 'disabled', 'checked']);
         const label = menuItemDom.text;
-        if (initVal && initVal === value) {
+        if (checked !== null) {
             inputDom.value = label || value;
-            yuiFunc_setAttributes(menuItemDom, {checked: ''});
         }
         menuItemDom.addEventListener('click', function () {
             if (disabled !== null) {
@@ -1260,3 +1259,78 @@ function yuiSwitch_getData(id) {
 }
 
 /** ================================= switch end =================================*/
+
+
+/** ================================= tabs start =================================*/
+
+function yuiTabs_init() {
+    const dom = document.querySelectorAll('div[yui-tabs]');
+    dom.forEach(tabsDom => {
+        const headerDom = tabsDom.querySelector('div[header]');
+        const menuItemsDom = tabsDom.querySelectorAll('div[header]>a');
+        const panelsDom = tabsDom.querySelectorAll('div[panel]>div');
+        const lineDom = yuiTabs_createActiveLine(headerDom);
+        const {change} = yuiFunc_getAttributes(tabsDom, ['change']);
+        yuiTabs_handleMenuItemClick(menuItemsDom, panelsDom, lineDom, change)
+    })
+}
+
+function yuiTabs_createActiveLine(headerDom) {
+    const dom = document.createElement('div');
+    yuiFunc_setAttributes(dom, {'active-line': ''});
+    headerDom.appendChild(dom);
+    return dom
+}
+
+function yuiTabs_handleMenuItemClick(menuItemsDom, panelsDom, lineDom, change) {
+    menuItemsDom.forEach(menuItemDom => {
+        const {checked, value, disabled} = yuiFunc_getAttributes(menuItemDom,
+            ['checked', 'value', 'disabled']);
+        if (checked !== null) {
+            yuiTabs_lineDomChange(menuItemDom, lineDom)
+        }
+        menuItemDom.addEventListener('click', function () {
+            if (disabled !== null) {
+                return
+            }
+            if (change) {
+                const flag = eval(change + '(value)');
+                if (flag === false) {
+                    return;
+                }
+            }
+            yuiTabs_tabsChange(menuItemsDom, panelsDom, value);
+            yuiTabs_lineDomChange(menuItemDom, lineDom);
+        })
+    })
+}
+
+function yuiTabs_tabsChange(menuItemsDom, panelsDom, val) {
+    menuItemsDom.forEach(menuItemDom => {
+        const {value} = yuiFunc_getAttributes(menuItemDom, ['value']);
+        if (value !== val) {
+            yuiFunc_removeAttributes(menuItemDom, ['checked'])
+        } else {
+            yuiFunc_setAttributes(menuItemDom, {checked: ''})
+        }
+    });
+    panelsDom.forEach(panelDom => {
+        const {value} = yuiFunc_getAttributes(panelDom, ['value']);
+        if (value !== val) {
+            yuiFunc_removeAttributes(panelDom, ['checked'])
+        } else {
+            yuiFunc_setAttributes(panelDom, {checked: ''})
+        }
+    })
+}
+
+function yuiTabs_lineDomChange(menuItem, lineDom) {
+    const width = menuItem.clientWidth;
+    const offsetLeft = menuItem.offsetLeft;
+    yuiFunc_setStyles(lineDom, {
+        width: width + 'px',
+        transform: 'translateX(' + offsetLeft + 'px)'
+    });
+}
+
+/** ================================= tabs end =================================*/

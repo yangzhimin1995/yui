@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - Tabs 标签页</title>
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_rz9eqmbar6m.css"/>
+    <link rel="stylesheet" type="text/css" href="../../plugins/highLight/monokai-sublime.css">
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        Tabs 标签页
+        <div class="desc">分隔内容上有关联但属于不同类别的数据集合。</div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            基础用法
+        </div>
+        <div yui-tabs change="tabsChange">
+            <div header>
+                <a value="1" checked>用户管理</a>
+                <a value="2">配置管理</a>
+                <a value="3" disabled>角色管理</a>
+                <a value="4">定时任务补偿</a>
+                <a value="5">查看版本信息</a>
+            </div>
+            <div panel>
+                <div value="1" checked>用户管理</div>
+                <div value="2">配置管理</div>
+                <div value="3">角色管理</div>
+                <div value="4">定时任务补偿</div>
+                <div value="5">查看版本信息</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../../yui/js/index.js"></script>
+<script src="../../plugins/highLight/highlight.pack.js"></script>
+<script src="../../static/js/index.js"></script>
+<script>
+    function tabsChange(value) {
+        if (value === '2') {
+            yui.message.danger('拒绝切换到此Tab页面');
+            return false
+        }
+    }
+</script>
+</html>
