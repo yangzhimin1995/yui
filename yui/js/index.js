@@ -1266,12 +1266,15 @@ function yuiSwitch_getData(id) {
 function yuiTabs_init() {
     const dom = document.querySelectorAll('div[yui-tabs]');
     dom.forEach(tabsDom => {
+        const {change, type} = yuiFunc_getAttributes(tabsDom, ['change', 'type']);
         const headerDom = tabsDom.querySelector('div[header]');
         const menuItemsDom = tabsDom.querySelectorAll('div[header]>a');
         const panelsDom = tabsDom.querySelectorAll('div[panel]>div');
-        const lineDom = yuiTabs_createActiveLine(headerDom);
-        const {change} = yuiFunc_getAttributes(tabsDom, ['change']);
-        yuiTabs_handleMenuItemClick(menuItemsDom, panelsDom, lineDom, change)
+        let lineDom;
+        if (!type) {
+            lineDom = yuiTabs_createActiveLine(headerDom);
+        }
+        yuiTabs_handleMenuItemClick(menuItemsDom, panelsDom, lineDom, {change, type})
     })
 }
 
@@ -1282,11 +1285,11 @@ function yuiTabs_createActiveLine(headerDom) {
     return dom
 }
 
-function yuiTabs_handleMenuItemClick(menuItemsDom, panelsDom, lineDom, change) {
+function yuiTabs_handleMenuItemClick(menuItemsDom, panelsDom, lineDom, {change, type}) {
     menuItemsDom.forEach(menuItemDom => {
         const {checked, value, disabled} = yuiFunc_getAttributes(menuItemDom,
             ['checked', 'value', 'disabled']);
-        if (checked !== null) {
+        if (checked !== null && !type) {
             yuiTabs_lineDomChange(menuItemDom, lineDom)
         }
         menuItemDom.addEventListener('click', function () {
@@ -1325,6 +1328,9 @@ function yuiTabs_tabsChange(menuItemsDom, panelsDom, val) {
 }
 
 function yuiTabs_lineDomChange(menuItem, lineDom) {
+    if (!lineDom) {
+        return
+    }
     const width = menuItem.clientWidth;
     const offsetLeft = menuItem.offsetLeft;
     yuiFunc_setStyles(lineDom, {
