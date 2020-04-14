@@ -3,9 +3,6 @@ addBackTop()
 hljs.initHighlightingOnLoad();
 
 function addBackTop() {
-// <div yui-back-top>
-//     <span icon></span>
-//     </div>
     const dom = document.createElement('div');
     yuiFunc_setAttributes(dom, {'yui-back-top': ''});
     const iconDom = document.createElement('span');
