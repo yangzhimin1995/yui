@@ -1,5 +1,19 @@
 addPageHeader();
+addBackTop()
 hljs.initHighlightingOnLoad();
+
+function addBackTop() {
+// <div yui-back-top>
+//     <span icon></span>
+//     </div>
+    const dom = document.createElement('div');
+    yuiFunc_setAttributes(dom, {'yui-back-top': ''});
+    const iconDom = document.createElement('span');
+    yuiFunc_setAttributes(iconDom, {'icon': ''});
+    dom.appendChild(iconDom);
+    document.body.appendChild(dom);
+    yuiBackTop_init();
+}
 
 function addPageHeader() {
     const headerDom = document.createElement('div');
