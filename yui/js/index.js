@@ -959,7 +959,7 @@ function yuiNumRun_getStep(toVal, diffVal, duration, speed) {
 }
 
 function yuiNumRun_add(dom, options) {
-    const {diffVal, speed, toVal} = options
+    const {diffVal, speed, toVal, callback} = options
     const {step, dotLen} = yuiNumRun_getStep(toVal, diffVal, options.duration, speed);
     const SI = setInterval(() => {
         const currentVal = parseFloat(dom.innerText);
@@ -968,13 +968,16 @@ function yuiNumRun_add(dom, options) {
             dom.innerText = nextVal;
         } else {
             dom.innerText = toVal;
-            clearInterval(SI)
+            clearInterval(SI);
+            if (callback) {
+                callback(options.id, options.dom)
+            }
         }
     }, speed)
 }
 
 function yuiNumRun_reduce(dom, options) {
-    let {diffVal, speed, toVal} = options
+    let {diffVal, speed, toVal, callback} = options
     diffVal = -diffVal;
     const {step, dotLen} = yuiNumRun_getStep(toVal, diffVal, options.duration, speed);
     const SI = setInterval(() => {
@@ -984,7 +987,10 @@ function yuiNumRun_reduce(dom, options) {
             dom.innerText = nextVal;
         } else {
             dom.innerText = toVal;
-            clearInterval(SI)
+            clearInterval(SI);
+            if (callback) {
+                callback(options.id, options.dom)
+            }
         }
     }, speed)
 }
@@ -1002,9 +1008,9 @@ function yuiNumRun(id, options = {}) {
     const dom = document.querySelector(`div[yui-num-run][id=${id}]`);
     dom.innerText = options.fromVal;
     if (diffVal < 0) {
-        yuiNumRun_reduce(dom, {...options, speed, diffVal})
+        yuiNumRun_reduce(dom, {...options, speed, diffVal, id})
     } else {
-        yuiNumRun_add(dom, {...options, speed, diffVal})
+        yuiNumRun_add(dom, {...options, speed, diffVal, id, dom})
     }
 }
 

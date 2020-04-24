@@ -65,6 +65,9 @@
         yui.numRun.start('my-add', {
             fromVal: 0,
             toVal: 381,
+            callback: (id, dom) => {
+                yui.message.success('数字滚动完成')
+            }
         })
     }
 
