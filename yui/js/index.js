@@ -81,6 +81,11 @@ const yui = {
             yuiNotify(options)
         },
     },
+    numRun: {
+        start: (id, options = {}) => {
+            yuiNumRun(id, options)
+        }
+    },
     radio: {
         data: (id) => {
             return yuiRadio_getData(id)
@@ -925,6 +930,85 @@ function yuiNotify_closed(dom) {
 }
 
 /** ================================= notify end =================================*/
+
+
+/** ================================= numRun start =================================*/
+
+function yuiNumRun_getStep(toVal, diffVal, duration, speed) {
+    const array = toVal.toString().split(".")
+    const dotStr = array[1];
+    if (!dotStr) {
+        let step = Math.ceil(diffVal / (duration / speed))
+        return {step, dotLen: 0}
+    } else {
+        const dotLen = dotStr.length;
+        let step = diffVal / (duration / speed);
+        step = step.toFixed(dotLen);
+        let dotNum = '0.';
+        for (let i = 0; i < dotLen; i++) {
+            if (i !== dotLen - 1) {
+                dotNum = dotNum + '0';
+            } else {
+                dotNum = dotNum + '1';
+                dotNum = parseFloat(dotNum);
+                step = step - dotNum
+            }
+        }
+        return {step, dotLen};
+    }
+}
+
+function yuiNumRun_add(dom, options) {
+    const {diffVal, speed, toVal} = options
+    const {step, dotLen} = yuiNumRun_getStep(toVal, diffVal, options.duration, speed);
+    const SI = setInterval(() => {
+        const currentVal = parseFloat(dom.innerText);
+        const nextVal = (currentVal + step).toFixed(dotLen);
+        if (nextVal < toVal) {
+            dom.innerText = nextVal;
+        } else {
+            dom.innerText = toVal;
+            clearInterval(SI)
+        }
+    }, speed)
+}
+
+function yuiNumRun_reduce(dom, options) {
+    let {diffVal, speed, toVal} = options
+    diffVal = -diffVal;
+    const {step, dotLen} = yuiNumRun_getStep(toVal, diffVal, options.duration, speed);
+    const SI = setInterval(() => {
+        const currentVal = parseFloat(dom.innerText);
+        const nextVal = (currentVal - step).toFixed(dotLen);
+        if (nextVal > toVal) {
+            dom.innerText = nextVal;
+        } else {
+            dom.innerText = toVal;
+            clearInterval(SI)
+        }
+    }, speed)
+}
+
+function yuiNumRun(id, options = {}) {
+    options = yuiFunc_json2Default(options, {
+        duration: 3000,
+        callback: null,
+        fromVal: 0,
+        toVal: 0,
+        speed: 90,
+    });
+    const diffVal = options.toVal - options.fromVal;
+    const speed = 100 - options.speed;
+    const dom = document.querySelector(`div[yui-num-run][id=${id}]`);
+    dom.innerText = options.fromVal;
+    if (diffVal < 0) {
+        yuiNumRun_reduce(dom, {...options, speed, diffVal})
+    } else {
+        yuiNumRun_add(dom, {...options, speed, diffVal})
+    }
+}
+
+/** ================================= numRun end =================================*/
 
 
 /** ================================= popover start =================================*/

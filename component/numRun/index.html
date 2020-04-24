@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - NumRun 数字滚动</title>
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_rz9eqmbar6m.css"/>
+    <link rel="stylesheet" type="text/css" href="../../plugins/highLight/monokai-sublime.css">
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        NumRun 数字滚动
+        <div class="desc">数字滚动特效</div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            基础用法
+        </div>
+        <a onclick="startAdd()" yui-button style="margin-right: 18px">开始滚动</a>
+        <div yui-num-run id="my-add">
+            0
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            递减
+        </div>
+        <a onclick="startReduce()" yui-button style="margin-right: 18px">开始滚动</a>
+        <div yui-num-run id="my-cut">
+            500
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            支持小数
+        </div>
+        <a onclick="startDotAdd()" yui-button style="margin-right: 18px">开始滚动</a>
+        <div yui-num-run id="my-dot-add">
+            0.00
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            小数递减
+        </div>
+        <a onclick="startDotReduce()" yui-button style="margin-right: 18px">开始滚动</a>
+        <div yui-num-run id="my-dot-reduce">
+            500.00
+        </div>
+    </div>
+</div>
+</body>
+<script src="../../yui/js/index.js"></script>
+<script src="../../plugins/highLight/highlight.pack.js"></script>
+<script src="../../static/js/index.js"></script>
+<script>
+    function startAdd() {
+        yui.numRun.start('my-add', {
+            fromVal: 0,
+            toVal: 381,
+        })
+    }
+
+    function startReduce() {
+        yui.numRun.start('my-cut', {
+            fromVal: 521,
+            toVal: 381,
+        })
+    }
+
+    function startDotAdd() {
+        yui.numRun.start('my-dot-add', {
+            fromVal: 0,
+            toVal: 381.68,
+        })
+    }
+
+    function startDotReduce() {
+        yui.numRun.start('my-dot-reduce', {
+            fromVal: 521,
+            toVal: 381.68,
+        })
+    }
+</script>
+</html>
