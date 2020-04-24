@@ -1005,7 +1005,7 @@ function yuiNumRun(id, options = {}) {
     });
     const diffVal = options.toVal - options.fromVal;
     const speed = 100 - options.speed;
-    const dom = document.querySelector(`div[yui-num-run][id=${id}]`);
+    const dom = document.querySelector(`span[yui-num-run][id=${id}]`);
     dom.innerText = options.fromVal;
     if (diffVal < 0) {
         yuiNumRun_reduce(dom, {...options, speed, diffVal, id})

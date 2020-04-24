@@ -21,9 +21,9 @@
             递增
         </div>
         <a onclick="startAdd()" yui-button>开始滚动</a>
-        <div yui-num-run id="my-add">
+        <span yui-num-run id="my-add">
             0
-        </div>
+        </span>
     </div>
 
     <div class="page-module">
@@ -31,9 +31,9 @@
             递减
         </div>
         <a onclick="startReduce()" yui-button>开始滚动</a>
-        <div yui-num-run id="my-cut">
+        <span yui-num-run id="my-cut">
             500
-        </div>
+        </span>
     </div>
 
     <div class="page-module">
@@ -41,9 +41,9 @@
             支持小数
         </div>
         <a onclick="startDotAdd()" yui-button>开始滚动</a>
-        <div yui-num-run id="my-dot-add">
+        <span yui-num-run id="my-dot-add">
             0.00
-        </div>
+        </span>
     </div>
 
     <div class="page-module">
@@ -51,9 +51,9 @@
             小数递减
         </div>
         <a onclick="startDotReduce()" yui-button>开始滚动</a>
-        <div yui-num-run id="my-dot-reduce">
+        <span yui-num-run id="my-dot-reduce">
             500.00
-        </div>
+        </span>
     </div>
 </div>
 </body>
@@ -78,6 +78,12 @@
         yui.numRun.start('my-cut', {
             fromVal: 521,
             toVal: 381,
+            callback: (id, dom) => {
+                yui.message.success('数字滚动完成，将会自动重置');
+                setTimeout(() => {
+                    dom.innerText = 521;
+                },3000)
+            }
         })
     }
 
@@ -85,6 +91,12 @@
         yui.numRun.start('my-dot-add', {
             fromVal: 0,
             toVal: 381.68,
+            callback: (id, dom) => {
+                yui.message.success('数字滚动完成，将会自动重置');
+                setTimeout(() => {
+                    dom.innerText = 381.68;
+                },3000)
+            }
         })
     }
 
@@ -92,11 +104,17 @@
         yui.numRun.start('my-dot-reduce', {
             fromVal: 521,
             toVal: 381.68,
+            callback: (id, dom) => {
+                yui.message.success('数字滚动完成，将会自动重置');
+                setTimeout(() => {
+                    dom.innerText = 381.68;
+                },3000)
+            }
         })
     }
 </script>
 <style>
-    div[yui-num-run] {
+    span[yui-num-run] {
         font-size: 18px;
         margin-left: 18px;
     }
