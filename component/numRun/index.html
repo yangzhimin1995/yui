@@ -20,7 +20,7 @@
         <div class="title">
             递增
         </div>
-        <a onclick="startAdd()" yui-button style="margin-right: 18px">开始滚动</a>
+        <a onclick="startAdd()" yui-button>开始滚动</a>
         <div yui-num-run id="my-add">
             0
         </div>
@@ -30,7 +30,7 @@
         <div class="title">
             递减
         </div>
-        <a onclick="startReduce()" yui-button style="margin-right: 18px">开始滚动</a>
+        <a onclick="startReduce()" yui-button>开始滚动</a>
         <div yui-num-run id="my-cut">
             500
         </div>
@@ -40,7 +40,7 @@
         <div class="title">
             支持小数
         </div>
-        <a onclick="startDotAdd()" yui-button style="margin-right: 18px">开始滚动</a>
+        <a onclick="startDotAdd()" yui-button>开始滚动</a>
         <div yui-num-run id="my-dot-add">
             0.00
         </div>
@@ -50,7 +50,7 @@
         <div class="title">
             小数递减
         </div>
-        <a onclick="startDotReduce()" yui-button style="margin-right: 18px">开始滚动</a>
+        <a onclick="startDotReduce()" yui-button>开始滚动</a>
         <div yui-num-run id="my-dot-reduce">
             500.00
         </div>
@@ -66,7 +66,10 @@
             fromVal: 0,
             toVal: 381,
             callback: (id, dom) => {
-                yui.message.success('数字滚动完成')
+                yui.message.success('数字滚动完成，将会自动重置');
+                setTimeout(() => {
+                    dom.innerText = 0;
+                },3000)
             }
         })
     }
@@ -92,4 +95,10 @@
         })
     }
 </script>
+<style>
+    div[yui-num-run] {
+        font-size: 18px;
+        margin-left: 18px;
+    }
+</style>
 </html>
