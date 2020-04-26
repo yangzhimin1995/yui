@@ -2,8 +2,6 @@
 
 let yuiData_index = 0;
 let yuiData_scrollBarWidth = 0;
-const yuiData_clientWidth = document.body.clientWidth;
-let yuiData_loadingSIJson = {};
 
 const yui = {
     checkbox: {
