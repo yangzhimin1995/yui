@@ -944,7 +944,6 @@ function yuiNumRun_getStep(toVal, diffVal, duration, speed) {
         const dotLen = dotStr.length;
         let step = diffVal / (duration / speed);
         step = parseFloat(step.toFixed(dotLen));
-        debugger
         let dotNum = '0.';
         for (let i = 0; i < dotLen; i++) {
             if (i !== dotLen - 1) {
@@ -952,7 +951,6 @@ function yuiNumRun_getStep(toVal, diffVal, duration, speed) {
             } else {
                 dotNum = dotNum + '1';
                 dotNum = parseFloat(dotNum);
-                debugger
                 step = step + dotNum
             }
         }
@@ -982,8 +980,6 @@ function yuiNumRun_reduce(dom, options) {
     let {diffVal, speed, toVal, callback} = options
     diffVal = -diffVal;
     const {step, dotLen} = yuiNumRun_getStep(toVal, diffVal, options.duration, speed);
-    debugger
-
     const SI = setInterval(() => {
         const currentVal = parseFloat(dom.innerText);
         const nextVal = (currentVal - step).toFixed(dotLen);
@@ -1005,7 +1001,7 @@ function yuiNumRun(id, options = {}) {
         callback: null,
         fromVal: 0,
         toVal: 0,
-        speed: 99,
+        speed: 70,
     });
     const diffVal = options.toVal - options.fromVal;
     const speed = 100 - options.speed;
