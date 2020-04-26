@@ -165,7 +165,7 @@
 
     function startDotAdd() {
         yui.numRun.start('my-dot-add', {
-            fromVal: 0.00,
+            fromVal: 0,
             toVal: 381.68,
             callback: (id, dom) => {
                 yui.message.success('数字滚动完成，将会自动重置');
@@ -178,7 +178,7 @@
 
     function startDotReduce() {
         yui.numRun.start('my-dot-reduce', {
-            fromVal: 521.00,
+            fromVal: 521,
             toVal: 381.68,
             callback: (id, dom) => {
                 yui.message.success('数字滚动完成，将会自动重置');
