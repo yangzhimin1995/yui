@@ -21,9 +21,28 @@
             递增
         </div>
         <a onclick="startAdd()" yui-button>开始滚动</a>
-        <span yui-num-run id="my-add">
-            0
-        </span>
+        <span yui-num-run id="my-add">0</span>
+        <pre><code class="html">
+        &lt;a onclick="startAdd()" yui-button&gt;开始滚动&lt;/a&gt;
+        &lt;span yui-num-run id="my-add"&gt;0&lt;/span&gt;
+
+        &lt;script&gt;
+
+            function startAdd() {
+                yui.numRun.start('my-add', {
+                    fromVal: 0,
+                    toVal: 381,
+                    callback: (id, dom) =&gt; {
+                        yui.message.success('数字滚动完成，将会自动重置');
+                        setTimeout(() =&gt; {
+                            dom.innerText = 0;
+                        }, 3000)
+                    }
+                })
+            }
+
+        &lt;/script&gt;
+        </code></pre>
     </div>
 
     <div class="page-module">
@@ -31,9 +50,28 @@
             递减
         </div>
         <a onclick="startReduce()" yui-button>开始滚动</a>
-        <span yui-num-run id="my-cut">
-            500
-        </span>
+        <span yui-num-run id="my-cut">500</span>
+        <pre><code class="html">
+        &lt;a onclick="startReduce()" yui-button&gt;开始滚动&lt;/a&gt;
+        &lt;span yui-num-run id="my-cut"&gt;500&lt;/span&gt;
+
+        &lt;script&gt;
+
+            function startReduce() {
+                yui.numRun.start('my-cut', {
+                    fromVal: 521,
+                    toVal: 381,
+                    callback: (id, dom) =&gt; {
+                        yui.message.success('数字滚动完成，将会自动重置');
+                        setTimeout(() =&gt; {
+                            dom.innerText = 521;
+                        }, 3000)
+                    }
+                })
+            }
+
+        &lt;/script&gt;
+        </code></pre>
     </div>
 
     <div class="page-module">
@@ -41,9 +79,28 @@
             支持小数
         </div>
         <a onclick="startDotAdd()" yui-button>开始滚动</a>
-        <span yui-num-run id="my-dot-add">
-            0.00
-        </span>
+        <span yui-num-run id="my-dot-add">0.00</span>
+        <pre><code class="html">
+        &lt;a onclick="startDotAdd()" yui-button&gt;开始滚动&lt;/a&gt;
+        &lt;span yui-num-run id="my-dot-add"&gt;0.00&lt;/span&gt;
+
+        &lt;script&gt;
+
+            function startDotAdd() {
+                yui.numRun.start('my-dot-add', {
+                    fromVal: 0,
+                    toVal: 381.68,
+                    callback: (id, dom) =&gt; {
+                        yui.message.success('数字滚动完成，将会自动重置');
+                        setTimeout(() =&gt; {
+                            dom.innerText = '0.00';
+                        }, 3000)
+                    }
+                })
+            }
+
+        &lt;/script&gt;
+        </code></pre>
     </div>
 
     <div class="page-module">
@@ -51,9 +108,28 @@
             小数递减
         </div>
         <a onclick="startDotReduce()" yui-button>开始滚动</a>
-        <span yui-num-run id="my-dot-reduce">
-            500.00
-        </span>
+        <span yui-num-run id="my-dot-reduce">521.00</span>
+        <pre><code class="html">
+        &lt;a onclick="startDotReduce()" yui-button&gt;开始滚动&lt;/a&gt;
+        &lt;span yui-num-run id="my-dot-reduce"&gt;500.00&lt;/span&gt;
+
+        &lt;script&gt;
+
+            function startDotReduce() {
+                yui.numRun.start('my-dot-reduce', {
+                    fromVal: 521,
+                    toVal: 381.68,
+                    callback: (id, dom) =&gt; {
+                        yui.message.success('数字滚动完成，将会自动重置');
+                        setTimeout(() =&gt; {
+                            dom.innerText = '521.00';
+                        }, 3000)
+                    }
+                })
+            }
+
+        &lt;/script&gt;
+        </code></pre>
     </div>
 </div>
 </body>
@@ -69,7 +145,7 @@
                 yui.message.success('数字滚动完成，将会自动重置');
                 setTimeout(() => {
                     dom.innerText = 0;
-                },3000)
+                }, 3000)
             }
         })
     }
@@ -82,33 +158,33 @@
                 yui.message.success('数字滚动完成，将会自动重置');
                 setTimeout(() => {
                     dom.innerText = 521;
-                },3000)
+                }, 3000)
             }
         })
     }
 
     function startDotAdd() {
         yui.numRun.start('my-dot-add', {
-            fromVal: 0,
+            fromVal: 0.00,
             toVal: 381.68,
             callback: (id, dom) => {
                 yui.message.success('数字滚动完成，将会自动重置');
                 setTimeout(() => {
-                    dom.innerText = 381.68;
-                },3000)
+                    dom.innerText = '0.00';
+                }, 3000)
             }
         })
     }
 
     function startDotReduce() {
         yui.numRun.start('my-dot-reduce', {
-            fromVal: 521,
+            fromVal: 521.00,
             toVal: 381.68,
             callback: (id, dom) => {
                 yui.message.success('数字滚动完成，将会自动重置');
                 setTimeout(() => {
-                    dom.innerText = 381.68;
-                },3000)
+                    dom.innerText = '521.00';
+                }, 3000)
             }
         })
     }
