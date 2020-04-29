@@ -1630,6 +1630,20 @@ div[yui-select-card] > a[checked]:after {
     bottom: 4px;
 }
 
+div[yui-select-card][type='info'] > a {
+    border-color: #d3d4d6;
+    background: #f4f4f5;
+}
+
+div[yui-select-card][type='info'] > a[checked] {
+    border-color: #909399;
+    color: #909399;
+}
+
+div[yui-select-card][type='info'] > a[checked]:before {
+    border-left-color: #909399;
+}
+
 div[yui-select-card][type='success'] > a {
     border-color: #c2e7b0;
     background: #f0f9eb;
@@ -1641,7 +1655,7 @@ div[yui-select-card][type='success'] > a[checked] {
 }
 
 div[yui-select-card][type='success'] > a[checked]:before {
-    border-color: transparent transparent transparent #67c23a;
+    border-left-color: #67c23a;
 }
 
 div[yui-select-card][type='warning'] > a {
@@ -1655,7 +1669,7 @@ div[yui-select-card][type='warning'] > a[checked] {
 }
 
 div[yui-select-card][type='warning'] > a[checked]:before {
-    border-color: transparent transparent transparent #e6a23c;
+    border-left-color: #e6a23c;
 }
 
 div[yui-select-card][type='danger'] > a {
@@ -1669,7 +1683,7 @@ div[yui-select-card][type='danger'] > a[checked] {
 }
 
 div[yui-select-card][type='danger'] > a[checked]:before {
-    border-color: transparent transparent transparent #f56c6c;
+    border-left-color: #f56c6c;
 }
 
 /* ============================= selectCard end ============================= */

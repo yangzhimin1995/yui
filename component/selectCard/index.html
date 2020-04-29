@@ -27,34 +27,13 @@
             <a value="30">30元优惠</a>
             <a value="50">50元优惠</a>
         </div>
-        <div yui-select-card type="success">
-            <a value="5" checked>5元优惠</a>
-            <a value="10">10元优惠</a>
-            <a value="20">20元优惠</a>
-            <a value="30">30元优惠</a>
-            <a value="50">50元优惠</a>
-        </div>
-        <div yui-select-card type="warning">
-            <a value="5" checked>5元优惠</a>
-            <a value="10">10元优惠</a>
-            <a value="20">20元优惠</a>
-            <a value="30">30元优惠</a>
-            <a value="50">50元优惠</a>
-        </div>
-        <div yui-select-card type="danger">
-            <a value="5" checked>5元优惠</a>
-            <a value="10">10元优惠</a>
-            <a value="20">20元优惠</a>
-            <a value="30">30元优惠</a>
-            <a value="50">50元优惠</a>
-        </div>
     </div>
 
     <div class="page-module">
         <div class="title">
             多选
         </div>
-        <div yui-select-card multiple id="my-select-card">
+        <div yui-select-card type="danger" multiple id="my-select-card">
             <a value="5" checked>5元优惠</a>
             <a value="10">10元优惠</a>
             <a value="20">20元优惠</a>
@@ -63,6 +42,17 @@
         </div>
         <div style="margin-top: 16px">
             <a onclick="getData()" type="primary" yui-button plain>获取状态数据</a>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            自定义颜色
+        </div>
+        <div class="row-flex">
+            <div yui-select-card class="my-select-card">
+                <a value="5" checked>5元优惠</a>
+            </div>
         </div>
     </div>
 </div>
@@ -94,11 +84,36 @@
 </script>
 <style>
     div[yui-select-card] > a {
-        height: 80px;
-        width: 140px;
+        height: 60px;
+        width: 120px;
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+</style>
+<style>
+    /*未选中的卡片*/
+    div[yui-select-card].my-select-card > a {
+        border-color: #d0f6f2;
+        background: #e6fffb;
+        color: #909399;
+    }
+
+    /*选中的卡片*/
+    div[yui-select-card].my-select-card > a[checked] {
+        border-color: #87e8de;
+        background: #e6fffb;
+        color: #13c2c2;
+    }
+
+    /*右下角三角形的颜色*/
+    div[yui-select-card].my-select-card > a[checked]:before {
+        border-left-color: #13c2c2;
+    }
+
+    /*三角形中对勾的颜色*/
+    div[yui-select-card].my-select-card > a[checked]:after {
+        border-color: #fff;
     }
 </style>
 </html>
