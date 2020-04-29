@@ -27,6 +27,39 @@
             <a value="30">30元优惠</a>
             <a value="50">50元优惠</a>
         </div>
+        <pre><code class="html">
+        &lt;div yui-select-card change="handleChange"&gt;
+            &lt;a value="5" checked&gt;5元优惠&lt;/a&gt;
+            &lt;a value="10"&gt;10元优惠&lt;/a&gt;
+            &lt;a value="20"&gt;20元优惠&lt;/a&gt;
+            &lt;a value="30"&gt;30元优惠&lt;/a&gt;
+            &lt;a value="50"&gt;50元优惠&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;script&gt;
+
+            function handleChange(value, checked) {
+                if (value === "20") {
+                    yui.message.danger(`无法使用 ${value} 元优惠券`);
+                    return false
+                }
+                yui.message.info(`${checked ? '取消使用' : '使用'} ${value} 元优惠券`);
+            }
+
+        &lt;/script&gt;
+
+        &lt;style&gt;
+
+            div[yui-select-card] &gt; a {
+                height: 60px;
+                width: 120px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        &lt;/style&gt;
+        </code></pre>
     </div>
 
     <div class="page-module">
@@ -43,17 +76,102 @@
         <div style="margin-top: 16px">
             <a onclick="getData()" type="primary" yui-button plain>获取状态数据</a>
         </div>
+        <pre><code class="html">
+        &lt;div yui-select-card type="danger" multiple id="my-select-card"&gt;
+            &lt;a value="5" checked&gt;5元优惠&lt;/a&gt;
+            &lt;a value="10"&gt;10元优惠&lt;/a&gt;
+            &lt;a value="20"&gt;20元优惠&lt;/a&gt;
+            &lt;a value="30"&gt;30元优惠&lt;/a&gt;
+            &lt;a value="50"&gt;50元优惠&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;div style="margin-top: 16px"&gt;
+            &lt;a onclick="getData()" type="primary" yui-button plain&gt;获取状态数据&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;script&gt;
+
+            function getData() {
+                const getTotal = (data) =&gt; {
+                    let total = 0;
+                    data.forEach(item =&gt; {
+                        total += parseInt(item);
+                    })
+                    return total
+                }
+                const data = yui.selectCard.data("my-select-card");
+                yui.message.success(`使用优惠券总额： ${getTotal(data['checked'])} 元`, {effect: 'dark'});
+                yuiMessage(`未使用优惠券总额： ${getTotal(data['unchecked'])} 元`);
+            }
+
+        &lt;/script&gt;
+
+        &lt;style&gt;
+
+            div[yui-select-card] &gt; a {
+                height: 60px;
+                width: 120px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        &lt;/style&gt;
+        </code></pre>
     </div>
 
     <div class="page-module">
         <div class="title">
             自定义颜色
         </div>
-        <div class="row-flex">
-            <div yui-select-card class="my-select-card">
-                <a value="5" checked>5元优惠</a>
-            </div>
+        <div yui-select-card class="my-select-card">
+            <a value="5" checked>5元优惠</a>
         </div>
+        <pre><code class="html">
+        &lt;div yui-select-card class="my-select-card"&gt;
+            &lt;a value="5" checked&gt;5元优惠&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;style&gt;
+
+            div[yui-select-card] &gt; a {
+                height: 60px;
+                width: 120px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        &lt;/style&gt;
+
+        &lt;style&gt;
+
+            /*未选中的卡片*/
+            div[yui-select-card].my-select-card &gt; a {
+                border-color: #d0f6f2;
+                background: #e6fffb;
+                color: #909399;
+            }
+
+            /*选中的卡片*/
+            div[yui-select-card].my-select-card &gt; a[checked] {
+                border-color: #87e8de;
+                background: #e6fffb;
+                color: #13c2c2;
+            }
+
+            /*右下角三角形的颜色*/
+            div[yui-select-card].my-select-card &gt; a[checked]:before {
+                border-left-color: #13c2c2;
+            }
+
+            /*三角形中对勾的颜色*/
+            div[yui-select-card].my-select-card &gt; a[checked]:after {
+                border-color: #fff;
+            }
+
+        &lt;/style&gt;
+        </code></pre>
     </div>
 </div>
 </body>
