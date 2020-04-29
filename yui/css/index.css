@@ -1577,6 +1577,104 @@ div[yui-select][yui-popover] > div[panel] > a[menu-item][disabled] {
 /* ============================= select end ============================= */
 
 
+/* ============================= selectCard start ============================= */
+
+div[yui-select-card] {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+div[yui-select-card] > a {
+    display: inline-block;
+    background: #ecf5ff;
+    border-radius: 4px;
+    border-color: #b3d8ff;
+    border-style: solid;
+    border-width: 1px;
+    position: relative;
+    overflow: hidden;
+    margin: 6px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+div[yui-select-card] > a[checked] {
+    border-color: #409EFF;
+    color: #409EFF;
+}
+
+div[yui-select-card] > a[checked]:before {
+    content: '';
+    position: absolute;
+    transform: rotate(45deg);
+    width: 0;
+    height: 0;
+    border-width: 20px 0 20px 20px;
+    border-style: solid;
+    border-color: transparent transparent transparent #409EFF;
+    right: -4px;
+    bottom: -14px;
+}
+
+div[yui-select-card] > a[checked]:after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 8px;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    transform: rotate(40deg);
+    right: 6px;
+    bottom: 4px;
+}
+
+div[yui-select-card][type='success'] > a {
+    border-color: #c2e7b0;
+    background: #f0f9eb;
+}
+
+div[yui-select-card][type='success'] > a[checked] {
+    border-color: #67c23a;
+    color: #67c23a;
+}
+
+div[yui-select-card][type='success'] > a[checked]:before {
+    border-color: transparent transparent transparent #67c23a;
+}
+
+div[yui-select-card][type='warning'] > a {
+    border-color: #f5dab1;
+    background: #fdf6ec;
+}
+
+div[yui-select-card][type='warning'] > a[checked] {
+    border-color: #e6a23c;
+    color: #e6a23c;
+}
+
+div[yui-select-card][type='warning'] > a[checked]:before {
+    border-color: transparent transparent transparent #e6a23c;
+}
+
+div[yui-select-card][type='danger'] > a {
+    border-color: #fbc4c4;
+    background: #fef0f0;
+}
+
+div[yui-select-card][type='danger'] > a[checked] {
+    border-color: #f56c6c;
+    color: #f56c6c;
+}
+
+div[yui-select-card][type='danger'] > a[checked]:before {
+    border-color: transparent transparent transparent #f56c6c;
+}
+
+/* ============================= selectCard end ============================= */
+
+
 /* ============================= switch start ============================= */
 
 div[yui-switch] {

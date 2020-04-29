@@ -94,6 +94,11 @@ const yui = {
             return yuiSelect_getData(id)
         }
     },
+    selectCard: {
+        data: (id) => {
+            return yuiSelectCard_getData(id)
+        }
+    },
     switch: {
         data: (id) => {
             return yuiSwitch_getData(id)
@@ -121,6 +126,7 @@ function yuiFunc_init() {
     yuiMenu_init();
     yuiRadio_init();
     yuiSelect_init();
+    yuiSelectCard_init();
     yuiSwitch_init();
     yuiTabs_init();
     //某些组件依赖popover,此方法放在最后执行
@@ -380,11 +386,11 @@ function yuiCheckbox_handleClick(checkboxDom, change) {
 
 function yuiCheckbox_getData(id) {
     const dom = document.querySelector(`div[yui-checkbox-group][id=${id}]`);
+    let data = {checked: [], unchecked: []};
     if (!dom) {
-        return
+        return data
     }
     const checkboxesDom = dom.querySelectorAll('a[yui-checkbox]');
-    let data = {checked: [], unchecked: []};
     checkboxesDom.forEach(checkboxDom => {
         const {checked, value} = yuiFunc_getAttributes(checkboxDom, ['checked', 'value']);
         if (checked === null) {
@@ -1278,6 +1284,66 @@ function yuiSelect_getData(id) {
 }
 
 /** ================================= select end =================================*/
+
+
+/** ================================= selectCard start =================================*/
+
+function yuiSelectCard_init() {
+    const dom = document.querySelectorAll('div[yui-select-card]');
+    dom.forEach(selectCardDom => {
+        yuiSelectCard_handleDom(selectCardDom);
+    })
+}
+
+function yuiSelectCard_handleDom(dom) {
+    const itemsDom = dom.querySelectorAll('a[value]');
+    const {multiple, change} = yuiFunc_getAttributes(dom, ['multiple', 'change']);
+    itemsDom.forEach(itemDom => {
+        itemDom.addEventListener('click', function () {
+            const {checked, value} = yuiFunc_getAttributes(itemDom, ['checked', 'value']);
+            if (change) {
+                const flag = eval(change + '(value,checked!==null)');
+                if (flag === false) {
+                    return;
+                }
+            }
+            yuiSelectCard_clearChecked(itemsDom, multiple)
+            if (checked === null) {
+                yuiFunc_setAttributes(itemDom, {checked: ''})
+            } else {
+                yuiFunc_removeAttributes(itemDom, ['checked'])
+            }
+        })
+    })
+}
+
+function yuiSelectCard_clearChecked(itemsDom, multiple) {
+    if (multiple === null) {
+        itemsDom.forEach(itemDom => {
+            yuiFunc_removeAttributes(itemDom, ['checked']);
+        })
+    }
+}
+
+function yuiSelectCard_getData(id) {
+    const dom = document.querySelector(`div[yui-select-card][id=${id}]`);
+    let data = {checked: [], unchecked: []};
+    if (!dom) {
+        return data
+    }
+    const itemsDom = dom.querySelectorAll('a[value]');
+    itemsDom.forEach(itemDom => {
+        const {checked, value} = yuiFunc_getAttributes(itemDom, ['checked', 'value']);
+        if (checked === null) {
+            data.unchecked.push(value)
+        } else {
+            data.checked.push(value)
+        }
+    });
+    return data
+}
+
+/** ================================= selectCard end =================================*/
 
 
 /** ================================= switch start =================================*/

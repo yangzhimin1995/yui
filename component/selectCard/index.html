@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yui - SelectCard 可选卡片</title>
+    <link rel="icon" type="image/x-icon" href="../../static/images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="../../yui/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1521392_rz9eqmbar6m.css"/>
+    <link rel="stylesheet" type="text/css" href="../../plugins/highLight/monokai-sublime.css">
+</head>
+<body>
+<div class="page-content">
+    <div class="page-title">
+        SelectCard 可选卡片
+        <div class="desc">类似单选框复选框的卡片形式</div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            单选
+        </div>
+        <div yui-select-card change="handleChange">
+            <a value="5" checked>5元优惠</a>
+            <a value="10">10元优惠</a>
+            <a value="20">20元优惠</a>
+            <a value="30">30元优惠</a>
+            <a value="50">50元优惠</a>
+        </div>
+        <div yui-select-card type="success">
+            <a value="5" checked>5元优惠</a>
+            <a value="10">10元优惠</a>
+            <a value="20">20元优惠</a>
+            <a value="30">30元优惠</a>
+            <a value="50">50元优惠</a>
+        </div>
+        <div yui-select-card type="warning">
+            <a value="5" checked>5元优惠</a>
+            <a value="10">10元优惠</a>
+            <a value="20">20元优惠</a>
+            <a value="30">30元优惠</a>
+            <a value="50">50元优惠</a>
+        </div>
+        <div yui-select-card type="danger">
+            <a value="5" checked>5元优惠</a>
+            <a value="10">10元优惠</a>
+            <a value="20">20元优惠</a>
+            <a value="30">30元优惠</a>
+            <a value="50">50元优惠</a>
+        </div>
+    </div>
+
+    <div class="page-module">
+        <div class="title">
+            多选
+        </div>
+        <div yui-select-card multiple id="my-select-card">
+            <a value="5" checked>5元优惠</a>
+            <a value="10">10元优惠</a>
+            <a value="20">20元优惠</a>
+            <a value="30">30元优惠</a>
+            <a value="50">50元优惠</a>
+        </div>
+        <div style="margin-top: 16px">
+            <a onclick="getData()" type="primary" yui-button plain>获取状态数据</a>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../../yui/js/index.js"></script>
+<script src="../../plugins/highLight/highlight.pack.js"></script>
+<script src="../../static/js/index.js"></script>
+<script>
+    function handleChange(value, checked) {
+        if (value === "20") {
+            yui.message.danger(`无法使用 ${value} 元优惠券`);
+            return false
+        }
+        yui.message.info(`${checked ? '取消使用' : '使用'} ${value} 元优惠券`);
+    }
+
+    function getData() {
+        const getTotal = (data) => {
+            let total = 0;
+            data.forEach(item => {
+                total += parseInt(item);
+            })
+            return total
+        }
+        const data = yui.selectCard.data("my-select-card");
+        yui.message.success(`使用优惠券总额： ${getTotal(data['checked'])} 元`, {effect: 'dark'});
+        yuiMessage(`未使用优惠券总额： ${getTotal(data['unchecked'])} 元`);
+    }
+</script>
+<style>
+    div[yui-select-card] > a {
+        height: 80px;
+        width: 140px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+</html>
