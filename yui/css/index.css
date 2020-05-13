@@ -725,9 +725,9 @@ div[yui-input] [inner][disabled] {
 
 div[yui-input] textarea[inner] {
     resize: vertical;
-    padding: 5px 15px;
+    height: auto;
+    padding: 8px 15px;
     line-height: 1.5;
-    min-height: 55px;
 }
 
 textarea::-webkit-input-placeholder {
