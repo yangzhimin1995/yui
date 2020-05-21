@@ -25,11 +25,11 @@ const yui = {
             yuiLoading_close(id)
         },
         fullscreen: {
-            start: (id) => {
-                yuiLoading_fullscreenStart(id)
+            start: () => {
+                yuiLoading_fullscreenStart()
             },
-            close: (id) => {
-                yuiLoading_fullscreenClose(id)
+            close: () => {
+                yuiLoading_fullscreenClose()
             },
         }
     },
@@ -499,7 +499,10 @@ function yuiDropdown_init() {
 
 /** ================================= loading start =================================*/
 
-const yuiLoadingSI = {};
+const yuiLoadingSI = {
+    icon: {},
+    close: {}
+};
 
 function yuiLoading_start(id) {
     const dom = document.querySelector(`div[yui-loading][id=${id}]`);
@@ -513,6 +516,7 @@ function yuiLoading_close(id) {
 }
 
 function yuiLoading_fullscreenStart() {
+    console.log('开启')
     let dom = document.querySelector(`div[yui-loading][fullscreen]`);
     if (!dom) {
         dom = document.createElement('div');
@@ -522,25 +526,32 @@ function yuiLoading_fullscreenStart() {
     yuiFunc_setStyles(dom, {visibility: 'visible'});
     const {modalDom, contentDom, iconDom, textDom} = yuiLoading_getModalDom(dom);
     yuiFunc_scrollBarLocked();
-    yuiLoading_showLoading('yui-fullscreen-loading-si', modalDom, iconDom);
+    yuiLoading_showLoading('yui-fullscreen-loading', modalDom, iconDom);
 }
 
 function yuiLoading_fullscreenClose() {
+    console.log('准备关闭')
     const dom = document.querySelector(`div[yui-loading][fullscreen]`);
-    yuiLoading_closeLoading('yui-fullscreen-loading-si', dom);
+    yuiLoading_closeLoading('yui-fullscreen-loading', dom);
     setTimeout(() => {
         yuiFunc_scrollBarUnlocked();
         yuiFunc_setStyles(dom, {visibility: 'hidden'});
+        console.log('关闭完成')
     }, 300)
 }
 
 function yuiLoading_showLoading(id, modalDom, iconDom) {
-    if (yuiLoadingSI[id]) {
+    if (yuiLoadingSI.close[id]) {
+        console.log('取消关闭')
+        clearTimeout(yuiLoadingSI.close[id])
+    }
+    if (yuiLoadingSI.icon[id]) {
+        console.log('return')
         return
     }
     yuiFunc_setStyles(modalDom, {visibility: 'visible'});
     let deg = 1;
-    yuiLoadingSI[id] = setInterval(() => {
+    yuiLoadingSI.icon[id] = setInterval(() => {
         yuiFunc_setStyles(iconDom, {transform: 'rotate(' + deg + 'deg)'});
         deg++
     });
@@ -550,15 +561,15 @@ function yuiLoading_showLoading(id, modalDom, iconDom) {
 }
 
 function yuiLoading_closeLoading(id, dom) {
-    if (!yuiLoadingSI[id]) {
+    if (!yuiLoadingSI.icon[id]) {
         return
     }
     const modalDom = dom.querySelector('div[modal]');
     yuiFunc_setStyles(modalDom, {opacity: '0'});
-    setTimeout(() => {
+    yuiLoadingSI.close[id] = setTimeout(() => {
         yuiFunc_setStyles(modalDom, {visibility: 'hidden'});
-        clearInterval(yuiLoadingSI[id]);
-        delete yuiLoadingSI[id]
+        clearInterval(yuiLoadingSI.icon[id]);
+        delete yuiLoadingSI.icon[id]
     }, 300)
 }
 
